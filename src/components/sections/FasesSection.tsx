@@ -3,6 +3,17 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
+import {
+  ShoppingBag,
+  TrendingUp,
+  Rocket,
+  Crown,
+  Trophy,
+  Coins,
+  Target,
+  Gem,
+  LucideIcon
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /* ── Dados das fases ─────────────────────────────────────────── */
@@ -10,12 +21,12 @@ const FASES = [
   {
     id: "fase1",
     label: "Fase 1 · Começar a Vender",
-    emoji: "🛍️",
+    icon: ShoppingBag,
     duration: "5 dias",
     color: "#2DCCD3",
     tagColor: "#033624",
     rewardBg: "#BAF6F0",
-    image: "/assets/1.svg",
+    image: "/assets/m3.jpg",
     objective: "Deixe sua loja pronta e gere as primeiras vendas",
     missions: [
       "Entre no grupo de WhatsApp da sua região",
@@ -27,17 +38,17 @@ const FASES = [
     ],
     reward: "Até R$ 2.400 em cupons",
     rewardSub: "Sessões de suporte · 0% comissão por 90 dias",
-    rewardEmoji: "🏆",
+    rewardIcon: Trophy,
   },
   {
     id: "fase2",
     label: "Fase 2 · Escalar Vendas",
-    emoji: "📈",
+    icon: TrendingUp,
     duration: "30 dias",
     color: "#FBEB35",
     tagColor: "#033624",
     rewardBg: "#FFFDE0",
-    image: "/assets/2.svg",
+    image: "/assets/m4.png",
     objective: "Ganhe volume com criadores + conteúdo",
     missions: [
       "Ative colaboração aberta em TODOS os produtos (>10%)",
@@ -49,17 +60,17 @@ const FASES = [
     ],
     reward: "Até R$ 3.400 em cupons + impulsionamento",
     rewardSub: "Incentivo de tráfego · 15% off cupom · Comissão extra",
-    rewardEmoji: "💰",
+    rewardIcon: Coins,
   },
   {
     id: "fase3",
     label: "Fase 3 · Acelerar",
-    emoji: "🚀",
+    icon: Rocket,
     duration: "60 dias",
     color: "#EDBBE8",
     tagColor: "#4A0505",
     rewardBg: "#F9EEFA",
-    image: "/assets/3.svg",
+    image: "/assets/m2.jpg",
     objective: "Escale de forma consistente com criadores, lives e tráfego pago",
     missions: [
       "Gerencie criadores para 1.500 vídeos publicados",
@@ -71,17 +82,17 @@ const FASES = [
     ],
     reward: "Matching com Top Criadores + Ads Credits",
     rewardSub: "Cashback em ads até R$ 4.000 · Cupons 30% off",
-    rewardEmoji: "🎯",
+    rewardIcon: Target,
   },
   {
     id: "fase4",
-    label: "💎 Diamante",
-    emoji: "👑",
+    label: "Diamante",
+    icon: Gem,
     duration: "Meta: R$ 4.000/dia",
     color: "#4A0505",
     tagColor: "#ffffff",
     rewardBg: "#EDD4B2",
-    image: "/assets/1.svg",
+    image: "/assets/m1.jpg",
     objective: "Atingir média de R$ 4.000/dia em vendas",
     missions: [
       "Gerente de contas dedicado (TikTok)",
@@ -91,7 +102,7 @@ const FASES = [
     ],
     reward: "Escala Avançada",
     rewardSub: "Benefícios exclusivos para top vendedores",
-    rewardEmoji: "💎",
+    rewardIcon: Crown,
   },
 ];
 
@@ -101,6 +112,47 @@ const wrap = (min: number, max: number, v: number) => {
   const size = max - min;
   return ((((v - min) % size) + size) % size) + min;
 };
+
+const FloatingDoodle = ({
+  src,
+  size = 40,
+  top,
+  left,
+  right,
+  bottom,
+  delay = 0,
+  rotate = 0,
+  opacity = 0.3,
+  reverse = false
+}: {
+  src: string;
+  size?: number;
+  top?: string;
+  left?: string;
+  right?: string;
+  bottom?: string;
+  delay?: number;
+  rotate?: number;
+  opacity?: number;
+  reverse?: boolean;
+}) => (
+  <div
+    className={`absolute pointer-events-none ${reverse ? 'animate-float-reverse' : 'animate-float'}`}
+    style={{
+      top, left, right, bottom,
+      width: size, height: size,
+      animationDelay: `${delay}s`,
+      opacity
+    }}
+  >
+    <img
+      src={src}
+      alt=""
+      className="w-full h-full object-contain"
+      style={{ transform: `rotate(${rotate}deg)` }}
+    />
+  </div>
+);
 
 /* ── Progress dot colors ─────────────────────────────────────── */
 const dotColors = ["#2DCCD3", "#FBEB35", "#EDBBE8", "#4A0505"];
@@ -128,18 +180,15 @@ export function FasesSection() {
     setTimeout(() => setIsPaused(false), 8000);
   };
 
-  const getCardStatus = (index: number) => {
-    let diff = index - currentIndex;
-    if (diff > FASES.length / 2) diff -= FASES.length;
-    if (diff < -FASES.length / 2) diff += FASES.length;
-    if (diff === 0) return "active";
-    if (diff === -1) return "prev";
-    if (diff === 1) return "next";
-    return "hidden";
-  };
-
   return (
-    <section id="fases" className="relative py-12" style={{ backgroundColor: "#ffffff" }}>
+    <section id="fases" className="relative py-12 overflow-hidden" style={{ backgroundColor: "#ffffff" }}>
+      {/* Decorative icons */}
+      <FloatingDoodle src="/assets_new/10.svg" size={80} top="15%" right="-2%" rotate={15} opacity={0.15} />
+      <FloatingDoodle src="/assets_new/5.svg" size={70} bottom="25%" left="-2%" rotate={-15} opacity={0.1} reverse />
+      <FloatingDoodle src="/assets_new/1.svg" size={40} top="45%" left="2%" rotate={20} opacity={0.08} />
+      <FloatingDoodle src="/assets_new/2.svg" size={50} bottom="5%" right="4%" rotate={-10} opacity={0.1} />
+      <FloatingDoodle src="/assets_new/4.svg" size={45} top="5%" left="4%" rotate={30} opacity={0.05} reverse />
+      <FloatingDoodle src="/assets_new/6.svg" size={60} bottom="45%" right="2%" rotate={45} opacity={0.08} />
       {/* Header */}
       <div className="w-full max-w-[430px] mx-auto px-6 mb-6">
         <p className="font-body text-xs uppercase tracking-widest mb-1" style={{ color: "#2DCCD3" }}>
@@ -204,7 +253,7 @@ export function FasesSection() {
                     )}
                     style={{ color: isActive ? currentFase.color : "rgba(255,255,255,0.65)" }}
                   >
-                    <span className="text-lg">{fase.emoji}</span>
+                    <fase.icon size={20} />
                     <span className="text-sm font-medium whitespace-nowrap">{fase.label}</span>
                   </button>
                 </motion.div>
@@ -252,8 +301,13 @@ export function FasesSection() {
               {/* Card branco */}
               <div className="card-float p-5">
                 {/* Cabeçalho */}
-                <div className="flex items-start gap-3 mb-3">
-                  <span className="text-3xl">{currentFase.emoji}</span>
+                <div className="flex items-start gap-4 mb-4">
+                  <div
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0"
+                    style={{ backgroundColor: `${currentFase.color}20`, color: currentFase.color }}
+                  >
+                    <currentFase.icon size={32} />
+                  </div>
                   <div>
                     <h3
                       className="font-display font-black text-lg leading-tight"
@@ -261,17 +315,20 @@ export function FasesSection() {
                     >
                       {currentFase.label.replace(/^Fase \d · |^💎 /, "")}
                     </h3>
-                    <p className="font-body text-xs italic mt-0.5" style={{ color: "#4A0505", opacity: 0.75 }}>
+                    <p className="font-body text-xs italic mt-1" style={{ color: "#4A0505", opacity: 0.75 }}>
                       {currentFase.objective}
                     </p>
                   </div>
                 </div>
 
                 {/* Missões */}
-                <ul className="space-y-1.5 mb-4">
+                <ul className="space-y-2 mb-6">
                   {currentFase.missions.map((m, i) => (
-                    <li key={i} className="flex items-start gap-2 font-body text-sm" style={{ color: "#033624" }}>
-                      <span style={{ color: currentFase.color, flexShrink: 0, marginTop: "2px" }}>✦</span>
+                    <li key={i} className="flex items-start gap-3 font-body text-sm" style={{ color: "#033624" }}>
+                      <div
+                        className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0"
+                        style={{ backgroundColor: currentFase.color }}
+                      />
                       <span>{m}</span>
                     </li>
                   ))}
@@ -279,18 +336,25 @@ export function FasesSection() {
 
                 {/* Recompensa */}
                 <div
-                  className="rounded-xl p-3"
+                  className="rounded-2xl p-4 flex flex-col gap-2"
                   style={{ backgroundColor: currentFase.rewardBg }}
                 >
-                  <div className="flex items-center gap-2 mb-0.5">
-                    <span className="text-xl">{currentFase.rewardEmoji}</span>
-                    <p className="font-display font-black text-sm" style={{ color: "#033624" }}>
-                      {currentFase.reward}
-                    </p>
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                      style={{ backgroundColor: "rgba(255,255,255,0.5)", color: "#033624" }}
+                    >
+                      <currentFase.rewardIcon size={24} />
+                    </div>
+                    <div>
+                      <p className="font-display font-black text-sm" style={{ color: "#033624" }}>
+                        {currentFase.reward}
+                      </p>
+                      <p className="font-body text-[0.7rem] leading-tight mt-0.5" style={{ color: "#4A0505", opacity: 0.8 }}>
+                        {currentFase.rewardSub}
+                      </p>
+                    </div>
                   </div>
-                  <p className="font-body text-xs pl-8" style={{ color: "#4A0505", opacity: 0.75 }}>
-                    {currentFase.rewardSub}
-                  </p>
                 </div>
               </div>
             </motion.div>
@@ -298,17 +362,9 @@ export function FasesSection() {
         </div>
       </div>
 
-      {/* Progress dots + linha trilha */}
+      {/* Progress dots */}
       <div className="w-full max-w-[430px] mx-auto px-6 mt-8">
         <div className="flex items-center justify-center gap-3 relative">
-          {/* Linha conectando dots */}
-          <div
-            className="absolute h-0.5 left-1/2 -translate-x-1/2"
-            style={{
-              width: `${(FASES.length - 1) * 40}px`,
-              backgroundColor: "rgba(3,54,36,0.12)",
-            }}
-          />
           {dotColors.map((color, i) => (
             <button
               key={i}

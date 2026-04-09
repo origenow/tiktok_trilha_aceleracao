@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ShoppingBag, TrendingUp, Gift, Trophy } from "lucide-react";
+import { ShoppingBag, TrendingUp, Gift, Trophy, ArrowRight } from "lucide-react";
 
 /* ── Marquee component inline (sem dep extra) ────────────────── */
 function Marquee({
@@ -88,10 +88,57 @@ const m1 = MISSOES_MARQUEE.slice(0, 4);
 const m2 = MISSOES_MARQUEE.slice(4, 8);
 const m3 = MISSOES_MARQUEE.slice(8);
 
+const FloatingDoodle = ({ 
+  src, 
+  size = 40, 
+  top, 
+  left, 
+  right, 
+  bottom, 
+  delay = 0, 
+  rotate = 0, 
+  opacity = 0.3,
+  reverse = false
+}: { 
+  src: string; 
+  size?: number; 
+  top?: string; 
+  left?: string; 
+  right?: string; 
+  bottom?: string; 
+  delay?: number; 
+  rotate?: number;
+  opacity?: number;
+  reverse?: boolean;
+}) => (
+  <div 
+    className={`absolute pointer-events-none ${reverse ? 'animate-float-reverse' : 'animate-float'}`}
+    style={{ 
+      top, left, right, bottom, 
+      width: size, height: size, 
+      animationDelay: `${delay}s`,
+      opacity 
+    }}
+  >
+    <img 
+      src={src} 
+      alt="" 
+      className="w-full h-full object-contain" 
+      style={{ transform: `rotate(${rotate}deg)` }} 
+    />
+  </div>
+);
+
 /* ── Componente principal ─────────────────────────────────────── */
 export function ComoFuncionaSection() {
   return (
-    <section id="como-funciona" className="py-12" style={{ backgroundColor: "#ffffff" }}>
+    <section id="como-funciona" className="relative py-12 overflow-hidden" style={{ backgroundColor: "#ffffff" }}>
+      {/* Decorative icons */}
+      <FloatingDoodle src="/assets_new/4.svg" size={60} top="2%" left="4%" rotate={-12} opacity={0.12} />
+      <FloatingDoodle src="/assets_new/6.svg" size={55} bottom="10%" right="4%" rotate={12} opacity={0.15} reverse />
+      <FloatingDoodle src="/assets_new/1.svg" size={45} top="40%" right="2%" rotate={25} opacity={0.08} />
+      <FloatingDoodle src="/assets_new/2.svg" size={35} bottom="20%" left="6%" rotate={-45} opacity={0.1} />
+      <FloatingDoodle src="/assets_new/5.svg" size={50} top="15%" right="10%" rotate={10} opacity={0.05} />
       <div className="w-full max-w-[430px] mx-auto">
 
         {/* Header */}
@@ -164,15 +211,20 @@ export function ComoFuncionaSection() {
           </div>
 
           {/* Link seller center */}
-          <div className="mt-4 text-center">
+          <div className="mt-8 text-center flex justify-center">
             <a
               href="https://seller-br.tiktok.com/challenges/growth"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-body text-sm underline"
-              style={{ color: "#F1204A" }}
+              className="group inline-flex items-center gap-2 font-display font-black text-sm px-7 py-3 transition-all duration-200"
+              style={{ 
+                color: "#ffffff", 
+                backgroundColor: "#F1204A", 
+                borderRadius: "999px",
+                boxShadow: "0 4px 12px rgba(241, 32, 74, 0.2)"
+              }}
             >
-              seller-br.tiktok.com/challenges/growth →
+              Ver minhas recompensas agora <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
         </div>

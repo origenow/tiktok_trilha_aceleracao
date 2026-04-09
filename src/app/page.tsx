@@ -3,10 +3,14 @@ import { FasesSection } from "@/components/sections/FasesSection";
 import { ComoFuncionaSection } from "@/components/sections/ComoFuncionaSection";
 import { CtaFinalSection } from "@/components/sections/CtaFinalSection";
 import { Footer } from "@/components/sections/Footer";
+import { TikTokIntro } from "@/components/ui/TikTokIntro";
 
 export default function Home() {
   return (
     <>
+      {/* Splash screen de entrada — remove-se automaticamente após ~3.2s */}
+      <TikTokIntro />
+
       {/* Fundo cinza neutro fora do container em desktop */}
       <div
         className="fixed inset-0 -z-10"

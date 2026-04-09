@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Smartphone, ArrowRight } from "lucide-react";
 import { HighlightedText } from "@/components/ui/highlighted-text";
 
 /* ── Doodles ─────────────────────────────────────────────────── */
-const StarBig = () => (
+const StarDoodle = () => (
   <svg viewBox="0 0 80 80" className="w-full h-full" fill="none">
     <path
       d="M40 6 L45 32 L72 28 L52 44 L62 70 L40 54 L18 70 L28 44 L8 28 L35 32 Z"
@@ -18,13 +18,14 @@ const StarBig = () => (
   </svg>
 );
 
-const FlowerSmall = () => (
+const FlowerDoodle = () => (
   <svg viewBox="0 0 60 60" className="w-full h-full" fill="none">
     <circle cx="30" cy="30" r="5" stroke="#2DCCD3" strokeWidth="2" fill="none" opacity="0.8" />
     {[0, 72, 144, 216, 288].map((angle) => {
       const rad = (angle * Math.PI) / 180;
-      const cx = 30 + 12 * Math.cos(rad);
-      const cy = 30 + 12 * Math.sin(rad);
+      // Rounding to fix hydration float precision mismatches (Node vs Browser)
+      const cx = (30 + 12 * Math.cos(rad)).toFixed(3);
+      const cy = (30 + 12 * Math.sin(rad)).toFixed(3);
       return (
         <ellipse
           key={angle}
@@ -67,13 +68,13 @@ export function CtaFinalSection() {
     >
       {/* Doodles absolutos */}
       <div className="absolute top-6 left-4 w-16 h-16 animate-float pointer-events-none">
-        <StarBig />
+        <StarDoodle />
       </div>
       <div className="absolute bottom-10 right-4 w-14 h-14 animate-float-reverse pointer-events-none">
-        <FlowerSmall />
+        <FlowerDoodle />
       </div>
       <div className="absolute top-1/3 right-6 w-10 h-10 animate-float pointer-events-none" style={{ animationDelay: "2s" }}>
-        <StarBig />
+        <StarDoodle />
       </div>
 
       <div className="relative z-10 w-full max-w-[430px] mx-auto px-6 flex flex-col items-center text-center">
@@ -100,15 +101,15 @@ export function CtaFinalSection() {
           href="https://seller-br.tiktok.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="font-display font-black text-white text-base px-8 py-4 w-full text-center mb-3 hover:scale-[1.04] transition-all duration-200"
+          className="font-display font-black text-white text-base px-8 py-4 w-full text-center mb-3 hover:scale-[1.04] transition-all duration-200 flex items-center justify-center gap-2"
           style={{
             backgroundColor: "#F1204A",
             borderRadius: "999px",
             boxShadow: "0 8px 24px rgba(241,32,74,0.35)",
-            display: "block",
+            display: "flex",
           }}
         >
-          Abrir Conta de Vendedor →
+          Abrir Conta de Vendedor <ArrowRight size={18} />
         </a>
 
         {/* Botão secundário */}
@@ -116,12 +117,12 @@ export function CtaFinalSection() {
           href="https://seller-br.tiktok.com/challenges/growth"
           target="_blank"
           rel="noopener noreferrer"
-          className="font-display font-black text-sm px-8 py-3.5 w-full text-center hover:bg-thrive/5 transition-colors duration-200"
+          className="font-display font-black text-sm px-8 py-3.5 w-full text-center hover:bg-thrive/5 transition-colors duration-200 flex items-center justify-center gap-2"
           style={{
             border: "2px solid #033624",
             borderRadius: "999px",
             color: "#033624",
-            display: "block",
+            display: "flex",
           }}
         >
           Ver missões no Seller Center
@@ -149,7 +150,10 @@ export function CtaFinalSection() {
               backdropFilter: "blur(4px)",
             }}
           >
-            <span>📱 Entre no grupo da sua região</span>
+            <div className="flex items-center gap-2">
+              <Smartphone size={18} style={{ opacity: 0.7 }} />
+              <span>Entre no grupo da sua região</span>
+            </div>
             <ChevronDown
               size={18}
               className="transition-transform duration-300"
@@ -175,8 +179,8 @@ export function CtaFinalSection() {
                   }}
                 >
                   <span>{g.regiao}</span>
-                  <span className="text-xs" style={{ color: "#F1204A" }}>
-                    Entrar →
+                  <span className="text-xs flex items-center gap-1" style={{ color: "#F1204A" }}>
+                    Entrar <ArrowRight size={14} />
                   </span>
                 </a>
               ))}

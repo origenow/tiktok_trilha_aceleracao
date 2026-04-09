@@ -2,83 +2,51 @@
 
 import React from "react";
 import { motion } from "motion/react";
+import { Trophy, ShoppingBag, Crown, Rocket, Gem, LucideIcon } from "lucide-react";
 import { HighlightedText } from "@/components/ui/highlighted-text";
+import { TikTokLogo } from "@/components/ui/tiktok-logo";
 
-/* ── Doodles SVG inline ───────────────────────────────────────── */
+/* ── Floating Doodle component ───────────────────────────────── */
 
-const StarDoodle = ({ className }: { className?: string }) => (
-  <svg
-    viewBox="0 0 60 60"
-    className={className}
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
+const FloatingDoodle = ({ 
+  src, 
+  size = 40, 
+  top, 
+  left, 
+  right, 
+  bottom, 
+  delay = 0, 
+  rotate = 0, 
+  opacity = 0.3,
+  reverse = false
+}: { 
+  src: string; 
+  size?: number; 
+  top?: string; 
+  left?: string; 
+  right?: string; 
+  bottom?: string; 
+  delay?: number; 
+  rotate?: number;
+  opacity?: number;
+  reverse?: boolean;
+}) => (
+  <div 
+    className={`absolute pointer-events-none ${reverse ? 'animate-float-reverse' : 'animate-float'}`}
+    style={{ 
+      top, left, right, bottom, 
+      width: size, height: size, 
+      animationDelay: `${delay}s`,
+      opacity 
+    }}
   >
-    <path
-      d="M30 4 L33.5 22.5 L52 19.5 L38.5 31.5 L46 49 L30 39 L14 49 L21.5 31.5 L8 19.5 L26.5 22.5 Z"
-      stroke="#FBEB35"
-      strokeWidth="2.5"
-      strokeLinejoin="round"
-      fill="none"
-      opacity="0.75"
+    <img 
+      src={src} 
+      alt="" 
+      className="w-full h-full object-contain" 
+      style={{ transform: `rotate(${rotate}deg)` }} 
     />
-  </svg>
-);
-
-const FlowerDoodle = ({ className }: { className?: string }) => (
-  <svg
-    viewBox="0 0 60 60"
-    className={className}
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <circle cx="30" cy="30" r="6" stroke="#2DCCD3" strokeWidth="2.5" fill="none" opacity="0.8" />
-    {[0, 60, 120, 180, 240, 300].map((angle) => {
-      const rad = (angle * Math.PI) / 180;
-      const cx = 30 + 14 * Math.cos(rad);
-      const cy = 30 + 14 * Math.sin(rad);
-      return (
-        <ellipse
-          key={angle}
-          cx={cx}
-          cy={cy}
-          rx="5"
-          ry="8"
-          transform={`rotate(${angle}, ${cx}, ${cy})`}
-          stroke="#2DCCD3"
-          strokeWidth="2"
-          fill="none"
-          opacity="0.65"
-        />
-      );
-    })}
-  </svg>
-);
-
-const ArrowDoodle = ({ className }: { className?: string }) => (
-  <svg
-    viewBox="0 0 80 60"
-    className={className}
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M10 45 C 20 10, 50 8, 65 28"
-      stroke="#EDBBE8"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      fill="none"
-      opacity="0.8"
-    />
-    <path
-      d="M54 20 L65 28 L56 36"
-      stroke="#EDBBE8"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      fill="none"
-      opacity="0.8"
-    />
-  </svg>
+  </div>
 );
 
 /* ── Badge circular girando ───────────────────────────────────── */
@@ -101,22 +69,22 @@ const CircularBadge = () => (
         </text>
       </svg>
     </div>
-    <span className="text-2xl">🏆</span>
+    <Trophy size={32} color="white" />
   </div>
 );
 
 /* ── Pílulas das fases (bottom row) ──────────────────────────── */
-const fasesPills = [
+const fasesPills: { label: string; bg: string; color: string; rotate: string; icon?: LucideIcon }[] = [
   { label: "Fase 1 · 5 dias",  bg: "#2DCCD3", color: "#033624", rotate: "-4deg" },
   { label: "Fase 2 · 30 dias", bg: "#FBEB35", color: "#033624", rotate: "5deg"  },
   { label: "Fase 3 · 60 dias", bg: "#EDBBE8", color: "#4A0505", rotate: "-5deg" },
-  { label: "💎 Diamante",       bg: "#4A0505", color: "#ffffff", rotate: "4deg"  },
+  { label: "Diamante",       bg: "#4A0505", color: "#ffffff", rotate: "4deg", icon: Gem  },
 ];
 
 /* ── Floating reward cards ───────────────────────────────────── */
 const cards = [
   {
-    emoji: "🛍️",
+    icon: ShoppingBag,
     title: "Fase 1",
     sub: "Até R$ 2.400",
     detail: "em cupons de plataforma",
@@ -126,7 +94,7 @@ const cards = [
     duration: 5,
   },
   {
-    emoji: "👑",
+    icon: Crown,
     title: "Diamante",
     sub: "Gerente Dedicado",
     detail: "TikTok Shop",
@@ -145,35 +113,41 @@ export function HeroSection() {
       style={{ backgroundColor: "#BAF6F0" }}
     >
       {/* Doodles absolutos */}
-      <div className="absolute top-8 right-6 w-12 h-12 animate-float pointer-events-none">
-        <FlowerDoodle className="w-full h-full" />
-      </div>
-      <div className="absolute bottom-32 left-4 w-10 h-10 animate-float-reverse pointer-events-none">
-        <StarDoodle className="w-full h-full" />
-      </div>
-      <div className="absolute top-1/2 right-8 w-14 h-10 animate-float pointer-events-none" style={{ animationDelay: "1.5s" }}>
-        <ArrowDoodle className="w-full h-full" />
-      </div>
-      <div className="absolute top-40 left-8 w-8 h-8 animate-float-reverse pointer-events-none" style={{ animationDelay: "0.8s" }}>
-        <StarDoodle className="w-full h-full" />
-      </div>
+      <FloatingDoodle src="/assets_new/1.svg" size={48} bottom="32%" left="4%" rotate={12} delay={0.5} opacity={0.4} reverse />
+      <FloatingDoodle src="/assets_new/2.svg" size={60} top="45%" right="4%" rotate={-12} delay={1.5} opacity={0.35} />
+      <FloatingDoodle src="/assets_new/4.svg" size={40} top="38%" left="6%" rotate={45} delay={0.8} opacity={0.4} reverse />
+      <FloatingDoodle src="/assets_new/5.svg" size={56} top="18%" right="10%" rotate={0} delay={2.1} opacity={0.25} />
+      <FloatingDoodle src="/assets_new/6.svg" size={44} top="8%" right="6%" rotate={-15} delay={1.2} opacity={0.3} />
+      <FloatingDoodle src="/assets_new/7.svg" size={50} bottom="15%" right="8%" rotate={20} delay={0.3} opacity={0.15} reverse />
+      <FloatingDoodle src="/assets_new/8.svg" size={38} top="25%" left="8%" rotate={-30} delay={2.5} opacity={0.2} />
+      <FloatingDoodle src="/assets_new/9.svg" size={52} bottom="40%" right="12%" rotate={10} delay={1.8} opacity={0.1} />
+      <FloatingDoodle src="/assets_new/10.svg" size={46} top="55%" left="2%" rotate={5} delay={0.1} opacity={0.3} />
+      <FloatingDoodle src="/assets_new/1.svg" size={32} bottom="5%" left="15%" rotate={-20} delay={3.2} opacity={0.25} reverse />
 
       {/* Container mobile-first */}
       <div className="relative z-10 flex flex-col items-center w-full max-w-[430px] mx-auto px-6 pt-8 pb-4">
 
-        {/* Logo */}
+        {/* Header de Logos */}
         <motion.div
           initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="mb-6 self-start"
+          className="mb-10 w-full flex items-center justify-between"
         >
-          <span
-            className="font-display font-black text-sm tracking-tight"
-            style={{ color: "#033624", opacity: 0.65 }}
-          >
-            TikTok Shop
-          </span>
+          {/* Logo aumentada (usando imagem da pasta icons) */}
+          <div className="flex items-center">
+            <img src="/tiktok-icon.svg" alt="TikTok" className="w-12 h-12" />
+          </div>
+
+          {/* Logo Preta do outro lado */}
+          <div className="flex items-center">
+            <img 
+              src="/tiktok-black.png" 
+              alt="TikTok Primary Logo" 
+              className="h-10 w-auto object-contain opacity-90" 
+              style={{ maxHeight: "36px" }}
+            />
+          </div>
         </motion.div>
 
         {/* Pílula categoria */}
@@ -243,8 +217,8 @@ export function HeroSection() {
           Siga as fases → complete missões → desbloqueie cupons, tráfego e suporte
         </motion.p>
 
-        {/* Cards flutuantes */}
-        <div className="relative w-full mt-8 mb-6" style={{ height: "200px" }}>
+        {/* Cards flutuantes com glassmorphism */}
+        <div className="relative w-full mt-8 mb-6" style={{ height: "220px" }}>
           {cards.map((card, i) => (
             <motion.div
               key={i}
@@ -252,23 +226,34 @@ export function HeroSection() {
               style={{
                 left: i === 0 ? "0%" : "auto",
                 right: i === 1 ? "0%" : "auto",
-                top: i === 0 ? "20px" : "0px",
+                top: i === 0 ? "30px" : "0px",
+                zIndex: 10,
               }}
               animate={{ y: card.yAnim }}
               transition={{ duration: card.duration, repeat: Infinity, ease: "easeInOut", delay: card.delay }}
             >
               <div
-                className="card-float px-5 py-4 flex flex-col items-center text-center pointer-events-auto w-36"
-                style={{ transform: `rotate(${card.rotate})` }}
+                className="px-5 py-4 flex flex-col items-center text-center pointer-events-auto w-36"
+                style={{
+                  transform: `rotate(${card.rotate})`,
+                  borderRadius: "2rem",
+                  background: "rgba(255,255,255,0.22)",
+                  backdropFilter: "blur(14px)",
+                  WebkitBackdropFilter: "blur(14px)",
+                  border: "1.5px solid rgba(255,255,255,0.5)",
+                  boxShadow: "0 8px 32px rgba(3,54,36,0.12), inset 0 1px 1px rgba(255,255,255,0.4)",
+                }}
               >
-                <span className="text-3xl mb-2">{card.emoji}</span>
+                <div className="mb-2" style={{ color: "#F1204A" }}>
+                  <card.icon size={32} />
+                </div>
                 <p className="font-display font-black text-sm" style={{ color: "#033624" }}>
                   {card.title}
                 </p>
                 <p className="font-body font-medium text-xs mt-0.5" style={{ color: "#F1204A" }}>
                   {card.sub}
                 </p>
-                <p className="font-body text-xs mt-0.5" style={{ color: "#4A0505", opacity: 0.7 }}>
+                <p className="font-body text-xs mt-0.5" style={{ color: "#4A0505", opacity: 0.75 }}>
                   {card.detail}
                 </p>
               </div>
@@ -276,7 +261,7 @@ export function HeroSection() {
           ))}
 
           {/* Badge circular centralizado */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" style={{ zIndex: 5 }}>
             <CircularBadge />
           </div>
         </div>
@@ -284,7 +269,7 @@ export function HeroSection() {
         {/* CTA principal */}
         <motion.a
           href="#fases"
-          className="font-display font-black text-white text-base px-8 py-4 shadow-lg hover:scale-[1.04] transition-all duration-200 w-full text-center"
+          className="font-display font-black text-white text-base px-8 py-4 shadow-lg hover:scale-[1.04] transition-all duration-200 w-full text-center flex items-center justify-center gap-2"
           style={{
             backgroundColor: "#F1204A",
             borderRadius: "999px",
@@ -295,7 +280,7 @@ export function HeroSection() {
           transition={{ delay: 0.65, duration: 0.4 }}
           whileHover={{ boxShadow: "0 12px 32px rgba(241, 32, 74, 0.5)" }}
         >
-          🚀 Começar a Trilha
+          <Rocket size={18} /> Começar a Trilha
         </motion.a>
 
         {/* Seta scroll */}
@@ -327,7 +312,7 @@ export function HeroSection() {
             {fasesPills.map((p) => (
               <span
                 key={p.label}
-                className="pill-tag text-xs"
+                className="pill-tag text-xs flex items-center justify-center"
                 style={{
                   backgroundColor: p.bg,
                   color: p.color,
@@ -336,6 +321,7 @@ export function HeroSection() {
                   padding: "4px 12px",
                 }}
               >
+                {p.icon && <p.icon size={12} className="mr-1 shrink-0" />}
                 {p.label}
               </span>
             ))}

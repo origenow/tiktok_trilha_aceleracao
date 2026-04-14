@@ -1,5 +1,6 @@
 import { PoloModaSection } from "@/components/sections/PoloModaSection";
 import { Footer } from "@/components/sections/Footer";
+import { FloatingNavbar } from "@/components/ui/FloatingNavbar";
 
 export const metadata = {
   title: "Polos de Moda · TikTok Shop",
@@ -10,6 +11,7 @@ export const metadata = {
 export default function PoloModaPage() {
   return (
     <>
+      <FloatingNavbar />
       <div
         className="fixed inset-0 -z-10"
         style={{ backgroundColor: "#e8e8e8" }}
@@ -24,3 +26,4 @@ export default function PoloModaPage() {
     </>
   );
 }
+

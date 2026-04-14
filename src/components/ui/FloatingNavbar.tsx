@@ -1,21 +1,33 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, useScroll, useMotionValueEvent } from "motion/react";
+import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
-const NAV_ITEMS = [
+const HOME_NAV_ITEMS = [
   { label: "Home", href: "#hero" },
   { label: "Fases", href: "#fases" },
   { label: "Destaques", href: "#downloads" },
-  { label: "Começar", href: "#cta" },
+  { label: "Polos", href: "/polo-moda", isExternal: true },
+];
+
+const POLO_NAV_ITEMS = [
+  { label: "Voltar", href: "/", isExternal: true },
+  { label: "Benefícios", href: "#beneficios" },
+  { label: "Polos", href: "#polos" },
+  { label: "Ajuda", href: "https://chat.whatsapp.com/LUOgiqEApUc8mXOeVbPxKO", isExternal: true },
 ];
 
 export function FloatingNavbar() {
+  const pathname = usePathname();
   const [activeItem, setActiveItem] = useState(0);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
   const [visible, setVisible] = useState(true);
   const { scrollY } = useScroll();
+
+  const isPoloPage = pathname === "/polo-moda";
+  const navItems = isPoloPage ? POLO_NAV_ITEMS : HOME_NAV_ITEMS;
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() ?? 0;
@@ -26,16 +38,19 @@ export function FloatingNavbar() {
     }
   });
 
-  // Update active item on scroll (optional, but good for UX)
+  // Update active item on scroll
   useEffect(() => {
     const handleScroll = () => {
       const scrollPos = window.scrollY + 100;
-      const sections = NAV_ITEMS.map((item) => document.querySelector(item.href));
+      const sections = navItems
+        .map((item, index) => ({ item, index }))
+        .filter(({ item }) => !item.isExternal);
       
-      sections.forEach((section, index) => {
-        if (section instanceof HTMLElement) {
-          const top = section.offsetTop;
-          const height = section.offsetHeight;
+      sections.forEach(({ item, index }) => {
+        const element = document.querySelector(item.href);
+        if (element instanceof HTMLElement) {
+          const top = element.offsetTop;
+          const height = element.offsetHeight;
           if (scrollPos >= top && scrollPos < top + height) {
             setActiveItem(index);
           }
@@ -45,10 +60,22 @@ export function FloatingNavbar() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [navItems]);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, item: typeof navItems[0], index: number) => {
+    if (item.isExternal) return;
+    
+    e.preventDefault();
+    const targetId = item.href.replace("#", "");
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setActiveItem(index);
+    }
+  };
 
   return (
-    <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-full max-w-[340px] px-4 pointer-events-none">
+    <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-full max-w-[380px] px-4 pointer-events-none">
       <motion.div
         initial={{ y: -100, x: "-50%", opacity: 0 }}
         animate={{ 
@@ -59,7 +86,7 @@ export function FloatingNavbar() {
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className="fixed top-6 left-1/2 flex items-center gap-0.5 p-1 rounded-full pointer-events-auto shadow-2xl"
         style={{
-          background: "rgba(3, 54, 36, 0.1)",
+          background: isPoloPage ? "rgba(3, 54, 36, 0.4)" : "rgba(3, 54, 36, 0.1)",
           backdropFilter: "blur(12px)",
           WebkitBackdropFilter: "blur(12px)",
           border: "1px solid rgba(255, 255, 255, 0.2)",
@@ -67,20 +94,20 @@ export function FloatingNavbar() {
         }}
       >
         <div className="relative flex items-center gap-0">
-          {NAV_ITEMS.map((item, index) => {
-            const isActive = activeItem === index;
+          {navItems.map((item, index) => {
+            const isActive = activeItem === index && !item.isExternal;
             const isHovered = hoveredItem === index;
 
             return (
               <a
                 key={item.label}
                 href={item.href}
+                onClick={(e) => handleNavClick(e, item, index)}
                 onMouseEnter={() => setHoveredItem(index)}
                 onMouseLeave={() => setHoveredItem(null)}
-                onClick={() => setActiveItem(index)}
                 className={cn(
-                  "relative px-2.5 py-1 text-[9px] font-display font-bold transition-colors duration-300 rounded-full",
-                  isActive ? "text-white" : "text-thrive/70 hover:text-thrive"
+                  "relative px-3 py-1 text-[10px] font-display font-bold transition-colors duration-300 rounded-full flex items-center justify-center min-w-[65px]",
+                  isActive ? "text-white" : "text-white/70 hover:text-white"
                 )}
               >
                 {/* Sliding Highlight */}
@@ -110,3 +137,4 @@ export function FloatingNavbar() {
     </div>
   );
 }
+

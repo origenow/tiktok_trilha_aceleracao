@@ -167,7 +167,7 @@ export function PoloModaSection() {
         </motion.div>
 
         {/* ② Grid de benefícios */}
-        <motion.div {...fadeUp(0.1)}>
+        <motion.div {...fadeUp(0.1)} id="beneficios">
           <p className="font-body text-xs mb-4" style={{ color: "rgba(255,255,255,0.45)" }}>
             O que você ganha entrando na Trilha
           </p>
@@ -212,7 +212,7 @@ export function PoloModaSection() {
         </motion.div>
 
         {/* ③ Polos Participantes */}
-        <motion.div {...fadeUp(0.2)}>
+        <motion.div {...fadeUp(0.2)} id="polos">
           <div className="rounded-3xl p-6" style={{ backgroundColor: "#BAF6F0" }}>
             <h3 className="font-display font-black text-xl mb-1" style={{ color: "#033624" }}>
               Polos Participantes

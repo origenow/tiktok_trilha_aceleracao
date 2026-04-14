@@ -1,3 +1,4 @@
+import { VideoPlayerSection } from "@/components/sections/VideoPlayerSection";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { FasesSection } from "@/components/sections/FasesSection";
 import { ComoFuncionaSection } from "@/components/sections/ComoFuncionaSection";
@@ -25,6 +26,7 @@ export default function Home() {
         className="relative w-full mx-auto shadow-2xl"
         style={{ maxWidth: "430px", minHeight: "100vh" }}
       >
+        <VideoPlayerSection />
         <HeroSection />
         <FasesSection />
         <ComoFuncionaSection />
@@ -35,3 +37,4 @@ export default function Home() {
     </>
   );
 }
+

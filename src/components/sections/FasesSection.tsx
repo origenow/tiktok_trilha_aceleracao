@@ -15,6 +15,7 @@ import {
   LucideIcon
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { HighlightedText } from "@/components/ui/highlighted-text";
 
 /* ── Dados das fases ─────────────────────────────────────────── */
 const FASES = [
@@ -198,7 +199,7 @@ export function FasesSection() {
           className="font-display font-black leading-tight"
           style={{ fontSize: "clamp(1.8rem, 7vw, 2.4rem)", color: "#033624" }}
         >
-          Missões por Fase
+          Missões por <HighlightedText highlightColor="#F1204A" from="bottom" inView delay={0.3}>Fase</HighlightedText>
         </h2>
         <p className="font-body text-sm mt-1" style={{ color: "#4A0505", opacity: 0.75 }}>
           Clique em uma fase para ver as missões e recompensas

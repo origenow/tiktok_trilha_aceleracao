@@ -2,6 +2,7 @@
 
 import React from "react";
 import { ShoppingBag, TrendingUp, Gift, Trophy, ArrowRight } from "lucide-react";
+import { HighlightedText } from "@/components/ui/highlighted-text";
 
 /* ── Marquee component inline (sem dep extra) ────────────────── */
 function Marquee({
@@ -150,7 +151,7 @@ export function ComoFuncionaSection() {
             className="font-display font-black leading-tight"
             style={{ fontSize: "clamp(1.6rem, 7vw, 2.2rem)", color: "#033624" }}
           >
-            Como resgatar seus prêmios?
+            Como resgatar seus <HighlightedText highlightColor="#F1204A" from="bottom" inView delay={0.3}>prêmios?</HighlightedText>
           </h2>
           <p className="font-body text-sm mt-2" style={{ color: "#4A0505", opacity: 0.7 }}>
             Depois de completar as missões, veja como retirar suas recompensas no Seller Center

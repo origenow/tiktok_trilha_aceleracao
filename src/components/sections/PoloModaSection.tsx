@@ -57,13 +57,13 @@ const BENEFICIOS = [
 ];
 
 const REGIOES = [
-  { nome: "Birigui",        whatsapp: "https://chat.whatsapp.com/Fi4iERd1llnDjeORN0xwK2" },
-  { nome: "Brás",           whatsapp: "https://chat.whatsapp.com/LUOgiqEApUc8mXOeVbPxKO" },
-  { nome: "Franca",         whatsapp: "https://chat.whatsapp.com/I7FD7s2GK7N5Ld5XOTKPEa" },
-  { nome: "Goiânia",        whatsapp: "https://chat.whatsapp.com/H46KVUKVn0jLEmDM9uQDSv" },
+  { nome: "Birigui", whatsapp: "https://chat.whatsapp.com/Fi4iERd1llnDjeORN0xwK2" },
+  { nome: "Brás", whatsapp: "https://chat.whatsapp.com/LUOgiqEApUc8mXOeVbPxKO" },
+  { nome: "Franca", whatsapp: "https://chat.whatsapp.com/I7FD7s2GK7N5Ld5XOTKPEa" },
+  { nome: "Goiânia", whatsapp: "https://chat.whatsapp.com/H46KVUKVn0jLEmDM9uQDSv" },
   { nome: "Mar de Espanha", whatsapp: "https://chat.whatsapp.com/CtfLuI455TZ0sWCekVHb2I" },
-  { nome: "Nova Friburgo",  whatsapp: "https://chat.whatsapp.com/EBYYg34lh2q5mb5gzKKz6J" },
-  { nome: "Nova Serrana",   whatsapp: "https://chat.whatsapp.com/GgWOs3eNI4n9SWdA41Oabg" },
+  { nome: "Nova Friburgo", whatsapp: "https://chat.whatsapp.com/EBYYg34lh2q5mb5gzKKz6J" },
+  { nome: "Nova Serrana", whatsapp: "https://chat.whatsapp.com/GgWOs3eNI4n9SWdA41Oabg" },
   { nome: "Santa Catarina", whatsapp: "https://chat.whatsapp.com/DKDpkAUKmZFLh9TuwHJpq4" },
 ];
 
@@ -71,47 +71,47 @@ const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 32 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, amount: 0.2 as const },
-  transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1], delay },
+  transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number], delay },
 });
 
-const FloatingDoodle = ({ 
-  src, 
-  size = 40, 
-  top, 
-  left, 
-  right, 
-  bottom, 
-  delay = 0, 
-  rotate = 0, 
+const FloatingDoodle = ({
+  src,
+  size = 40,
+  top,
+  left,
+  right,
+  bottom,
+  delay = 0,
+  rotate = 0,
   opacity = 0.3,
   reverse = false
-}: { 
-  src: string; 
-  size?: number; 
-  top?: string; 
-  left?: string; 
-  right?: string; 
-  bottom?: string; 
-  delay?: number; 
+}: {
+  src: string;
+  size?: number;
+  top?: string;
+  left?: string;
+  right?: string;
+  bottom?: string;
+  delay?: number;
   rotate?: number;
   opacity?: number;
   reverse?: boolean;
 }) => (
-  <div 
+  <div
     className={`absolute pointer-events-none ${reverse ? 'animate-float-reverse' : 'animate-float'}`}
-    style={{ 
-      top, left, right, bottom, 
-      width: size, height: size, 
+    style={{
+      top, left, right, bottom,
+      width: size, height: size,
       animationDelay: `${delay}s`,
       opacity,
       zIndex: 0
     }}
   >
-    <img 
-      src={src} 
-      alt="" 
-      className="w-full h-full object-contain brightness-125 saturate-150" 
-      style={{ transform: `rotate(${rotate}deg)` }} 
+    <img
+      src={src}
+      alt=""
+      className="w-full h-full object-contain brightness-125 saturate-150"
+      style={{ transform: `rotate(${rotate}deg)` }}
     />
   </div>
 );
@@ -125,10 +125,10 @@ export function PoloModaSection() {
       <FloatingDoodle src="/assets_new/7.svg" size={140} top="2%" right="-5%" rotate={-10} opacity={0.4} />
       <FloatingDoodle src="/assets_new/8.svg" size={120} bottom="5%" left="-5%" rotate={15} opacity={0.4} reverse />
       <FloatingDoodle src="/assets_new/10.svg" size={180} top="35%" left="-10%" rotate={0} opacity={0.25} />
-      <FloatingDoodle src="/assets_new/1.svg" size={100} top="20%" right="-5%" rotate={45} opacity={0.3} />
+      <FloatingDoodle src="/assets_new/5.svg" size={100} top="20%" right="-5%" rotate={45} opacity={0.3} />
       <FloatingDoodle src="/assets_new/2.svg" size={110} bottom="25%" right="-3%" rotate={-20} opacity={0.35} reverse />
       <FloatingDoodle src="/assets_new/4.svg" size={80} top="10%" left="2%" rotate={30} opacity={0.45} />
-      <FloatingDoodle src="/assets_new/5.svg" size={95} bottom="2%" right="12%" rotate={-10} opacity={0.3} />
+      <FloatingDoodle src="/assets_new/1.svg" size={95} bottom="2%" right="12%" rotate={-10} opacity={0.3} />
 
       <div className="relative z-10 w-full max-w-[430px] mx-auto px-6 py-16 flex flex-col gap-12">
 

@@ -4,12 +4,16 @@ import { ComoFuncionaSection } from "@/components/sections/ComoFuncionaSection";
 import { CtaFinalSection } from "@/components/sections/CtaFinalSection";
 import { Footer } from "@/components/sections/Footer";
 import { TikTokIntro } from "@/components/ui/TikTokIntro";
+import { FloatingNavbar } from "@/components/ui/FloatingNavbar";
 
 export default function Home() {
   return (
     <>
       {/* Splash screen de entrada — remove-se automaticamente após ~3.2s */}
       <TikTokIntro />
+
+      {/* Menu flutuante interativo */}
+      <FloatingNavbar />
 
       {/* Fundo cinza neutro fora do container em desktop */}
       <div

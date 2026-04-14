@@ -46,14 +46,14 @@ const FlowerDoodle = () => (
 
 /* ── Dados grupos WhatsApp ───────────────────────────────────── */
 const GRUPOS = [
-  { regiao: "Birigui",          link: "https://chat.whatsapp.com/Fi4iERd1llnDjeORN0xwK2" },
-  { regiao: "Brás",             link: "https://chat.whatsapp.com/LUOgiqEApUc8mXOeVbPxKO" },
-  { regiao: "Franca",           link: "https://chat.whatsapp.com/I7FD7s2GK7N5Ld5XOTKPEa" },
-  { regiao: "Goiânia",          link: "https://chat.whatsapp.com/H46KVUKVn0jLEmDM9uQDSv" },
-  { regiao: "Mar de Espanha",   link: "https://chat.whatsapp.com/CtfLuI455TZ0sWCekVHb2I" },
-  { regiao: "Nova Friburgo",    link: "https://chat.whatsapp.com/EBYYg34lh2q5mb5gzKKz6J" },
-  { regiao: "Nova Serrana",     link: "https://chat.whatsapp.com/GgWOs3eNI4n9SWdA41Oabg" },
-  { regiao: "Santa Catarina",   link: "https://chat.whatsapp.com/DKDpkAUKmZFLh9TuwHJpq4" },
+  { regiao: "Birigui", link: "https://chat.whatsapp.com/Fi4iERd1llnDjeORN0xwK2" },
+  { regiao: "Brás", link: "https://chat.whatsapp.com/LUOgiqEApUc8mXOeVbPxKO" },
+  { regiao: "Franca", link: "https://chat.whatsapp.com/I7FD7s2GK7N5Ld5XOTKPEa" },
+  { regiao: "Goiânia", link: "https://chat.whatsapp.com/H46KVUKVn0jLEmDM9uQDSv" },
+  { regiao: "Mar de Espanha", link: "https://chat.whatsapp.com/CtfLuI455TZ0sWCekVHb2I" },
+  { regiao: "Nova Friburgo", link: "https://chat.whatsapp.com/EBYYg34lh2q5mb5gzKKz6J" },
+  { regiao: "Nova Serrana", link: "https://chat.whatsapp.com/GgWOs3eNI4n9SWdA41Oabg" },
+  { regiao: "Santa Catarina", link: "https://chat.whatsapp.com/DKDpkAUKmZFLh9TuwHJpq4" },
 ];
 
 /* ── Componente principal ─────────────────────────────────────── */

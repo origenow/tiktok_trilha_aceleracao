@@ -178,14 +178,15 @@ export function ComoFuncionaSection() {
 
         {/* 4 passos */}
         <div className="px-6">
-          <div className="border-t-2 border-dashed" style={{ borderColor: "rgba(3,54,36,0.12)" }}>
+          <div className="border-t-2 border-dashed" style={{ borderColor: "#2DCCD3" }}>
             {PASSOS.map((passo, i) => {
               const Icon = passo.icon;
+              const dividerColors = ["#F1204A", "#FBEB35", "#EDBBE8", "#2DCCD3"];
               return (
                 <div
                   key={i}
                   className="flex gap-4 py-5 border-b border-dashed"
-                  style={{ borderColor: "rgba(3,54,36,0.08)" }}
+                  style={{ borderColor: dividerColors[i % dividerColors.length] }}
                 >
                   {/* Número */}
                   <div

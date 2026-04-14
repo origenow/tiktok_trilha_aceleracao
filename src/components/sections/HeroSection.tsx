@@ -109,6 +109,7 @@ const cards = [
 export function HeroSection() {
   return (
     <section
+      id="hero"
       className="relative min-h-screen flex flex-col overflow-hidden"
       style={{ backgroundColor: "#BAF6F0" }}
     >

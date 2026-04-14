@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "motion/react";
 import { Trophy, PhoneCall, Zap, Tag, Star, ArrowRight } from "lucide-react";
+import { HighlightedText } from "@/components/ui/highlighted-text";
 
 /* ── WhatsApp icon ───────────────────────────────────────────── */
 const WhatsAppIcon = ({ className }: { className?: string }) => (
@@ -147,7 +148,7 @@ export function PoloModaSection() {
           >
             Venda moda{" "}
             <span style={{ color: "#2DCCD3" }}>no TikTok Shop</span>
-            <br />e desbloqueie benefícios exclusivos
+            <br />e desbloqueie <HighlightedText once={false} inView={true} from="left">benefícios exclusivos</HighlightedText>
           </h2>
 
           <p className="font-body mt-4 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>

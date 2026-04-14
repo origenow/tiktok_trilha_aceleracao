@@ -8,43 +8,43 @@ import { TikTokLogo } from "@/components/ui/tiktok-logo";
 
 /* ── Floating Doodle component ───────────────────────────────── */
 
-const FloatingDoodle = ({ 
-  src, 
-  size = 40, 
-  top, 
-  left, 
-  right, 
-  bottom, 
-  delay = 0, 
-  rotate = 0, 
+const FloatingDoodle = ({
+  src,
+  size = 40,
+  top,
+  left,
+  right,
+  bottom,
+  delay = 0,
+  rotate = 0,
   opacity = 0.3,
   reverse = false
-}: { 
-  src: string; 
-  size?: number; 
-  top?: string; 
-  left?: string; 
-  right?: string; 
-  bottom?: string; 
-  delay?: number; 
+}: {
+  src: string;
+  size?: number;
+  top?: string;
+  left?: string;
+  right?: string;
+  bottom?: string;
+  delay?: number;
   rotate?: number;
   opacity?: number;
   reverse?: boolean;
 }) => (
-  <div 
+  <div
     className={`absolute pointer-events-none ${reverse ? 'animate-float-reverse' : 'animate-float'}`}
-    style={{ 
-      top, left, right, bottom, 
-      width: size, height: size, 
+    style={{
+      top, left, right, bottom,
+      width: size, height: size,
       animationDelay: `${delay}s`,
-      opacity 
+      opacity
     }}
   >
-    <img 
-      src={src} 
-      alt="" 
-      className="w-full h-full object-contain" 
-      style={{ transform: `rotate(${rotate}deg)` }} 
+    <img
+      src={src}
+      alt=""
+      className="w-full h-full object-contain"
+      style={{ transform: `rotate(${rotate}deg)` }}
     />
   </div>
 );
@@ -75,10 +75,10 @@ const CircularBadge = () => (
 
 /* ── Pílulas das fases (bottom row) ──────────────────────────── */
 const fasesPills: { label: string; bg: string; color: string; rotate: string; icon?: LucideIcon }[] = [
-  { label: "Fase 1 · 5 dias",  bg: "#2DCCD3", color: "#033624", rotate: "-4deg" },
-  { label: "Fase 2 · 30 dias", bg: "#FBEB35", color: "#033624", rotate: "5deg"  },
+  { label: "Fase 1 · 5 dias", bg: "#2DCCD3", color: "#033624", rotate: "-4deg" },
+  { label: "Fase 2 · 30 dias", bg: "#FBEB35", color: "#033624", rotate: "5deg" },
   { label: "Fase 3 · 60 dias", bg: "#EDBBE8", color: "#4A0505", rotate: "-5deg" },
-  { label: "Diamante",       bg: "#4A0505", color: "#ffffff", rotate: "4deg", icon: Gem  },
+  { label: "Diamante", bg: "#4A0505", color: "#ffffff", rotate: "4deg", icon: Gem },
 ];
 
 /* ── Floating reward cards ───────────────────────────────────── */
@@ -133,19 +133,19 @@ export function HeroSection() {
           initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="mb-10 w-full flex items-center justify-between"
+          className="mb-8 w-full flex items-center justify-between"
         >
-          {/* Logo aumentada (usando imagem da pasta icons) */}
+          {/* Logo aumentada e alinhada */}
           <div className="flex items-center">
-            <img src="/tiktok-icon.svg" alt="TikTok" className="w-12 h-12" />
+            <img src="/tiktok-icon.svg" alt="TikTok" className="w-16 h-16 -ml-2" />
           </div>
 
           {/* Logo Preta do outro lado */}
           <div className="flex items-center">
-            <img 
-              src="/tiktok-black.png" 
-              alt="TikTok Primary Logo" 
-              className="h-10 w-auto object-contain opacity-90" 
+            <img
+              src="/tiktok-black.png"
+              alt="TikTok Primary Logo"
+              className="h-10 w-auto object-contain opacity-90"
               style={{ maxHeight: "36px" }}
             />
           </div>

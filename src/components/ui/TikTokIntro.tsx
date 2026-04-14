@@ -28,7 +28,7 @@ const INTRO_CSS = `
     to { 
       top: 32px; 
       left: 24px; 
-      transform: translate(0, 0) scale(0.14815);
+      transform: translate(0, 0) scale(0.1975);
       transform-origin: 0 0;
     }
   }

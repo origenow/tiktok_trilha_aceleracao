@@ -1,33 +1,21 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "motion/react";
+import React, { useState } from "react";
+import { motion, useScroll, useMotionValueEvent } from "motion/react";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
-const HOME_NAV_ITEMS = [
-  { label: "Home", href: "#hero" },
-  { label: "Fases", href: "#fases" },
-  { label: "Destaques", href: "#downloads" },
-  { label: "Polos", href: "/polo-moda", isExternal: true },
-];
-
-const POLO_NAV_ITEMS = [
-  { label: "Voltar", href: "/", isExternal: true },
-  { label: "Benefícios", href: "#beneficios" },
-  { label: "Polos", href: "#polos" },
-  { label: "Ajuda", href: "https://chat.whatsapp.com/LUOgiqEApUc8mXOeVbPxKO", isExternal: true },
+const NAV_ROUTES = [
+  { label: "Trilha de Aceleração", href: "/" },
+  { label: "Polos de Moda", href: "/polo-moda" },
 ];
 
 export function FloatingNavbar() {
   const pathname = usePathname();
-  const [activeItem, setActiveItem] = useState(0);
-  const [hoveredItem, setHoveredItem] = useState<number | null>(null);
   const [visible, setVisible] = useState(true);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const { scrollY } = useScroll();
-
-  const isPoloPage = pathname === "/polo-moda";
-  const navItems = isPoloPage ? POLO_NAV_ITEMS : HOME_NAV_ITEMS;
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() ?? 0;
@@ -38,44 +26,8 @@ export function FloatingNavbar() {
     }
   });
 
-  // Update active item on scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPos = window.scrollY + 100;
-      const sections = navItems
-        .map((item, index) => ({ item, index }))
-        .filter(({ item }) => !item.isExternal);
-      
-      sections.forEach(({ item, index }) => {
-        const element = document.querySelector(item.href);
-        if (element instanceof HTMLElement) {
-          const top = element.offsetTop;
-          const height = element.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            setActiveItem(index);
-          }
-        }
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [navItems]);
-
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, item: typeof navItems[0], index: number) => {
-    if (item.isExternal) return;
-    
-    e.preventDefault();
-    const targetId = item.href.replace("#", "");
-    const element = document.getElementById(targetId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setActiveItem(index);
-    }
-  };
-
   return (
-    <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-full max-w-[380px] px-4 pointer-events-none">
+    <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-full max-w-[320px] px-4 pointer-events-none">
       <motion.div
         initial={{ y: -100, x: "-50%", opacity: 0 }}
         animate={{ 
@@ -84,42 +36,41 @@ export function FloatingNavbar() {
           opacity: visible ? 1 : 0 
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="fixed top-6 left-1/2 flex items-center gap-0.5 p-1 rounded-full pointer-events-auto shadow-2xl"
+        className="fixed top-6 left-1/2 flex items-center gap-1 p-1.5 rounded-full pointer-events-auto shadow-2xl"
         style={{
-          background: isPoloPage ? "rgba(3, 54, 36, 0.4)" : "rgba(3, 54, 36, 0.1)",
-          backdropFilter: "blur(12px)",
-          WebkitBackdropFilter: "blur(12px)",
+          background: "rgba(3, 54, 36, 0.15)",
+          backdropFilter: "blur(16px)",
+          WebkitBackdropFilter: "blur(16px)",
           border: "1px solid rgba(255, 255, 255, 0.2)",
           boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <div className="relative flex items-center gap-0">
-          {navItems.map((item, index) => {
-            const isActive = activeItem === index && !item.isExternal;
-            const isHovered = hoveredItem === index;
+        <div className="relative flex items-center w-full gap-1">
+          {NAV_ROUTES.map((route, index) => {
+            const isActive = pathname === route.href;
+            const isHovered = hoveredIndex === index;
 
             return (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item, index)}
-                onMouseEnter={() => setHoveredItem(index)}
-                onMouseLeave={() => setHoveredItem(null)}
+              <Link
+                key={route.href}
+                href={route.href}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
                 className={cn(
-                  "relative px-3 py-1 text-[10px] font-display font-bold transition-colors duration-300 rounded-full flex items-center justify-center min-w-[65px]",
-                  isActive ? "text-white" : "text-white/70 hover:text-white"
+                  "relative flex-1 px-4 py-2 text-[10px] font-display font-black transition-colors duration-300 rounded-full text-center whitespace-nowrap",
+                  isActive ? "text-white" : "text-white/60 hover:text-white"
                 )}
               >
-                {/* Sliding Highlight */}
-                {(isHovered || isActive) && (
+                {/* Background sliding highlight */}
+                {(isActive || isHovered) && (
                   <motion.span
-                    layoutId="nav-highlight"
-                    className="absolute inset-0 z-[-1] rounded-full"
+                    layoutId="nav-pill"
+                    className="absolute inset-0 z-0 rounded-full"
                     style={{
                       background: isActive 
                         ? "linear-gradient(90deg, #F1204A 0%, #ff4b6e 100%)" 
-                        : "rgba(255, 255, 255, 0.15)",
-                      border: isActive ? "none" : "1px solid rgba(255,255,255,0.2)",
+                        : "rgba(255, 255, 255, 0.1)",
+                      border: isActive ? "none" : "1px solid rgba(255,255,255,0.15)",
                     }}
                     transition={{
                       type: "spring",
@@ -128,8 +79,8 @@ export function FloatingNavbar() {
                     }}
                   />
                 )}
-                <span className="relative z-10">{item.label}</span>
-              </a>
+                <span className="relative z-10">{route.label}</span>
+              </Link>
             );
           })}
         </div>
@@ -137,4 +88,5 @@ export function FloatingNavbar() {
     </div>
   );
 }
+
 

@@ -76,7 +76,7 @@ const PASSOS = [
     num: "3",
     icon: Gift,
     title: "Conclua e atualize",
-    desc: "Ao completar a missão, recarregue a página para registrar",
+    desc: "Ao completar a missão, recarregue a página para registrar ",
   },
   {
     num: "4",

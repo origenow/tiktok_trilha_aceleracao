@@ -2,6 +2,7 @@ import { VideoPlayerSection } from "@/components/sections/VideoPlayerSection";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { FasesSection } from "@/components/sections/FasesSection";
 import { ComoFuncionaSection } from "@/components/sections/ComoFuncionaSection";
+import { WebinarsSection } from "@/components/sections/WebinarsSection";
 import { CtaFinalSection } from "@/components/sections/CtaFinalSection";
 import { Footer } from "@/components/sections/Footer";
 import { TikTokIntro } from "@/components/ui/TikTokIntro";
@@ -29,6 +30,7 @@ export default function Home() {
         <HeroSection />
         <FasesSection />
         <ComoFuncionaSection />
+        <WebinarsSection />
         <CtaFinalSection />
         <Footer />
       </main>

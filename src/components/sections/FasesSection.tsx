@@ -52,9 +52,9 @@ const FASES = [
     image: "/assets/m4.png",
     objective: "Ganhe volume com criadores + conteúdo",
     missions: [
-      "Ative colaboração aberta em TODOS os produtos (>10%)",
-      "Defina amostras grátis para os top 3 produtos",
-      "Envie mínimo 30 amostras para criadores",
+      "Ative colaboração aberta em TODOS os produtos (comissão >10%)",
+      "Defina amostras grátis para os top 2 produtos",
+      "Envie mínimo 30 amostras para criadores do mesmo produto",
       "Poste 10 vídeos compráveis com link",
       "Realize 14 lives (mínimo 20h no total)",
       "Participe das campanhas no Seller Center",
@@ -78,7 +78,7 @@ const FASES = [
       "Reforce top criadores (mais produtos + comunicação)",
       "Faça lives frequentes — mínimo 40h/mês",
       "Realize 1 big live por campanha mensal (>3h)",
-      "Ative GMV Max nos produtos com >30 vídeos",
+      "Ative GMV Max nos produtos com mais conteúdo",
       "Investimento inicial GMV Max: R$ 2.500/mês",
     ],
     reward: "Matching com Top Criadores + Ads Credits",
@@ -98,7 +98,7 @@ const FASES = [
     missions: [
       "Gerente de contas dedicado (TikTok)",
       "Planejamento estratégico personalizado",
-      "Acesso antecipado a campanhas exclusivas",
+      "Acesso antecipado a oportunidades e campanhas",
       "Suporte direto para escalar mais rápido",
     ],
     reward: "Escala Avançada",
@@ -167,18 +167,19 @@ export function FasesSection() {
   const currentFase = FASES[currentIndex];
 
   const nextStep = useCallback(() => setStep((p) => p + 1), []);
+  const prevStep = useCallback(() => setStep((p) => p - 1), []);
 
   useEffect(() => {
     if (isPaused) return;
-    const id = setInterval(nextStep, 5000);
+    const id = setInterval(nextStep, 10000); // Passa mais devagar (10s)
     return () => clearInterval(id);
   }, [nextStep, isPaused]);
 
   const handleSelect = (index: number) => {
-    const diff = (index - currentIndex + FASES.length) % FASES.length;
-    if (diff > 0) setStep((s) => s + diff);
+    const diff = index - currentIndex;
+    setStep((s) => s + diff);
     setIsPaused(true);
-    setTimeout(() => setIsPaused(false), 8000);
+    setTimeout(() => setIsPaused(false), 15000);
   };
 
   return (
@@ -285,11 +286,26 @@ export function FasesSection() {
           <AnimatePresence mode="wait">
             <motion.div
               key={currentFase.id}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.35 }}
-              className="pt-4"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.2}
+              onDragEnd={(_, info) => {
+                const swipeThreshold = 50;
+                if (info.offset.x > swipeThreshold) {
+                  prevStep();
+                  setIsPaused(true);
+                  setTimeout(() => setIsPaused(false), 15000);
+                } else if (info.offset.x < -swipeThreshold) {
+                  nextStep();
+                  setIsPaused(true);
+                  setTimeout(() => setIsPaused(false), 15000);
+                }
+              }}
+              className="pt-4 cursor-grab active:cursor-grabbing"
             >
               {/* Imagem da fase */}
               <div className="relative w-full h-40 rounded-2xl overflow-hidden mb-4 shadow-sm">

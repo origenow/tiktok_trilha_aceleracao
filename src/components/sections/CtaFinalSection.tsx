@@ -67,6 +67,17 @@ export function CtaFinalSection() {
       style={{ background: "linear-gradient(180deg, #BAF6F0 0%, #EDD4B2 100%)" }}
     >
       {/* Doodles absolutos */}
+      {/* Estrela Glint — vinda da seção de Webinars */}
+      <svg
+        className="absolute top-5 right-4 pointer-events-none animate-float"
+        style={{ opacity: 0.55 }}
+        width="52" height="52" viewBox="0 0 52 52" fill="none"
+      >
+        <path
+          d="M26 2 L30.2 18.8 L46 15 L35.4 26 L46 37 L30.2 33.2 L26 50 L21.8 33.2 L6 37 L16.6 26 L6 15 L21.8 18.8 Z"
+          stroke="#2DCCD3" strokeWidth="1.8" strokeLinejoin="round"
+        />
+      </svg>
       <div className="absolute top-6 left-4 w-16 h-16 animate-float pointer-events-none">
         <StarDoodle />
       </div>

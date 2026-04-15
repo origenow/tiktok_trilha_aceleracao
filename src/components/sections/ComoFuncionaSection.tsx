@@ -255,20 +255,6 @@ export function ComoFuncionaSection() {
         </div>
       </div>
 
-      {/* Wave transition → CtaFinalSection */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none pointer-events-none">
-        <svg
-          viewBox="0 0 1440 72"
-          xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="none"
-          className="w-full h-[72px] block"
-        >
-          <path
-            d="M0,36 C240,72 480,0 720,36 C960,72 1200,0 1440,36 L1440,72 L0,72 Z"
-            fill="#BAF6F0"
-          />
-        </svg>
-      </div>
     </section>
   );
 }

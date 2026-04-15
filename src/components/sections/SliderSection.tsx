@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -8,78 +8,125 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 export function SliderSection() {
-  // Traduzido para o contexto de "Trilha de Aceleração" ou podemos manter original da imagem. 
-  // O usuário pediu "nesse formato da segunda imagem". Vou adaptar os textos levemente para fazer sentido com "Destaques da Trilha", mas mantendo a estrutura.
-  const tabs = ["Vendas", "Engajamento", "Construção de Marca"];
+  const tabs = [
+    "Abrindo sua loja",
+    "Operação para iniciantes",
+    "Benefícios para novos vendedores",
+    "Criadores de conteúdo/Afiliados",
+    "Lives"
+  ];
   const [activeTab, setActiveTab] = useState(tabs[0]);
+  const [swiperInstance, setSwiperInstance] = useState<any>(null);
+
+  useEffect(() => {
+    if (swiperInstance) {
+      swiperInstance.slideTo(0);
+    }
+  }, [activeTab, swiperInstance]);
 
   interface SlideData {
     tag: string;
-    image: string;
+    video: string;
+    image: string; // fallback
     title: string;
     description: string;
     dark: boolean;
   }
 
   const tabData: Record<string, SlideData[]> = {
-    "Vendas": [
+    "Abrindo sua loja": [
       {
-        tag: "GMV Max",
+        tag: "Primeiro Passo",
+        video: "https://v1.bg.ot7.me/auth/login?redirect=https%3A%2F%2Fassets.mixkit.co%2Fvideos%2Fpreview%2Fmixkit-girl-in-neon-light-dancing-reggaeton-41221-large.mp4",
         image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=600&auto=format&fit=crop",
-        title: "Maximize as vendas do TikTok Shop com anúncios",
-        description: "Solução de publicidade baseada em IA que transforma cada conteúdo—afiliado, orgânico e pago—em vendas incrementais no TikTok Shop.",
+        title: "Como criar sua conta no Seller Center",
+        description: "Passo a passo completo para cadastrar sua loja e começar a vender em minutos.",
         dark: true,
       },
       {
-        tag: "Conversões Web",
+        tag: "Configuração",
+        video: "https://assets.mixkit.co/videos/preview/mixkit-young-woman-with-red-neon-lighting-and-makeup-41219-large.mp4",
         image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=600&auto=format&fit=crop",
-        title: "Gere ações no seu site",
-        description: "Gere tráfego de alta intenção a custos menores e capture usuários mais propensos a agir em sua página.",
+        title: "Dicas para o perfil da loja",
+        description: "Como escolher o nome e a imagem ideal para atrair mais clientes e gerar confiança.",
         dark: false,
-      },
-      {
-        tag: "Venda de Produtos",
-        image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=600&auto=format&fit=crop",
-        title: "Aumente a visibilidade de produtos específicos",
-        description: "Destaque seus produtos principais diretamente no feed para gerar compras imediatas.",
-        dark: true,
       }
     ],
-    "Engajamento": [
+    "Operação para iniciantes": [
       {
-        tag: "Geração de Leads",
+        tag: "Estoque",
+        video: "https://assets.mixkit.co/videos/preview/mixkit-fashion-girl-walking-down-a-street-in-london-4428-large.mp4",
         image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=600&auto=format&fit=crop",
-        title: "Capture leads nativamente",
-        description: "Colete informações de usuários sem que eles precisem sair do aplicativo.",
+        title: "Gerenciando seus primeiros pedidos",
+        description: "Tudo o que você precisa saber sobre empacotamento, envio e status de entrega.",
         dark: true,
       },
       {
-        tag: "Otimização de Formulários",
+        tag: "Produtos",
+        video: "https://assets.mixkit.co/videos/preview/mixkit-young-woman-dancing-in-a-sunny-field-41211-large.mp4",
         image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=600&auto=format&fit=crop",
-        title: "Otimize para preenchimentos",
-        description: "Mostre seus anúncios para usuários com maior probabilidade de preencher seus formulários completamente.",
+        title: "Como cadastrar produtos que vendem",
+        description: "Fotos, descrições e categorias que aumentam a conversão dos seus anúncios.",
         dark: false,
       }
     ],
-    "Construção de Marca": [
+    "Benefícios para novos vendedores": [
       {
-        tag: "TopView",
+        tag: "Incentivo",
+        video: "https://assets.mixkit.co/videos/preview/mixkit-woman-dancing-with-balloons-41224-large.mp4",
         image: "https://images.unsplash.com/photo-1555529733-0e67056058e1?q=80&w=600&auto=format&fit=crop",
-        title: "Domine a primeira impressão",
-        description: "Seja o primeiro anúncio que os usuários veem ao abrir o app, garantindo visibilidade máxima.",
+        title: "Cupons de boas-vindas",
+        description: "Como resgatar e utilizar os primeiros cupons de impulsionamento da plataforma.",
         dark: true,
       },
       {
-        tag: "Missão da Marca",
+        tag: "Comissão Zero",
+        video: "https://assets.mixkit.co/videos/preview/mixkit-girl-walking-in-a-neon-tunnel-41216-large.mp4",
         image: "https://images.unsplash.com/photo-1616469829581-73993eb86b02?q=80&w=600&auto=format&fit=crop",
-        title: "Conteúdo autêntico colaborativo",
-        description: "Engaje criadores para desenvolver vídeos autênticos em torno da missão única da sua marca.",
+        title: "Benefício de taxa zero",
+        description: "Entenda como funciona o período de carência para novos lojistas e como aproveitar.",
+        dark: false,
+      }
+    ],
+    "Criadores de conteúdo/Afiliados": [
+      {
+        tag: "Colaboração",
+        video: "https://assets.mixkit.co/videos/preview/mixkit-woman-posing-in-neon-lights-41222-large.mp4",
+        image: "https://images.unsplash.com/photo-1555529733-0e67056058e1?q=80&w=600&auto=format&fit=crop",
+        title: "Encontrando os criadores certos",
+        description: "Como usar o Affiliate Center para conectar sua marca com influenciadores.",
+        dark: true,
+      },
+      {
+        tag: "Amostras",
+        video: "https://assets.mixkit.co/videos/preview/mixkit-young-woman-with-sunglasses-posing-in-neon-lights-41217-large.mp4",
+        image: "https://images.unsplash.com/photo-1616469829581-73993eb86b02?q=80&w=600&auto=format&fit=crop",
+        title: "Gerenciamento de amostras",
+        description: "A melhor estratégia para enviar produtos e garantir vídeos de alta qualidade.",
+        dark: false,
+      }
+    ],
+    "Lives": [
+      {
+        tag: "Live Commerce",
+        video: "https://assets.mixkit.co/videos/preview/mixkit-woman-dancing-in-front-of-a-mirror-with-neon-lights-41223-large.mp4",
+        image: "https://images.unsplash.com/photo-1555529733-0e67056058e1?q=80&w=600&auto=format&fit=crop",
+        title: "Sua primeira Live Shop",
+        description: "Equipamentos, roteiro e técnicas para prender a atenção e vender ao vivo.",
+        dark: true,
+      },
+      {
+        tag: "Análise",
+        video: "https://assets.mixkit.co/videos/preview/mixkit-young-woman-portrait-in-neon-red-light-41215-large.mp4",
+        image: "https://images.unsplash.com/photo-1616469829581-73993eb86b02?q=80&w=600&auto=format&fit=crop",
+        title: "Métricas de engajamento",
+        description: "Como ler os dados da sua live e melhorar os resultados para a próxima sessão.",
         dark: false,
       }
     ]
   };
 
-  const currentSlides = tabData[activeTab] || tabData["Vendas"];
+  const currentSlides = tabData[activeTab] || tabData["Abrindo sua loja"];
 
   return (
     <section id="downloads" className="py-12 bg-white overflow-hidden relative z-10 w-full max-w-[430px] mx-auto">
@@ -106,38 +153,41 @@ export function SliderSection() {
       {/* Slider */}
       <div className="w-full px-4">
         <Swiper
+          onSwiper={setSwiperInstance}
           modules={[Navigation, Pagination, Autoplay]}
           spaceBetween={16}
-          slidesPerView={1.2}
+          slidesPerView={1.15}
           centeredSlides={false}
           loop={false}
+          autoplay={{
+            delay: 10000, // Mais devagar (10 segundos)
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true
+          }}
           className="mySwiper !pb-12"
         >
           {currentSlides.map((slide, i) => (
-            <SwiperSlide key={i} className="h-auto">
+            <SwiperSlide key={`${activeTab}-${i}`} className="h-auto">
               <div 
                 className={`flex flex-col h-full rounded-2xl p-6 ${slide.dark ? 'bg-black text-white' : 'bg-[#f4f5f5] text-black'}`}
-                style={{ minHeight: "450px" }}
+                style={{ minHeight: "520px" }}
               >
                 {/* Tag Superior */}
                 <h4 className={`font-bold text-sm mb-6 ${slide.dark ? 'text-gray-300' : 'text-gray-600'}`}>
                   {slide.tag}
                 </h4>
 
-                {/* Imagem Vertical */}
-                <div className="relative w-full aspect-[3/4] mb-6 rounded-xl overflow-hidden shadow-sm">
-                  <img 
-                    src={slide.image} 
-                    alt={slide.title}
+                {/* Vídeo Vertical */}
+                <div className="relative w-full aspect-[9/16] mb-6 rounded-xl overflow-hidden shadow-sm bg-gray-200">
+                   <video 
+                    src={slide.video}
                     className="w-full h-full object-cover"
+                    controls
+                    playsInline
+                    loop
+                    muted
                   />
-                  {/* Pseudo Play Button (Decorativo) para a imagem */}
-                  {!slide.dark && (
-                    <div className="absolute bottom-4 left-4 bg-black/60 rounded-full px-3 py-1 flex items-center gap-1 backdrop-blur-sm">
-                       <div className="w-0 h-0 border-t-[4px] border-t-transparent border-l-[6px] border-l-white border-b-[4px] border-b-transparent"></div>
-                       <span className="text-white text-[10px] font-bold">0:09</span>
-                    </div>
-                  )}
+                  {/* Pseudo Play Button removido pois temos controles reais */}
                 </div>
 
                 {/* Textos Inferiores */}
@@ -151,7 +201,7 @@ export function SliderSection() {
                 {/* Link Saiba Mais */}
                 <div className="mt-auto flex items-center gap-1 cursor-pointer hover:opacity-80 transition-opacity w-fit">
                   <span className={`font-bold text-sm leading-none ${slide.dark ? 'text-white' : 'text-black'}`}>
-                    Saiba mais
+                    Assistir agora
                   </span>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={`mt-[1px] ${slide.dark ? 'text-white' : 'text-black'}`}>
                     <path d="m9 18 6-6-6-6"/>
@@ -171,7 +221,6 @@ export function SliderSection() {
           -ms-overflow-style: none;  /* IE and Edge */
           scrollbar-width: none;  /* Firefox */
         }
-        /* Customizando a paginação do Swiper se necessário, mas a imagem não mostra bullets. Se quiser esconder: */
         .mySwiper .swiper-pagination {
           display: none; 
         }
@@ -179,4 +228,3 @@ export function SliderSection() {
     </section>
   );
 }
-

@@ -3,7 +3,6 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { FasesSection } from "@/components/sections/FasesSection";
 import { ComoFuncionaSection } from "@/components/sections/ComoFuncionaSection";
 import { CtaFinalSection } from "@/components/sections/CtaFinalSection";
-import { SliderSection } from "@/components/sections/SliderSection";
 import { Footer } from "@/components/sections/Footer";
 import { TikTokIntro } from "@/components/ui/TikTokIntro";
 import { FloatingNavbar } from "@/components/ui/FloatingNavbar";
@@ -30,7 +29,6 @@ export default function Home() {
         <HeroSection />
         <FasesSection />
         <ComoFuncionaSection />
-        <SliderSection />
         <CtaFinalSection />
         <Footer />
       </main>

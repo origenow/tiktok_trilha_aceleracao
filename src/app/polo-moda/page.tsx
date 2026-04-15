@@ -1,4 +1,5 @@
 import { PoloModaSection } from "@/components/sections/PoloModaSection";
+import { SliderSection } from "@/components/sections/SliderSection";
 import { MateriaisDeApoioSection } from "@/components/sections/MateriaisDeApoioSection";
 import { Footer } from "@/components/sections/Footer";
 import { FloatingNavbar } from "@/components/ui/FloatingNavbar";
@@ -26,6 +27,7 @@ export default function PoloModaPage() {
         style={{ maxWidth: "430px", minHeight: "100vh", backgroundColor: "#033624" }}
       >
         <PoloModaSection />
+        <SliderSection />
         <MateriaisDeApoioSection />
         <Footer />
       </main>

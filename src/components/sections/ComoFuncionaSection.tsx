@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { motion } from "motion/react";
 import { ShoppingBag, TrendingUp, Gift, Trophy, ArrowRight } from "lucide-react";
 import { HighlightedText } from "@/components/ui/highlighted-text";
 
@@ -89,43 +90,43 @@ const m1 = MISSOES_MARQUEE.slice(0, 4);
 const m2 = MISSOES_MARQUEE.slice(4, 8);
 const m3 = MISSOES_MARQUEE.slice(8);
 
-const FloatingDoodle = ({ 
-  src, 
-  size = 40, 
-  top, 
-  left, 
-  right, 
-  bottom, 
-  delay = 0, 
-  rotate = 0, 
+const FloatingDoodle = ({
+  src,
+  size = 40,
+  top,
+  left,
+  right,
+  bottom,
+  delay = 0,
+  rotate = 0,
   opacity = 0.3,
   reverse = false
-}: { 
-  src: string; 
-  size?: number; 
-  top?: string; 
-  left?: string; 
-  right?: string; 
-  bottom?: string; 
-  delay?: number; 
+}: {
+  src: string;
+  size?: number;
+  top?: string;
+  left?: string;
+  right?: string;
+  bottom?: string;
+  delay?: number;
   rotate?: number;
   opacity?: number;
   reverse?: boolean;
 }) => (
-  <div 
+  <div
     className={`absolute pointer-events-none ${reverse ? 'animate-float-reverse' : 'animate-float'}`}
-    style={{ 
-      top, left, right, bottom, 
-      width: size, height: size, 
+    style={{
+      top, left, right, bottom,
+      width: size, height: size,
       animationDelay: `${delay}s`,
-      opacity 
+      opacity
     }}
   >
-    <img 
-      src={src} 
-      alt="" 
-      className="w-full h-full object-contain" 
-      style={{ transform: `rotate(${rotate}deg)` }} 
+    <img
+      src={src}
+      alt=""
+      className="w-full h-full object-contain"
+      style={{ transform: `rotate(${rotate}deg)` }}
     />
   </div>
 );
@@ -133,17 +134,23 @@ const FloatingDoodle = ({
 /* ── Componente principal ─────────────────────────────────────── */
 export function ComoFuncionaSection() {
   return (
-    <section id="como-funciona" className="relative py-12 overflow-hidden" style={{ backgroundColor: "#ffffff" }}>
+    <section id="como-funciona" className="relative pt-12 pb-20 overflow-hidden" style={{ backgroundColor: "#ffffff" }}>
       {/* Decorative icons */}
-      <FloatingDoodle src="/assets_new/4.svg" size={60} top="2%" left="4%" rotate={-12} opacity={0.12} />
-      <FloatingDoodle src="/assets_new/6.svg" size={55} bottom="10%" right="4%" rotate={12} opacity={0.15} reverse />
-      <FloatingDoodle src="/assets_new/1.svg" size={45} top="40%" right="2%" rotate={25} opacity={0.08} />
+      <FloatingDoodle src="/assets_new/camera.svg" size={108} top="2%" left="4%" rotate={-12} opacity={0.12} />
+      <FloatingDoodle src="/assets_new/cosmetics.svg" size={99} bottom="10%" right="4%" rotate={12} opacity={0.15} reverse />
+      <FloatingDoodle src="/assets_new/manequim.svg" size={81} top="40%" right="2%" rotate={25} opacity={0.08} />
       <FloatingDoodle src="/assets_new/2.svg" size={35} bottom="20%" left="6%" rotate={-45} opacity={0.1} />
       <FloatingDoodle src="/assets_new/5.svg" size={50} top="15%" right="10%" rotate={10} opacity={0.05} />
       <div className="w-full max-w-[430px] mx-auto">
 
         {/* Header */}
-        <div className="px-6 mb-6 text-center">
+        <motion.div
+          className="px-6 mb-6 text-center"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.5 }}
+        >
           <p className="font-body text-xs uppercase tracking-widest mb-1" style={{ color: "#FBEB35", textShadow: "0 0 0 #033624", WebkitTextStroke: "0.5px #bba800" }}>
             Recompensas
           </p>
@@ -156,10 +163,16 @@ export function ComoFuncionaSection() {
           <p className="font-body text-sm mt-2" style={{ color: "#4A0505", opacity: 0.7 }}>
             Depois de completar as missões, veja como retirar suas recompensas no Seller Center
           </p>
-        </div>
+        </motion.div>
 
         {/* Marquee triplo */}
-        <div className="relative mb-8">
+        <motion.div
+          className="relative mb-8"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+        >
           {/* Fade laterais */}
           <div
             className="absolute left-0 top-0 bottom-0 w-10 z-10 pointer-events-none"
@@ -175,7 +188,7 @@ export function ComoFuncionaSection() {
             <Marquee items={m2} reverse duration="45s" />
             <Marquee items={m3} duration="40s" />
           </div>
-        </div>
+        </motion.div>
 
         {/* 4 passos */}
         <div className="px-6">
@@ -184,10 +197,14 @@ export function ComoFuncionaSection() {
               const Icon = passo.icon;
               const dividerColors = ["#F1204A", "#FBEB35", "#EDBBE8", "#2DCCD3"];
               return (
-                <div
+                <motion.div
                   key={i}
                   className="flex gap-4 py-5 border-b border-dashed"
                   style={{ borderColor: dividerColors[i % dividerColors.length] }}
+                  initial={{ opacity: 0, x: -24 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.4 }}
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
                 >
                   {/* Número */}
                   <div
@@ -207,29 +224,50 @@ export function ComoFuncionaSection() {
                       {passo.desc}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
 
           {/* Link seller center */}
-          <div className="mt-8 text-center flex justify-center">
+          <motion.div
+            className="mt-8 text-center flex justify-center"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.4, delay: 0.35 }}
+          >
             <a
               href="https://seller-br.tiktok.com/challenges/growth"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 font-display font-black text-sm px-7 py-3 transition-all duration-200"
-              style={{ 
-                color: "#ffffff", 
-                backgroundColor: "#F1204A", 
+              style={{
+                color: "#ffffff",
+                backgroundColor: "#F1204A",
                 borderRadius: "999px",
                 boxShadow: "0 4px 12px rgba(241, 32, 74, 0.2)"
               }}
             >
               Ver minhas recompensas agora <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </a>
-          </div>
+          </motion.div>
         </div>
+      </div>
+
+      {/* Wave transition → CtaFinalSection */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none pointer-events-none">
+        <svg
+          viewBox="0 0 1440 72"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+          className="w-full h-[72px] block"
+        >
+          <path
+            d="M0,36 C240,72 480,0 720,36 C960,72 1200,0 1440,36 L1440,72 L0,72 Z"
+            fill="#BAF6F0"
+          />
+        </svg>
       </div>
     </section>
   );

@@ -128,8 +128,8 @@ export function PoloModaSection() {
       <FloatingDoodle src="/assets_new/10.svg" size={180} top="35%" left="-10%" rotate={0} opacity={0.25} />
       <FloatingDoodle src="/assets_new/5.svg" size={100} top="20%" right="-5%" rotate={45} opacity={0.3} />
       <FloatingDoodle src="/assets_new/2.svg" size={110} bottom="25%" right="-3%" rotate={-20} opacity={0.35} reverse />
-      <FloatingDoodle src="/assets_new/4.svg" size={80} top="10%" left="2%" rotate={30} opacity={0.45} />
-      <FloatingDoodle src="/assets_new/1.svg" size={95} bottom="2%" right="12%" rotate={-10} opacity={0.3} />
+      <FloatingDoodle src="/assets_new/camera.svg" size={144} top="10%" left="2%" rotate={30} opacity={0.45} />
+      <FloatingDoodle src="/assets_new/manequim.svg" size={171} bottom="2%" right="12%" rotate={-10} opacity={0.3} />
 
       <div className="relative z-10 w-full max-w-[430px] mx-auto px-6 py-16 flex flex-col gap-12">
 

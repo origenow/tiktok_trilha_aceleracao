@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { HighlightedText } from "@/components/ui/highlighted-text";
 import {
   ExternalLink, ChevronDown,
   BookOpen, Megaphone, Settings, TrendingUp, Heart,
@@ -229,9 +230,15 @@ function MaterialCard({ item, index }: { item: MaterialItem; index: number }) {
 }
 
 /* ── GrupoAccordeon ───────────────────────────────────────────── */
-function GrupoAccordeon({ grupo, defaultOpen = false }: { grupo: MaterialGroup; defaultOpen?: boolean }) {
-  const [open, setOpen] = useState(defaultOpen);
-
+function GrupoAccordeon({
+  grupo,
+  open,
+  onToggle,
+}: {
+  grupo: MaterialGroup;
+  open: boolean;
+  onToggle: () => void;
+}) {
   return (
     <div
       className="rounded-3xl overflow-hidden"
@@ -239,7 +246,7 @@ function GrupoAccordeon({ grupo, defaultOpen = false }: { grupo: MaterialGroup; 
     >
       {/* Header colorido sólido */}
       <button
-        onClick={() => setOpen(!open)}
+        onClick={onToggle}
         className="w-full flex items-center justify-between px-5 py-4 text-left"
         style={{ backgroundColor: grupo.headerBg }}
       >
@@ -310,6 +317,8 @@ function GrupoAccordeon({ grupo, defaultOpen = false }: { grupo: MaterialGroup; 
 
 /* ── Seção principal ──────────────────────────────────────────── */
 export function MateriaisDeApoioSection() {
+  const [openId, setOpenId] = useState<string | null>(GRUPOS[0].id);
+
   return (
     <section className="relative overflow-hidden" style={{ backgroundColor: "#EDBBE8" }}>
 
@@ -366,7 +375,7 @@ export function MateriaisDeApoioSection() {
             style={{ fontSize: "clamp(1.8rem, 7vw, 2.4rem)", color: "#111111" }}
           >
             Materiais{" "}
-            <span style={{ color: "#F1204A" }}>de Apoio</span>
+            <HighlightedText highlightColor="#2DCCD3" from="bottom" inView delay={0.2}>de Apoio</HighlightedText>
           </h2>
 
           <p className="font-body text-sm mt-3 leading-relaxed" style={{ color: "#4A0505", opacity: 0.65 }}>
@@ -382,8 +391,13 @@ export function MateriaisDeApoioSection() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="flex flex-col gap-3"
         >
-          {GRUPOS.map((grupo, i) => (
-            <GrupoAccordeon key={grupo.id} grupo={grupo} defaultOpen={i === 0} />
+          {GRUPOS.map((grupo) => (
+            <GrupoAccordeon
+              key={grupo.id}
+              grupo={grupo}
+              open={openId === grupo.id}
+              onToggle={() => setOpenId(openId === grupo.id ? null : grupo.id)}
+            />
           ))}
         </motion.div>
 

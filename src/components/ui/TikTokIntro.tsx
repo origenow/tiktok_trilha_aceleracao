@@ -66,6 +66,8 @@ export function TikTokIntro({ onComplete }: { onComplete?: () => void }) {
   const whiteRef = useRef<SVGPathElement>(null);
 
   useEffect(() => {
+    document.body.style.overflow = "hidden";
+
     const styleEl = document.createElement("style");
     styleEl.id = "tk-intro-styles";
     styleEl.textContent = INTRO_CSS;
@@ -85,12 +87,14 @@ export function TikTokIntro({ onComplete }: { onComplete?: () => void }) {
     const t1 = setTimeout(() => setPhase("fading"), 2700);
     const t2 = setTimeout(() => {
       setPhase("done");
+      document.body.style.overflow = "";
       onComplete?.();
     }, 3200);
 
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
+      document.body.style.overflow = "";
       document.getElementById("tk-intro-styles")?.remove();
     };
   }, [onComplete]);

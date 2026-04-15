@@ -182,14 +182,31 @@ export function FasesSection() {
   };
 
   return (
-    <section id="fases" className="relative py-12 overflow-hidden" style={{ backgroundColor: "#ffffff" }}>
+    <section id="fases" className="relative pt-20 pb-20 overflow-hidden" style={{ backgroundColor: "#ffffff" }}>
+      {/* Wave entrada — vindo do HeroSection (#BAF6F0) */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none pointer-events-none">
+        <svg
+          viewBox="0 0 1440 80"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+          className="w-full h-[80px] block"
+        >
+          <path
+            d="M0,80 C200,20 500,70 720,30 C940,0 1180,60 1440,25 L1440,0 L0,0 Z"
+            fill="#BAF6F0"
+          />
+        </svg>
+      </div>
+
+
+
       {/* Decorative icons */}
       <FloatingDoodle src="/assets_new/10.svg" size={80} top="15%" right="-2%" rotate={15} opacity={0.15} />
       <FloatingDoodle src="/assets_new/5.svg" size={70} bottom="25%" left="-2%" rotate={-15} opacity={0.1} reverse />
-      <FloatingDoodle src="/assets_new/1.svg" size={40} top="45%" left="2%" rotate={20} opacity={0.08} />
+      <FloatingDoodle src="/assets_new/manequim.svg" size={72} top="45%" left="2%" rotate={20} opacity={0.08} />
       <FloatingDoodle src="/assets_new/2.svg" size={50} bottom="5%" right="4%" rotate={-10} opacity={0.1} />
-      <FloatingDoodle src="/assets_new/4.svg" size={45} top="5%" left="4%" rotate={30} opacity={0.05} reverse />
-      <FloatingDoodle src="/assets_new/6.svg" size={60} bottom="45%" right="2%" rotate={45} opacity={0.08} />
+      <FloatingDoodle src="/assets_new/camera.svg" size={81} top="5%" left="4%" rotate={30} opacity={0.05} reverse />
+      <FloatingDoodle src="/assets_new/cosmetics.svg" size={108} bottom="45%" right="2%" rotate={45} opacity={0.08} />
       {/* Header */}
       <div className="w-full max-w-[430px] mx-auto px-6 mb-6">
         <p className="font-body text-xs uppercase tracking-widest mb-1" style={{ color: "#2DCCD3" }}>

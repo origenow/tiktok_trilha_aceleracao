@@ -108,22 +108,24 @@ const cards = [
 /* ── Componente principal ─────────────────────────────────────── */
 export function HeroSection() {
   return (
+
     <section
       id="hero"
       className="relative min-h-screen flex flex-col overflow-hidden"
       style={{ backgroundColor: "#BAF6F0" }}
     >
+
       {/* Doodles absolutos */}
-      <FloatingDoodle src="/assets_new/1.svg" size={48} bottom="32%" left="4%" rotate={12} delay={0.5} opacity={0.4} reverse />
+      <FloatingDoodle src="/assets_new/manequim.svg" size={86} bottom="32%" left="4%" rotate={12} delay={0.5} opacity={0.4} reverse />
       <FloatingDoodle src="/assets_new/2.svg" size={60} top="45%" right="4%" rotate={-12} delay={1.5} opacity={0.35} />
-      <FloatingDoodle src="/assets_new/4.svg" size={40} top="38%" left="6%" rotate={45} delay={0.8} opacity={0.4} reverse />
+      <FloatingDoodle src="/assets_new/camera.svg" size={72} top="38%" left="6%" rotate={45} delay={0.8} opacity={0.4} reverse />
       <FloatingDoodle src="/assets_new/5.svg" size={56} top="18%" right="10%" rotate={0} delay={2.1} opacity={0.25} />
-      <FloatingDoodle src="/assets_new/6.svg" size={44} top="8%" right="6%" rotate={-15} delay={1.2} opacity={0.3} />
+      <FloatingDoodle src="/assets_new/cosmetics.svg" size={79} top="8%" right="6%" rotate={-15} delay={1.2} opacity={0.3} />
       <FloatingDoodle src="/assets_new/7.svg" size={50} bottom="15%" right="8%" rotate={20} delay={0.3} opacity={0.15} reverse />
       <FloatingDoodle src="/assets_new/8.svg" size={38} top="25%" left="8%" rotate={-30} delay={2.5} opacity={0.2} />
       <FloatingDoodle src="/assets_new/9.svg" size={52} bottom="40%" right="12%" rotate={10} delay={1.8} opacity={0.1} />
       <FloatingDoodle src="/assets_new/10.svg" size={46} top="55%" left="2%" rotate={5} delay={0.1} opacity={0.3} />
-      <FloatingDoodle src="/assets_new/1.svg" size={32} bottom="5%" left="15%" rotate={-20} delay={3.2} opacity={0.25} reverse />
+      <FloatingDoodle src="/assets_new/manequim.svg" size={58} bottom="5%" left="15%" rotate={-20} delay={3.2} opacity={0.25} reverse />
 
       {/* Container mobile-first */}
       <div className="relative z-10 flex flex-col items-center w-full max-w-[430px] mx-auto px-6 pt-8 pb-4">

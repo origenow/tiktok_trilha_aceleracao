@@ -107,7 +107,7 @@ const cards = [
 /* ── Componente principal ─────────────────────────────────────── */
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  
+
   // Hook de Scroll para monitorar o progresso na HeroSection
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -118,11 +118,11 @@ export function HeroSection() {
   // Parte 1: Ativa em 20% do scroll
   const color1 = useTransform(scrollYProgress, (v) => v >= 0.2 ? "#F1204A" : "#4A0505");
   const weight1 = useTransform(scrollYProgress, (v) => v >= 0.2 ? 900 : 100);
-  
+
   // Parte 2: Ativa em 50% do scroll
   const color2 = useTransform(scrollYProgress, (v) => v >= 0.5 ? "#F1204A" : "#4A0505");
   const weight2 = useTransform(scrollYProgress, (v) => v >= 0.5 ? 900 : 100);
-  
+
   // Parte 3: Ativa em 80% do scroll
   const color3 = useTransform(scrollYProgress, (v) => v >= 0.8 ? "#F1204A" : "#4A0505");
   const weight3 = useTransform(scrollYProgress, (v) => v >= 0.8 ? 900 : 100);
@@ -136,7 +136,7 @@ export function HeroSection() {
     >
       {/* Sticky container para manter o conteúdo fixo enquanto rola */}
       <div className="sticky top-0 h-screen w-full flex flex-col overflow-hidden">
-        
+
         {/* Doodles absolutos */}
         <FloatingDoodle src="/assets_new/manequim.svg" size={86} bottom="32%" left="4%" rotate={12} delay={0.5} opacity={0.4} reverse />
         <FloatingDoodle src="/assets_new/2.svg" size={60} top="45%" right="4%" rotate={-12} delay={1.5} opacity={0.35} />

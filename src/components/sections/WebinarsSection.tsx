@@ -127,8 +127,13 @@ function WebinarCard({ card, index, scrollXProgress, onCardClick }: { card: Webi
             width: "667px",
             height: "556px",
             border: "none",
-            transformOrigin: "top left",
-            transform: "scale(0.36)",
+            transformOrigin: "center",
+            transform: "scale(0.42)", // Aumentado para dar zoom
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            marginTop: "-278px", // Metade da altura (556/2)
+            marginLeft: "-333.5px", // Metade da largura (667/2)
             pointerEvents: "none",
           }}
         />

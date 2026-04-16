@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const NAV_ROUTES = [
   { label: "Trilha de Aceleração", href: "/" },
-  { label: "Polos de Moda", href: "/polo-moda" },
+  { label: "Onboarding", href: "/polo-moda" },
 ];
 
 export function FloatingNavbar() {
@@ -30,10 +30,10 @@ export function FloatingNavbar() {
     <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-full max-w-[320px] px-4 pointer-events-none">
       <motion.div
         initial={{ y: -100, x: "-50%", opacity: 0 }}
-        animate={{ 
-          y: visible ? 0 : -100, 
-          x: "-50%", 
-          opacity: visible ? 1 : 0 
+        animate={{
+          y: visible ? 0 : -100,
+          x: "-50%",
+          opacity: visible ? 1 : 0
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className="fixed top-6 left-1/2 flex items-center gap-1 p-1.5 rounded-full pointer-events-auto shadow-2xl"
@@ -67,8 +67,8 @@ export function FloatingNavbar() {
                     layoutId="nav-pill"
                     className="absolute inset-0 z-0 rounded-full"
                     style={{
-                      background: isActive 
-                        ? "linear-gradient(90deg, #F1204A 0%, #ff4b6e 100%)" 
+                      background: isActive
+                        ? "linear-gradient(90deg, #F1204A 0%, #ff4b6e 100%)"
                         : "rgba(255, 255, 255, 0.1)",
                       border: isActive ? "none" : "1px solid rgba(255,255,255,0.15)",
                     }}

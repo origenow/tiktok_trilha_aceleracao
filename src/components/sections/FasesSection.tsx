@@ -27,6 +27,7 @@ import {
   Info,
   BookOpen,
   ChevronRight,
+  RotateCcw,
   MessageCircle,
   LucideIcon,
 } from "lucide-react";
@@ -434,16 +435,20 @@ function MissionGroupCard({ group, fase, step }: {
             </a>
           ) : (
             <a href={group.note.href}
-              className="flex items-center gap-1.5 mt-3 font-body text-xs font-semibold w-fit rounded-full px-3 py-1.5"
-              style={{ backgroundColor: alpha(DS.glint, 0.12), color: DS.thrive }}
+              className="inline-flex items-center gap-2 mt-3 font-display font-black text-xs rounded-xl px-4 py-2.5 transition-transform duration-150 active:scale-[0.97]"
+              style={{
+                backgroundColor: DS.glint,
+                color: DS.thrive,
+                boxShadow: `0 4px 14px ${alpha(DS.glint, 0.4)}`,
+              }}
               onClick={(e) => {
                 e.preventDefault();
                 document.querySelector(group.note!.href)?.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              <MessageCircle size={12} />
+              <MessageCircle size={15} />
               {group.note.text}
-              <ChevronRight size={11} />
+              <ChevronRight size={14} />
             </a>
           )
         )}
@@ -550,6 +555,10 @@ export function FasesSection() {
       setActiveIndex((i) => i + 1);
       setGroupStep(0);
       setShowReward(false);
+      setTimeout(() => document.getElementById("fases")?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
+    } else {
+      selectPhase(0);
+      setTimeout(() => document.getElementById("fases")?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
     }
   };
 
@@ -760,17 +769,22 @@ export function FasesSection() {
                       Próxima fase
                       <ChevronRight size={15} />
                     </>
-                  ) : isLastGroup && !showReward ? (
+                  ) : isLastGroup && showReward ? (
+                    <>
+                      <RotateCcw size={14} />
+                      Voltar à Fase 1
+                    </>
+                  ) : isLastGroup ? (
                     <>
                       <activeFase.rewardIcon size={15} />
                       Ver recompensa
                     </>
-                  ) : !isLastGroup ? (
+                  ) : (
                     <>
                       Próximo passo
                       <ChevronRight size={15} />
                     </>
-                  ) : null}
+                  )}
                 </motion.button>
               </div>
             </div>

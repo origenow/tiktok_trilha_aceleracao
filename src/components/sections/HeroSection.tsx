@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import React from "react";
+import { motion } from "motion/react";
 import { Trophy, ShoppingBag, Crown, Rocket, Gem, LucideIcon } from "lucide-react";
 import { HighlightedText } from "@/components/ui/highlighted-text";
 
@@ -106,36 +106,13 @@ const cards = [
 
 /* ── Componente principal ─────────────────────────────────────── */
 export function HeroSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  // Hook de Scroll para monitorar o progresso na HeroSection
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"]
-  });
-
-  // Cores e pesos transformados para mudar instantaneamente em pontos específicos
-  // Parte 1: Ativa em 20% do scroll
-  const color1 = useTransform(scrollYProgress, (v) => v >= 0.2 ? "#F1204A" : "#4A0505");
-  const weight1 = useTransform(scrollYProgress, (v) => v >= 0.2 ? 900 : 100);
-
-  // Parte 2: Ativa em 50% do scroll
-  const color2 = useTransform(scrollYProgress, (v) => v >= 0.5 ? "#F1204A" : "#4A0505");
-  const weight2 = useTransform(scrollYProgress, (v) => v >= 0.5 ? 900 : 100);
-
-  // Parte 3: Ativa em 80% do scroll
-  const color3 = useTransform(scrollYProgress, (v) => v >= 0.8 ? "#F1204A" : "#4A0505");
-  const weight3 = useTransform(scrollYProgress, (v) => v >= 0.8 ? 900 : 100);
-
   return (
     <section
-      ref={sectionRef}
       id="hero"
-      className="relative h-[250vh] flex flex-col"
+      className="relative flex flex-col overflow-hidden"
       style={{ backgroundColor: "#BAF6F0" }}
     >
-      {/* Sticky container para manter o conteúdo fixo enquanto rola */}
-      <div className="sticky top-0 h-screen w-full flex flex-col overflow-hidden">
+      <div className="w-full flex flex-col">
 
         {/* Doodles absolutos */}
         <FloatingDoodle src="/assets_new/manequim.svg" size={86} bottom="32%" left="4%" rotate={12} delay={0.5} opacity={0.4} reverse />
@@ -229,16 +206,10 @@ export function HeroSection() {
             </motion.span>
           </motion.h1>
 
-          {/* Subtítulo Dinâmico */}
-          <div className="font-body mt-4 text-[0.95rem] leading-relaxed w-full">
-            <motion.p style={{ display: "inline-block" }}>
-              <motion.span style={{ color: color1, fontWeight: weight1 }}>Siga as fases</motion.span>
-              <motion.span style={{ color: "#4A0505", opacity: 0.8 }}> → </motion.span>
-              <motion.span style={{ color: color2, fontWeight: weight2 }}>complete missões</motion.span>
-              <motion.span style={{ color: "#4A0505", opacity: 0.8 }}> → </motion.span>
-              <motion.span style={{ color: color3, fontWeight: weight3 }}>desbloqueie cupons, tráfego e suporte</motion.span>
-            </motion.p>
-          </div>
+          {/* Subtítulo */}
+          <p className="font-body mt-4 text-[0.95rem] leading-relaxed w-full" style={{ color: "#4A0505", opacity: 0.8 }}>
+            Siga as fases → complete missões → desbloqueie cupons, tráfego e suporte
+          </p>
 
           {/* Cards flutuantes */}
           <div className="relative w-full mt-8 mb-6" style={{ height: "180px" }}>
@@ -248,7 +219,7 @@ export function HeroSection() {
                 className="absolute"
                 style={{
                   left: i === 0 ? "0%" : "auto",
-                  right: i === 1 ? "0%" : "auto",
+                  right: i === 1 ? "3%" : "auto",
                   top: i === 0 ? "20px" : "0px",
                   zIndex: 10,
                 }}
@@ -317,7 +288,7 @@ export function HeroSection() {
         </div>
 
         {/* Bottom strip — pílulas das fases (AGORA DENTRO DO STICKY) */}
-        <div className="mt-auto relative z-10 w-full max-w-[430px] mx-auto px-4 pb-8">
+        <div className="mt-auto shrink-0 relative z-10 w-full max-w-[430px] mx-auto px-4 pb-6">
           <div className="bg-white rounded-3xl px-4 py-5 shadow-md">
             <p className="font-body text-xs text-center mb-3 opacity-60" style={{ color: "#033624" }}>
               4 fases · missões progressivas · recompensas reais

@@ -84,7 +84,7 @@ const GRUPOS: MaterialGroup[] = [
         icon: TrendingUp,
         label: "GMV Max — Ads Acelerados",
         description: "Impulsionamento automático com ROAS otimizado",
-        href: "https://seller-br.tiktok.com/university/home?default_language=pt-BR&identity=1&role=seller&menu=feature",
+        href: "/gmv-max",
         accent: "#F1204A",
         accentText: "#ffffff",
         cardBg: "#fff0f2",
@@ -178,8 +178,8 @@ function MaterialCard({ item, index }: { item: MaterialItem; index: number }) {
   return (
     <motion.a
       href={item.href}
-      target="_blank"
-      rel="noopener noreferrer"
+      target={item.href.startsWith("/") ? "_self" : "_blank"}
+      rel={item.href.startsWith("/") ? undefined : "noopener noreferrer"}
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 10 }}

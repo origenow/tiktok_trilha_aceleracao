@@ -1,12 +1,20 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import { motion } from "motion/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { ExternalLink, ChevronRight, Tag, Truck } from "lucide-react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 28 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.15 as const },
+  transition: { duration: 0.48, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number], delay },
+});
 
 export function SliderSection() {
   const tabs = [
@@ -297,103 +305,184 @@ export function SliderSection() {
       <div className="px-4 mb-10 flex flex-col gap-4">
 
         {/* Header */}
-        <div className="flex flex-col gap-1">
-          <span className="font-black text-[10px] uppercase tracking-widest text-gray-400">
+        <motion.div {...fadeUp(0)} className="flex flex-col gap-2">
+          <span
+            className="font-body text-xs font-semibold px-4 py-1.5 self-start"
+            style={{
+              backgroundColor: "#033624",
+              color: "#BAF6F0",
+              borderRadius: "999px",
+              transform: "rotate(-2deg)",
+              display: "inline-block",
+            }}
+          >
             🎓 Conteúdo oficial
           </span>
-          <h2 className="font-black text-2xl leading-tight">Seller Academy</h2>
-          <p className="text-sm text-gray-500 leading-snug">
+          <h2 className="font-display font-black leading-tight" style={{ fontSize: "clamp(1.6rem, 7vw, 2rem)", color: "#033624" }}>
+            Seller Academy
+          </h2>
+          <p className="font-body text-sm leading-snug" style={{ color: "#4A0505", opacity: 0.7 }}>
             Saiba tudo sobre TikTok Shop — do cadastro à escala.
           </p>
-        </div>
+        </motion.div>
 
         {/* CTA Seller Academy */}
-        <a
+        <motion.a
+          {...fadeUp(0.08)}
           href="https://seller-br.tiktok.com/university/home"
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex items-center gap-4 rounded-2xl p-4 transition-all duration-200 hover:opacity-90 active:scale-[0.98]"
-          style={{ background: "linear-gradient(135deg, #111111 0%, #1a1a1a 100%)" }}
+          className="group flex items-center gap-4 rounded-2xl p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]"
+          style={{
+            background: "linear-gradient(135deg, #033624 0%, #055a3a 100%)",
+            boxShadow: "0 6px 24px rgba(3,54,36,0.30)",
+          }}
         >
-          <div className="shrink-0 w-11 h-11 rounded-xl flex items-center justify-center text-2xl bg-white/10">
+          <div
+            className="shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-2xl"
+            style={{ backgroundColor: "rgba(186,246,240,0.15)" }}
+          >
             🎓
           </div>
           <div className="flex-1 min-w-0">
-            <p className="font-black text-sm text-white">Acessar Seller Academy</p>
-            <p className="text-[11px] text-white/50 mt-0.5">Treinamentos oficiais TikTok Shop</p>
+            <p className="font-display font-black text-sm" style={{ color: "#BAF6F0" }}>Acessar Seller Academy</p>
+            <p className="font-body text-xs mt-0.5" style={{ color: "rgba(186,246,240,0.5)" }}>Treinamentos oficiais TikTok Shop</p>
           </div>
-          <ExternalLink size={14} className="shrink-0 text-white/30 group-hover:text-white/60 transition-colors" />
-        </a>
+          <div
+            className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 group-hover:scale-110"
+            style={{ backgroundColor: "rgba(186,246,240,0.15)" }}
+          >
+            <ExternalLink size={14} style={{ color: "#BAF6F0" }} />
+          </div>
+        </motion.a>
 
         {/* Divider */}
-        <div className="flex items-center gap-3 my-1">
-          <div className="flex-1 h-px bg-black/8" />
-          <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Abrindo sua loja</span>
-          <div className="flex-1 h-px bg-black/8" />
-        </div>
+        <motion.div {...fadeUp(0.14)} className="flex items-center gap-3 my-1">
+          <div className="flex-1 h-px" style={{ backgroundColor: "rgba(3,54,36,0.12)" }} />
+          <span className="font-body text-[10px] font-bold uppercase tracking-widest" style={{ color: "#033624", opacity: 0.45 }}>Abrindo sua loja</span>
+          <div className="flex-1 h-px" style={{ backgroundColor: "rgba(3,54,36,0.12)" }} />
+        </motion.div>
 
         {/* Políticas */}
-        <a
+        <motion.a
+          {...fadeUp(0.18)}
           href="https://seller-br.tiktok.com/university/home"
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex items-center gap-3 rounded-2xl px-4 py-3.5 bg-[#f4f5f5] hover:bg-gray-100 transition-colors duration-200"
-          style={{ borderLeft: "4px solid #111111" }}
+          className="group flex items-center gap-3.5 rounded-2xl px-4 py-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+          style={{
+            background: "linear-gradient(135deg, #e0fdfb 0%, #BAF6F0 100%)",
+            border: "1.5px solid #2DCCD3",
+            boxShadow: "0 4px 16px rgba(45,204,211,0.18)",
+          }}
         >
-          <div className="shrink-0 w-9 h-9 rounded-xl bg-black flex items-center justify-center">
-            <span className="text-white text-sm">📋</span>
+          <div
+            className="shrink-0 w-11 h-11 rounded-xl flex items-center justify-center text-lg"
+            style={{ backgroundColor: "#2DCCD3", boxShadow: "0 3px 10px rgba(45,204,211,0.4)" }}
+          >
+            📋
           </div>
           <div className="flex-1 min-w-0">
-            <p className="font-black text-sm text-black">Políticas da Plataforma</p>
-            <p className="text-[11px] text-gray-500 mt-0.5">Regras e termos para vender no TikTok Shop</p>
+            <p className="font-display font-black text-sm" style={{ color: "#033624" }}>Políticas da Plataforma</p>
+            <p className="font-body text-xs mt-0.5" style={{ color: "#033624", opacity: 0.55 }}>Regras e termos para vender no TikTok Shop</p>
           </div>
-          <ExternalLink size={13} className="shrink-0 text-gray-300 group-hover:text-gray-600 transition-colors" />
-        </a>
+          <div
+            className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+            style={{ backgroundColor: "#2DCCD3" }}
+          >
+            <ExternalLink size={12} style={{ color: "#033624" }} />
+          </div>
+        </motion.a>
 
         {/* Taxas — 2 colunas */}
-        <div className="grid grid-cols-2 gap-3">
-          <div className="rounded-2xl p-4 bg-[#f4f5f5] flex flex-col gap-2" style={{ borderTop: "3px solid #F1204A" }}>
-            <div className="w-8 h-8 rounded-lg bg-[#F1204A]/10 flex items-center justify-center">
-              <Tag size={14} className="text-[#F1204A]" />
+        <motion.div {...fadeUp(0.22)} className="grid grid-cols-2 gap-3">
+          {/* Comissão */}
+          <div
+            className="rounded-2xl p-4 flex flex-col gap-1.5 relative overflow-hidden"
+            style={{
+              background: "linear-gradient(145deg, #F1204A 0%, #c01038 100%)",
+              boxShadow: "0 6px 22px rgba(241,32,74,0.38)",
+            }}
+          >
+            <div className="absolute -top-4 -right-4 w-20 h-20 rounded-full opacity-10 bg-white" />
+            <div
+              className="w-9 h-9 rounded-xl flex items-center justify-center mb-0.5"
+              style={{ backgroundColor: "rgba(255,255,255,0.2)" }}
+            >
+              <Tag size={15} style={{ color: "#ffffff" }} />
             </div>
-            <p className="text-[10px] text-gray-500 font-medium">Comissão TikTok</p>
-            <p className="font-black text-xl leading-none text-black">6%</p>
-            <p className="text-[10px] text-gray-500 leading-snug">+ R$ 4,00 por item vendido</p>
+            <p className="font-body text-[10px] font-semibold uppercase tracking-wide" style={{ color: "rgba(255,255,255,0.75)" }}>
+              Comissão TikTok
+            </p>
+            <p className="font-display font-black leading-none" style={{ fontSize: "2.2rem", color: "#ffffff" }}>
+              6%
+            </p>
+            <p className="font-body text-[10px]" style={{ color: "rgba(255,255,255,0.65)" }}>
+              + R$ 4,00 por item
+            </p>
           </div>
-          <div className="rounded-2xl p-4 bg-[#f4f5f5] flex flex-col gap-2" style={{ borderTop: "3px solid #111111" }}>
-            <div className="w-8 h-8 rounded-lg bg-black/8 flex items-center justify-center">
-              <Truck size={14} className="text-black" />
+          {/* Frete */}
+          <div
+            className="rounded-2xl p-4 flex flex-col gap-1.5 relative overflow-hidden"
+            style={{
+              background: "linear-gradient(145deg, #033624 0%, #055a3a 100%)",
+              boxShadow: "0 6px 22px rgba(3,54,36,0.35)",
+            }}
+          >
+            <div className="absolute -top-4 -right-4 w-20 h-20 rounded-full opacity-10" style={{ backgroundColor: "#2DCCD3" }} />
+            <div
+              className="w-9 h-9 rounded-xl flex items-center justify-center mb-0.5"
+              style={{ backgroundColor: "rgba(45,204,211,0.2)" }}
+            >
+              <Truck size={15} style={{ color: "#2DCCD3" }} />
             </div>
-            <p className="text-[10px] text-gray-500 font-medium">Taxa de Frete</p>
-            <p className="font-black text-xl leading-none text-black">6%</p>
-            <p className="text-[10px] text-gray-500 leading-snug">sobre o valor do pedido</p>
+            <p className="font-body text-[10px] font-semibold uppercase tracking-wide" style={{ color: "rgba(186,246,240,0.7)" }}>
+              Taxa de Frete
+            </p>
+            <p className="font-display font-black leading-none" style={{ fontSize: "2.2rem", color: "#BAF6F0" }}>
+              6%
+            </p>
+            <p className="font-body text-[10px]" style={{ color: "rgba(186,246,240,0.6)" }}>
+              sobre o pedido
+            </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Nota de isenção */}
-        <div className="rounded-2xl p-4 flex flex-col gap-3 border border-dashed border-black/15 bg-[#fffde8]">
-          <div className="flex items-start gap-2.5">
-            <span className="text-xl leading-none mt-0.5">💡</span>
+        <motion.div
+          {...fadeUp(0.28)}
+          className="rounded-2xl p-5 flex flex-col gap-3 relative overflow-hidden"
+          style={{
+            background: "linear-gradient(135deg, #FBEB35 0%, #f5e020 100%)",
+            boxShadow: "0 6px 24px rgba(251,235,53,0.45)",
+          }}
+        >
+          <div className="absolute -bottom-6 -right-6 w-28 h-28 rounded-full opacity-10" style={{ backgroundColor: "#033624" }} />
+          <div className="flex items-start gap-3 relative z-10">
+            <span style={{ fontSize: "1.75rem", lineHeight: 1, marginTop: "2px" }}>💡</span>
             <div className="flex flex-col gap-1">
-              <p className="font-black text-sm text-black">Isenção de comissão por 60 dias</p>
-              <p className="text-[11px] text-gray-600 leading-relaxed">
+              <p className="font-display font-black text-sm" style={{ color: "#033624" }}>Isenção de comissão por 60 dias</p>
+              <p className="font-body text-xs leading-relaxed" style={{ color: "#033624", opacity: 0.72 }}>
                 Habilite a missão no Seller Center para participar e aproveite 0% de comissão nas primeiras semanas.
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-1 flex-wrap bg-black/5 rounded-xl px-3 py-2">
-            <span className="text-[10px] font-medium text-gray-700">Menu lateral</span>
-            <ChevronRight size={10} className="text-gray-400" />
-            <span className="text-[10px] font-medium text-gray-700">Crescimento</span>
-            <ChevronRight size={10} className="text-gray-400" />
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#F1204A] text-white">Missões</span>
+          <div
+            className="flex items-center gap-1 flex-wrap rounded-xl px-3 py-2 relative z-10"
+            style={{ backgroundColor: "rgba(3,54,36,0.12)" }}
+          >
+            <span className="font-body text-[10px] font-semibold" style={{ color: "#033624" }}>Menu lateral</span>
+            <ChevronRight size={10} style={{ color: "#033624", opacity: 0.6 }} />
+            <span className="font-body text-[10px] font-semibold" style={{ color: "#033624" }}>Crescimento</span>
+            <ChevronRight size={10} style={{ color: "#033624", opacity: 0.6 }} />
+            <span className="font-body text-[10px] font-black px-2.5 py-0.5 rounded-full" style={{ backgroundColor: "#F1204A", color: "#ffffff" }}>Missões</span>
           </div>
-        </div>
+        </motion.div>
 
       </div>
 
       {/* Container de Tabs */}
-      <div className="w-full px-4 mb-8 flex items-center justify-start gap-3 overflow-x-auto no-scrollbar pb-2">
+      <motion.div {...fadeUp(0.1)} className="w-full px-4 mb-8 flex items-center justify-start gap-3 overflow-x-auto no-scrollbar pb-2">
         {tabs.map((tab) => {
           const isActive = activeTab === tab;
           return (
@@ -409,10 +498,10 @@ export function SliderSection() {
             </button>
           );
         })}
-      </div>
+      </motion.div>
 
       {/* Slider */}
-      <div className="w-full px-4">
+      <motion.div {...fadeUp(0.15)} className="w-full px-4">
         <Swiper
           onSwiper={setSwiperInstance}
           modules={[Navigation, Pagination, Autoplay]}
@@ -492,7 +581,7 @@ export function SliderSection() {
             </SwiperSlide>
           ))}
         </Swiper>
-      </div>
+      </motion.div>
 
       <style jsx global>{`
         .no-scrollbar::-webkit-scrollbar {

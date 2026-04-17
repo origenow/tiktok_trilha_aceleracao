@@ -28,7 +28,7 @@ export function VideoPlayerSection({ canPlay = false }: { canPlay?: boolean }) {
     if (!video) return;
 
     const tryPlay = () => {
-      video.play().then(() => setIsPlaying(true)).catch(() => {});
+      video.play().then(() => setIsPlaying(true)).catch(() => { });
     };
 
     // readyState >= 3 (HAVE_FUTURE_DATA) = já tem dados suficientes para tocar
@@ -60,7 +60,7 @@ export function VideoPlayerSection({ canPlay = false }: { canPlay?: boolean }) {
       video.pause();
       setIsPlaying(false);
     } else {
-      video.play().then(() => setIsPlaying(true)).catch(() => {});
+      video.play().then(() => setIsPlaying(true)).catch(() => { });
     }
   };
 
@@ -126,9 +126,8 @@ export function VideoPlayerSection({ canPlay = false }: { canPlay?: boolean }) {
                 animate={isMuted ? { scale: [1, 1.15, 1] } : { scale: 1 }}
                 transition={isMuted ? { repeat: Infinity, duration: 1.2, ease: "easeInOut" } : {}}
                 onClick={toggleMute}
-                className={`w-10 h-10 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/10 ${
-                  isMuted ? "bg-[#F1204A]/80 shadow-[0_0_15px_rgba(241,32,74,0.5)]" : "bg-black/40"
-                }`}
+                className={`w-10 h-10 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/10 ${isMuted ? "bg-[#F1204A]/80 shadow-[0_0_15px_rgba(241,32,74,0.5)]" : "bg-black/40"
+                  }`}
               >
                 {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
               </motion.button>

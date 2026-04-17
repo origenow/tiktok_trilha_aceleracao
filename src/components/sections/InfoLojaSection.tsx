@@ -158,105 +158,115 @@ export function InfoLojaSection() {
             href="https://seller-br.tiktok.com/university/home"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-3.5 rounded-2xl px-4 py-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+            className="group flex items-center gap-3.5 rounded-2xl px-4 py-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-xl"
             style={{
-              backgroundColor: "#ffffff",
-              boxShadow: "0 2px 12px rgba(3,54,36,0.08)",
-              borderLeft: "4px solid #2DCCD3",
+              background: "linear-gradient(135deg, #e0fdfb 0%, #BAF6F0 100%)",
+              boxShadow: "0 4px 18px rgba(45,204,211,0.22)",
+              border: "1.5px solid #2DCCD3",
             }}
           >
             <div
-              className="shrink-0 w-10 h-10 rounded-xl flex items-center justify-center"
-              style={{ backgroundColor: "#2DCCD3" }}
+              className="shrink-0 w-11 h-11 rounded-xl flex items-center justify-center"
+              style={{ backgroundColor: "#2DCCD3", boxShadow: "0 4px 12px rgba(45,204,211,0.4)" }}
             >
-              <Info size={16} style={{ color: "#033624" }} />
+              <Info size={18} style={{ color: "#033624" }} />
             </div>
             <div className="flex-1 min-w-0">
               <p className="font-display font-black text-sm" style={{ color: "#033624" }}>
                 Políticas da Plataforma
               </p>
-              <p className="font-body text-xs mt-0.5" style={{ color: "#4A0505", opacity: 0.55 }}>
+              <p className="font-body text-xs mt-0.5" style={{ color: "#033624", opacity: 0.6 }}>
                 Regras e termos para vender no TikTok Shop
               </p>
             </div>
-            <ExternalLink
-              size={13}
-              className="shrink-0 opacity-25 group-hover:opacity-70 transition-opacity"
-              style={{ color: "#2DCCD3" }}
-            />
+            <div
+              className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+              style={{ backgroundColor: "#2DCCD3" }}
+            >
+              <ExternalLink size={13} style={{ color: "#033624" }} />
+            </div>
           </a>
 
           {/* Cards de taxas — 2 colunas */}
           <div className="grid grid-cols-2 gap-3">
             {/* Comissão */}
             <div
-              className="rounded-2xl p-4 flex flex-col gap-2"
+              className="rounded-2xl p-4 flex flex-col gap-1.5 relative overflow-hidden"
               style={{
-                backgroundColor: "#ffffff",
-                boxShadow: "0 2px 12px rgba(3,54,36,0.08)",
-                borderTop: "3px solid #F1204A",
+                background: "linear-gradient(145deg, #F1204A 0%, #c01038 100%)",
+                boxShadow: "0 6px 24px rgba(241,32,74,0.35)",
               }}
             >
               <div
-                className="w-9 h-9 rounded-xl flex items-center justify-center"
-                style={{ backgroundColor: "#fff0f2" }}
+                className="absolute -top-4 -right-4 w-20 h-20 rounded-full opacity-10"
+                style={{ backgroundColor: "#ffffff" }}
+              />
+              <div
+                className="w-9 h-9 rounded-xl flex items-center justify-center mb-1"
+                style={{ backgroundColor: "rgba(255,255,255,0.2)" }}
               >
-                <Tag size={15} style={{ color: "#F1204A" }} />
+                <Tag size={15} style={{ color: "#ffffff" }} />
               </div>
-              <p className="font-body text-[10px] font-medium" style={{ color: "#4A0505", opacity: 0.6 }}>
+              <p className="font-body text-[10px] font-semibold uppercase tracking-wide" style={{ color: "rgba(255,255,255,0.75)" }}>
                 Comissão TikTok
               </p>
-              <p className="font-display font-black text-lg leading-none" style={{ color: "#033624" }}>
+              <p className="font-display font-black leading-none" style={{ fontSize: "2.2rem", color: "#ffffff" }}>
                 6%
               </p>
-              <p className="font-body text-[10px]" style={{ color: "#4A0505", opacity: 0.7 }}>
-                + R$ 4,00 por item vendido
+              <p className="font-body text-[10px]" style={{ color: "rgba(255,255,255,0.7)" }}>
+                + R$ 4,00 por item
               </p>
             </div>
 
             {/* Frete */}
             <div
-              className="rounded-2xl p-4 flex flex-col gap-2"
+              className="rounded-2xl p-4 flex flex-col gap-1.5 relative overflow-hidden"
               style={{
-                backgroundColor: "#ffffff",
-                boxShadow: "0 2px 12px rgba(3,54,36,0.08)",
-                borderTop: "3px solid #2DCCD3",
+                background: "linear-gradient(145deg, #033624 0%, #055a3a 100%)",
+                boxShadow: "0 6px 24px rgba(3,54,36,0.35)",
               }}
             >
               <div
-                className="w-9 h-9 rounded-xl flex items-center justify-center"
-                style={{ backgroundColor: "#e8fafa" }}
+                className="absolute -top-4 -right-4 w-20 h-20 rounded-full opacity-10"
+                style={{ backgroundColor: "#2DCCD3" }}
+              />
+              <div
+                className="w-9 h-9 rounded-xl flex items-center justify-center mb-1"
+                style={{ backgroundColor: "rgba(45,204,211,0.2)" }}
               >
                 <Truck size={15} style={{ color: "#2DCCD3" }} />
               </div>
-              <p className="font-body text-[10px] font-medium" style={{ color: "#4A0505", opacity: 0.6 }}>
-                Taxa de Frete TikTok
+              <p className="font-body text-[10px] font-semibold uppercase tracking-wide" style={{ color: "rgba(186,246,240,0.7)" }}>
+                Taxa de Frete
               </p>
-              <p className="font-display font-black text-lg leading-none" style={{ color: "#033624" }}>
+              <p className="font-display font-black leading-none" style={{ fontSize: "2.2rem", color: "#BAF6F0" }}>
                 6%
               </p>
-              <p className="font-body text-[10px]" style={{ color: "#4A0505", opacity: 0.7 }}>
-                sobre o valor do pedido
+              <p className="font-body text-[10px]" style={{ color: "rgba(186,246,240,0.6)" }}>
+                sobre o pedido
               </p>
             </div>
           </div>
 
           {/* Nota de isenção */}
           <div
-            className="rounded-2xl p-4 flex flex-col gap-3"
+            className="rounded-2xl p-5 flex flex-col gap-3 relative overflow-hidden"
             style={{
-              backgroundColor: "#fffde8",
-              border: "1.5px dashed #FBEB35",
-              boxShadow: "0 2px 12px rgba(3,54,36,0.06)",
+              background: "linear-gradient(135deg, #FBEB35 0%, #f5e020 100%)",
+              boxShadow: "0 6px 24px rgba(251,235,53,0.45)",
             }}
           >
-            <div className="flex items-start gap-2.5">
-              <span style={{ fontSize: "1.25rem", lineHeight: 1, marginTop: "1px" }}>💡</span>
+            <div
+              className="absolute -bottom-6 -right-6 w-28 h-28 rounded-full opacity-15"
+              style={{ backgroundColor: "#033624" }}
+            />
+            <div className="flex items-start gap-3 relative z-10">
+              <span style={{ fontSize: "1.75rem", lineHeight: 1, marginTop: "1px" }}>💡</span>
               <div className="flex flex-col gap-1">
-                <p className="font-display font-black text-sm" style={{ color: "#033624" }}>
+                <p className="font-display font-black text-base" style={{ color: "#033624" }}>
                   Isenção de comissão por 60 dias
                 </p>
-                <p className="font-body text-xs leading-relaxed" style={{ color: "#4A0505", opacity: 0.75 }}>
+                <p className="font-body text-xs leading-relaxed" style={{ color: "#033624", opacity: 0.75 }}>
                   Habilite a missão no Seller Center para participar e aproveite 0% de comissão nas primeiras semanas.
                 </p>
               </div>
@@ -264,19 +274,19 @@ export function InfoLojaSection() {
 
             {/* Caminho de navegação */}
             <div
-              className="flex items-center gap-1 flex-wrap rounded-xl px-3 py-2"
-              style={{ backgroundColor: "rgba(3,54,36,0.06)" }}
+              className="flex items-center gap-1 flex-wrap rounded-xl px-3 py-2 relative z-10"
+              style={{ backgroundColor: "rgba(3,54,36,0.12)" }}
             >
-              <span className="font-body text-[10px] font-medium" style={{ color: "#033624" }}>
+              <span className="font-body text-[10px] font-semibold" style={{ color: "#033624" }}>
                 Menu lateral
               </span>
-              <ChevronRight size={10} style={{ color: "#033624", opacity: 0.5 }} />
-              <span className="font-body text-[10px] font-medium" style={{ color: "#033624" }}>
+              <ChevronRight size={10} style={{ color: "#033624", opacity: 0.6 }} />
+              <span className="font-body text-[10px] font-semibold" style={{ color: "#033624" }}>
                 Crescimento
               </span>
-              <ChevronRight size={10} style={{ color: "#033624", opacity: 0.5 }} />
+              <ChevronRight size={10} style={{ color: "#033624", opacity: 0.6 }} />
               <span
-                className="font-body text-[10px] font-bold px-2 py-0.5 rounded-full"
+                className="font-body text-[10px] font-black px-2.5 py-0.5 rounded-full"
                 style={{ backgroundColor: "#F1204A", color: "#ffffff" }}
               >
                 Missões

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { ZoomableImage } from "@/components/ui/zoomable-image";
 import { motion } from "motion/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
@@ -466,9 +467,8 @@ export function SliderSection() {
             </div>
           </div>
           
-          <div className="relative z-10 mt-1 rounded-xl overflow-hidden shadow-sm border border-black/5">
-            <img src="/assets/isencao.png" alt="Como ativar isenção de comissão" className="w-full h-auto" />
-          </div>
+          <ZoomableImage src="/assets/isencao.png" alt="Como ativar isenção de comissão"
+            width={400} height={260} className="mt-1" />
 
           <div
             className="flex items-center gap-1 flex-wrap rounded-xl px-3 py-2 relative z-10"

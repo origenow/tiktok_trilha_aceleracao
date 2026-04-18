@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
+import { ZoomableImage } from "@/components/ui/zoomable-image";
 import { motion, AnimatePresence } from "motion/react";
 import { HighlightedText } from "@/components/ui/highlighted-text";
 import {
@@ -14,7 +14,27 @@ import {
   BadgeCheck, ListChecks, Clock, Wallet,
 } from "lucide-react";
 
-/* ── helpers ─────────────────────────────────────────────────────── */
+/* ── Design system colors ────────────────────────────────────── */
+const DS = {
+  shimmer: "#BAF6F0",
+  muse:    "#EDD4B2",
+  thrive:  "#033624",
+  ember:   "#4A0505",
+  blaze:   "#F1204A",
+  glint:   "#2DCCD3",
+  glow:    "#FBEB35",
+  dawn:    "#EDBBE8",
+  white:   "#FFFFFF",
+};
+
+/* ── Helpers ─────────────────────────────────────────────────────── */
+function alpha(hex: string, a: number): string {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r},${g},${b},${a})`;
+}
+
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 28 },
   whileInView: { opacity: 1, y: 0 },
@@ -156,16 +176,18 @@ export function GmvMaxSection() {
       {/* ═══════════════════════════════════════════════════════
           HERO
       ═══════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden" style={{ backgroundColor: "#BAF6F0" }}>
+      <section className="relative overflow-hidden" style={{ backgroundColor: DS.shimmer }}>
         {/* Doodles */}
+        <div className="absolute top-0 left-0 w-full h-full opacity-40 pointer-events-none"
+          style={{ background: `radial-gradient(circle at 10% 20%, ${alpha(DS.glint, 0.2)} 0%, transparent 40%), radial-gradient(circle at 90% 80%, ${alpha(DS.blaze, 0.1)} 0%, transparent 40%)` }} />
         <svg className="absolute top-6 right-4 opacity-30 pointer-events-none animate-float"
           width="52" height="52" viewBox="0 0 52 52" fill="none">
           <path d="M26 3L30.3 18.7L45 15L35.8 26L45 37L30.3 33.3L26 49L21.7 33.3L7 37L16.2 26L7 15L21.7 18.7Z"
-            stroke="#033624" strokeWidth="1.6" strokeLinejoin="round" />
+            stroke={DS.thrive} strokeWidth="1.6" strokeLinejoin="round" />
         </svg>
         <svg className="absolute bottom-10 left-3 opacity-20 pointer-events-none animate-float-reverse"
           width="40" height="40" viewBox="0 0 40 40" fill="none">
-          <circle cx="20" cy="20" r="8" stroke="#F1204A" strokeWidth="1.8" fill="none" />
+          <circle cx="20" cy="20" r="8" stroke={DS.blaze} strokeWidth="1.8" fill="none" />
           {[0, 72, 144, 216, 288].map((angle) => {
             const rad = (angle * Math.PI) / 180;
             const cx = (20 + 10 * Math.cos(rad)).toFixed(2);
@@ -173,7 +195,7 @@ export function GmvMaxSection() {
             return (
               <ellipse key={angle} cx={cx} cy={cy} rx="3" ry="4.5"
                 transform={`rotate(${angle}, ${cx}, ${cy})`}
-                stroke="#F1204A" strokeWidth="1.5" fill="none" opacity="0.6" />
+                stroke={DS.blaze} strokeWidth="1.5" fill="none" opacity="0.6" />
             );
           })}
         </svg>
@@ -182,15 +204,15 @@ export function GmvMaxSection() {
 
           <motion.div {...fadeUp(0)} className="flex flex-col gap-3">
             <span className="font-body text-xs font-semibold px-4 py-1.5 inline-flex items-center gap-1.5 self-start"
-              style={{ backgroundColor: "#033624", color: "#BAF6F0", borderRadius: "999px", transform: "rotate(-3deg)" }}>
+              style={{ backgroundColor: DS.thrive, color: DS.shimmer, borderRadius: "999px", transform: "rotate(-3deg)" }}>
               <BarChart2 size={11} />
               Ads Inteligentes
             </span>
 
             <h1 className="font-display font-black leading-[0.92] tracking-tight"
-              style={{ fontSize: "clamp(2.2rem, 9vw, 3rem)", color: "#033624" }}>
+              style={{ fontSize: "clamp(2.2rem, 9vw, 3rem)", color: DS.thrive }}>
               GMV{" "}
-              <HighlightedText highlightColor="#F1204A" from="bottom" inView delay={0.12}>
+              <HighlightedText highlightColor={DS.blaze} from="bottom" inView delay={0.12}>
                 Max
               </HighlightedText>
             </h1>
@@ -211,9 +233,9 @@ export function GmvMaxSection() {
                 style={{ backgroundColor: "rgba(3,54,36,0.07)" }}>
                 <div className="w-8 h-8 rounded-xl flex items-center justify-center"
                   style={{ backgroundColor: color }}>
-                  <Icon size={14} style={{ color: color === "#033624" ? "#BAF6F0" : color === "#F1204A" ? "#ffffff" : "#033624" }} />
+                  <Icon size={14} style={{ color: color === DS.thrive ? DS.shimmer : color === DS.blaze ? DS.white : DS.thrive }} />
                 </div>
-                <span className="font-display font-black text-lg leading-none" style={{ color: "#033624" }}>{value}</span>
+                <span className="font-display font-black text-lg leading-none" style={{ color: DS.thrive }}>{value}</span>
                 <span className="font-body text-[10px] text-center leading-tight" style={{ color: "#4A0505", opacity: 0.7 }}>{label}</span>
               </div>
             ))}
@@ -223,10 +245,10 @@ export function GmvMaxSection() {
           <motion.div {...fadeUp(0.14)} className="rounded-3xl p-5 flex flex-col gap-3"
             style={{ backgroundColor: "rgba(3,54,36,0.07)", border: "1px solid rgba(3,54,36,0.1)" }}>
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ backgroundColor: "#033624" }}>
-                <Store size={14} style={{ color: "#BAF6F0" }} />
+              <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ backgroundColor: DS.thrive }}>
+                <Store size={14} style={{ color: DS.shimmer }} />
               </div>
-              <p className="font-display font-black text-sm" style={{ color: "#033624" }}>O que é o GMV Max?</p>
+              <p className="font-display font-black text-sm" style={{ color: DS.thrive }}>O que é o GMV Max?</p>
             </div>
             <p className="font-body text-xs leading-relaxed" style={{ color: "#4A0505", opacity: 0.8 }}>
               O GMV Max é a nova solução de automação de publicidade do TikTok Shop que otimiza o ROI total do canal de um vendedor para maximizar a receita.
@@ -250,7 +272,7 @@ export function GmvMaxSection() {
             <a href="https://ads.tiktok.com/i18n/gmv-max/welcome?aadvid=7510325651095470096"
               target="_blank" rel="noopener noreferrer"
               className="group flex items-center gap-3 rounded-2xl px-5 py-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl"
-              style={{ background: "linear-gradient(135deg, #F1204A 0%, #c01038 100%)", boxShadow: "0 6px 24px rgba(241,32,74,0.30)" }}>
+              style={{ background: `linear-gradient(135deg, ${DS.blaze} 0%, #c01038 100%)`, boxShadow: `0 6px 24px ${alpha(DS.blaze, 0.30)}` }}>
               <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
                 style={{ backgroundColor: "rgba(255,255,255,0.18)" }}>
                 <ArrowUpRight size={18} style={{ color: "#ffffff" }} />
@@ -295,10 +317,10 @@ export function GmvMaxSection() {
           </motion.div>
 
           <motion.div {...fadeUp(0.08)} className="rounded-3xl p-5 flex items-start gap-4"
-            style={{ backgroundColor: "#FFF9E6", border: "2px solid #FBEB35", boxShadow: "0 4px 20px rgba(251,235,53,0.2)" }}>
+            style={{ backgroundColor: "#FFF9E6", border: `2px solid ${DS.glow}`, boxShadow: `0 4px 20px ${alpha(DS.glow, 0.2)}` }}>
             <div className="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0"
-              style={{ backgroundColor: "#033624" }}>
-              <Store size={16} style={{ color: "#BAF6F0" }} />
+              style={{ backgroundColor: DS.thrive }}>
+              <Store size={16} style={{ color: DS.shimmer }} />
             </div>
             <div className="flex flex-col gap-1">
               <p className="font-display font-black text-sm" style={{ color: "#033624" }}>
@@ -368,7 +390,9 @@ export function GmvMaxSection() {
       {/* ═══════════════════════════════════════════════════════
           COMO FUNCIONA (4 STEPS)
       ═══════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden" style={{ backgroundColor: "#EDD4B2" }}>
+      <section className="relative overflow-hidden" style={{ backgroundColor: DS.muse }}>
+        <div className="absolute top-0 left-0 w-full h-full opacity-40 pointer-events-none"
+          style={{ background: `radial-gradient(circle at 10% 20%, ${alpha(DS.glint, 0.15)} 0%, transparent 40%), radial-gradient(circle at 90% 80%, ${alpha(DS.blaze, 0.1)} 0%, transparent 40%)` }} />
         <svg className="absolute top-8 right-5 opacity-20 pointer-events-none animate-float"
           width="44" height="44" viewBox="0 0 44 44" fill="none">
           <path d="M22 4C22 4 26 14 36 18C26 22 22 32 22 32C22 32 18 22 8 18C18 14 22 4 22 4Z"
@@ -379,38 +403,38 @@ export function GmvMaxSection() {
 
           <motion.div {...fadeUp(0)}>
             <span className="font-body text-xs font-semibold px-4 py-1.5 inline-flex items-center gap-1.5 mb-3"
-              style={{ backgroundColor: "#F1204A", color: "#ffffff", borderRadius: "999px", transform: "rotate(2deg)" }}>
+              style={{ backgroundColor: DS.blaze, color: DS.white, borderRadius: "999px", transform: "rotate(2deg)" }}>
               <Settings size={11} />
               Configuração
             </span>
             <h2 className="font-display font-black leading-[0.92] tracking-tight"
-              style={{ fontSize: "clamp(1.6rem, 6vw, 2rem)", color: "#033624" }}>
+              style={{ fontSize: "clamp(1.6rem, 6vw, 2rem)", color: DS.thrive }}>
               Como{" "}
-              <HighlightedText highlightColor="#2DCCD3" from="bottom" inView delay={0.12}>funciona</HighlightedText>
+              <HighlightedText highlightColor={DS.glint} from="bottom" inView delay={0.12}>funciona</HighlightedText>
               {" "}na prática
             </h2>
           </motion.div>
 
           {/* Step 1 — com imagem */}
-          <motion.div {...fadeUp(0.06)} className="flex flex-col gap-3">
+          <motion.div {...fadeUp(0.06)} className="flex flex-col gap-3 p-5 rounded-3xl bg-white/60 backdrop-blur-sm border border-white/40 shadow-sm">
             <div className="flex gap-3 items-start">
-              <div className="shrink-0 w-11 h-11 rounded-2xl flex items-center justify-center font-display font-black text-base"
-                style={{ background: "linear-gradient(135deg, #2DCCD3, #1ab5bb)", color: "#ffffff" }}>
+              <div className="shrink-0 w-11 h-11 rounded-2xl flex items-center justify-center font-display font-black text-base shadow-sm"
+                style={{ background: `linear-gradient(135deg, ${DS.glint}, #1ab5bb)`, color: DS.white }}>
                 01
               </div>
               <div className="flex-1">
-                <p className="font-display font-black text-sm" style={{ color: "#033624" }}>Conectar contas</p>
-                <p className="font-body text-xs leading-relaxed mt-0.5" style={{ color: "#4A0505", opacity: 0.75 }}>
+                <p className="font-display font-black text-sm" style={{ color: DS.thrive }}>Conectar contas</p>
+                <p className="font-body text-xs leading-relaxed mt-0.5" style={{ color: alpha(DS.thrive, 0.8) }}>
                   Central do Vendedor → Marketing → Anúncios da loja. Conecte sua Central de Negócios e conta de anúncios.
                 </p>
-                <div className="flex flex-wrap gap-2 mt-1.5">
+                <div className="flex flex-wrap gap-2 mt-2">
                   {[
                     { label: "Central de Negócios", href: "https://business.tiktok.com/" },
                     { label: "Ads Manager", href: "https://ads.tiktok.com/i18n/gmv-max/welcome?aadvid=7510325651095470096" },
                   ].map((l) => (
                     <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer"
-                      className="flex items-center gap-1 font-body text-xs font-semibold"
-                      style={{ color: "#F1204A" }}>
+                      className="flex items-center gap-1 font-body text-[10px] font-bold px-2 py-1 rounded-lg bg-white/80 border border-black/5"
+                      style={{ color: DS.blaze }}>
                       <ExternalLink size={10} />{l.label}
                     </a>
                   ))}
@@ -418,39 +442,38 @@ export function GmvMaxSection() {
               </div>
             </div>
             {/* Imagem business center */}
-            <div className="rounded-2xl overflow-hidden" style={{ boxShadow: "0 4px 16px rgba(3,54,36,0.12)" }}>
-              <Image src="/assets/images/gmv/business.png" alt="Business Center — conectar contas"
-                width={400} height={220} className="w-full h-auto object-cover" />
+            <div className="rounded-2xl overflow-hidden border border-black/5 shadow-inner bg-black/5">
+              <ZoomableImage src="/assets/images/gmv/business.png" alt="Business Center — conectar contas"
+                width={400} height={220} />
             </div>
             <div className="flex items-start gap-2 rounded-xl px-3.5 py-3"
-              style={{ backgroundColor: "rgba(3,54,36,0.07)" }}>
-              <AlertCircle size={12} className="shrink-0 mt-0.5" style={{ color: "#033624" }} />
-              <p className="font-body text-[11px] leading-snug" style={{ color: "#033624" }}>
+              style={{ backgroundColor: alpha(DS.thrive, 0.05) }}>
+              <AlertCircle size={12} className="shrink-0 mt-0.5" style={{ color: DS.thrive }} />
+              <p className="font-body text-[11px] leading-snug" style={{ color: DS.thrive }}>
                 O email do Seller Center precisa ser admin no Business Center. Se não aparecer, acesse: Business Center → Usuários → Membros → Convidar membro
               </p>
             </div>
           </motion.div>
 
           {/* Step 2 — com imagem */}
-          <motion.div {...fadeUp(0.10)} className="flex flex-col gap-3">
+          <motion.div {...fadeUp(0.10)} className="flex flex-col gap-3 p-5 rounded-3xl bg-white/60 backdrop-blur-sm border border-white/40 shadow-sm">
             <div className="flex gap-3 items-start">
-              <div className="shrink-0 w-11 h-11 rounded-2xl flex items-center justify-center font-display font-black text-base"
-                style={{ background: "linear-gradient(135deg, #F1204A, #c01038)", color: "#ffffff" }}>
+              <div className="shrink-0 w-11 h-11 rounded-2xl flex items-center justify-center font-display font-black text-base shadow-sm"
+                style={{ background: `linear-gradient(135deg, ${DS.blaze}, #c01038)`, color: DS.white }}>
                 02
               </div>
               <div className="flex-1">
-                <p className="font-display font-black text-sm" style={{ color: "#033624" }}>Criar campanha</p>
-                <p className="font-body text-xs leading-relaxed mt-0.5" style={{ color: "#4A0505", opacity: 0.75 }}>
+                <p className="font-display font-black text-sm" style={{ color: DS.thrive }}>Criar campanha</p>
+                <p className="font-body text-xs leading-relaxed mt-0.5" style={{ color: alpha(DS.thrive, 0.8) }}>
                   Visão geral → Criar GMV Max Ads → Promover produtos
                 </p>
               </div>
             </div>
-            <div className="rounded-2xl overflow-hidden" style={{ boxShadow: "0 4px 16px rgba(3,54,36,0.12)" }}>
-              <Image src="/assets/images/gmv/manager.png" alt="Ads Manager — criar campanha GMV Max"
-                width={400} height={220} className="w-full h-auto object-cover" />
+            <div className="rounded-2xl overflow-hidden border border-black/5 shadow-inner bg-black/5">
+              <ZoomableImage src="/assets/images/gmv/manager.png" alt="Ads Manager — criar campanha GMV Max"
+                width={400} height={220} />
             </div>
-            <div className="flex flex-col gap-2 rounded-2xl p-4"
-              style={{ backgroundColor: "rgba(3,54,36,0.06)" }}>
+            <div className="flex flex-col gap-2 rounded-2xl p-4 bg-white/40 border border-white/50 shadow-sm">
               {[
                 "Escolha os produtos que deseja promover ou clique em Promover todos",
                 "Defina a meta de ROI (pode seguir a recomendada ou sua própria)",
@@ -458,16 +481,16 @@ export function GmvMaxSection() {
                 "Escolha data e hora de início — a campanha roda continuamente",
                 "Clique em Publicar",
               ].map((item, i) => (
-                <div key={i} className="flex items-start gap-2">
+                <div key={i} className="flex items-start gap-2.5">
                   <span className="shrink-0 w-5 h-5 rounded-full flex items-center justify-center font-display font-black text-[10px]"
-                    style={{ backgroundColor: "#F1204A", color: "#ffffff" }}>{i + 1}</span>
-                  <p className="font-body text-xs leading-snug" style={{ color: "#033624" }}>{item}</p>
+                    style={{ backgroundColor: DS.blaze, color: DS.white }}>{i + 1}</span>
+                  <p className="font-body text-xs leading-snug" style={{ color: DS.thrive }}>{item}</p>
                 </div>
               ))}
               <div className="flex items-start gap-2 mt-1 rounded-xl px-3 py-2"
-                style={{ backgroundColor: "rgba(241,32,74,0.08)", border: "1px solid rgba(241,32,74,0.2)" }}>
-                <AlertCircle size={11} className="shrink-0 mt-0.5" style={{ color: "#F1204A" }} />
-                <p className="font-body text-[10px] leading-snug" style={{ color: "#4A0505" }}>
+                style={{ backgroundColor: alpha(DS.blaze, 0.08), border: `1px solid ${alpha(DS.blaze, 0.2)}` }}>
+                <AlertCircle size={11} className="shrink-0 mt-0.5" style={{ color: DS.blaze }} />
+                <p className="font-body text-[10px] leading-snug" style={{ color: alpha(DS.ember, 0.9) }}>
                   Se o botão Criar GMV Max Ads estiver desativado, verifique se você tem acesso de operador ou administrador à conta de anunciante.
                 </p>
               </div>
@@ -475,46 +498,46 @@ export function GmvMaxSection() {
           </motion.div>
 
           {/* Step 3 — com imagem ads */}
-          <motion.div {...fadeUp(0.14)} className="flex flex-col gap-3">
+          <motion.div {...fadeUp(0.14)} className="flex flex-col gap-3 p-5 rounded-3xl bg-white/60 backdrop-blur-sm border border-white/40 shadow-sm">
             <div className="flex gap-3 items-start">
-              <div className="shrink-0 w-11 h-11 rounded-2xl flex items-center justify-center font-display font-black text-base"
-                style={{ background: "linear-gradient(135deg, #FBEB35, #e8d400)", color: "#033624" }}>
+              <div className="shrink-0 w-11 h-11 rounded-2xl flex items-center justify-center font-display font-black text-base shadow-sm"
+                style={{ background: `linear-gradient(135deg, ${DS.glow}, #e8d400)`, color: DS.thrive }}>
                 03
               </div>
               <div className="flex-1">
-                <p className="font-display font-black text-sm" style={{ color: "#033624" }}>Selecionar criativos</p>
-                <p className="font-body text-xs leading-relaxed mt-0.5" style={{ color: "#4A0505", opacity: 0.75 }}>
+                <p className="font-display font-black text-sm" style={{ color: DS.thrive }}>Selecionar criativos</p>
+                <p className="font-body text-xs leading-relaxed mt-0.5" style={{ color: alpha(DS.thrive, 0.8) }}>
                   Mantenha seleção automática para escalar com facilidade.
                 </p>
               </div>
             </div>
-            <div className="rounded-2xl overflow-hidden" style={{ boxShadow: "0 4px 16px rgba(3,54,36,0.12)" }}>
-              <Image src="/assets/images/gmv/ads.png" alt="Seleção de criativos no Ads Manager"
-                width={400} height={220} className="w-full h-auto object-cover" />
+            <div className="rounded-2xl overflow-hidden border border-black/5 shadow-inner bg-black/5">
+              <ZoomableImage src="/assets/images/gmv/ads.png" alt="Seleção de criativos no Ads Manager"
+                width={400} height={220} />
             </div>
             <div className="flex flex-col gap-2">
               {[
-                { icon: Cpu, text: "Seleção automática: todo vídeo novo de afiliado autorizado entra automaticamente na biblioteca de criativos", accent: "#2DCCD3" },
-                { icon: ListChecks, text: "Seleção manual: lembre-se de aprovar novos vídeos individualmente para que entrem na campanha", accent: "#F1204A" },
+                { icon: Cpu, text: "Seleção automática: todo vídeo novo de afiliado autorizado entra automaticamente na biblioteca de criativos", accent: DS.glint },
+                { icon: ListChecks, text: "Seleção manual: lembre-se de aprovar novos vídeos individualmente para que entrem na campanha", accent: DS.blaze },
               ].map(({ icon: Icon, text, accent }) => (
                 <div key={text} className="flex items-start gap-2.5 rounded-xl px-3.5 py-3"
-                  style={{ backgroundColor: accent + "12", border: `1px solid ${accent}30` }}>
+                  style={{ backgroundColor: alpha(accent, 0.12), border: `1px solid ${alpha(accent, 0.3)}` }}>
                   <Icon size={13} className="shrink-0 mt-0.5" style={{ color: accent }} />
-                  <p className="font-body text-xs leading-snug" style={{ color: "#4A0505" }}>{text}</p>
+                  <p className="font-body text-[11px] leading-snug" style={{ color: alpha(DS.ember, 0.9) }}>{text}</p>
                 </div>
               ))}
             </div>
           </motion.div>
 
           {/* Step 4 */}
-          <motion.div {...fadeUp(0.18)} className="flex gap-3 items-start">
-            <div className="shrink-0 w-11 h-11 rounded-2xl flex items-center justify-center font-display font-black text-base"
-              style={{ background: "linear-gradient(135deg, #033624, #055a3a)", color: "#BAF6F0" }}>
+          <motion.div {...fadeUp(0.18)} className="flex gap-3 items-start p-5 rounded-3xl bg-white/60 backdrop-blur-sm border border-white/40 shadow-sm">
+            <div className="shrink-0 w-11 h-11 rounded-2xl flex items-center justify-center font-display font-black text-base shadow-sm"
+              style={{ background: `linear-gradient(135deg, ${DS.thrive}, #055a3a)`, color: DS.shimmer }}>
               04
             </div>
-            <div className="flex flex-col gap-1.5">
-              <p className="font-display font-black text-sm" style={{ color: "#033624" }}>Monitorar e ajustar</p>
-              <p className="font-body text-xs leading-relaxed" style={{ color: "#4A0505", opacity: 0.75 }}>
+            <div className="flex flex-col gap-1">
+              <p className="font-display font-black text-sm" style={{ color: DS.thrive }}>Monitorar e ajustar</p>
+              <p className="font-body text-xs leading-relaxed mt-0.5" style={{ color: alpha(DS.thrive, 0.8) }}>
                 Deixe a campanha rodar por pelo menos <strong>1 semana</strong> antes de qualquer ajuste na meta de ROI. Alterações frequentes prejudicam a entrega e a performance.
               </p>
             </div>
@@ -530,33 +553,32 @@ export function GmvMaxSection() {
 
           <motion.div {...fadeUp(0)}>
             <span className="font-body text-xs font-semibold px-4 py-1.5 inline-flex items-center gap-1.5 mb-3"
-              style={{ backgroundColor: "#2DCCD3", color: "#033624", borderRadius: "999px", transform: "rotate(-2deg)" }}>
+              style={{ backgroundColor: DS.glint, color: DS.thrive, borderRadius: "999px", transform: "rotate(-2deg)" }}>
               <RefreshCw size={11} />
               Ciclo de vida
             </span>
             <h2 className="font-display font-black leading-[0.92] tracking-tight"
-              style={{ fontSize: "clamp(1.6rem, 6vw, 2rem)", color: "#033624" }}>
+              style={{ fontSize: "clamp(1.6rem, 6vw, 2rem)", color: DS.thrive }}>
               Ciclo de vida de{" "}
-              <HighlightedText highlightColor="#2DCCD3" from="bottom" inView delay={0.12}>
+              <HighlightedText highlightColor={DS.glint} from="bottom" inView delay={0.12}>
                 campanha
               </HighlightedText>
             </h2>
-            <p className="font-body text-sm mt-2 leading-relaxed" style={{ color: "#4A0505", opacity: 0.7 }}>
+            <p className="font-body text-sm mt-2 leading-relaxed" style={{ color: alpha(DS.ember, 0.8), opacity: 0.9 }}>
               Entenda como a IA aprende e otimiza sua campanha ao longo do tempo.
             </p>
           </motion.div>
 
-          <motion.div {...fadeUp(0.08)} className="rounded-3xl overflow-hidden"
-            style={{ boxShadow: "0 6px 32px rgba(3,54,36,0.12)", border: "1.5px solid #2DCCD340" }}>
-            <Image src="/assets/images/gmv/ciclo.png" alt="Ciclo de vida de campanha GMV Max"
-              width={400} height={300} className="w-full h-auto object-contain" />
+          <motion.div {...fadeUp(0.08)}>
+            <ZoomableImage src="/assets/images/gmv/ciclo.png" alt="Ciclo de vida de campanha GMV Max"
+              width={400} height={300} style={{ boxShadow: `0 6px 32px ${alpha(DS.thrive, 0.12)}`, border: `1.5px solid ${alpha(DS.glint, 0.4)}` }} />
           </motion.div>
 
           <motion.div {...fadeUp(0.12)} className="flex flex-col gap-2.5">
             {[
-              { icon: Zap, label: "Fase de aprendizado", desc: "A IA coleta dados iniciais — evite alterar configurações neste período", color: "#FBEB35", textColor: "#033624" },
-              { icon: TrendingUp, label: "Fase de escala", desc: "Performance estabiliza e ROI converge para a meta definida", color: "#2DCCD3", textColor: "#033624" },
-              { icon: Flame, label: "Fase de maturidade", desc: "Campanha rodando com eficiência máxima — mantenha criativos frescos", color: "#F1204A", textColor: "#ffffff" },
+              { icon: Zap, label: "Fase de aprendizado", desc: "A IA coleta dados iniciais — evite alterar configurações neste período", color: DS.glow, textColor: DS.thrive },
+              { icon: TrendingUp, label: "Fase de escala", desc: "Performance estabiliza e ROI converge para a meta definida", color: DS.glint, textColor: DS.thrive },
+              { icon: Flame, label: "Fase de maturidade", desc: "Campanha rodando com eficiência máxima — mantenha criativos frescos", color: DS.blaze, textColor: DS.white },
             ].map(({ icon: Icon, label, desc, color, textColor }) => (
               <div key={label} className="flex items-start gap-3 rounded-2xl px-4 py-3.5"
                 style={{ backgroundColor: "#f8f8f8" }}>
@@ -565,8 +587,8 @@ export function GmvMaxSection() {
                   <Icon size={15} style={{ color: textColor }} />
                 </div>
                 <div>
-                  <p className="font-display font-black text-sm" style={{ color: "#033624" }}>{label}</p>
-                  <p className="font-body text-xs leading-snug mt-0.5" style={{ color: "#4A0505", opacity: 0.65 }}>{desc}</p>
+                  <p className="font-display font-black text-sm" style={{ color: DS.thrive }}>{label}</p>
+                  <p className="font-body text-xs leading-snug mt-0.5" style={{ color: alpha(DS.ember, 0.7) }}>{desc}</p>
                 </div>
               </div>
             ))}
@@ -577,19 +599,21 @@ export function GmvMaxSection() {
       {/* ═══════════════════════════════════════════════════════
           COLD START GUIDE
       ═══════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden" style={{ backgroundColor: "#BAF6F0" }}>
-        <div className="w-full max-w-[430px] mx-auto px-5 py-12 flex flex-col gap-6">
+      <section className="relative overflow-hidden" style={{ backgroundColor: DS.shimmer }}>
+        <div className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none"
+          style={{ background: `radial-gradient(circle at 10% 80%, ${alpha(DS.glint, 0.2)} 0%, transparent 40%)` }} />
+        <div className="relative z-10 w-full max-w-[430px] mx-auto px-5 py-12 flex flex-col gap-6">
 
           <motion.div {...fadeUp(0)}>
             <span className="font-body text-xs font-semibold px-4 py-1.5 inline-flex items-center gap-1.5 mb-3"
-              style={{ backgroundColor: "#4A0505", color: "#EDD4B2", borderRadius: "999px", transform: "rotate(-2deg)" }}>
+              style={{ backgroundColor: DS.ember, color: DS.muse, borderRadius: "999px", transform: "rotate(-2deg)" }}>
               <Zap size={11} />
               Início frio (Cold Start)
             </span>
             <h2 className="font-display font-black leading-[0.92] tracking-tight"
-              style={{ fontSize: "clamp(1.6rem, 6vw, 2rem)", color: "#033624" }}>
+              style={{ fontSize: "clamp(1.6rem, 6vw, 2rem)", color: DS.thrive }}>
               Como{" "}
-              <HighlightedText highlightColor="#F1204A" from="bottom" inView delay={0.12}>iniciar</HighlightedText>
+              <HighlightedText highlightColor={DS.blaze} from="bottom" inView delay={0.12}>iniciar</HighlightedText>
             </h2>
             <p className="font-body text-sm mt-2 leading-relaxed" style={{ color: "#4A0505", opacity: 0.75 }}>
               Se um produto tem menos de <strong>R$ 5.000</strong> em GMV nos últimos 7 dias (L7D), ele deve seguir este guia de cold start.
@@ -621,25 +645,25 @@ export function GmvMaxSection() {
               <button key={tab} onClick={() => setColdStartTab(tab)}
                 className="flex items-start gap-3 rounded-2xl px-4 py-4 text-left w-full transition-all duration-200 hover:-translate-y-0.5"
                 style={{
-                  backgroundColor: coldStartTab === tab ? "#033624" : "#ffffff",
+                  backgroundColor: coldStartTab === tab ? DS.thrive : DS.white,
                   boxShadow: coldStartTab === tab
-                    ? "0 6px 24px rgba(3,54,36,0.25)"
+                    ? `0 6px 24px ${alpha(DS.thrive, 0.25)}`
                     : "0 2px 10px rgba(3,54,36,0.08)",
                   border: coldStartTab === tab ? "none" : "1.5px solid rgba(3,54,36,0.08)",
                 }}>
                 <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-                  style={{ backgroundColor: coldStartTab === tab ? "rgba(186,246,240,0.15)" : tagBg }}>
-                  <Icon size={15} style={{ color: coldStartTab === tab ? "#BAF6F0" : tagText }} />
+                  style={{ backgroundColor: coldStartTab === tab ? alpha(DS.shimmer, 0.15) : tagBg }}>
+                  <Icon size={15} style={{ color: coldStartTab === tab ? DS.shimmer : tagText }} />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-0.5">
                     <span className="font-body text-[10px] font-black px-2 py-0.5 rounded-full"
                       style={{ backgroundColor: tagBg, color: tagText }}>{tag}</span>
                     <p className="font-display font-black text-sm"
-                      style={{ color: coldStartTab === tab ? "#BAF6F0" : "#033624" }}>{title}</p>
+                      style={{ color: coldStartTab === tab ? DS.shimmer : DS.thrive }}>{title}</p>
                   </div>
                   <p className="font-body text-xs leading-snug"
-                    style={{ color: coldStartTab === tab ? "rgba(186,246,240,0.65)" : "#4A0505", opacity: coldStartTab === tab ? 1 : 0.7 }}>
+                    style={{ color: coldStartTab === tab ? alpha(DS.shimmer, 0.75) : DS.ember, opacity: coldStartTab === tab ? 1 : 0.8 }}>
                     {desc}
                   </p>
                 </div>
@@ -826,8 +850,8 @@ export function GmvMaxSection() {
                       },
                     ].map(({ label, text }) => (
                       <div key={label}>
-                        <p className="font-body text-[10px] font-semibold uppercase tracking-wide mb-0.5" style={{ color: "rgba(186,246,240,0.5)" }}>{label}</p>
-                        <p className="font-body text-xs leading-relaxed" style={{ color: "rgba(186,246,240,0.8)" }}>{text}</p>
+                        <p className="font-body text-[10px] font-semibold uppercase tracking-wide mb-0.5" style={{ color: alpha(DS.shimmer, 0.65) }}>{label}</p>
+                        <p className="font-body text-xs leading-relaxed" style={{ color: DS.shimmer }}>{text}</p>
                       </div>
                     ))}
                   </div>
@@ -918,7 +942,7 @@ export function GmvMaxSection() {
                     <DollarSign size={14} style={{ color: "#ffffff" }} />
                     <p className="font-display font-black text-xs" style={{ color: "#ffffff" }}>Budget (Orçamento)</p>
                   </div>
-                  <p className="font-body text-xs" style={{ color: "rgba(255,255,255,0.9)" }}>
+                  <p className="font-body text-xs" style={{ color: alpha(DS.white, 0.95) }}>
                     Defina um orçamento maior que o GMV histórico dividido pelo ROI desejado.
                   </p>
                   <div className="rounded-xl px-4 py-3 font-display font-black text-xs text-center border-2 border-white/20"
@@ -930,16 +954,16 @@ export function GmvMaxSection() {
                     <p className="font-display font-bold text-[10px] uppercase mb-2" style={{ color: "#BAF6F0" }}>Exemplo Prático:</p>
                     <div className="grid grid-cols-2 gap-2 font-body text-[10px]" style={{ color: "#ffffff" }}>
                       <div className="flex flex-col">
-                        <span className="opacity-60">GMV histórico</span>
+                        <span className="opacity-70">GMV histórico</span>
                         <span className="font-bold">$10.000</span>
                       </div>
                       <div className="flex flex-col">
-                        <span className="opacity-60">ROI alvo</span>
+                        <span className="opacity-70">ROI alvo</span>
                         <span className="font-bold">3</span>
                       </div>
                     </div>
                     <div className="mt-2 pt-2 border-t border-white/10 flex justify-between items-center">
-                      <span className="font-body text-[10px] text-white/60">Cálculo: $10.000 / 3</span>
+                      <span className="font-body text-[10px] text-white/70">Cálculo: $10.000 / 3</span>
                       <span className="font-display font-black text-xs text-[#BAF6F0]">Min: $3.333*</span>
                     </div>
                   </div>
@@ -954,7 +978,9 @@ export function GmvMaxSection() {
       {/* ═══════════════════════════════════════════════════════
           FAQ
       ═══════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden" style={{ backgroundColor: "#EDD4B2" }}>
+      <section className="relative overflow-hidden" style={{ backgroundColor: DS.muse }}>
+        <div className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none"
+          style={{ background: `radial-gradient(circle at 90% 10%, ${alpha(DS.glint, 0.1)} 0%, transparent 40%)` }} />
         <svg className="absolute top-8 left-3 opacity-20 pointer-events-none animate-float-reverse"
           width="48" height="48" viewBox="0 0 48 48" fill="none">
           <circle cx="24" cy="24" r="11" stroke="#033624" strokeWidth="2" />
@@ -964,14 +990,14 @@ export function GmvMaxSection() {
 
           <motion.div {...fadeUp(0)}>
             <span className="font-body text-xs font-semibold px-4 py-1.5 inline-flex items-center gap-1.5 mb-3"
-              style={{ backgroundColor: "#4A0505", color: "#EDD4B2", borderRadius: "999px", transform: "rotate(3deg)" }}>
+              style={{ backgroundColor: DS.ember, color: DS.muse, borderRadius: "999px", transform: "rotate(3deg)" }}>
               <HelpCircle size={11} />
               Dúvidas frequentes
             </span>
             <h2 className="font-display font-black leading-[0.92] tracking-tight"
-              style={{ fontSize: "clamp(1.6rem, 6vw, 2rem)", color: "#033624" }}>
+              style={{ fontSize: "clamp(1.6rem, 6vw, 2rem)", color: DS.thrive }}>
               Principais{" "}
-              <HighlightedText highlightColor="#EDBBE8" from="bottom" inView delay={0.12}>
+              <HighlightedText highlightColor={DS.dawn} from="bottom" inView delay={0.12}>
                 dúvidas
               </HighlightedText>
             </h2>
@@ -1004,14 +1030,14 @@ export function GmvMaxSection() {
 
           <motion.div {...fadeUp(0)}>
             <span className="font-body text-xs font-semibold px-4 py-1.5 inline-flex items-center gap-1.5 mb-3"
-              style={{ backgroundColor: "#033624", color: "#BAF6F0", borderRadius: "999px", transform: "rotate(-2deg)" }}>
+              style={{ backgroundColor: DS.thrive, color: DS.shimmer, borderRadius: "999px", transform: "rotate(-2deg)" }}>
               <Link2 size={11} />
               Recursos
             </span>
             <h2 className="font-display font-black leading-[0.92] tracking-tight"
-              style={{ fontSize: "clamp(1.6rem, 6vw, 2rem)", color: "#033624" }}>
+              style={{ fontSize: "clamp(1.6rem, 6vw, 2rem)", color: DS.thrive }}>
               Links{" "}
-              <HighlightedText highlightColor="#F1204A" from="bottom" inView delay={0.12}>
+              <HighlightedText highlightColor={DS.blaze} from="bottom" inView delay={0.12}>
                 úteis
               </HighlightedText>
             </h2>
@@ -1022,16 +1048,16 @@ export function GmvMaxSection() {
             {/* Entrega Máxima — interno */}
             <motion.a key="entrega-maxima" {...fadeUp(0)} href="/entrega-maxima"
               className="group flex items-center gap-3.5 rounded-2xl px-4 py-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl"
-              style={{ background: "linear-gradient(135deg, #2DCCD3 0%, #1ab5bb 100%)", boxShadow: "0 6px 24px rgba(45,204,211,0.30)" }}>
+              style={{ background: `linear-gradient(135deg, ${DS.glint} 0%, #1ab5bb 100%)`, boxShadow: `0 6px 24px ${alpha(DS.glint, 0.30)}` }}>
               <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
                 style={{ backgroundColor: "rgba(255,255,255,0.18)" }}>
-                <Zap size={16} style={{ color: "#033624" }} />
+                <Zap size={16} style={{ color: DS.thrive }} />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-display font-black text-sm" style={{ color: "#033624" }}>Entrega Máxima</p>
-                <p className="font-body text-xs" style={{ color: "rgba(3,54,36,0.6)" }}>Como ativar e configurar o Max Delivery</p>
+                <p className="font-display font-black text-sm" style={{ color: DS.thrive }}>Entrega Máxima</p>
+                <p className="font-body text-xs" style={{ color: alpha(DS.thrive, 0.6) }}>Como ativar e configurar o Max Delivery</p>
               </div>
-              <ChevronRight size={14} className="shrink-0 opacity-60 group-hover:opacity-100 transition-opacity" style={{ color: "#033624" }} />
+              <ChevronRight size={14} className="shrink-0 opacity-60 group-hover:opacity-100 transition-opacity" style={{ color: DS.thrive }} />
             </motion.a>
 
             {/* Ads Manager */}
@@ -1039,16 +1065,16 @@ export function GmvMaxSection() {
               href="https://ads.tiktok.com/i18n/gmv-max/welcome?aadvid=7510325651095470096"
               target="_blank" rel="noopener noreferrer"
               className="group flex items-center gap-3.5 rounded-2xl px-4 py-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl"
-              style={{ background: "linear-gradient(135deg, #F1204A 0%, #c01038 100%)", boxShadow: "0 6px 24px rgba(241,32,74,0.28)" }}>
+              style={{ background: `linear-gradient(135deg, ${DS.blaze} 0%, #c01038 100%)`, boxShadow: `0 6px 24px ${alpha(DS.blaze, 0.28)}` }}>
               <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
                 style={{ backgroundColor: "rgba(255,255,255,0.18)" }}>
-                <ArrowUpRight size={16} style={{ color: "#ffffff" }} />
+                <ArrowUpRight size={16} style={{ color: DS.white }} />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-display font-black text-sm" style={{ color: "#ffffff" }}>Ads Manager — GMV Max</p>
-                <p className="font-body text-xs" style={{ color: "rgba(255,255,255,0.65)" }}>Criar e gerenciar campanhas</p>
+                <p className="font-display font-black text-sm" style={{ color: DS.white }}>Ads Manager — GMV Max</p>
+                <p className="font-body text-xs" style={{ color: alpha(DS.white, 0.65) }}>Criar e gerenciar campanhas</p>
               </div>
-              <ExternalLink size={13} className="shrink-0 opacity-50 group-hover:opacity-100 transition-opacity" style={{ color: "#ffffff" }} />
+              <ExternalLink size={13} className="shrink-0 opacity-50 group-hover:opacity-100 transition-opacity" style={{ color: DS.white }} />
             </motion.a>
 
             {/* Central de Negócios */}
@@ -1056,23 +1082,23 @@ export function GmvMaxSection() {
               href="https://business.tiktok.com/"
               target="_blank" rel="noopener noreferrer"
               className="group flex items-center gap-3.5 rounded-2xl px-4 py-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl"
-              style={{ background: "linear-gradient(135deg, #033624 0%, #055a3a 100%)", boxShadow: "0 6px 24px rgba(3,54,36,0.22)" }}>
+              style={{ background: `linear-gradient(135deg, ${DS.thrive} 0%, #055a3a 100%)`, boxShadow: `0 6px 24px ${alpha(DS.thrive, 0.22)}` }}>
               <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                style={{ backgroundColor: "rgba(186,246,240,0.15)" }}>
-                <Building2 size={16} style={{ color: "#BAF6F0" }} />
+                style={{ backgroundColor: alpha(DS.shimmer, 0.15) }}>
+                <Building2 size={16} style={{ color: DS.shimmer }} />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-display font-black text-sm" style={{ color: "#BAF6F0" }}>Central de Negócios</p>
-                <p className="font-body text-xs" style={{ color: "rgba(186,246,240,0.55)" }}>Configurar business center</p>
+                <p className="font-display font-black text-sm" style={{ color: DS.shimmer }}>Central de Negócios</p>
+                <p className="font-body text-xs" style={{ color: alpha(DS.shimmer, 0.55) }}>Configurar business center</p>
               </div>
-              <ExternalLink size={13} className="shrink-0 opacity-50 group-hover:opacity-100 transition-opacity" style={{ color: "#BAF6F0" }} />
+              <ExternalLink size={13} className="shrink-0 opacity-50 group-hover:opacity-100 transition-opacity" style={{ color: DS.shimmer }} />
             </motion.a>
           </div>
 
           {/* Recursos secundários */}
           <div className="flex flex-col gap-2.5">
             <p className="font-body text-[11px] font-semibold uppercase tracking-widest px-1"
-              style={{ color: "#033624", opacity: 0.4 }}>Recursos de apoio</p>
+              style={{ color: DS.thrive, opacity: 0.55 }}>Recursos de apoio</p>
             {[
               {
                 icon: Play,
@@ -1124,11 +1150,11 @@ export function GmvMaxSection() {
                   <item.icon size={15} style={{ color: item.iconColor }} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-display font-black text-sm" style={{ color: "#033624" }}>{item.label}</p>
-                  <p className="font-body text-xs" style={{ color: "rgba(74,5,5,0.5)" }}>{item.sub}</p>
+                  <p className="font-display font-black text-sm" style={{ color: DS.thrive }}>{item.label}</p>
+                  <p className="font-body text-xs" style={{ color: alpha(DS.ember, 0.65) }}>{item.sub}</p>
                 </div>
                 <ExternalLink size={12} className="shrink-0 opacity-25 group-hover:opacity-60 transition-opacity"
-                  style={{ color: "#033624" }} />
+                  style={{ color: DS.thrive }} />
               </motion.a>
             ))}
           </div>

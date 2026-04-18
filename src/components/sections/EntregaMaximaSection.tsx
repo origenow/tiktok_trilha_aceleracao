@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
+import { ZoomableImage } from "@/components/ui/zoomable-image";
 import { motion, AnimatePresence } from "motion/react";
 import { HighlightedText } from "@/components/ui/highlighted-text";
 import {
@@ -274,10 +274,8 @@ export function EntregaMaximaSection() {
               <p className="font-body text-xs leading-relaxed pl-9" style={{ color: "#4A0505", opacity: 0.8 }}>
                 Para ativar o modo Entrega Máxima, clique no botão <strong>"Exibir Detalhes"</strong> de uma campanha ativa no Ads Manager.
               </p>
-              <div className="rounded-2xl overflow-hidden mt-2.5" style={{ boxShadow: "0 4px 16px rgba(3,54,36,0.12)" }}>
-                <Image src="/assets/images/max_delivery/p1.png" alt="Lista de campanhas — clicar em Exibir Detalhes"
-                  width={400} height={240} className="w-full h-auto object-cover" />
-              </div>
+              <ZoomableImage src="/assets/images/max_delivery/p1.png" alt="Lista de campanhas — clicar em Exibir Detalhes"
+                width={400} height={240} className="mt-2.5" style={{ boxShadow: "0 4px 16px rgba(3,54,36,0.12)" }} />
             </DemoStep>
           </motion.div>
 
@@ -287,10 +285,8 @@ export function EntregaMaximaSection() {
               <p className="font-body text-xs leading-relaxed pl-9" style={{ color: "#4A0505", opacity: 0.8 }}>
                 Selecione o produto para o qual deseja ativar a função e clique para alternar entre <strong>Meta de ROI</strong> e <strong>Entrega Máxima</strong>.
               </p>
-              <div className="rounded-2xl overflow-hidden mt-2.5" style={{ boxShadow: "0 4px 16px rgba(3,54,36,0.12)" }}>
-                <Image src="/assets/images/max_delivery/p2.png" alt="Relatório de produtos e criativos — alternar modo de otimização"
-                  width={400} height={240} className="w-full h-auto object-cover" />
-              </div>
+              <ZoomableImage src="/assets/images/max_delivery/p2.png" alt="Relatório de produtos e criativos — alternar modo de otimização"
+                width={400} height={240} className="mt-2.5" style={{ boxShadow: "0 4px 16px rgba(3,54,36,0.12)" }} />
             </DemoStep>
           </motion.div>
 
@@ -300,10 +296,8 @@ export function EntregaMaximaSection() {
               <p className="font-body text-xs leading-relaxed pl-9" style={{ color: "#4A0505", opacity: 0.8 }}>
                 Defina o orçamento separado e o período de vigência da Entrega Máxima para o produto selecionado.
               </p>
-              <div className="rounded-2xl overflow-hidden mt-2.5" style={{ boxShadow: "0 4px 16px rgba(3,54,36,0.12)" }}>
-                <Image src="/assets/images/max_delivery/p3.png" alt="Gerenciar modo de otimização — orçamento e programação"
-                  width={400} height={260} className="w-full h-auto object-cover" />
-              </div>
+              <ZoomableImage src="/assets/images/max_delivery/p3.png" alt="Gerenciar modo de otimização — orçamento e programação"
+                width={400} height={260} className="mt-2.5" style={{ boxShadow: "0 4px 16px rgba(3,54,36,0.12)" }} />
             </DemoStep>
           </motion.div>
         </div>

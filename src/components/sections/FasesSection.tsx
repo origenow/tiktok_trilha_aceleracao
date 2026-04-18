@@ -3,6 +3,7 @@
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
+import confetti from "canvas-confetti";
 import {
   ShoppingBag,
   TrendingUp,
@@ -549,6 +550,14 @@ export function FasesSection() {
       setGroupStep((p) => p + 1);
     } else if (!showReward) {
       setShowReward(true);
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: [activeFase.color, activeFase.onColor, '#F1204A', '#FBEB35'],
+        ticks: 200,
+        zIndex: 9999,
+      });
       setTimeout(() => rewardRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }), 120);
     } else if (activeIndex < FASES.length - 1) {
       setDirection(1);

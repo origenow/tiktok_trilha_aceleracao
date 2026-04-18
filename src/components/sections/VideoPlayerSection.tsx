@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
-import { Play, Volume2, VolumeX, Heart, MessageCircle, Share2, Music2 } from "lucide-react";
+import { Play, Volume2, VolumeX, Heart, MessageCircle, Share2, Music2, ChevronDown } from "lucide-react";
 
 export function VideoPlayerSection({ canPlay = false }: { canPlay?: boolean }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -20,6 +20,7 @@ export function VideoPlayerSection({ canPlay = false }: { canPlay?: boolean }) {
   const borderRadius = useTransform(scrollYProgress, [0, 0.3], [0, 40]);
   const opacity = useTransform(scrollYProgress, [0.35, 0.8], [1, 0]);
   const y = useTransform(scrollYProgress, [0.31, 0.8], [0, -100]);
+  const iniciarOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
 
   // Autoplay só depois que o intro terminar E o vídeo estiver pronto
   useEffect(() => {
@@ -60,6 +61,9 @@ export function VideoPlayerSection({ canPlay = false }: { canPlay?: boolean }) {
       video.pause();
       setIsPlaying(false);
     } else {
+      // Unmute on first manual play interaction
+      video.muted = false;
+      setIsMuted(false);
       video.play().then(() => setIsPlaying(true)).catch(() => { });
     }
   };
@@ -175,6 +179,36 @@ export function VideoPlayerSection({ canPlay = false }: { canPlay?: boolean }) {
             </div>
           </div>
         </motion.section>
+
+        {/* Botão "iniciar" + seta para próxima seção — some ao scrollar */}
+        <motion.div
+          style={{ opacity: iniciarOpacity }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2"
+        >
+          <button
+            onClick={togglePlay}
+            className="px-7 py-3 rounded-full bg-white/15 backdrop-blur-md border border-white/30 text-white text-sm font-display font-bold tracking-widest uppercase shadow-lg hover:bg-white/25 transition-colors"
+            aria-label="Iniciar vídeo"
+          >
+            iniciar
+          </button>
+          <button
+            onClick={() => {
+              const next = document.querySelector<HTMLElement>("#hero");
+              next?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="w-10 h-10 rounded-full bg-white/15 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-white/25 transition-colors"
+            aria-label="Ir para próxima seção"
+          >
+            <motion.span
+              animate={{ y: [0, 4, 0] }}
+              transition={{ repeat: Infinity, duration: 1.4, ease: "easeInOut" }}
+              className="flex"
+            >
+              <ChevronDown size={18} />
+            </motion.span>
+          </button>
+        </motion.div>
       </div>
 
       <style jsx>{`

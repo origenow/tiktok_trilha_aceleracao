@@ -1,13 +1,11 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "motion/react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import { ExternalLink, ChevronRight, Tag, Truck } from "lucide-react";
+import { Autoplay } from "swiper/modules";
+import { ExternalLink, ChevronRight, Tag, Truck, ChevronLeft, ChevronRight as ChevronRightNav } from "lucide-react";
 import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 28 },
@@ -463,19 +461,24 @@ export function SliderSection() {
             <div className="flex flex-col gap-1">
               <p className="font-display font-black text-sm" style={{ color: "#033624" }}>Isenção de comissão por 60 dias</p>
               <p className="font-body text-xs leading-relaxed" style={{ color: "#033624", opacity: 0.72 }}>
-                Habilite a missão no Seller Center para participar e aproveite 0% de comissão nas primeiras semanas.
+                Ative a isenção de comissão antes da sua primeira venda
               </p>
             </div>
           </div>
+          
+          <div className="relative z-10 mt-1 rounded-xl overflow-hidden shadow-sm border border-black/5">
+            <img src="/assets/isencao.png" alt="Como ativar isenção de comissão" className="w-full h-auto" />
+          </div>
+
           <div
             className="flex items-center gap-1 flex-wrap rounded-xl px-3 py-2 relative z-10"
             style={{ backgroundColor: "rgba(3,54,36,0.12)" }}
           >
-            <span className="font-body text-[10px] font-semibold" style={{ color: "#033624" }}>Menu lateral</span>
+            <span className="font-body text-[10px] font-semibold" style={{ color: "#033624" }}>Central do vendedor</span>
             <ChevronRight size={10} style={{ color: "#033624", opacity: 0.6 }} />
             <span className="font-body text-[10px] font-semibold" style={{ color: "#033624" }}>Crescimento</span>
             <ChevronRight size={10} style={{ color: "#033624", opacity: 0.6 }} />
-            <span className="font-body text-[10px] font-black px-2.5 py-0.5 rounded-full" style={{ backgroundColor: "#F1204A", color: "#ffffff" }}>Missões</span>
+            <span className="font-body text-[10px] font-black px-2.5 py-0.5 rounded-full" style={{ backgroundColor: "#F1204A", color: "#ffffff" }}>Minhas Missões</span>
           </div>
         </motion.div>
 
@@ -501,44 +504,57 @@ export function SliderSection() {
       </motion.div>
 
       {/* Slider */}
-      <motion.div {...fadeUp(0.15)} className="w-full px-4">
+      <motion.div {...fadeUp(0.15)} className="w-full px-4 relative">
+        {/* Seta esquerda */}
+        <button
+          onClick={() => swiperInstance?.slidePrev()}
+          aria-label="Card anterior"
+          className="absolute left-0 top-[calc(50%-2.5rem)] -translate-y-1/2 z-20 w-9 h-9 rounded-full flex items-center justify-center shadow-lg transition-all active:scale-90"
+          style={{ backgroundColor: "rgba(3,54,36,0.85)", color: "#BAF6F0" }}
+        >
+          <ChevronLeft size={18} />
+        </button>
+
+        {/* Seta direita */}
+        <button
+          onClick={() => swiperInstance?.slideNext()}
+          aria-label="Próximo card"
+          className="absolute right-0 top-[calc(50%-2.5rem)] -translate-y-1/2 z-20 w-9 h-9 rounded-full flex items-center justify-center shadow-lg transition-all active:scale-90"
+          style={{ backgroundColor: "rgba(3,54,36,0.85)", color: "#BAF6F0" }}
+        >
+          <ChevronRightNav size={18} />
+        </button>
+
         <Swiper
           onSwiper={setSwiperInstance}
-          modules={[Navigation, Pagination, Autoplay]}
-          spaceBetween={16}
-          slidesPerView={1.15}
+          modules={[Autoplay]}
+          spaceBetween={12}
+          slidesPerView={1.1}
           centeredSlides={false}
           loop={false}
           autoplay={{
             delay: 10000,
             disableOnInteraction: false,
-            pauseOnMouseEnter: true
+            pauseOnMouseEnter: true,
           }}
-          className="mySwiper !pb-12"
+          className="mySwiper !pb-10"
         >
           {currentSlides.map((slide, i) => (
             <SwiperSlide key={`${activeTab}-${i}`} className="h-auto">
               <div
-                className={`flex flex-col h-full rounded-2xl p-6 ${slide.dark ? 'bg-black text-white' : 'bg-[#f4f5f5] text-black'}`}
+                className={`flex flex-col h-full rounded-2xl p-6 ${slide.dark ? "bg-black text-white" : "bg-[#f4f5f5] text-black"}`}
                 style={{ minHeight: "520px" }}
+                onPointerDown={pauseAutoplay}
               >
                 {/* Tag Superior */}
-                <h4 className={`font-bold text-sm mb-6 ${slide.dark ? 'text-gray-300' : 'text-gray-600'}`}>
+                <h4 className={`font-bold text-sm mb-6 ${slide.dark ? "text-gray-300" : "text-gray-600"}`}>
                   {slide.tag}
                 </h4>
 
                 {/* Vídeo Vertical */}
-                <div className="relative w-full aspect-[9/16] mb-6 rounded-xl overflow-hidden shadow-2xl bg-gray-900 border-0">
+                <div className="relative w-full aspect-[9/16] mb-6 rounded-xl overflow-hidden shadow-2xl bg-gray-900">
                   {slide.tiktok ? (
-                    <iframe
-                      src={slide.video}
-                      className="w-full h-full border-0 overflow-hidden"
-                      scrolling="no"
-                      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
-                      allowFullScreen
-                      onClick={pauseAutoplay}
-                      onMouseEnter={pauseAutoplay}
-                    />
+                    <TikTokEmbed src={slide.video} />
                   ) : (
                     <video
                       src={slide.video}
@@ -556,24 +572,22 @@ export function SliderSection() {
                 <h3 className="font-bold text-xl leading-tight mb-3">
                   {slide.title}
                 </h3>
-                <p className={`text-sm leading-snug mb-8 ${slide.dark ? 'text-gray-300' : 'text-gray-700'}`}>
+                <p className={`text-sm leading-snug mb-8 ${slide.dark ? "text-gray-300" : "text-gray-700"}`}>
                   {slide.description}
                 </p>
 
                 {/* Link Assistir Agora */}
-                <a 
+                <a
                   href={slide.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-auto flex items-center gap-1 cursor-pointer hover:opacity-80 transition-opacity w-fit"
-                  onClick={(e) => {
-                    pauseAutoplay();
-                  }}
+                  className="mt-auto flex items-center gap-1 hover:opacity-80 transition-opacity w-fit"
+                  onClick={pauseAutoplay}
                 >
-                  <span className={`font-bold text-sm leading-none ${slide.dark ? 'text-white' : 'text-black'}`}>
+                  <span className={`font-bold text-sm leading-none ${slide.dark ? "text-white" : "text-black"}`}>
                     Assistir agora
                   </span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={`mt-[1px] ${slide.dark ? 'text-white' : 'text-black'}`}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={`mt-[1px] ${slide.dark ? "text-white" : "text-black"}`}>
                     <path d="m9 18 6-6-6-6" />
                   </svg>
                 </a>
@@ -584,17 +598,37 @@ export function SliderSection() {
       </motion.div>
 
       <style jsx global>{`
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .no-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .mySwiper .swiper-pagination {
-          display: none; 
-        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
     </section>
+  );
+}
+
+function TikTokEmbed({ src }: { src: string }) {
+  const [activated, setActivated] = useState(false);
+  const startX = useRef(0);
+
+  return (
+    <div className="relative w-full h-full overflow-hidden">
+      <iframe
+        src={src}
+        className="border-0 absolute"
+        style={{ top: 0, left: 0, width: "calc(100% + 18px)", height: "100%", overflow: "hidden" }}
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
+        allowFullScreen
+      />
+      {!activated && (
+        <div
+          className="absolute inset-0 z-10 cursor-pointer"
+          onPointerDown={(e) => { startX.current = e.clientX; }}
+          onPointerUp={(e) => {
+            if (Math.abs(e.clientX - startX.current) < 8) {
+              setActivated(true);
+            }
+          }}
+        />
+      )}
+    </div>
   );
 }

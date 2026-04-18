@@ -114,7 +114,7 @@ const GRUPOS: MaterialGroup[] = [
         icon: Gem,
         label: "Jóias e Semi Jóias",
         description: "Requisitos e processo para vender na categoria de jóias",
-        href: "https://seller-br.tiktok.com/university/home?default_language=pt-BR&identity=1&role=seller&menu=feature",
+        href: "/semijoias",
         accent: "#2DCCD3",
         accentText: "#111111",
         cardBg: "#d0f5f3",
@@ -401,52 +401,6 @@ export function MateriaisDeApoioSection() {
           ))}
         </motion.div>
 
-        {/* Card Chinese Version */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <a
-            href="https://seller-br.tiktok.com/university/home?default_language=zh-Hans"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-4 rounded-3xl p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl"
-            style={{
-              background: "linear-gradient(135deg, #111111 0%, #055a3a 100%)",
-              boxShadow: "0 4px 20px rgba(3,54,36,0.22)",
-            }}
-          >
-            <div
-              className="shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-2xl"
-              style={{ backgroundColor: "rgba(186,246,240,0.15)" }}
-            >
-              🇨🇳
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-0.5">
-                <p className="font-display font-black text-sm" style={{ color: "#BAF6F0" }}>
-                  Chinese Version
-                </p>
-                <span
-                  className="font-body text-[10px] px-2 py-0.5 rounded-full"
-                  style={{ backgroundColor: "#F1204A", color: "#ffffff" }}
-                >
-                  2026.1 最新
-                </span>
-              </div>
-              <p className="font-body text-xs leading-snug" style={{ color: "rgba(186,246,240,0.55)" }}>
-                巴西服饰南家TikTok Shop基础运营指导
-              </p>
-            </div>
-            <Globe
-              size={16}
-              className="shrink-0 opacity-35 group-hover:opacity-80 transition-opacity"
-              style={{ color: "#BAF6F0" }}
-            />
-          </a>
-        </motion.div>
 
       </div>
     </section>

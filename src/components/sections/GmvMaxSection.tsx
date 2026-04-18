@@ -685,31 +685,31 @@ export function GmvMaxSection() {
                     {
                       icon: Video,
                       label: "Conteúdo",
-                      val: "Vídeo não é obrigatório para começar. O GMV Max também cria formatos de anúncio de compras de produto (product shopping ads) e pode automatizar a otimização dessas campanhas.",
+                      val: <>O uso de conteúdo em vídeo <strong>não é obrigatório</strong> para começar a utilizar o GMV Max, pois ele também cria formatos de product shopping ads.</>,
                       color: "#2DCCD3",
                     },
                     {
                       icon: Target,
                       label: "Produtos",
-                      val: "Promova de 3 a 7 dos seus produtos mais vendidos.",
+                      val: <>Promova de <strong>3 a 7</strong> dos seus produtos mais vendidos.</>,
                       color: "#2DCCD3",
                     },
                     {
                       icon: Cpu,
                       label: "Seleção de Criativos",
-                      val: "Use a seleção automática (Auto-select) e mantenha os posts de afiliados ativados.",
+                      val: <>Use a <strong>seleção automática (Auto-select)</strong> e mantenha os posts de afiliados ativados.</>,
                       color: "#2DCCD3",
                     },
                     {
                       icon: Gauge,
                       label: "ROI Target",
-                      val: "Durante o cold start, a meta de ROI é menos relevante — o ideal é usar a Entrega Máxima. Se preferir não usá-la, comece com metas conservadoras entre 1.5 e 2.",
+                      val: <>No cold start, o ideal é utilizar a <strong>Entrega Máxima (Maximum Delivery)</strong>.</>,
                       color: "#F1204A",
                     },
                     {
                       icon: DollarSign,
                       label: "Investimento",
-                      val: "Siga os orçamentos recomendados na plataforma. Com Entrega Máxima, a meta de ROI é irrelevante — a campanha roda em modo de entrega máxima. Obs.: esse orçamento não será gasto nos produtos em cold start; você definirá um orçamento separado para a Entrega Máxima.",
+                      val: <>Siga os <strong>orçamentos recomendados</strong> na plataforma.</>,
                       color: "#F1204A",
                     },
                   ].map(({ icon: Icon, label, val, color }) => (
@@ -755,11 +755,11 @@ export function GmvMaxSection() {
                     </div>
                   </div>
                   {[
-                    { icon: Target, label: "Produtos", val: "Top 3–7 best sellers", color: "#2DCCD3" },
-                    { icon: Zap, label: "Lance", val: "Ative a Entrega Máxima (Maximum Delivery) após a criação da campanha para cada produto", color: "#2DCCD3" },
-                    { icon: DollarSign, label: "Budget PME", val: "Orçamento mínimo semanal de R$ 400 por 1 semana (≈ R$ 60/dia)", color: "#2DCCD3" },
-                    { icon: DollarSign, label: "Budget KA", val: "Orçamento mínimo diário de R$ 500 por 1 semana", color: "#2DCCD3" },
-                    { icon: Video, label: "Criativos", val: "Tudo que for sendo criado com esses produtos será somado automaticamente à campanha", color: "#2DCCD3" },
+                    { icon: Target, label: "Produtos", val: <>Top <strong>3-7</strong> best sellers</>, color: "#2DCCD3" },
+                    { icon: Zap, label: "Lance", val: <>Ative a <strong>Entrega Máxima</strong> para cada produto.</>, color: "#2DCCD3" },
+                    { icon: DollarSign, label: "Budget SMB", val: <>Mínimo semanal de <strong>R$ 400</strong>.</>, color: "#2DCCD3" },
+                    { icon: DollarSign, label: "Budget KA", val: <>Mínimo diário de <strong>R$ 500</strong>.</>, color: "#2DCCD3" },
+                    { icon: Video, label: "Criativos", val: <><strong>Soma automática</strong> à campanha.</>, color: "#2DCCD3" },
                   ].map(({ icon: Icon, label, val, color }) => (
                     <div key={label} className="flex items-start gap-2.5 px-3.5 py-2.5 border-t"
                       style={{ borderColor: "rgba(3,54,36,0.06)" }}>
@@ -788,10 +788,10 @@ export function GmvMaxSection() {
                     </div>
                   </div>
                   {[
-                    { icon: Layers, label: "Produtos", val: "Mantenha pelo menos 3 produtos ativos até a semana 5", color: "#033624" },
-                    { icon: Zap, label: "Lance", val: "Mantenha a Entrega Máxima ativada, a menos que prefira controle de custos. Se optar pelo controle, mude para Meta de ROI após 7 dias seguindo a recomendação do sistema", color: "#033624" },
-                    { icon: DollarSign, label: "Budget", val: "Use 10× o AOV (Valor Médio do Pedido) como orçamento inicial para Meta de ROI", color: "#033624" },
-                    { icon: Video, label: "Criativos", val: "Tudo que for sendo criado com esses produtos será somado automaticamente. Se novos afiliados autorizarem o investimento, não esqueça de somá-los", color: "#033624" },
+                    { icon: Layers, label: "Produtos", val: <>Mantenha pelo menos <strong>3 produtos ativos</strong>.</>, color: "#033624" },
+                    { icon: Zap, label: "Lance", val: <>Mude para <strong>Meta de ROI</strong> após 7 dias se desejar controle.</>, color: "#033624" },
+                    { icon: DollarSign, label: "Budget", val: <>Use <strong>10x o AOV</strong> como orçamento inicial.</>, color: "#033624" },
+                    { icon: Video, label: "Criativos", val: <>Soma automática de <strong>novos afiliados</strong>.</>, color: "#033624" },
                   ].map(({ icon: Icon, label, val, color }) => (
                     <div key={label} className="flex items-start gap-2.5 px-3.5 py-2.5 border-t"
                       style={{ borderColor: "rgba(3,54,36,0.06)" }}>
@@ -851,17 +851,53 @@ export function GmvMaxSection() {
 
                 <div className="rounded-2xl p-1.5"
                   style={{ backgroundColor: "#ffffff", boxShadow: "0 2px 12px rgba(3,54,36,0.08)" }}>
+                  <div className="px-3.5 pt-3 pb-2 border-b" style={{ borderColor: "rgba(3,54,36,0.06)" }}>
+                    <p className="font-display font-black text-xs" style={{ color: "#F1204A" }}>RECOMENDAÇÕES INICIAIS</p>
+                  </div>
+                  
+                  {/* Conteúdo Detalhado */}
+                  <div className="px-3.5 py-3 border-b" style={{ borderColor: "rgba(3,54,36,0.06)" }}>
+                    <div className="flex items-start gap-2.5 mb-2">
+                      <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
+                        style={{ backgroundColor: "#F1204A15", border: "1px solid #F1204A30" }}>
+                        <Video size={12} style={{ color: "#F1204A" }} />
+                      </div>
+                      <div>
+                        <p className="font-body text-[10px] font-semibold uppercase tracking-wide" style={{ color: "#4A0505", opacity: 0.45 }}>Conteúdo</p>
+                        <p className="font-body text-xs leading-snug" style={{ color: "#033624" }}>
+                          Recomendamos começar com <strong>5 vídeos</strong> para obter melhores resultados, mas isso não é obrigatório. Os conteúdos podem ser obtidos através de:
+                        </p>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 gap-2 pl-9 mt-1">
+                      {[
+                        { title: "Conteúdo de Afiliados", items: ["Vídeos autorizados por afiliados", "Spark Codes (códigos de divulgação)"] },
+                        { title: "Posts Personalizados", items: ["Conteúdo orgânico da sua conta TikTok", "Anúncios Spark anteriores (TTAM)"] },
+                        { title: "Conteúdo Próprio", items: ["Vídeos criados pela conta com links dos produtos"] },
+                        { title: "Conteúdo Spark", items: ["Spark Codes de afiliados já vinculados"] },
+                      ].map((group) => (
+                        <div key={group.title} className="bg-[#F1204A08] p-2 rounded-lg border border-[#F1204A15]">
+                          <p className="font-display font-bold text-[10px]" style={{ color: "#F1204A" }}>{group.title}</p>
+                          <ul className="mt-1 space-y-0.5">
+                            {group.items.map((item) => (
+                              <li key={item} className="font-body text-[10px] flex items-center gap-1.5" style={{ color: "#033624" }}>
+                                <div className="w-1 h-1 rounded-full bg-[#F1204A]" />
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Outros itens */}
                   {[
-                    {
-                      icon: Video,
-                      label: "Conteúdo",
-                      val: "Comece com 5 vídeos. Use afiliados autorizados, Spark Codes, conteúdo orgânico da conta TikTok ou vídeos próprios com link do produto",
-                    },
-                    { icon: Target, label: "Produtos", val: "Promova 2–7 best sellers" },
-                    { icon: Cpu, label: "Criativos", val: "Seleção automática com posts de afiliados ativados" },
-                    { icon: Gauge, label: "ROI Target", val: "Defina o ROI mais baixo que você aceita — não o mais alto" },
-                  ].map(({ icon: Icon, label, val }, i) => (
-                    <div key={label} className={`flex items-start gap-2.5 px-3.5 py-2.5 ${i > 0 ? "border-t" : "pt-3"}`}
+                    { icon: Target, label: "Produtos", val: <>Promova de <strong>2-7 produtos</strong> best sellers</> },
+                    { icon: Cpu, label: "Seleção de criativos", val: <>Use <strong>seleção automática</strong></> },
+                    { icon: Gauge, label: "ROI Target", val: <>Defina a ROI <strong>mais baixa</strong> que aceitar.</> },
+                  ].map(({ icon: Icon, label, val }) => (
+                    <div key={label} className="flex items-start gap-2.5 px-3.5 py-3 border-b last:border-0"
                       style={{ borderColor: "rgba(3,54,36,0.06)" }}>
                       <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
                         style={{ backgroundColor: "#F1204A15", border: "1px solid #F1204A30" }}>
@@ -875,20 +911,38 @@ export function GmvMaxSection() {
                   ))}
                 </div>
 
-                {/* Fórmula */}
-                <div className="rounded-2xl p-4 flex flex-col gap-2"
+                {/* Budget */}
+                <div className="rounded-2xl p-4 flex flex-col gap-3"
                   style={{ background: "linear-gradient(135deg, #F1204A, #c01038)", boxShadow: "0 6px 24px rgba(241,32,74,0.28)" }}>
                   <div className="flex items-center gap-2">
                     <DollarSign size={14} style={{ color: "#ffffff" }} />
-                    <p className="font-display font-black text-xs" style={{ color: "#ffffff" }}>Calculando o Budget</p>
+                    <p className="font-display font-black text-xs" style={{ color: "#ffffff" }}>Budget (Orçamento)</p>
                   </div>
-                  <div className="rounded-xl px-4 py-3 font-body text-xs text-center font-semibold"
-                    style={{ backgroundColor: "rgba(255,255,255,0.18)", color: "#ffffff" }}>
+                  <p className="font-body text-xs" style={{ color: "rgba(255,255,255,0.9)" }}>
+                    Defina um orçamento maior que o GMV histórico dividido pelo ROI desejado.
+                  </p>
+                  <div className="rounded-xl px-4 py-3 font-display font-black text-xs text-center border-2 border-white/20"
+                    style={{ backgroundColor: "rgba(255,255,255,0.1)", color: "#ffffff" }}>
                     Orçamento &gt; GMV histórico ÷ ROI alvo
                   </div>
-                  <p className="font-body text-[11px] text-center" style={{ color: "rgba(255,255,255,0.75)" }}>
-                    Ex: GMV R$ 10.000 ÷ ROI 3 = Orçamento mín. <strong>R$ 3.333</strong>
-                  </p>
+                  
+                  <div className="bg-white/10 rounded-xl p-3 border border-white/10">
+                    <p className="font-display font-bold text-[10px] uppercase mb-2" style={{ color: "#BAF6F0" }}>Exemplo Prático:</p>
+                    <div className="grid grid-cols-2 gap-2 font-body text-[10px]" style={{ color: "#ffffff" }}>
+                      <div className="flex flex-col">
+                        <span className="opacity-60">GMV histórico</span>
+                        <span className="font-bold">$10.000</span>
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="opacity-60">ROI alvo</span>
+                        <span className="font-bold">3</span>
+                      </div>
+                    </div>
+                    <div className="mt-2 pt-2 border-t border-white/10 flex justify-between items-center">
+                      <span className="font-body text-[10px] text-white/60">Cálculo: $10.000 / 3</span>
+                      <span className="font-display font-black text-xs text-[#BAF6F0]">Min: $3.333*</span>
+                    </div>
+                  </div>
                 </div>
 
               </motion.div>

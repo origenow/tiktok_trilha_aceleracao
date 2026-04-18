@@ -18,6 +18,7 @@ type WebinarCard = {
   bgFrom: string;
   bgTo: string;
   pdfPath: string;
+  imagePath: string;
 };
 
 const WEBINARS: WebinarCard[] = [
@@ -33,6 +34,7 @@ const WEBINARS: WebinarCard[] = [
     bgFrom: "#e8fafa",
     bgTo: "#BAF6F0",
     pdfPath: "/assets/webinars/Agenda Webinars de Abril (1).pdf",
+    imagePath: "/assets/webinars/agenda.png",
   },
   {
     id: 2,
@@ -46,6 +48,7 @@ const WEBINARS: WebinarCard[] = [
     bgFrom: "#fffde8",
     bgTo: "#FFF9B0",
     pdfPath: "/assets/webinars/Convite Monte Sião.pdf",
+    imagePath: "/assets/webinars/vaga.png",
   },
   {
     id: 3,
@@ -59,6 +62,7 @@ const WEBINARS: WebinarCard[] = [
     bgFrom: "#fdf0fc",
     bgTo: "#EDBBE8",
     pdfPath: "/assets/webinars/Evento Goiânia 14 de abril (SINVEST) (1).pdf",
+    imagePath: "/assets/webinars/commerce.png",
   },
 ];
 
@@ -114,28 +118,15 @@ function WebinarCard({ card, index, scrollXProgress, onCardClick }: { card: Webi
           // Para este projeto, o foco visual deve mudar durante o scroll.
         }}
       >
-      {/* Preview do PDF via iframe escalado */}
+      {/* Preview via Imagem */}
       <div
-        className="relative overflow-hidden"
-        style={{ height: "200px", backgroundColor: "#f5f5f5" }}
+        className="relative overflow-hidden flex items-center justify-center p-0"
+        style={{ height: "200px" }}
       >
-        <iframe
-          src={`${card.pdfPath}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-          title={card.title}
-          scrolling="no"
-          style={{
-            width: "667px",
-            height: "556px",
-            border: "none",
-            transformOrigin: "center",
-            transform: "scale(0.42)", // Aumentado para dar zoom
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            marginTop: "-278px", // Metade da altura (556/2)
-            marginLeft: "-333.5px", // Metade da largura (667/2)
-            pointerEvents: "none",
-          }}
+        <img
+          src={card.imagePath}
+          alt={card.title}
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
         {/* Overlay com tag */}
         <span

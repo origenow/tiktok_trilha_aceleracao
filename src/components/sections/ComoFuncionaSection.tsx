@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "motion/react";
 import { ShoppingBag, TrendingUp, Gift, Trophy, ArrowRight } from "lucide-react";
 import { HighlightedText } from "@/components/ui/highlighted-text";
+import confetti from "canvas-confetti";
 
 /* ── Marquee component inline (sem dep extra) ────────────────── */
 function Marquee({
@@ -247,6 +248,15 @@ export function ComoFuncionaSection() {
                 backgroundColor: "#F1204A",
                 borderRadius: "999px",
                 boxShadow: "0 4px 12px rgba(241, 32, 74, 0.2)"
+              }}
+              onClick={() => {
+                confetti({
+                  particleCount: 100,
+                  spread: 70,
+                  origin: { y: 0.8 },
+                  colors: ['#F1204A', '#FBEB35', '#2DCCD3', '#EDBBE8'],
+                  zIndex: 9999,
+                });
               }}
             >
               Ver minhas recompensas agora <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />

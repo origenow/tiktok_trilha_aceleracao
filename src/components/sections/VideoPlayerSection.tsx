@@ -21,6 +21,26 @@ export function VideoPlayerSection({ canPlay = false }: { canPlay?: boolean }) {
   const opacity = useTransform(scrollYProgress, [0.35, 0.8], [1, 0]);
   const y = useTransform(scrollYProgress, [0.31, 0.8], [0, -100]);
   const iniciarOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
+  
+  // Pausa o vídeo ao sair da visão (Intersection Observer)
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Se o vídeo não estiver mais intersectando (visível) e estiver tocando, pausamos
+        if (!entry.isIntersecting) {
+          video.pause();
+          setIsPlaying(false);
+        }
+      },
+      { threshold: 0.1 } // Dispara quando menos de 10% do vídeo está visível
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
 
   // Autoplay só depois que o intro terminar E o vídeo estiver pronto
   useEffect(() => {

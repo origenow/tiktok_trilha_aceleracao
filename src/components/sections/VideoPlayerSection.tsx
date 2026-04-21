@@ -101,7 +101,7 @@ export function VideoPlayerSection({ canPlay = false }: { canPlay?: boolean }) {
       <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
         <motion.section
           style={{ scale, borderRadius, opacity, y }}
-          className="relative w-full h-full bg-black overflow-hidden shadow-2xl origin-center"
+          className="relative w-full h-full lg:max-w-[520px] lg:h-[90vh] lg:my-auto bg-black overflow-hidden shadow-2xl origin-center lg:rounded-3xl"
         >
           {/* Logo TikTok */}
           <div className="absolute top-8 left-6 z-50 pointer-events-none">

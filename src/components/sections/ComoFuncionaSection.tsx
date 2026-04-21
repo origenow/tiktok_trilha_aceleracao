@@ -142,126 +142,129 @@ export function ComoFuncionaSection() {
       <FloatingDoodle src="/assets_new/manequim.svg" size={81} top="40%" right="2%" rotate={25} opacity={0.08} />
       <FloatingDoodle src="/assets_new/2.svg" size={35} bottom="20%" left="6%" rotate={-45} opacity={0.1} />
       <FloatingDoodle src="/assets_new/5.svg" size={50} top="15%" right="10%" rotate={10} opacity={0.05} />
-      <div className="w-full max-w-[430px] mx-auto">
+      <div className="w-full max-w-[430px] lg:max-w-screen-xl mx-auto lg:px-16">
 
-        {/* Header */}
-        <motion.div
-          className="px-6 mb-6 text-center"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.5 }}
-        >
-          <p className="font-body text-xs uppercase tracking-widest mb-1" style={{ color: "#FBEB35", textShadow: "0 0 0 #033624", WebkitTextStroke: "0.5px #bba800" }}>
-            Recompensas
-          </p>
-          <h2
-            className="font-display font-black leading-tight"
-            style={{ fontSize: "clamp(1.6rem, 7vw, 2.2rem)", color: "#033624" }}
-          >
-            Como resgatar seus <HighlightedText highlightColor="#F1204A" from="bottom" inView delay={0.3}>prêmios?</HighlightedText>
-          </h2>
-          <p className="font-body text-sm mt-2" style={{ color: "#4A0505", opacity: 0.7 }}>
-            Depois de completar as missões, veja como retirar suas recompensas no Seller Center
-          </p>
-        </motion.div>
+        {/* Desktop: grid 2 colunas */}
+        <div className="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-start">
 
-        {/* Marquee triplo */}
-        <motion.div
-          className="relative mb-8"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-        >
-          {/* Fade laterais */}
-          <div
-            className="absolute left-0 top-0 bottom-0 w-10 z-10 pointer-events-none"
-            style={{ background: "linear-gradient(to right, #ffffff, transparent)" }}
-          />
-          <div
-            className="absolute right-0 top-0 bottom-0 w-10 z-10 pointer-events-none"
-            style={{ background: "linear-gradient(to left, #ffffff, transparent)" }}
-          />
-
-          <div className="flex flex-col gap-2 py-1">
-            <Marquee items={m1} duration="35s" />
-            <Marquee items={m2} reverse duration="45s" />
-            <Marquee items={m3} duration="40s" />
-          </div>
-        </motion.div>
-
-        {/* 4 passos */}
-        <div className="px-6">
-          <div className="border-t-2 border-dashed" style={{ borderColor: "#2DCCD3" }}>
-            {PASSOS.map((passo, i) => {
-              const Icon = passo.icon;
-              const dividerColors = ["#F1204A", "#FBEB35", "#EDBBE8", "#2DCCD3"];
-              return (
-                <motion.div
-                  key={i}
-                  className="flex gap-4 py-5 border-b border-dashed"
-                  style={{ borderColor: dividerColors[i % dividerColors.length] }}
-                  initial={{ opacity: 0, x: -24 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.4 }}
-                  transition={{ duration: 0.4, delay: i * 0.1 }}
-                >
-                  {/* Número */}
-                  <div
-                    className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-display font-black text-sm text-white"
-                    style={{ backgroundColor: "#F1204A" }}
-                  >
-                    {passo.num}
-                  </div>
-
-                  {/* Ícone + texto */}
-                  <div className="flex flex-col gap-1 pt-0.5">
-                    <Icon size={20} style={{ color: "#033624", opacity: 0.6 }} />
-                    <h3 className="font-display font-black text-sm" style={{ color: "#033624" }}>
-                      {passo.title}
-                    </h3>
-                    <p className="font-body text-sm" style={{ color: "#4A0505", opacity: 0.75 }}>
-                      {passo.desc}
-                    </p>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          {/* Link seller center */}
-          <motion.div
-            className="mt-8 text-center flex justify-center"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.4, delay: 0.35 }}
-          >
-            <a
-              href="https://seller-br.tiktok.com/challenges/growth"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 font-display font-black text-sm px-7 py-3 transition-all duration-200"
-              style={{
-                color: "#ffffff",
-                backgroundColor: "#F1204A",
-                borderRadius: "999px",
-                boxShadow: "0 4px 12px rgba(241, 32, 74, 0.2)"
-              }}
-              onClick={() => {
-                confetti({
-                  particleCount: 100,
-                  spread: 70,
-                  origin: { y: 0.8 },
-                  colors: ['#F1204A', '#FBEB35', '#2DCCD3', '#EDBBE8'],
-                  zIndex: 9999,
-                });
-              }}
+          {/* ── Coluna esquerda: header + marquee ── */}
+          <div>
+            {/* Header */}
+            <motion.div
+              className="px-6 lg:px-0 mb-6 text-center lg:text-left"
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.5 }}
             >
-              Ver minhas recompensas agora <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </a>
-          </motion.div>
+              <p className="font-body text-xs uppercase tracking-widest mb-1" style={{ color: "#FBEB35", textShadow: "0 0 0 #033624", WebkitTextStroke: "0.5px #bba800" }}>
+                Recompensas
+              </p>
+              <h2
+                className="font-display font-black leading-tight"
+                style={{ fontSize: "clamp(1.6rem, 7vw, 2.8rem)", color: "#033624" }}
+              >
+                Como resgatar seus <HighlightedText highlightColor="#F1204A" from="bottom" inView delay={0.3}>prêmios?</HighlightedText>
+              </h2>
+              <p className="font-body text-sm mt-2" style={{ color: "#4A0505", opacity: 0.7 }}>
+                Depois de completar as missões, veja como retirar suas recompensas no Seller Center
+              </p>
+            </motion.div>
+
+            {/* Marquee triplo */}
+            <motion.div
+              className="relative mb-8"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+            >
+              <div
+                className="absolute left-0 top-0 bottom-0 w-10 z-10 pointer-events-none"
+                style={{ background: "linear-gradient(to right, #ffffff, transparent)" }}
+              />
+              <div
+                className="absolute right-0 top-0 bottom-0 w-10 z-10 pointer-events-none"
+                style={{ background: "linear-gradient(to left, #ffffff, transparent)" }}
+              />
+              <div className="flex flex-col gap-2 py-1">
+                <Marquee items={m1} duration="35s" />
+                <Marquee items={m2} reverse duration="45s" />
+                <Marquee items={m3} duration="40s" />
+              </div>
+            </motion.div>
+          </div>
+
+          {/* ── Coluna direita: 4 passos + botão ── */}
+          <div className="px-6 lg:px-0">
+            <div className="border-t-2 border-dashed" style={{ borderColor: "#2DCCD3" }}>
+              {PASSOS.map((passo, i) => {
+                const Icon = passo.icon;
+                const dividerColors = ["#F1204A", "#FBEB35", "#EDBBE8", "#2DCCD3"];
+                return (
+                  <motion.div
+                    key={i}
+                    className="flex gap-4 py-5 border-b border-dashed"
+                    style={{ borderColor: dividerColors[i % dividerColors.length] }}
+                    initial={{ opacity: 0, x: -24 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.4 }}
+                    transition={{ duration: 0.4, delay: i * 0.1 }}
+                  >
+                    <div
+                      className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-display font-black text-sm text-white"
+                      style={{ backgroundColor: "#F1204A" }}
+                    >
+                      {passo.num}
+                    </div>
+                    <div className="flex flex-col gap-1 pt-0.5">
+                      <Icon size={20} style={{ color: "#033624", opacity: 0.6 }} />
+                      <h3 className="font-display font-black text-sm" style={{ color: "#033624" }}>
+                        {passo.title}
+                      </h3>
+                      <p className="font-body text-sm" style={{ color: "#4A0505", opacity: 0.75 }}>
+                        {passo.desc}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Link seller center */}
+            <motion.div
+              className="mt-8 text-center lg:text-left flex justify-center lg:justify-start"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.4, delay: 0.35 }}
+            >
+              <a
+                href="https://seller-br.tiktok.com/challenges/growth"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 font-display font-black text-sm px-7 py-3 transition-all duration-200"
+                style={{
+                  color: "#ffffff",
+                  backgroundColor: "#F1204A",
+                  borderRadius: "999px",
+                  boxShadow: "0 4px 12px rgba(241, 32, 74, 0.2)"
+                }}
+                onClick={() => {
+                  confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.8 },
+                    colors: ['#F1204A', '#FBEB35', '#2DCCD3', '#EDBBE8'],
+                    zIndex: 9999,
+                  });
+                }}
+              >
+                Ver minhas recompensas agora <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </a>
+            </motion.div>
+          </div>
+
         </div>
       </div>
 

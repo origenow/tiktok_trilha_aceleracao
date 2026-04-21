@@ -320,7 +320,7 @@ export function MateriaisDeApoioSection() {
   const [openId, setOpenId] = useState<string | null>(GRUPOS[0].id);
 
   return (
-    <section className="relative overflow-hidden" style={{ backgroundColor: "#EDBBE8" }}>
+    <section id="materiais" className="relative overflow-hidden" style={{ backgroundColor: "#EDBBE8" }}>
 
       {/* Doodles SVG inline */}
       <svg className="absolute top-6 right-4 opacity-25 pointer-events-none animate-float"
@@ -349,7 +349,13 @@ export function MateriaisDeApoioSection() {
         <line x1="16" y1="12" x2="24" y2="18" stroke="#EDBBE8" strokeWidth="1.5" />
       </svg>
 
-      <div className="relative z-10 w-full max-w-[430px] mx-auto px-5 py-14 flex flex-col gap-8">
+      <div className="relative z-10 w-full max-w-[430px] lg:max-w-screen-xl mx-auto px-5 lg:px-16 py-14 flex flex-col gap-8">
+
+        {/* Desktop: grid 2 colunas */}
+        <div className="lg:grid lg:grid-cols-[1fr_340px] lg:gap-10 lg:items-start">
+
+        {/* Coluna esquerda: cabeçalho + accordions */}
+        <div className="flex flex-col gap-8">
 
         {/* Cabeçalho */}
         <motion.div
@@ -401,6 +407,31 @@ export function MateriaisDeApoioSection() {
           ))}
         </motion.div>
 
+        </div>{/* fim coluna esquerda */}
+
+        {/* ── Coluna direita — desktop only ── */}
+        <div className="hidden lg:flex flex-col gap-6 sticky top-24">
+
+
+          {/* Card destaque */}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.35 }}
+            className="p-6 rounded-3xl"
+            style={{ backgroundColor: "#2DCCD3", boxShadow: "0 4px 24px rgba(45,204,211,0.3)" }}
+          >
+            <p className="font-display font-black text-lg leading-tight" style={{ color: "#111111" }}>
+              {GRUPOS.reduce((acc, g) => acc + g.items.length, 0)} recursos disponíveis
+            </p>
+            <p className="font-body text-sm mt-1" style={{ color: "#033624", opacity: 0.75 }}>
+              em {GRUPOS.length} categorias para acelerar seu crescimento
+            </p>
+          </motion.div>
+        </div>
+
+        </div>{/* fim grid */}
 
       </div>
     </section>

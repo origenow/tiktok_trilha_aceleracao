@@ -17,14 +17,9 @@ export default function Home() {
       {/* Menu flutuante interativo */}
       <FloatingNavbar />
 
-      {/* Fundo cinza neutro fora do container em desktop */}
-      <div
-        className="fixed inset-0 -z-10"
-        style={{ backgroundColor: "#e8e8e8" }}
-      />
       <main
-        className="relative w-full mx-auto shadow-2xl"
-        style={{ maxWidth: "430px", minHeight: "100vh" }}
+        className="relative w-full mx-auto"
+        style={{ minHeight: "100vh" }}
       >
         <VideoPlayerSection />
         <HeroSection />

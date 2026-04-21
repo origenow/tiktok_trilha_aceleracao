@@ -81,56 +81,60 @@ export function CtaFinalSection() {
         <StarDoodle />
       </div>
 
-      <div className="relative z-10 w-full max-w-[430px] mx-auto px-6 flex flex-col items-center text-center">
+      <div className="relative z-10 w-full max-w-[430px] lg:max-w-screen-xl mx-auto px-6 lg:px-16 lg:py-8">
 
-        {/* ── Título ── */}
-        <h2
-          className="font-display font-black leading-[0.92] tracking-tighter mb-4"
-          style={{ fontSize: "clamp(2rem, 9vw, 2.8rem)", color: "#033624" }}
-        >
-          Pronto para jogar{" "}<br />e vender{" "}
-          <HighlightedText highlightColor="#F1204A" from="bottom" inView delay={0.2}>muito?</HighlightedText>
-        </h2>
+        {/* Desktop: grid 2 colunas */}
+        <div className="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
 
-        <p className="font-body text-sm mb-8" style={{ color: "#4A0505", opacity: 0.8 }}>
-          Abra sua conta agora e entre na Trilha de Aceleração
-        </p>
+          {/* ── Coluna esquerda: título + CTAs ── */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+            <h2
+              className="font-display font-black leading-[0.92] tracking-tighter mb-4"
+              style={{ fontSize: "clamp(2rem, 9vw, 3.5rem)", color: "#033624" }}
+            >
+              Pronto para jogar{" "}<br />e vender{" "}
+              <HighlightedText highlightColor="#F1204A" from="bottom" inView delay={0.2}>muito?</HighlightedText>
+            </h2>
 
-        {/* ── Botão primário ── */}
-        <a
-          href="https://seller-br.tiktok.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-display font-black text-white text-base px-8 py-4 w-full text-center mb-3 hover:scale-[1.04] transition-all duration-200 flex items-center justify-center gap-2"
-          style={{ backgroundColor: "#F1204A", borderRadius: "999px", boxShadow: "0 8px 24px rgba(241,32,74,0.35)" }}
-        >
-          Abrir Conta de Vendedor <ArrowRight size={18} />
-        </a>
+            <p className="font-body text-sm mb-8" style={{ color: "#4A0505", opacity: 0.8 }}>
+              Abra sua conta agora e entre na Trilha de Aceleração
+            </p>
 
-        {/* ── Botão secundário ── */}
-        <a
-          href="https://seller-br.tiktok.com/challenges/growth"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-display font-black text-sm px-8 py-3.5 w-full text-center hover:bg-thrive/5 transition-colors duration-200 flex items-center justify-center gap-2"
-          style={{ border: "2px solid #033624", borderRadius: "999px", color: "#033624" }}
-        >
-          Ver missões no Seller Center
-        </a>
+            <a
+              href="https://seller-br.tiktok.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-display font-black text-white text-base px-8 py-4 w-full lg:w-auto text-center mb-3 hover:scale-[1.04] transition-all duration-200 flex items-center justify-center gap-2"
+              style={{ backgroundColor: "#F1204A", borderRadius: "999px", boxShadow: "0 8px 24px rgba(241,32,74,0.35)" }}
+            >
+              Abrir Conta de Vendedor <ArrowRight size={18} />
+            </a>
 
-        {/* ── Divisor ── */}
-        <div className="w-full mt-12 mb-6">
-          <div className="flex items-center gap-3">
-            <div className="flex-1 h-px" style={{ backgroundColor: "rgba(3,54,36,0.2)" }} />
-            <span className="font-body text-xs font-semibold" style={{ color: "#033624", opacity: 0.5 }}>
-              Comunidade
-            </span>
-            <div className="flex-1 h-px" style={{ backgroundColor: "rgba(3,54,36,0.2)" }} />
+            <a
+              href="https://seller-br.tiktok.com/challenges/growth"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-display font-black text-sm px-8 py-3.5 w-full lg:w-auto text-center hover:bg-thrive/5 transition-colors duration-200 flex items-center justify-center gap-2"
+              style={{ border: "2px solid #033624", borderRadius: "999px", color: "#033624" }}
+            >
+              Ver missões no Seller Center
+            </a>
           </div>
-        </div>
 
-        {/* ── Bloco WhatsApp ── */}
-        <div className="w-full rounded-3xl overflow-hidden" style={{ boxShadow: "0 8px 40px rgba(0,0,0,0.12)" }}>
+          {/* ── Coluna direita: WhatsApp ── */}
+          <div className="mt-10 lg:mt-0">
+
+            {/* Divisor — mobile only */}
+            <div className="w-full mb-6 lg:hidden">
+              <div className="flex items-center gap-3">
+                <div className="flex-1 h-px" style={{ backgroundColor: "rgba(3,54,36,0.2)" }} />
+                <span className="font-body text-xs font-semibold" style={{ color: "#033624", opacity: 0.5 }}>Comunidade</span>
+                <div className="flex-1 h-px" style={{ backgroundColor: "rgba(3,54,36,0.2)" }} />
+              </div>
+            </div>
+
+            {/* ── Bloco WhatsApp ── */}
+            <div className="w-full rounded-3xl overflow-hidden" style={{ boxShadow: "0 8px 40px rgba(0,0,0,0.12)" }}>
 
           {/* Header verde WhatsApp */}
           <div
@@ -250,6 +254,10 @@ export function CtaFinalSection() {
             </div>
           )}
         </div>
+
+          </div>{/* fim bloco WhatsApp + coluna direita */}
+
+        </div>{/* fim grid */}
 
       </div>
     </section>

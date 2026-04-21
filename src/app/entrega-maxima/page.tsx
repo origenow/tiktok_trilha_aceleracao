@@ -16,13 +16,10 @@ export default function EntregaMaximaPage() {
     <>
       <FloatingNavbar />
 
-      <div
-        className="fixed inset-0 -z-10"
-        style={{ backgroundColor: "#e8e8e8" }}
-      />
+      <div className="fixed inset-0 -z-10 hidden lg:block" style={{ backgroundColor: "#e8e8e8" }} />
       <main
-        className="relative w-full mx-auto shadow-2xl pt-28"
-        style={{ maxWidth: "430px", minHeight: "100vh", backgroundColor: "#BAF6F0" }}
+        className="relative w-full mx-auto shadow-2xl pt-28 lg:max-w-screen-xl"
+        style={{ minHeight: "100vh", backgroundColor: "#BAF6F0" }}
       >
         <EntregaMaximaSection />
         <Footer />

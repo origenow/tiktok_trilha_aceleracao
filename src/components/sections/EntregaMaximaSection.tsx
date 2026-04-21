@@ -138,7 +138,7 @@ export function EntregaMaximaSection() {
           })}
         </svg>
 
-        <div className="relative z-10 w-full max-w-[430px] mx-auto px-5 pt-10 pb-14 flex flex-col gap-5">
+        <div className="relative z-10 w-full max-w-[430px] lg:max-w-screen-xl mx-auto px-5 lg:px-16 pt-10 pb-14 flex flex-col gap-5">
 
           {/* Back link */}
           <motion.a {...fadeUp(0)} href="/gmv-max"
@@ -193,7 +193,7 @@ export function EntregaMaximaSection() {
           REGRAS GERAIS
       ═══════════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden" style={{ backgroundColor: "#ffffff" }}>
-        <div className="w-full max-w-[430px] mx-auto px-5 py-12 flex flex-col gap-5">
+        <div className="w-full max-w-[430px] lg:max-w-screen-xl mx-auto px-5 lg:px-16 py-12 flex flex-col gap-5">
 
           <motion.div {...fadeUp(0)}>
             <span className="font-body text-xs font-semibold px-4 py-1.5 inline-flex items-center gap-1.5 mb-3"
@@ -251,7 +251,7 @@ export function EntregaMaximaSection() {
             stroke="#033624" strokeWidth="2" strokeLinejoin="round" />
         </svg>
 
-        <div className="w-full max-w-[430px] mx-auto px-5 py-12 flex flex-col gap-7">
+        <div className="w-full max-w-[430px] lg:max-w-screen-xl mx-auto px-5 lg:px-16 py-12 flex flex-col gap-7">
 
           <motion.div {...fadeUp(0)}>
             <span className="font-body text-xs font-semibold px-4 py-1.5 inline-flex items-center gap-1.5 mb-3"
@@ -307,7 +307,7 @@ export function EntregaMaximaSection() {
           CONFIGURAR ORÇAMENTO
       ═══════════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden" style={{ backgroundColor: "#BAF6F0" }}>
-        <div className="w-full max-w-[430px] mx-auto px-5 py-12 flex flex-col gap-5">
+        <div className="w-full max-w-[430px] lg:max-w-screen-xl mx-auto px-5 lg:px-16 py-12 flex flex-col gap-5">
 
           <motion.div {...fadeUp(0)}>
             <span className="font-body text-xs font-semibold px-4 py-1.5 inline-flex items-center gap-1.5 mb-3"
@@ -379,7 +379,7 @@ export function EntregaMaximaSection() {
           <circle cx="24" cy="24" r="20" stroke="#033624" strokeWidth="1.2" strokeDasharray="4 3" />
         </svg>
 
-        <div className="w-full max-w-[430px] mx-auto px-5 py-12 flex flex-col gap-5">
+        <div className="w-full max-w-[430px] lg:max-w-screen-xl mx-auto px-5 lg:px-16 py-12 flex flex-col gap-5">
 
           <motion.div {...fadeUp(0)}>
             <span className="font-body text-xs font-semibold px-4 py-1.5 inline-flex items-center gap-1.5 mb-3"
@@ -463,7 +463,7 @@ export function EntregaMaximaSection() {
           LINKS
       ═══════════════════════════════════════════════════════ */}
       <section style={{ backgroundColor: "#EDD4B2" }}>
-        <div className="w-full max-w-[430px] mx-auto px-5 py-10 flex flex-col gap-4">
+        <div className="w-full max-w-[430px] lg:max-w-screen-xl mx-auto px-5 lg:px-16 py-10 flex flex-col gap-4">
           <motion.div {...fadeUp(0)}>
             <p className="font-display font-black text-sm" style={{ color: "#033624" }}>Recursos relacionados</p>
           </motion.div>

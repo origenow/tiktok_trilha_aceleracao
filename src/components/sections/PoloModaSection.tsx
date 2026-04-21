@@ -131,7 +131,7 @@ export function PoloModaSection() {
       <FloatingDoodle src="/assets_new/camera.svg" size={144} top="10%" left="2%" rotate={30} opacity={0.45} />
       <FloatingDoodle src="/assets_new/manequim.svg" size={171} bottom="2%" right="12%" rotate={-10} opacity={0.3} />
 
-      <div className="relative z-10 w-full max-w-[430px] mx-auto px-6 py-16 flex flex-col gap-12">
+      <div className="relative z-10 w-full max-w-[430px] lg:max-w-screen-xl mx-auto px-6 lg:px-16 py-16 flex flex-col gap-12">
 
         {/* ① Hero da seção */}
         <motion.div {...fadeUp(0)}>

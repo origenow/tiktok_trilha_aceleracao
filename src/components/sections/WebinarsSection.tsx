@@ -241,7 +241,7 @@ export function WebinarsSection() {
   }
 
   return (
-    <section className="relative overflow-hidden" style={{ backgroundColor: "#EDD4B2" }}>
+    <section id="webinars" className="relative overflow-hidden" style={{ backgroundColor: "#EDD4B2" }}>
 
       {/* ── Doodles ── */}
       {/* Florzinha Glow — esquerda central */}
@@ -268,7 +268,7 @@ export function WebinarsSection() {
         />
       </svg>
 
-      <div className="relative z-10 w-full max-w-[430px] mx-auto py-14 flex flex-col gap-8">
+      <div className="relative z-10 w-full max-w-[430px] lg:max-w-screen-xl mx-auto py-14 lg:px-16 flex flex-col gap-8">
 
         {/* ── Cabeçalho ── */}
         <motion.div
@@ -276,7 +276,7 @@ export function WebinarsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5 }}
-          className="px-5"
+          className="px-5 lg:px-0 lg:text-left"
         >
           {/* Pílula */}
           <span
@@ -310,13 +310,61 @@ export function WebinarsSection() {
           </p>
         </motion.div>
 
-        {/* ── Cards scroll horizontal ── */}
+        {/* ── Grid desktop (3 colunas) ── */}
+        <div className="hidden lg:grid lg:grid-cols-3 lg:gap-6 px-0">
+          {WEBINARS.map((card, i) => (
+            <motion.a
+              key={card.id}
+              href={card.pdfPath}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
+              className="group flex flex-col rounded-3xl overflow-hidden cursor-pointer hover:-translate-y-1 transition-transform duration-200"
+              style={{ background: "#ffffff", boxShadow: "0 4px 20px rgba(3,54,36,0.10)" }}
+            >
+              <div className="relative overflow-hidden" style={{ height: "220px" }}>
+                <img
+                  src={card.imagePath}
+                  alt={card.title}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <span
+                  className="absolute top-3 left-3 font-body text-[10px] font-semibold px-2.5 py-1 rounded-full z-10"
+                  style={{ backgroundColor: card.tagColor, color: card.tagTextColor, transform: "rotate(-3deg)", boxShadow: "0 2px 8px rgba(0,0,0,0.12)" }}
+                >
+                  {card.tag}
+                </span>
+                <div
+                  className="absolute bottom-3 right-3 w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 z-10"
+                  style={{ backgroundColor: "#033624" }}
+                >
+                  <Download size={13} style={{ color: "#BAF6F0" }} />
+                </div>
+              </div>
+              <div className="p-4 flex flex-col gap-1" style={{ borderTop: `3px solid ${card.accentColor}` }}>
+                <p className="font-display font-black text-sm leading-tight" style={{ color: "#033624" }}>{card.title}</p>
+                <p className="font-body text-xs leading-snug" style={{ color: "#4A0505", opacity: 0.6 }}>{card.subtitle}</p>
+                <div className="flex items-center gap-1 mt-2">
+                  <FileText size={11} style={{ color: card.accentColor === "#FBEB35" ? "#8a7a00" : card.accentColor }} />
+                  <span className="font-body text-[10px] font-medium" style={{ color: card.accentColor === "#FBEB35" ? "#8a7a00" : card.accentColor }}>
+                    Abrir PDF
+                  </span>
+                </div>
+              </div>
+            </motion.a>
+          ))}
+        </div>
+
+        {/* ── Cards scroll horizontal — mobile only ── */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="relative px-0"
+          className="relative px-0 lg:hidden"
         >
           {/* Botões nav — visíveis em telas maiores */}
           <button
@@ -367,8 +415,8 @@ export function WebinarsSection() {
           </div>
         </motion.div>
 
-        {/* ── Dots de paginação dinâmicos ── */}
-        <div className="flex justify-center gap-3 -mt-4">
+        {/* ── Dots de paginação dinâmicos — mobile only ── */}
+        <div className="flex lg:hidden justify-center gap-3 -mt-4">
           {WEBINARS.map((card, i) => (
             <PaginationDot 
               key={card.id} 

@@ -2,11 +2,9 @@
 
 import React from "react";
 import { motion } from "motion/react";
-import { Trophy, ShoppingBag, Crown, Rocket, Gem, LucideIcon } from "lucide-react";
-import { HighlightedText } from "@/components/ui/highlighted-text";
+import { Trophy, ShoppingBag, Crown, Rocket, Gem, Gift } from "lucide-react";
 
 /* ── Floating Doodle component ───────────────────────────────── */
-
 const FloatingDoodle = ({
   src,
   size = 40,
@@ -50,7 +48,7 @@ const FloatingDoodle = ({
 
 /* ── Badge circular girando ───────────────────────────────────── */
 const CircularBadge = () => (
-  <div className="relative w-24 h-24 bg-[#F1204A] rounded-full flex items-center justify-center shadow-xl rotate-12 hover:scale-105 transition-transform cursor-pointer border-[2px] border-white/20">
+  <div className="relative w-28 h-28 md:w-36 md:h-36 bg-[#EDBBE8] rounded-full flex items-center justify-center shadow-xl rotate-12 hover:scale-105 transition-transform cursor-pointer border-[3px] border-white/20">
     <div className="absolute inset-1 animate-[spin_12s_linear_infinite]">
       <svg viewBox="0 0 100 100" className="w-full h-full">
         <path
@@ -59,8 +57,8 @@ const CircularBadge = () => (
           fill="none"
         />
         <text
-          style={{ fontSize: "9px", fontFamily: "TikTokSansDisplay", fontWeight: 900, letterSpacing: "0.2em" }}
-          fill="white"
+          style={{ fontSize: "10px", fontFamily: "TikTokSansDisplay", fontWeight: 900, letterSpacing: "0.15em" }}
+          fill="#4A0505"
         >
           <textPath href="#circlePath" startOffset="0%">
             CATEGORIA MODA • CATEGORIA MODA •{" "}
@@ -68,315 +66,245 @@ const CircularBadge = () => (
         </text>
       </svg>
     </div>
-    <Trophy size={32} color="white" />
+    <div className="absolute inset-0 flex items-center justify-center">
+        <Trophy size={40} color="#4A0505" />
+    </div>
   </div>
 );
 
-/* ── Pílulas das fases (bottom row) ──────────────────────────── */
-const fasesPills: { label: string; bg: string; color: string; rotate: string; icon?: LucideIcon }[] = [
-  { label: "Fase 1 · 5 dias", bg: "#2DCCD3", color: "#033624", rotate: "-4deg" },
-  { label: "Fase 2 · 30 dias", bg: "#FBEB35", color: "#033624", rotate: "5deg" },
-  { label: "Fase 3 · 60 dias", bg: "#EDBBE8", color: "#4A0505", rotate: "-5deg" },
-  { label: "Diamante", bg: "#4A0505", color: "#ffffff", rotate: "4deg", icon: Gem },
-];
+/* ── Arrow components for bottom section (adapted to TikTok aesthetics) ───────────────────────────────── */
+const ArrowBlack1 = () => (
+  <svg viewBox="0 0 100 100" className="w-full h-full text-[#033624] stroke-current overflow-visible" fill="none" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M20,80 Q 40,20 80,40" />
+    <path d="M60,20 L80,40 L50,60" />
+  </svg>
+);
 
-/* ── Floating reward cards ───────────────────────────────────── */
-const cards = [
-  {
-    icon: ShoppingBag,
-    title: "Fase 1",
-    sub: "Até R$ 2.400",
-    detail: "em cupons de plataforma",
-    rotate: "-10deg",
-    delay: 0,
-    yAnim: [0, -14, 0],
-    duration: 5,
-  },
-  {
-    icon: Crown,
-    title: "Diamante",
-    sub: "Gerente Dedicado",
-    detail: "TikTok Shop",
-    rotate: "10deg",
-    delay: 1,
-    yAnim: [0, -18, 0],
-    duration: 6,
-  },
-];
+const ArrowBlack2 = () => (
+  <svg viewBox="0 0 100 100" className="w-full h-full text-[#033624] stroke-current overflow-visible" fill="none" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M20,80 Q 40,20 80,40" />
+    <path d="M60,20 L80,40 L50,60" />
+  </svg>
+);
 
-/* ── Componente principal ─────────────────────────────────────── */
 export function HeroSection() {
   return (
-    <section
-      id="hero"
-      className="relative flex flex-col overflow-hidden"
-      style={{ backgroundColor: "#BAF6F0" }}
-    >
-      <div className="w-full flex flex-col">
+    <div className="min-h-screen flex flex-col font-sans selection:bg-[#F1204A] selection:text-white relative overflow-hidden w-full" style={{ backgroundColor: "#BAF6F0" }}>
+      
+      {/* Background Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#03362415_1px,transparent_1px),linear-gradient(to_bottom,#03362415_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none z-0"></div>
 
-        {/* Doodles absolutos */}
-        <FloatingDoodle src="/assets_new/manequim.svg" size={86} bottom="32%" left="4%" rotate={12} delay={0.5} opacity={0.4} reverse />
-        <FloatingDoodle src="/assets_new/2.svg" size={60} top="45%" right="4%" rotate={-12} delay={1.5} opacity={0.35} />
-        <FloatingDoodle src="/assets_new/camera.svg" size={72} top="38%" left="6%" rotate={45} delay={0.8} opacity={0.4} reverse />
-        <FloatingDoodle src="/assets_new/5.svg" size={56} top="18%" right="10%" rotate={0} delay={2.1} opacity={0.25} />
-        <FloatingDoodle src="/assets_new/cosmetics.svg" size={79} top="8%" right="6%" rotate={-15} delay={1.2} opacity={0.3} />
-        <FloatingDoodle src="/assets_new/7.svg" size={50} bottom="15%" right="8%" rotate={20} delay={0.3} opacity={0.15} reverse />
-        <FloatingDoodle src="/assets_new/8.svg" size={38} top="25%" left="8%" rotate={-30} delay={2.5} opacity={0.2} />
-        <FloatingDoodle src="/assets_new/9.svg" size={52} bottom="40%" right="12%" rotate={10} delay={1.8} opacity={0.1} />
-        <FloatingDoodle src="/assets_new/10.svg" size={46} top="55%" left="2%" rotate={5} delay={0.1} opacity={0.3} />
-        <FloatingDoodle src="/assets_new/manequim.svg" size={58} bottom="5%" left="15%" rotate={-20} delay={3.2} opacity={0.25} reverse />
+      {/* Doodles absolutos */}
+      <FloatingDoodle src="/assets_new/manequim.svg" size={86} bottom="32%" left="4%" rotate={12} delay={0.5} opacity={0.4} reverse />
+      <FloatingDoodle src="/assets_new/2.svg" size={60} top="45%" right="4%" rotate={-12} delay={1.5} opacity={0.35} />
+      <FloatingDoodle src="/assets_new/camera.svg" size={72} top="38%" left="6%" rotate={45} delay={0.8} opacity={0.4} reverse />
+      <FloatingDoodle src="/assets_new/5.svg" size={56} top="18%" right="10%" rotate={0} delay={2.1} opacity={0.25} />
+      <FloatingDoodle src="/assets_new/cosmetics.svg" size={79} top="8%" right="6%" rotate={-15} delay={1.2} opacity={0.3} />
+      <FloatingDoodle src="/assets_new/7.svg" size={50} bottom="15%" right="8%" rotate={20} delay={0.3} opacity={0.15} reverse />
+      <FloatingDoodle src="/assets_new/8.svg" size={38} top="25%" left="8%" rotate={-30} delay={2.5} opacity={0.2} />
+      <FloatingDoodle src="/assets_new/9.svg" size={52} bottom="40%" right="12%" rotate={10} delay={1.8} opacity={0.1} />
+      <FloatingDoodle src="/assets_new/10.svg" size={46} top="55%" left="2%" rotate={5} delay={0.1} opacity={0.3} />
+      <FloatingDoodle src="/assets_new/manequim.svg" size={58} bottom="5%" left="15%" rotate={-20} delay={3.2} opacity={0.25} reverse />
 
-        {/* Container: mobile single col / desktop 2-col grid */}
-        <div className="relative z-10 w-full max-w-[430px] lg:max-w-screen-xl mx-auto px-6 lg:px-16 pt-8 pb-4 lg:py-16">
-          <div className="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center lg:min-h-[80vh]">
 
-            {/* ── Coluna esquerda ── */}
-            <div className="flex flex-col items-center lg:items-start">
-
-              {/* Header de Logos */}
-              <motion.div
-                initial={{ opacity: 0, y: -16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="mb-8 w-full flex items-center justify-between"
-              >
-                <div className="flex items-center">
-                  <img src="/tiktok-icon.svg" alt="TikTok" className="w-16 h-16 -ml-2" />
-                </div>
-                <div className="flex items-center">
-                  <img
-                    src="/tiktok-black.png"
-                    alt="TikTok Primary Logo"
-                    className="h-10 w-auto object-contain opacity-90"
-                    style={{ maxHeight: "36px" }}
-                  />
-                </div>
-              </motion.div>
-
-              {/* Pílula categoria */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-                className="self-start mb-4"
-              >
-                <span
-                  className="pill-tag text-xs"
-                  style={{
-                    backgroundColor: "#EDBBE8",
-                    color: "#4A0505",
-                    transform: "rotate(-6deg)",
-                    display: "inline-block",
-                  }}
-                >
-                  Categoria Moda
-                </span>
-              </motion.div>
-
-              {/* H1 */}
-              <motion.h1
-                className="font-display font-black leading-[0.9] tracking-tighter w-full"
-                style={{
-                  fontSize: "clamp(2.4rem, 10vw, 4.5rem)",
-                  color: "#033624",
+      {/* Hero Section Main Content */}
+      <main className="flex-1 relative z-10 pt-16 pb-32 md:pt-20 md:pb-48 px-4 flex flex-col items-center justify-center w-full max-w-[1440px] mx-auto min-h-[85vh]">
+        
+        {/* Massive Typography & Elements Container */}
+        <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center justify-center text-center z-10 mt-4 mb-16">
+          
+          {/* Text Stack */}
+          <div className="w-full flex flex-col items-center relative z-10 space-y-2 md:space-y-4">
+            
+            {/* TRILHA DE */}
+            <div className="w-full flex justify-start pl-[5%] md:pl-[15%] relative z-30">
+              <h1 
+                className="text-[clamp(4.5rem,11vw,150px)] font-black leading-[0.85] tracking-tighter text-[#033624] m-0 p-0 uppercase"
+                style={{ 
+                  fontFamily: 'TikTokSansDisplay, "Arial Black", Impact, sans-serif',
+                  textShadow: '1px 1px 0 rgba(255,255,255,0.8), 2px 2px 0 rgba(255,255,255,0.8), 3px 3px 0 rgba(255,255,255,0.8), 4px 4px 0 rgba(255,255,255,0.8)'
                 }}
               >
-                <motion.span
-                  className="block"
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15, duration: 0.45 }}
-                >
-                  Trilha de
-                </motion.span>
-                <motion.span
-                  className="block"
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.25, duration: 0.45 }}
-                >
-                  <HighlightedText highlightColor="#F1204A" from="bottom" delay={0.5}>
-                    Aceleração
-                  </HighlightedText>
-                </motion.span>
-                <motion.span
-                  className="block"
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.35, duration: 0.45 }}
-                >
-                  TikTok Shop
-                </motion.span>
-              </motion.h1>
-
-              {/* Subtítulo */}
-              <p className="font-body mt-4 text-[0.95rem] leading-relaxed w-full" style={{ color: "#4A0505", opacity: 0.8 }}>
-                Siga as fases → complete missões → desbloqueie cupons, tráfego e suporte
-              </p>
-
-              {/* Cards flutuantes — mobile only */}
-              <div className="lg:hidden relative w-full mt-8 mb-6" style={{ height: "180px" }}>
-                {cards.map((card, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute"
-                    style={{
-                      left: i === 0 ? "0%" : "auto",
-                      right: i === 1 ? "3%" : "auto",
-                      top: i === 0 ? "20px" : "0px",
-                      zIndex: 10,
-                    }}
-                    animate={{ y: card.yAnim }}
-                    transition={{ duration: card.duration, repeat: Infinity, ease: "easeInOut", delay: card.delay }}
-                  >
-                    <div
-                      className="px-5 py-4 flex flex-col items-center text-center pointer-events-auto w-36"
-                      style={{
-                        transform: `rotate(${card.rotate})`,
-                        borderRadius: "2rem",
-                        background: "rgba(255,255,255,0.22)",
-                        backdropFilter: "blur(14px)",
-                        WebkitBackdropFilter: "blur(14px)",
-                        border: "1.5px solid rgba(255,255,255,0.5)",
-                        boxShadow: "0 8px 32px rgba(3,54,36,0.12), inset 0 1px 1px rgba(255,255,255,0.4)",
-                      }}
-                    >
-                      <div className="mb-2" style={{ color: "#F1204A" }}>
-                        <card.icon size={32} />
-                      </div>
-                      <p className="font-display font-black text-sm" style={{ color: "#033624" }}>{card.title}</p>
-                      <p className="font-body font-medium text-xs mt-0.5" style={{ color: "#F1204A" }}>{card.sub}</p>
-                    </div>
-                  </motion.div>
-                ))}
-                <div className="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2" style={{ zIndex: 5 }}>
-                  <CircularBadge />
-                </div>
-              </div>
-
-              {/* CTA principal */}
-              <motion.a
-                href="#fases"
-                className="font-display font-black text-white text-base px-8 py-4 shadow-lg hover:scale-[1.04] transition-all duration-200 w-full lg:w-auto text-center flex items-center justify-center gap-2"
-                style={{
-                  backgroundColor: "#F1204A",
-                  borderRadius: "999px",
-                  boxShadow: "0 8px 24px rgba(241, 32, 74, 0.35)",
-                }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.65, duration: 0.4 }}
-                whileHover={{ boxShadow: "0 12px 32px rgba(241, 32, 74, 0.5)" }}
-              >
-                <Rocket size={18} /> Começar a Trilha
-              </motion.a>
-
-              {/* Pílulas das fases — desktop (abaixo do CTA) */}
-              <div className="hidden lg:block mt-8 w-full">
-                <div className="bg-white/60 backdrop-blur-sm rounded-3xl px-4 py-5 shadow-md">
-                  <p className="font-body text-xs mb-3 opacity-60" style={{ color: "#033624" }}>
-                    4 fases · missões progressivas · recompensas reais
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {fasesPills.map((p) => (
-                      <span
-                        key={p.label}
-                        className="pill-tag text-xs flex items-center justify-center"
-                        style={{ backgroundColor: p.bg, color: p.color, transform: `rotate(${p.rotate})`, fontSize: "0.7rem", padding: "4px 12px" }}
-                      >
-                        {p.icon && <p.icon size={12} className="mr-1 shrink-0" />}
-                        {p.label}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Seta scroll — mobile */}
-              <motion.div
-                className="mt-6 animate-bounce-arrow lg:hidden"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.9 }}
-                style={{ color: "#033624" }}
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 5 L12 19 M6 13 L12 19 L18 13" stroke="#033624" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </motion.div>
+                TRILHA DE
+              </h1>
             </div>
+            
+            {/* ACELERAÇÃO */}
+            <div className="w-full flex justify-center relative z-20">
+              <h1 
+                className="text-[clamp(4.5rem,13vw,200px)] font-black leading-[0.85] tracking-tighter text-[#F1204A] m-0 p-0 uppercase"
+                style={{ 
+                  fontFamily: 'TikTokSansDisplay, "Arial Black", Impact, sans-serif',
+                  textShadow: '1px 1px 0 #033624, 2px 2px 0 #033624, 3px 3px 0 #033624, 4px 4px 0 #033624, 5px 5px 0 #033624, 6px 6px 0 #033624, 7px 7px 0 #033624, 8px 8px 0 #033624, 9px 9px 0 #033624, 10px 10px 0 #033624, 11px 11px 0 #033624'
+                }}
+              >
+                ACELERAÇÃO
+              </h1>
+            </div>
+            
+            {/* TIKTOK SHOP */}
+            <div className="w-full flex justify-start pl-[15%] md:pl-[30%] relative z-10">
+              <h1 
+                className="text-[clamp(4.5rem,11vw,150px)] font-black leading-[0.85] tracking-tighter text-white m-0 p-0 uppercase"
+                style={{ 
+                  fontFamily: 'TikTokSansDisplay, "Arial Black", Impact, sans-serif',
+                  textShadow: '1px 1px 0 #033624, 2px 2px 0 #033624, 3px 3px 0 #033624, 4px 4px 0 #033624, 5px 5px 0 #033624, 6px 6px 0 #033624, 7px 7px 0 #033624, 8px 8px 0 #033624, 9px 9px 0 #033624'
+                }}
+              >
+                TIKTOK SHOP
+              </h1>
+            </div>
+          </div>
 
-            {/* ── Coluna direita — desktop only ── */}
-            <div className="hidden lg:flex items-center justify-center relative" style={{ minHeight: "420px" }}>
-              {cards.map((card, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute"
-                  style={{
-                    left: i === 0 ? "5%" : "auto",
-                    right: i === 1 ? "5%" : "auto",
-                    top: i === 0 ? "60px" : "20px",
-                    zIndex: 10,
-                  }}
-                  animate={{ y: card.yAnim }}
-                  transition={{ duration: card.duration, repeat: Infinity, ease: "easeInOut", delay: card.delay }}
-                >
-                  <div
-                    className="px-6 py-5 flex flex-col items-center text-center w-44"
-                    style={{
-                      transform: `rotate(${card.rotate})`,
-                      borderRadius: "2rem",
-                      background: "rgba(255,255,255,0.28)",
-                      backdropFilter: "blur(14px)",
-                      WebkitBackdropFilter: "blur(14px)",
-                      border: "1.5px solid rgba(255,255,255,0.5)",
-                      boxShadow: "0 8px 32px rgba(3,54,36,0.12), inset 0 1px 1px rgba(255,255,255,0.4)",
-                    }}
-                  >
-                    <div className="mb-2" style={{ color: "#F1204A" }}>
-                      <card.icon size={40} />
-                    </div>
-                    <p className="font-display font-black text-base" style={{ color: "#033624" }}>{card.title}</p>
-                    <p className="font-body font-medium text-sm mt-0.5" style={{ color: "#F1204A" }}>{card.sub}</p>
-                    <p className="font-body text-xs mt-0.5 opacity-60" style={{ color: "#033624" }}>{card.detail}</p>
-                  </div>
-                </motion.div>
-              ))}
-              <div className="relative z-5" style={{ marginTop: "20px" }}>
-                <CircularBadge />
+          {/* CTA Button */}
+          <motion.a
+            href="#fases"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+            className="mt-12 relative z-50 px-8 py-4 rounded-full text-white text-base md:text-lg font-display font-black hover:scale-105 transition-transform flex items-center gap-2 shadow-2xl"
+            style={{ backgroundColor: "#F1204A", boxShadow: "0 8px 32px rgba(241, 32, 74, 0.4)" }}
+          >
+            <Rocket size={20} /> Começar a Trilha
+          </motion.a>
+
+          {/* Absolute Overlays (Cards & Badge) */}
+          <div className="absolute inset-0 w-full h-full pointer-events-none">
+            
+            {/* Floating Glass Card 1 (Bottom Left) */}
+            <motion.div 
+              animate={{ y: [0, -15, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute bottom-[20%] md:bottom-[5%] left-[0%] md:left-[10%] z-30 pointer-events-auto"
+            >
+              <div className="w-40 md:w-52 aspect-[3/3.5] bg-white/20 backdrop-blur-md border border-white/40 rounded-[2rem] p-5 flex flex-col items-center justify-center rotate-[-12deg] shadow-2xl hover:rotate-0 transition-transform duration-500">
+                <div className="w-16 h-16 md:w-24 md:h-24 bg-[#2DCCD3] rounded-full flex items-center justify-center mb-4 shadow-inner border-[3px] border-white/50 overflow-hidden">
+                   <ShoppingBag size={40} className="text-[#033624]" />
+                </div>
+                <div className="text-center mt-2">
+                  <p className="font-display font-black text-sm md:text-lg text-[#033624]">Fase 1</p>
+                  <p className="text-[10px] md:text-xs font-bold text-[#F1204A] mt-1">Até R$ 2.400</p>
+                  <p className="text-[9px] md:text-[10px] text-[#033624]/80 leading-tight mt-1">em cupons de plataforma</p>
+                </div>
               </div>
+            </motion.div>
+
+            {/* Floating Glass Card 2 (Top Right) */}
+            <motion.div 
+              animate={{ y: [0, -20, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="absolute top-[5%] md:top-[15%] right-[0%] md:right-[15%] z-30 pointer-events-auto"
+            >
+              <div className="w-40 md:w-52 aspect-[3/3.5] bg-white/20 backdrop-blur-md border border-white/40 rounded-[2rem] p-5 flex flex-col items-center justify-center rotate-[12deg] shadow-2xl hover:rotate-0 transition-transform duration-500">
+                <div className="w-16 h-16 md:w-24 md:h-24 bg-[#FBEB35] rounded-full flex items-center justify-center mb-4 shadow-inner border-[3px] border-white/50 overflow-hidden">
+                  <Crown size={40} className="text-[#033624]" />
+                </div>
+                <div className="text-center mt-2">
+                  <p className="font-display font-black text-sm md:text-lg text-[#033624]">Diamante</p>
+                  <p className="text-[10px] md:text-xs font-bold text-[#F1204A] mt-1">Gerente Dedicado</p>
+                  <p className="text-[9px] md:text-[10px] text-[#033624]/80 leading-tight mt-1">TikTok Shop</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Circular Badge */}
+            <div className="absolute bottom-[-10%] md:bottom-[-5%] right-[5%] md:right-[15%] z-40 pointer-events-auto">
+              <CircularBadge />
             </div>
 
           </div>
         </div>
+      </main>
 
-        {/* Bottom strip — pílulas das fases — mobile only */}
-        <div className="lg:hidden mt-auto shrink-0 relative z-10 w-full max-w-[430px] mx-auto px-4 pb-6">
-          <div className="bg-white rounded-3xl px-4 py-5 shadow-md">
-            <p className="font-body text-xs text-center mb-3 opacity-60" style={{ color: "#033624" }}>
-              4 fases · missões progressivas · recompensas reais
+      {/* Bottom Features Section */}
+      <section className="bg-white text-[#033624] rounded-t-[2.5rem] md:rounded-t-[3.5rem] px-6 py-12 md:px-10 md:py-16 relative z-20 shadow-[0_-20px_50px_rgba(0,0,0,0.1)] mt-auto w-full">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          
+          {/* Card 1: Missões */}
+          <div className="bg-[#F8F9FA] rounded-[2rem] p-8 flex flex-col items-center text-center relative h-64 border border-gray-100 shadow-sm">
+            <h3 className="text-xl md:text-2xl uppercase leading-tight mb-2 font-black font-display text-[#033624]">
+              COMPLETE<br/>MISSÕES
+            </h3>
+            <p className="text-[11px] md:text-xs text-[#033624]/60 font-medium mb-auto font-body">
+              3 Fases e 60 dias para crescer de nível.
             </p>
-            <div className="flex flex-wrap justify-center gap-2">
-              {fasesPills.map((p) => (
-                <span
-                  key={p.label}
-                  className="pill-tag text-xs flex items-center justify-center"
-                  style={{
-                    backgroundColor: p.bg,
-                    color: p.color,
-                    transform: `rotate(${p.rotate})`,
-                    fontSize: "0.7rem",
-                    padding: "4px 12px",
-                  }}
-                >
-                  {p.icon && <p.icon size={12} className="mr-1 shrink-0" />}
-                  {p.label}
-                </span>
-              ))}
+            
+            {/* Pill Graphic */}
+            <div className="relative w-full flex justify-center mt-6">
+              <div className="flex items-center bg-[#2DCCD3] rounded-2xl p-2 pr-12 shadow-lg relative z-10">
+                <div className="w-8 h-8 bg-white rounded-full mr-3 flex items-center justify-center flex-shrink-0">
+                  <Rocket size={16} className="text-[#033624]" />
+                </div>
+                <div className="text-left">
+                  <p className="text-[10px] font-black font-display text-[#033624] leading-none">Fase Inicial</p>
+                  <p className="text-[8px] text-[#033624]/80 font-body mt-1">1 a 5 dias</p>
+                </div>
+              </div>
+              <div className="absolute right-6 top-1/2 transform -translate-y-1/2 bg-[#033624] text-white font-black text-[10px] px-3 py-2 rounded-xl z-20 shadow-md">
+                + Pontos
+              </div>
+            </div>
+
+            {/* Arrow pointing to next card */}
+            <div className="hidden md:block absolute -right-12 bottom-8 w-16 h-16 z-30">
+              <ArrowBlack1 />
             </div>
           </div>
+
+          {/* Card 2: Recompensas */}
+          <div className="bg-[#F8F9FA] rounded-[2rem] p-8 flex flex-col items-center text-center relative h-64 border border-gray-100 shadow-sm">
+            <h3 className="text-xl md:text-2xl uppercase leading-tight mb-2 font-black font-display text-[#033624]">
+              DESBLOQUEIE<br/>CUPONS
+            </h3>
+            <p className="text-[11px] md:text-xs text-[#033624]/60 font-medium mb-auto font-body">
+              Até R$2.400 em cupons de plataforma.
+            </p>
+            
+            {/* Pill Graphic */}
+            <div className="relative w-full flex justify-center mt-6">
+              <div className="flex items-center bg-[#F1204A] rounded-full p-1.5 shadow-lg">
+                <div className="bg-white/20 text-white font-bold text-sm px-4 py-2 rounded-full mr-2">
+                  R$ 2.400
+                </div>
+                <div className="font-bold text-xs px-4 text-white">
+                  CUPOM
+                </div>
+              </div>
+              
+              {/* Small floating green pill */}
+              <div className="absolute -bottom-6 right-1/4 bg-[#2DCCD3] rounded-full p-2 shadow-lg transform rotate-12 z-20">
+                 <Gift size={16} className="text-[#033624]" />
+              </div>
+            </div>
+
+            {/* Arrow pointing to next card */}
+            <div className="hidden md:block absolute -right-12 bottom-8 w-16 h-16 z-30">
+              <ArrowBlack2 />
+            </div>
+          </div>
+
+          {/* Card 3: Diamante */}
+          <div className="bg-[#F8F9FA] rounded-[2rem] p-8 flex flex-col items-center text-center relative h-64 border border-gray-100 shadow-sm">
+            <h3 className="text-xl md:text-2xl uppercase leading-tight mb-2 font-black font-display text-[#033624]">
+              TORNE-SE<br/>DIAMANTE
+            </h3>
+            <p className="text-[11px] md:text-xs text-[#033624]/60 font-medium mb-auto font-body">
+              Desbloqueie suporte VIP e gerente.
+            </p>
+            
+            {/* Pill Graphic */}
+            <div className="flex flex-col items-center bg-[#FBEB35] rounded-[2rem] px-6 py-4 text-[#033624] shadow-lg mt-6 relative w-full max-w-[200px]">
+              <p className="text-[9px] font-bold uppercase tracking-wider mb-1 font-body">Status Alcançado</p>
+              <p className="text-xl font-black font-display flex items-center gap-1"><Gem size={18} /> VIP</p>
+              
+              {/* Speech bubble tail */}
+              <div className="absolute -bottom-2 left-8 w-5 h-5 bg-[#FBEB35] transform rotate-45"></div>
+            </div>
+          </div>
+
         </div>
-      </div>
-    </section>
+      </section>
+
+    </div>
   );
 }

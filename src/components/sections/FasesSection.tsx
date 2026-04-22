@@ -826,81 +826,317 @@ export function FasesSection() {
       </div>
 
       {/* ════════════════════════════════════════════════════════ */}
-      {/* DESKTOP layout — sidebar tabs + conteúdo               */}
+      {/* DESKTOP layout — Tabuleiro Interativo Gamificado         */}
       {/* ════════════════════════════════════════════════════════ */}
-      <div className="hidden lg:block w-full max-w-screen-xl mx-auto px-16">
-        {/* Header desktop */}
-        <div className="mb-8">
-          <p className="font-body text-xs uppercase tracking-widest mb-1" style={{ color: DS.glint }}>A Trilha</p>
-          <h2 className="font-display font-black leading-tight" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", color: DS.thrive }}>
-            Missões por{" "}
-            <HighlightedText highlightColor={DS.blaze} from="bottom" inView delay={0.3}>Fase</HighlightedText>
+      <div className="hidden lg:block w-full max-w-[1200px] mx-auto px-8 relative z-10">
+        
+        {/* Cabeçalho */}
+        <div className="text-center mb-16">
+          <p className="font-body text-sm uppercase tracking-widest mb-2 font-bold" style={{ color: DS.glint }}>
+            Mapa da Aceleração
+          </p>
+          <h2 className="font-display font-black leading-tight mb-3" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", color: DS.thrive }}>
+            Sua Jornada até o{" "}
+            <HighlightedText highlightColor={DS.blaze} from="bottom" inView delay={0.3}>Topo</HighlightedText>
           </h2>
-          <p className="font-body text-sm mt-1.5" style={{ color: DS.ember, opacity: 0.7 }}>
-            Selecione uma fase e explore as missões passo a passo
+          <p className="font-body text-base max-w-2xl mx-auto font-medium" style={{ color: DS.ember, opacity: 0.8 }}>
+            Siga o caminho, complete missões estratégicas e desbloqueie recompensas exclusivas a cada novo marco alcançado no TikTok Shop.
           </p>
         </div>
 
-        {/* Grid: sidebar + conteúdo */}
-        <div className="grid grid-cols-[240px_1fr] gap-8 items-start">
+        {/* MAPA HORIZONTAL (TABULEIRO) */}
+        <div className="relative w-full max-w-5xl mx-auto mb-16 h-32 flex items-center">
+          {/* Linha pontilhada de fundo */}
+          <div className="absolute left-[10%] right-[10%] top-1/2 -translate-y-1/2 h-1.5 rounded-full border-t-[3px] border-dashed" style={{ borderColor: alpha(DS.thrive, 0.15) }} />
+          
+          {/* Linha de progresso preenchida */}
+          <div className="absolute left-[10%] top-1/2 -translate-y-1/2 h-2.5 rounded-full transition-all duration-700 ease-out z-0"
+               style={{ 
+                 width: `${(activeIndex / (FASES.length - 1)) * 80}%`,
+                 backgroundColor: DS.glint,
+                 boxShadow: `0 0 15px ${alpha(DS.glint, 0.8)}`
+               }} 
+          />
 
-          {/* ── Sidebar: tabs verticais ── */}
-          <div className="flex flex-col gap-2 sticky top-24">
+          {/* NÓS DAS FASES */}
+          <div className="relative w-full flex justify-between z-10 px-[5%]">
             {FASES.map((fase, i) => {
-              const Icon = fase.icon;
               const isActive = i === activeIndex;
+              const isPast = i < activeIndex;
+              
               return (
-                <button
-                  key={fase.id}
-                  onClick={() => selectPhase(i)}
-                  className="flex items-center gap-3 px-4 py-3.5 rounded-2xl text-left transition-all duration-300"
-                  style={isActive
-                    ? { backgroundColor: fase.color, boxShadow: `0 6px 20px ${alpha(fase.color, 0.4)}` }
-                    : { backgroundColor: DS.white, border: "1.5px solid rgba(3,54,36,0.08)" }}
-                >
-                  <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-                    style={{ backgroundColor: isActive ? alpha(DS.white, 0.22) : alpha(fase.color, 0.12), color: isActive ? fase.onColor : fase.color }}>
-                    <Icon size={18} />
+                <div key={fase.id} className="relative flex flex-col items-center group cursor-pointer" onClick={() => selectPhase(i)}>
+                  
+                  {/* Etiqueta Superior */}
+                  <div className={`absolute -top-14 transition-all duration-300 pointer-events-none ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0'}`}>
+                    <div className="bg-white px-4 py-2 rounded-2xl shadow-[0_10px_30px_rgba(3,54,36,0.1)] border border-gray-100 text-center whitespace-nowrap">
+                      <p className="font-display font-black text-[0.9rem]" style={{ color: fase.color }}>{fase.shortLabel}</p>
+                      <p className="font-body text-[0.55rem] font-black text-gray-400 uppercase tracking-widest">{fase.duration}</p>
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-display font-black text-sm leading-tight truncate"
-                      style={{ color: isActive ? fase.onColor : DS.thrive }}>
-                      {fase.shortLabel}
-                    </p>
-                    <p className="font-body text-[0.65rem] mt-0.5"
-                      style={{ color: isActive ? alpha(fase.onColor, 0.65) : "#9ca3af" }}>
-                      {fase.duration}
-                    </p>
-                  </div>
-                  {isActive && (
-                    <ChevronRight size={14} style={{ color: fase.onColor, opacity: 0.7, flexShrink: 0 }} />
-                  )}
-                </button>
+
+                  {/* O "Nó" Circular */}
+                  <motion.div 
+                    className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center relative transition-colors duration-500 bg-white"
+                    style={{
+                      border: `4px solid ${isActive || isPast ? fase.color : alpha(DS.thrive, 0.1)}`,
+                      boxShadow: isActive ? `0 0 0 8px ${alpha(fase.color, 0.15)}, 0 15px 30px ${alpha(fase.color, 0.3)}` : (isPast ? `0 6px 15px rgba(3,54,36,0.08)` : "none")
+                    }}
+                    animate={isActive ? { scale: [1, 1.05, 1], y: [0, -6, 0] } : {}}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <div className="absolute inset-2 rounded-full flex items-center justify-center transition-colors duration-500" style={{ backgroundColor: isActive || isPast ? fase.color : "transparent" }}>
+                      <fase.icon 
+                        size={26} 
+                        style={{ color: isActive || isPast ? fase.onColor : alpha(DS.thrive, 0.3) }}
+                        strokeWidth={isActive ? 2.5 : 2}
+                      />
+                    </div>
+                    
+                    {/* Checkmark for past phases */}
+                    {isPast && (
+                      <motion.div 
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full flex items-center justify-center border-[3px] border-[#f4f6f5] z-20 shadow-md"
+                        style={{ backgroundColor: DS.glint }}
+                      >
+                        <svg className="w-3.5 h-3.5" style={{ color: DS.thrive }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </motion.div>
+                    )}
+                  </motion.div>
+                </div>
               );
             })}
+          </div>
 
-            {/* Barra de progresso global */}
-            <div className="mt-3 px-1">
-              <p className="font-body text-[0.6rem] mb-2" style={{ color: alpha(DS.thrive, 0.4) }}>
-                Fase {activeIndex + 1} de {FASES.length}
-              </p>
-              <div className="h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: "rgba(3,54,36,0.08)" }}>
-                <div
-                  className="h-full rounded-full transition-all duration-500"
-                  style={{
-                    width: `${((activeIndex) / (FASES.length - 1)) * 100}%`,
-                    backgroundColor: activeFase.color,
-                  }}
-                />
+          {/* Avatar / Cursor */}
+          <motion.div 
+            className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-14 h-14 z-20 pointer-events-none drop-shadow-2xl"
+            initial={false}
+            animate={{ left: `${10 + (activeIndex / (FASES.length - 1)) * 80}%` }}
+            transition={{ type: "spring", stiffness: 50, damping: 14 }}
+          >
+            <div className="w-full h-full rounded-[1.2rem] flex items-center justify-center border-4 border-white shadow-xl rotate-[15deg]" style={{ backgroundColor: activeFase.color }}>
+              <div className="absolute inset-0 bg-white/20 rounded-xl" />
+              <activeFase.icon size={22} color={activeFase.onColor} className="relative z-10" />
+            </div>
+          </motion.div>
+        </div>
+
+        {/* QUEST LOG PANEL (Detalhes da Missão) */}
+        <div ref={rewardRef} className="scroll-mt-32">
+          <motion.div 
+            key={activeFase.id}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, type: "spring", bounce: 0.3 }}
+            className="w-full max-w-5xl mx-auto bg-white rounded-[2.5rem] overflow-hidden shadow-[0_20px_60px_rgba(3,54,36,0.08)] flex flex-row border border-gray-100 relative"
+            style={{ minHeight: "560px" }}
+          >
+            {/* Lado Esquerdo: Imagem e Identidade */}
+            <div className="w-[42%] relative flex flex-col justify-end p-10 overflow-hidden text-white shrink-0">
+              <Image src={activeFase.image} alt={activeFase.label} fill className="object-cover absolute inset-0 z-0 scale-[1.02] hover:scale-105 transition-transform duration-[2s]" sizes="500px" priority />
+              
+              {/* Overlays */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-black/10 z-10" />
+              <div className="absolute inset-0 opacity-40 mix-blend-multiply z-10" style={{ backgroundColor: activeFase.color }} />
+              
+              <div className="relative z-20">
+                <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full mb-5 backdrop-blur-md border shadow-lg" style={{ backgroundColor: alpha(activeFase.color, 0.4), borderColor: alpha(activeFase.color, 0.5) }}>
+                  <activeFase.icon size={16} color={activeFase.onColor === DS.white ? DS.white : activeFase.onColor} />
+                  <span className="font-display font-black text-[0.65rem] uppercase tracking-widest" style={{ color: activeFase.onColor === DS.white ? DS.white : activeFase.onColor }}>{activeFase.tagLabel}</span>
+                </div>
+                <h3 className="font-display font-black text-[2.5rem] leading-[0.9] tracking-tight mb-4 drop-shadow-md">
+                  {activeFase.shortLabel}
+                </h3>
+                <p className="font-body text-[0.9rem] font-medium text-white/90 leading-relaxed mb-6">
+                  {activeFase.objective}
+                </p>
+                
+                {activeFase.tip && (
+                  <div className="bg-white/10 backdrop-blur-xl rounded-[1.25rem] p-4 flex items-start gap-3 border border-white/20 shadow-inner">
+                    <div className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5" style={{ backgroundColor: activeFase.color }}>
+                      <Info size={12} color={activeFase.onColor} />
+                    </div>
+                    <p className="font-body text-[0.7rem] font-medium text-white/95 leading-snug">
+                      {activeFase.tip}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
-          </div>
 
-          {/* ── Conteúdo da fase ── */}
-          <div>
-            <PhaseContent />
-          </div>
+            {/* Lado Direito: Conteúdo de Missões */}
+            <div className="w-[58%] p-10 flex flex-col justify-between bg-[#FCFDFD] relative">
+              
+              <div className="flex-1">
+                {/* Header Steps */}
+                <div className="flex items-center justify-between mb-8 pb-5 border-b border-gray-100">
+                  <div>
+                    <h4 className="font-display font-black text-[1.4rem] tracking-tight text-[#033624]">
+                      Missão Atual
+                    </h4>
+                    <p className="font-body text-xs font-bold uppercase tracking-widest mt-1.5" style={{ color: alpha(DS.thrive, 0.4) }}>
+                      Passo {groupStep + 1} de {totalSteps}
+                    </p>
+                  </div>
 
+                  <div className="flex gap-2">
+                    {activeFase.missionGroups.map((_, i) => (
+                      <button key={i} onClick={() => jumpTo(i)}
+                        className="rounded-full transition-all duration-300 h-2"
+                        style={{
+                          width: i === groupStep ? "2.5rem" : "1rem",
+                          backgroundColor: i <= groupStep ? activeFase.color : alpha(DS.thrive, 0.08),
+                        }}
+                        aria-label={`Ir para passo ${i + 1}`}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Card da Missão Atual */}
+                <AnimatePresence mode="wait" custom={direction}>
+                  <motion.div
+                    key={`${activeFase.id}-${groupStep}`}
+                    custom={direction}
+                    variants={slideVariants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
+                    className="min-h-[220px]"
+                  >
+                    <MissionGroupCard
+                      group={activeFase.missionGroups[groupStep]}
+                      fase={activeFase}
+                      step={groupStep + 1}
+                    />
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Controle Inferior */}
+              <div className="mt-8 flex items-center gap-3">
+                <motion.button
+                  onClick={goPrev}
+                  disabled={groupStep === 0 && activeIndex === 0 && !showReward}
+                  whileTap={{ scale: 0.94 }}
+                  className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center shrink-0 bg-white border-2 border-gray-100 shadow-sm transition-all hover:bg-gray-50"
+                  style={{
+                    color: DS.thrive,
+                    opacity: groupStep === 0 && activeIndex === 0 && !showReward ? 0.3 : 1,
+                    cursor: groupStep === 0 && activeIndex === 0 && !showReward ? 'not-allowed' : 'pointer'
+                  }}
+                >
+                  <ChevronRight size={22} style={{ transform: "rotate(180deg)" }} strokeWidth={2.5} />
+                </motion.button>
+
+                <motion.button
+                  onClick={goNext}
+                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: 1.02 }}
+                  className="flex-1 h-14 rounded-[1.25rem] font-display font-black text-[0.95rem] flex items-center justify-center gap-2.5 transition-all duration-300 group relative overflow-hidden"
+                  style={{
+                    backgroundColor: activeFase.color,
+                    color: activeFase.onColor,
+                    boxShadow: `0 8px 25px ${alpha(activeFase.color, 0.35)}`,
+                  }}
+                >
+                  <div className="absolute inset-0 bg-white/20 w-0 group-hover:w-full transition-all duration-500 ease-out" />
+                  
+                  {isLastGroup && showReward && activeIndex < FASES.length - 1 ? (
+                    <><span className="relative z-10">Ir para {FASES[activeIndex + 1].label}</span><Rocket size={18} className="relative z-10 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" strokeWidth={2.5} /></>
+                  ) : isLastGroup && showReward ? (
+                    <><RotateCcw size={18} className="relative z-10 group-hover:-rotate-90 transition-transform" strokeWidth={2.5} /><span className="relative z-10">Recomeçar Trilha</span></>
+                  ) : isLastGroup ? (
+                    <><activeFase.rewardIcon size={20} className="relative z-10 group-hover:scale-110 transition-transform" strokeWidth={2.5} /><span className="relative z-10">Ver Recompensa da Fase</span></>
+                  ) : (
+                    <><span className="relative z-10">Completar Missão</span><ChevronRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform" strokeWidth={2.5} /></>
+                  )}
+                </motion.button>
+              </div>
+              
+              {/* OVERLAY DE RECOMPENSA DESKTOP */}
+              <AnimatePresence>
+                {showReward && (
+                  <motion.div
+                    key="desktop-reward"
+                    initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.98, y: -10 }}
+                    transition={{ duration: 0.4, type: "spring", bounce: 0.2 }}
+                    className="absolute inset-0 z-30 flex flex-col items-center justify-center text-center p-12"
+                  >
+                    {/* Fundo com glassmorphism forte */}
+                    <div className="absolute inset-0 bg-white/70 backdrop-blur-2xl rounded-r-[2.5rem]" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-white/90 via-white/40 to-transparent rounded-r-[2.5rem]" />
+                    
+                    <div className="relative z-10 flex flex-col items-center w-full">
+                      <motion.div 
+                        initial={{ rotate: -15, scale: 0 }}
+                        animate={{ rotate: 10, scale: 1 }}
+                        transition={{ type: "spring", damping: 12, delay: 0.1 }}
+                        className="w-28 h-28 rounded-[2.5rem] flex items-center justify-center mb-6 shadow-2xl border-4 border-white" 
+                        style={{ backgroundColor: activeFase.color, color: activeFase.onColor }}
+                      >
+                        <activeFase.rewardIcon size={56} strokeWidth={1.5} />
+                      </motion.div>
+                      
+                      <motion.div 
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                        className="inline-flex px-5 py-2 rounded-full font-body text-[0.7rem] font-black uppercase tracking-widest mb-4 border-[1.5px]" 
+                        style={{ borderColor: activeFase.color, color: activeFase.color, backgroundColor: alpha(activeFase.color, 0.08) }}
+                      >
+                        Desbloqueio de Fase
+                      </motion.div>
+                      
+                      <motion.h3 
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3 }}
+                        className="font-display font-black text-4xl text-[#033624] mb-3 max-w-[90%] leading-[1.1] tracking-tight"
+                      >
+                        {activeFase.reward}
+                      </motion.h3>
+                      
+                      <motion.p 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.4 }}
+                        className="font-body text-[0.95rem] text-gray-500 font-medium max-w-[85%] mb-10"
+                      >
+                        {activeFase.rewardSub}
+                      </motion.p>
+                      
+                      <motion.button
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5, type: "spring" }}
+                        onClick={goNext}
+                        whileHover={{ scale: 1.04, boxShadow: "0 15px 30px rgba(241,32,74,0.4)" }}
+                        whileTap={{ scale: 0.96 }}
+                        className="h-14 px-10 rounded-full font-display font-black text-lg flex items-center justify-center gap-3 shadow-[0_8px_20px_rgba(241,32,74,0.3)] transition-all"
+                        style={{ backgroundColor: "#F1204A", color: "white" }}
+                      >
+                         {activeIndex < FASES.length - 1 ? (
+                            <>Avançar Trilha <Rocket size={20} /></>
+                         ) : (
+                            <>Recomeçar Trilha <RotateCcw size={20} /></>
+                         )}
+                      </motion.button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

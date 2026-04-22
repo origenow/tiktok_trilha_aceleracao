@@ -298,8 +298,8 @@ export function SliderSection() {
   const currentSlides = tabData[activeTab] || tabData["Abrindo sua loja"];
 
   return (
-    <section id="acceleration-sliders" className="py-12 bg-white overflow-hidden relative z-10 w-full max-w-[430px] mx-auto">
-
+    <section id="acceleration-sliders" className="py-12 bg-white overflow-hidden relative z-10 w-full">
+      <div className="w-full max-w-[430px] lg:max-w-screen-xl mx-auto">
       {/* ── Seller Academy + Abrindo sua loja ─────────────────────── */}
       <div className="px-4 mb-10 flex flex-col gap-4">
 
@@ -362,19 +362,21 @@ export function SliderSection() {
           <div className="flex-1 h-px" style={{ backgroundColor: "rgba(3,54,36,0.12)" }} />
         </motion.div>
 
-        {/* Políticas */}
-        <motion.a
-          {...fadeUp(0.18)}
-          href="https://seller-br.tiktok.com/university/home"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group flex items-center gap-3.5 rounded-2xl px-4 py-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
-          style={{
-            background: "linear-gradient(135deg, #e0fdfb 0%, #BAF6F0 100%)",
-            border: "1.5px solid #2DCCD3",
-            boxShadow: "0 4px 16px rgba(45,204,211,0.18)",
-          }}
-        >
+        {/* Container Desktop para Políticas + Taxas */}
+        <div className="flex flex-col lg:flex-row gap-3 lg:gap-4 w-full mt-2 lg:mt-4">
+          {/* Políticas */}
+          <motion.a
+            {...fadeUp(0.18)}
+            href="https://seller-br.tiktok.com/university/home"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-3.5 rounded-2xl px-4 py-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl lg:flex-1 h-full"
+            style={{
+              background: "linear-gradient(135deg, #e0fdfb 0%, #BAF6F0 100%)",
+              border: "1.5px solid #2DCCD3",
+              boxShadow: "0 4px 16px rgba(45,204,211,0.18)",
+            }}
+          >
           <div
             className="shrink-0 w-11 h-11 rounded-xl flex items-center justify-center text-lg"
             style={{ backgroundColor: "#2DCCD3", boxShadow: "0 3px 10px rgba(45,204,211,0.4)" }}
@@ -394,7 +396,7 @@ export function SliderSection() {
         </motion.a>
 
         {/* Taxas — 2 colunas */}
-        <motion.div {...fadeUp(0.22)} className="grid grid-cols-2 gap-3">
+        <motion.div {...fadeUp(0.22)} className="grid grid-cols-2 gap-3 lg:gap-4 lg:flex-[2] h-full">
           {/* Comissão */}
           <div
             className="rounded-2xl p-4 flex flex-col gap-1.5 relative overflow-hidden"
@@ -446,46 +448,53 @@ export function SliderSection() {
             </p>
           </div>
         </motion.div>
+        </div>
 
         {/* Nota de isenção */}
         <motion.div
           {...fadeUp(0.28)}
-          className="rounded-2xl p-5 flex flex-col gap-3 relative overflow-hidden"
+          className="rounded-2xl p-5 lg:p-8 flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-8 relative overflow-hidden mt-2 lg:mt-4"
           style={{
             background: "linear-gradient(135deg, #FBEB35 0%, #f5e020 100%)",
             boxShadow: "0 6px 24px rgba(251,235,53,0.45)",
           }}
         >
           <div className="absolute -bottom-6 -right-6 w-28 h-28 rounded-full opacity-10" style={{ backgroundColor: "#033624" }} />
-          <div className="flex items-start gap-3 relative z-10">
-            <span style={{ fontSize: "1.75rem", lineHeight: 1, marginTop: "2px" }}>💡</span>
-            <div className="flex flex-col gap-1">
-              <p className="font-display font-black text-sm" style={{ color: "#033624" }}>Isenção de comissão por 60 dias</p>
-              <p className="font-body text-xs leading-relaxed" style={{ color: "#033624", opacity: 0.72 }}>
-                Ative a isenção de comissão antes da sua primeira venda
-              </p>
+          
+          <div className="flex-1 flex flex-col gap-4 relative z-10">
+            <div className="flex items-start gap-3">
+              <span style={{ fontSize: "1.75rem", lineHeight: 1, marginTop: "2px" }}>💡</span>
+              <div className="flex flex-col gap-1">
+                <p className="font-display font-black text-sm lg:text-xl" style={{ color: "#033624" }}>Isenção de comissão por 60 dias</p>
+                <p className="font-body text-xs lg:text-sm leading-relaxed" style={{ color: "#033624", opacity: 0.72 }}>
+                  Ative a isenção de comissão antes da sua primeira venda.
+                </p>
+              </div>
+            </div>
+            
+            <div
+              className="flex items-center gap-1 flex-wrap rounded-xl px-3 py-2 w-fit mt-1 lg:mt-2"
+              style={{ backgroundColor: "rgba(3,54,36,0.12)" }}
+            >
+              <span className="font-body text-[10px] lg:text-xs font-semibold" style={{ color: "#033624" }}>Central do vendedor</span>
+              <ChevronRight size={12} style={{ color: "#033624", opacity: 0.6 }} />
+              <span className="font-body text-[10px] lg:text-xs font-semibold" style={{ color: "#033624" }}>Crescimento</span>
+              <ChevronRight size={12} style={{ color: "#033624", opacity: 0.6 }} />
+              <span className="font-body text-[10px] lg:text-xs font-black px-2.5 py-0.5 rounded-full" style={{ backgroundColor: "#F1204A", color: "#ffffff" }}>Minhas Missões</span>
             </div>
           </div>
           
-          <ZoomableImage src="/assets/isencao.png" alt="Como ativar isenção de comissão"
-            width={400} height={260} className="mt-1" />
-
-          <div
-            className="flex items-center gap-1 flex-wrap rounded-xl px-3 py-2 relative z-10"
-            style={{ backgroundColor: "rgba(3,54,36,0.12)" }}
-          >
-            <span className="font-body text-[10px] font-semibold" style={{ color: "#033624" }}>Central do vendedor</span>
-            <ChevronRight size={10} style={{ color: "#033624", opacity: 0.6 }} />
-            <span className="font-body text-[10px] font-semibold" style={{ color: "#033624" }}>Crescimento</span>
-            <ChevronRight size={10} style={{ color: "#033624", opacity: 0.6 }} />
-            <span className="font-body text-[10px] font-black px-2.5 py-0.5 rounded-full" style={{ backgroundColor: "#F1204A", color: "#ffffff" }}>Minhas Missões</span>
+          <div className="lg:w-[45%] shrink-0 z-10 lg:-mr-4 mt-2 lg:mt-0 transition-transform duration-500 hover:scale-[1.02]">
+            <ZoomableImage src="/assets/isencao.png" alt="Como ativar isenção de comissão"
+              width={500} height={320} className="rounded-xl shadow-lg" />
           </div>
         </motion.div>
 
+
       </div>
 
-      {/* Container de Tabs */}
-      <motion.div {...fadeUp(0.1)} className="w-full px-4 mb-8 flex items-center justify-start gap-3 overflow-x-auto no-scrollbar pb-2">
+        {/* Container de Tabs */}
+        <motion.div {...fadeUp(0.1)} className="w-full px-4 mb-8 flex items-center justify-start gap-3 overflow-x-auto no-scrollbar lg:flex-wrap pb-2">
         {tabs.map((tab) => {
           const isActive = activeTab === tab;
           return (
@@ -504,32 +513,38 @@ export function SliderSection() {
       </motion.div>
 
       {/* Slider */}
-      <motion.div {...fadeUp(0.15)} className="w-full px-4 relative">
+      <motion.div {...fadeUp(0.15)} className="w-full px-4 relative lg:px-8">
         {/* Seta esquerda */}
         <button
           onClick={() => swiperInstance?.slidePrev()}
           aria-label="Card anterior"
-          className="absolute left-0 top-[calc(50%-2.5rem)] -translate-y-1/2 z-20 w-9 h-9 rounded-full flex items-center justify-center shadow-lg transition-all active:scale-90"
+          className="absolute left-0 lg:-left-4 top-[calc(50%-2.5rem)] lg:top-[calc(50%-1.5rem)] -translate-y-1/2 z-20 w-9 lg:w-12 h-9 lg:h-12 rounded-full flex items-center justify-center shadow-lg transition-all active:scale-90 hover:scale-110"
           style={{ backgroundColor: "rgba(3,54,36,0.85)", color: "#BAF6F0" }}
         >
-          <ChevronLeft size={18} />
+          <ChevronLeft size={20} />
         </button>
 
         {/* Seta direita */}
         <button
           onClick={() => swiperInstance?.slideNext()}
           aria-label="Próximo card"
-          className="absolute right-0 top-[calc(50%-2.5rem)] -translate-y-1/2 z-20 w-9 h-9 rounded-full flex items-center justify-center shadow-lg transition-all active:scale-90"
+          className="absolute right-0 lg:-right-4 top-[calc(50%-2.5rem)] lg:top-[calc(50%-1.5rem)] -translate-y-1/2 z-20 w-9 lg:w-12 h-9 lg:h-12 rounded-full flex items-center justify-center shadow-lg transition-all active:scale-90 hover:scale-110"
           style={{ backgroundColor: "rgba(3,54,36,0.85)", color: "#BAF6F0" }}
         >
-          <ChevronRightNav size={18} />
+          <ChevronRightNav size={20} />
         </button>
 
         <Swiper
           onSwiper={setSwiperInstance}
           modules={[Autoplay]}
-          spaceBetween={12}
+          spaceBetween={16}
           slidesPerView={1.1}
+          breakpoints={{
+            1024: {
+              slidesPerView: 3.5,
+              spaceBetween: 24,
+            }
+          }}
           centeredSlides={false}
           loop={false}
           autoplay={{
@@ -537,7 +552,7 @@ export function SliderSection() {
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
           }}
-          className="mySwiper !pb-10"
+          className="mySwiper !pb-10 lg:!px-2"
         >
           {currentSlides.map((slide, i) => (
             <SwiperSlide key={`${activeTab}-${i}`} className="h-auto">
@@ -596,6 +611,7 @@ export function SliderSection() {
           ))}
         </Swiper>
       </motion.div>
+      </div>
 
       <style jsx global>{`
         .no-scrollbar::-webkit-scrollbar { display: none; }

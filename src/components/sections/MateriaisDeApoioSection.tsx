@@ -301,7 +301,7 @@ function GrupoAccordeon({
             style={{ overflow: "hidden" }}
           >
             <div
-              className="flex flex-col gap-2.5 p-3"
+              className="flex flex-col lg:grid lg:grid-cols-2 gap-2.5 lg:gap-4 p-3 lg:p-4"
               style={{ backgroundColor: grupo.bodyBg }}
             >
               {grupo.items.map((item, i) => (
@@ -413,22 +413,57 @@ export function MateriaisDeApoioSection() {
         <div className="hidden lg:flex flex-col gap-6 sticky top-24">
 
 
-          {/* Card destaque */}
+          {/* Card destaque enriquecido */}
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5, delay: 0.35 }}
-            className="p-6 rounded-3xl"
+            className="p-6 lg:p-8 rounded-3xl"
             style={{ backgroundColor: "#2DCCD3", boxShadow: "0 4px 24px rgba(45,204,211,0.3)" }}
           >
-            <p className="font-display font-black text-lg leading-tight" style={{ color: "#111111" }}>
-              {GRUPOS.reduce((acc, g) => acc + g.items.length, 0)} recursos disponíveis
-            </p>
-            <p className="font-body text-sm mt-1" style={{ color: "#033624", opacity: 0.75 }}>
-              em {GRUPOS.length} categorias para acelerar seu crescimento
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0" style={{ backgroundColor: "#111111" }}>
+                <span className="text-2xl">💡</span>
+              </div>
+              <div>
+                <p className="font-display font-black text-xl leading-tight" style={{ color: "#111111" }}>
+                  {GRUPOS.reduce((acc, g) => acc + g.items.length, 0)} recursos
+                </p>
+                <p className="font-body text-sm font-semibold mt-0.5" style={{ color: "#033624", opacity: 0.8 }}>
+                  em {GRUPOS.length} categorias úteis
+                </p>
+              </div>
+            </div>
+            
+            <div className="w-full h-px my-5" style={{ backgroundColor: "rgba(17,17,17,0.15)" }} />
+            
+            <p className="font-body text-sm leading-relaxed" style={{ color: "#111111", opacity: 0.85 }}>
+              Estes materiais foram curados pelo time de aceleração para garantir que sua operação escale com segurança, performance e de acordo com as políticas.
             </p>
           </motion.div>
+
+          {/* Botão de Suporte Adicional */}
+          <motion.a
+            href="https://seller-br.tiktok.com/ticket/create"
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.45 }}
+            className="p-5 rounded-2xl flex items-center gap-4 hover:-translate-y-1 transition-transform shadow-xl group cursor-pointer"
+            style={{ backgroundColor: "#ffffff" }}
+          >
+            <div className="w-11 h-11 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110 shrink-0" style={{ backgroundColor: "#F1204A" }}>
+               <span className="text-xl text-white">💬</span>
+            </div>
+            <div>
+              <p className="font-display font-black text-sm" style={{ color: "#033624" }}>Central de Ajuda</p>
+              <p className="font-body text-xs mt-0.5" style={{ color: "#4A0505", opacity: 0.65 }}>Abrir chamado oficial</p>
+            </div>
+            <ExternalLink size={14} className="ml-auto opacity-30 group-hover:opacity-100 transition-opacity" style={{ color: "#F1204A" }} />
+          </motion.a>
         </div>
 
         </div>{/* fim grid */}

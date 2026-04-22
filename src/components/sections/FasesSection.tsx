@@ -461,14 +461,16 @@ function MissionGroupCard({ group, fase, step }: {
           <p className="font-body text-[0.6rem] uppercase tracking-wider pt-3 mb-2.5" style={{ color: alpha(DS.thrive, 0.4) }}>
             Figuras de referência
           </p>
-          <div className="flex flex-col gap-3">
+          <div className={cn("grid gap-3", group.images!.length > 1 ? "grid-cols-2" : "grid-cols-1")}>
             {group.images!.map((src, i) => (
-              <div key={i} className="w-full rounded-xl overflow-hidden"
+              <div key={i} className="w-full rounded-xl overflow-hidden flex flex-col"
                 style={{ border: `1px solid ${alpha(fase.color, 0.18)}` }}>
-                <p className="font-body text-[0.6rem] px-2.5 py-1.5" style={{ backgroundColor: alpha(fase.color, 0.08), color: alpha(DS.thrive, 0.5) }}>
+                <p className="font-body text-[0.6rem] px-2.5 py-1.5 shrink-0" style={{ backgroundColor: alpha(fase.color, 0.08), color: alpha(DS.thrive, 0.5) }}>
                   Figura {i + 1}
                 </p>
-                <img src={src} alt={`Figura ${i + 1}`} className="w-full h-auto block" />
+                <div className="relative w-full flex-1 min-h-[120px] max-h-[180px] bg-[#f8f9fa] flex items-center justify-center p-2 overflow-hidden">
+                  <img src={src} alt={`Figura ${i + 1}`} className="max-w-full max-h-full object-contain" />
+                </div>
               </div>
             ))}
           </div>

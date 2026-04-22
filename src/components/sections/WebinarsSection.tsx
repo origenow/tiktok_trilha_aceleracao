@@ -244,9 +244,31 @@ export function WebinarsSection() {
     <section id="webinars" className="relative overflow-hidden py-20 lg:py-32" style={{ backgroundColor: "#EDD4B2" }}>
 
       {/* ── Doodles ── */}
+      {/* Wave Superior Esquerdo (Fixa, Encaixada e Wavy, Preenchida) */}
+      <svg
+        className="absolute top-0 left-0 w-32 h-32 lg:w-64 lg:h-64 pointer-events-none opacity-30"
+        viewBox="0 0 200 200"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path fill="#FBEB35" d="M 0,0 L 0,180 C 40,230 80,120 120,110 S 180,40 200,0 L 0,0 Z" />
+        <path fill="#2DCCD3" d="M 0,0 L 0,135 C 30,175 60,90 90,82 S 135,30 150,0 L 0,0 Z" />
+        <path fill="#F1204A" d="M 0,0 L 0,90 C 20,120 40,60 60,55 S 90,20 100,0 L 0,0 Z" />
+      </svg>
+
+      {/* Wave Inferior Direito (Fixa, Encaixada e Wavy, Preenchida) */}
+      <svg
+        className="absolute bottom-0 right-0 w-32 h-32 lg:w-64 lg:h-64 pointer-events-none opacity-30 rotate-180"
+        viewBox="0 0 200 200"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path fill="#F1204A" d="M 0,0 L 0,180 C 40,230 80,120 120,110 S 180,40 200,0 L 0,0 Z" />
+        <path fill="#2DCCD3" d="M 0,0 L 0,135 C 30,175 60,90 90,82 S 135,30 150,0 L 0,0 Z" />
+        <path fill="#EDBBE8" d="M 0,0 L 0,90 C 20,120 40,60 60,55 S 90,20 100,0 L 0,0 Z" />
+      </svg>
+
       {/* Florzinha Glow — esquerda central */}
       <svg
-        className="absolute left-3 top-1/2 pointer-events-none animate-float-reverse"
+        className="absolute left-3 top-1/2 pointer-events-none animate-float-reverse hidden lg:block"
         style={{ opacity: 0.45, animationDelay: "1.2s" }}
         width="38" height="38" viewBox="0 0 38 38" fill="none"
       >
@@ -258,7 +280,7 @@ export function WebinarsSection() {
 
       {/* Seta Dawn — embaixo */}
       <svg
-        className="absolute bottom-8 right-6 pointer-events-none animate-float"
+        className="absolute bottom-8 right-6 pointer-events-none animate-float hidden lg:block"
         style={{ opacity: 0.4, animationDelay: "0.6s" }}
         width="34" height="34" viewBox="0 0 34 34" fill="none"
       >

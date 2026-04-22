@@ -66,6 +66,11 @@ export function TikTokIntro({ onComplete }: { onComplete?: () => void }) {
   const whiteRef = useRef<SVGPathElement>(null);
 
   useEffect(() => {
+    if (window.innerWidth >= 1024) {
+      setPhase("done");
+      return;
+    }
+
     document.body.style.overflow = "hidden";
 
     const styleEl = document.createElement("style");

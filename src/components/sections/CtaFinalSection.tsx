@@ -64,6 +64,14 @@ const GRUPOS = [
 export function CtaFinalSection() {
   const [accordionOpen, setAccordionOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(true);
+
+  React.useEffect(() => {
+    setIsMobile(window.innerWidth < 1024);
+    const handleResize = () => setIsMobile(window.innerWidth < 1024);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -157,7 +165,7 @@ export function CtaFinalSection() {
           </div>
 
           {/* ── Coluna direita: WhatsApp ── */}
-          <div className="mt-12 lg:mt-0 relative group perspective-[1000px]">
+          <div className="mt-12 lg:mt-0 relative group" style={{ perspective: isMobile ? "none" : "1000px" }}>
 
             {/* Divisor — mobile only */}
             <div className="w-full mb-6 lg:hidden">
@@ -176,7 +184,7 @@ export function CtaFinalSection() {
               ref={containerRef}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
-              style={{
+              style={isMobile ? {} : {
                 rotateX,
                 rotateY,
                 transformStyle: "preserve-3d"

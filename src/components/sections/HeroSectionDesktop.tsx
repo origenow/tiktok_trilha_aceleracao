@@ -3,6 +3,7 @@
 import React, { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { Trophy, ShoppingBag, Crown, Rocket, Gem, Gift } from "lucide-react";
+import { ModaHandwriting } from "@/components/ui/ModaHandwriting";
 
 /* ── Floating Doodle component ───────────────────────────────── */
 const FloatingDoodle = ({
@@ -73,7 +74,7 @@ const CircularBadge = () => (
       </svg>
     </div>
     <div className="absolute inset-0 flex items-center justify-center group">
-        <Trophy size={40} color="#4A0505" className="group-hover:scale-110 transition-transform" />
+      <Trophy size={40} color="#4A0505" className="group-hover:scale-110 transition-transform" />
     </div>
   </div>
 );
@@ -124,14 +125,14 @@ export function HeroSectionDesktop() {
   };
 
   return (
-    <div 
+    <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="min-h-screen flex flex-col font-sans selection:bg-[#F1204A] selection:text-white relative overflow-hidden w-full" 
+      className="min-h-screen flex flex-col font-sans selection:bg-[#F1204A] selection:text-white relative overflow-hidden w-full"
       style={{ backgroundColor: "#BAF6F0" }}
     >
-      
+
       {/* Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#03362415_1px,transparent_1px),linear-gradient(to_bottom,#03362415_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none z-0"></div>
 
@@ -149,21 +150,21 @@ export function HeroSectionDesktop() {
 
 
       {/* Hero Section Main Content */}
-      <main className="flex-1 relative z-10 pt-16 pb-32 md:pt-20 md:pb-48 px-4 flex flex-col items-center justify-center w-full max-w-[1440px] mx-auto min-h-[85vh]">
-        
+      <main className="flex-1 relative z-10 pt-10 pb-16 md:pt-12 md:pb-20 px-4 flex flex-col items-center justify-center w-full max-w-[1440px] mx-auto min-h-[60vh]">
+
         {/* Massive Typography & Elements Container */}
-        <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center justify-center text-center z-10 mt-4 mb-16">
-          
+        <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center justify-center text-center z-10 mt-2 mb-8">
+
           {/* Text Stack */}
-          <motion.div 
+          <motion.div
             style={{ x: parallax3X, y: parallax3Y }}
-            className="w-full flex flex-col items-center relative z-10 space-y-2 md:space-y-4"
+            className="w-full flex flex-col items-center relative z-10 space-y-6 md:space-y-10"
           >
             {/* TRILHA DE */}
             <div className="w-full flex justify-start pl-[5%] md:pl-[15%] relative z-30">
-              <h1 
+              <h1
                 className="text-[clamp(4.5rem,11vw,150px)] font-black leading-[0.85] tracking-tighter text-[#033624] m-0 p-0 uppercase hover:scale-105 transition-transform duration-500 cursor-default"
-                style={{ 
+                style={{
                   fontFamily: 'TikTokSansDisplay, "Arial Black", Impact, sans-serif',
                   textShadow: '1px 1px 0 rgba(255,255,255,0.8), 2px 2px 0 rgba(255,255,255,0.8), 3px 3px 0 rgba(255,255,255,0.8), 4px 4px 0 rgba(255,255,255,0.8)'
                 }}
@@ -171,12 +172,12 @@ export function HeroSectionDesktop() {
                 TRILHA DE
               </h1>
             </div>
-            
+
             {/* ACELERAÇÃO */}
             <div className="w-full flex justify-center relative z-20">
-              <h1 
+              <h1
                 className="text-[clamp(4.5rem,13vw,200px)] font-black leading-[0.85] tracking-tighter text-[#F1204A] m-0 p-0 uppercase hover:scale-[1.02] transition-transform duration-500 cursor-default"
-                style={{ 
+                style={{
                   fontFamily: 'TikTokSansDisplay, "Arial Black", Impact, sans-serif',
                   textShadow: '1px 1px 0 #033624, 2px 2px 0 #033624, 3px 3px 0 #033624, 4px 4px 0 #033624, 5px 5px 0 #033624, 6px 6px 0 #033624, 7px 7px 0 #033624, 8px 8px 0 #033624, 9px 9px 0 #033624, 10px 10px 0 #033624, 11px 11px 0 #033624'
                 }}
@@ -184,12 +185,12 @@ export function HeroSectionDesktop() {
                 ACELERAÇÃO
               </h1>
             </div>
-            
+
             {/* TIKTOK SHOP */}
             <div className="w-full flex justify-start pl-[15%] md:pl-[30%] relative z-10">
-              <h1 
+              <h1
                 className="text-[clamp(4.5rem,11vw,150px)] font-black leading-[0.85] tracking-tighter text-white m-0 p-0 uppercase hover:scale-105 hover:-rotate-1 transition-transform duration-500 cursor-default"
-                style={{ 
+                style={{
                   fontFamily: 'TikTokSansDisplay, "Arial Black", Impact, sans-serif',
                   textShadow: '1px 1px 0 #033624, 2px 2px 0 #033624, 3px 3px 0 #033624, 4px 4px 0 #033624, 5px 5px 0 #033624, 6px 6px 0 #033624, 7px 7px 0 #033624, 8px 8px 0 #033624, 9px 9px 0 #033624'
                 }}
@@ -207,30 +208,30 @@ export function HeroSectionDesktop() {
             transition={{ delay: 0.8, duration: 0.7, type: "spring" }}
             whileHover={{ scale: 1.05, boxShadow: "0 15px 40px rgba(241, 32, 74, 0.6)" }}
             whileTap={{ scale: 0.95 }}
-            className="mt-14 relative z-50 px-10 py-5 rounded-full text-white text-lg font-display font-black flex items-center gap-3 overflow-hidden group"
+            className="mt-8 md:mt-12 relative z-50 px-10 py-5 rounded-full text-white text-lg font-display font-black flex items-center gap-3 overflow-hidden group"
             style={{ backgroundColor: "#F1204A" }}
           >
             {/* Brilho animado passando no botão */}
             <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover:animate-[shimmer_1.5s_infinite]" />
-            <Rocket size={24} className="group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" /> 
+            <Rocket size={24} className="group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
             Começar a Trilha
           </motion.a>
 
           {/* Absolute Overlays (Cards & Badge) */}
           <div className="absolute inset-0 w-full h-full pointer-events-none">
-            
+
             {/* Floating Glass Card 1 (Bottom Left) */}
-            <motion.div 
+            <motion.div
               style={{ x: parallax2X, y: parallax2Y }}
               className="absolute bottom-[20%] md:bottom-[10%] left-[0%] md:left-[10%] z-30 pointer-events-auto"
             >
-              <motion.div 
+              <motion.div
                 animate={{ y: [0, -20, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                 className="w-40 md:w-56 aspect-[3/3.5] bg-white/20 backdrop-blur-xl border-2 border-white/50 rounded-[2rem] p-6 flex flex-col items-center justify-center rotate-[-12deg] shadow-[0_20px_50px_rgba(3,54,36,0.15)] hover:rotate-0 hover:scale-110 hover:bg-white/40 transition-all duration-500 cursor-pointer group"
               >
                 <div className="w-16 h-16 md:w-24 md:h-24 bg-[#2DCCD3] rounded-full flex items-center justify-center mb-4 shadow-inner border-[4px] border-white/60 overflow-hidden group-hover:rotate-12 transition-transform duration-500">
-                   <ShoppingBag size={40} className="text-[#033624]" />
+                  <ShoppingBag size={40} className="text-[#033624]" />
                 </div>
                 <div className="text-center mt-2">
                   <p className="font-display font-black text-sm md:text-xl text-[#033624]">Fase 1</p>
@@ -240,12 +241,31 @@ export function HeroSectionDesktop() {
               </motion.div>
             </motion.div>
 
-            {/* Floating Glass Card 2 (Top Right) */}
-            <motion.div 
-              style={{ x: parallax1X, y: parallax1Y }}
-              className="absolute top-[5%] md:top-auto md:bottom-[0%] right-[0%] md:right-[0%] z-30 pointer-events-auto"
+            {/* Cursive "Moda" — topo direito superior com parallax */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8, duration: 0.5 }}
+              className="absolute pointer-events-none z-20"
+              style={{
+                right: "-20%",
+                top: "3%",
+                width: "clamp(160px, 18vw, 280px)",
+                rotate: 10,
+                x: parallax3X,
+                y: parallax3Y,
+                filter: "drop-shadow(2px 3px 0px rgba(255,255,255,0.55))",
+              }}
             >
-              <motion.div 
+              <ModaHandwriting color="#033624" strokeWidth={5} />
+            </motion.div>
+
+            {/* Floating Glass Card 2 (Yellow — Diamante) */}
+            <motion.div
+              style={{ x: parallax1X, y: parallax1Y }}
+              className="absolute top-[5%] md:top-auto md:bottom-[0%] right-[0%] md:right-[-6%] z-30 pointer-events-auto"
+            >
+              <motion.div
                 animate={{ y: [0, -25, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                 className="w-40 md:w-56 aspect-[3/3.5] bg-white/20 backdrop-blur-xl border-2 border-white/50 rounded-[2rem] p-6 flex flex-col items-center justify-center rotate-[12deg] shadow-[0_20px_50px_rgba(3,54,36,0.15)] hover:rotate-0 hover:scale-110 hover:bg-white/40 transition-all duration-500 cursor-pointer group"
@@ -262,7 +282,7 @@ export function HeroSectionDesktop() {
             </motion.div>
 
             {/* Circular Badge */}
-            <motion.div 
+            <motion.div
               style={{ x: parallax2X, y: parallax1Y }}
               className="absolute bottom-[-10%] md:bottom-[-15%] right-[5%] md:right-[15%] z-40 pointer-events-auto"
             >
@@ -274,24 +294,24 @@ export function HeroSectionDesktop() {
       </main>
 
       {/* Bottom Features Section */}
-      <section className="bg-white text-[#033624] rounded-t-[3.5rem] px-6 py-12 md:px-10 md:py-20 relative z-20 shadow-[0_-30px_60px_rgba(0,0,0,0.08)] mt-auto w-full">
+      <section className="bg-white text-[#033624] rounded-t-[3.5rem] px-6 py-8 md:px-10 md:py-12 relative z-20 shadow-[0_-30px_60px_rgba(0,0,0,0.08)] mt-auto w-full">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
-          
+
           {/* Card 1: Missões */}
-          <motion.div 
+          <motion.div
             whileHover={{ y: -10, scale: 1.02 }}
-            className="bg-gradient-to-b from-[#F8F9FA] to-white rounded-[2.5rem] p-8 flex flex-col items-center text-center relative h-72 border-2 border-gray-50 shadow-md hover:shadow-2xl transition-all duration-300"
+            className="bg-gradient-to-b from-[#F8F9FA] to-white rounded-[2.5rem] p-6 flex flex-col items-center text-center relative h-64 border-2 border-gray-50 shadow-md hover:shadow-2xl transition-all duration-300"
           >
             <div className="w-12 h-12 bg-[#BAF6F0] rounded-full mb-4 flex items-center justify-center text-[#033624]">
               <Rocket size={24} />
             </div>
             <h3 className="text-xl md:text-[1.7rem] uppercase leading-none mb-3 font-black font-display text-[#033624] tracking-tight">
-              COMPLETE<br/>MISSÕES
+              COMPLETE<br />MISSÕES
             </h3>
             <p className="text-[11px] md:text-[0.8rem] text-[#033624]/60 font-bold uppercase tracking-widest mb-auto font-body">
               3 Fases e 60 dias
             </p>
-            
+
             {/* Pill Graphic */}
             <div className="relative w-full flex justify-center mt-6">
               <div className="flex items-center bg-[#2DCCD3] rounded-2xl p-2 pr-12 shadow-lg relative z-10 border border-white/20">
@@ -315,20 +335,20 @@ export function HeroSectionDesktop() {
           </motion.div>
 
           {/* Card 2: Recompensas */}
-          <motion.div 
+          <motion.div
             whileHover={{ y: -10, scale: 1.02 }}
-            className="bg-gradient-to-b from-[#F8F9FA] to-white rounded-[2.5rem] p-8 flex flex-col items-center text-center relative h-72 border-2 border-gray-50 shadow-md hover:shadow-2xl transition-all duration-300"
+            className="bg-gradient-to-b from-[#F8F9FA] to-white rounded-[2.5rem] p-6 flex flex-col items-center text-center relative h-64 border-2 border-gray-50 shadow-md hover:shadow-2xl transition-all duration-300"
           >
             <div className="w-12 h-12 bg-[#F1204A]/10 rounded-full mb-4 flex items-center justify-center text-[#F1204A]">
               <Gift size={24} />
             </div>
             <h3 className="text-xl md:text-[1.7rem] uppercase leading-none mb-3 font-black font-display text-[#033624] tracking-tight">
-              DESBLOQUEIE<br/>CUPONS
+              DESBLOQUEIE<br />CUPONS
             </h3>
             <p className="text-[11px] md:text-[0.8rem] text-[#033624]/60 font-bold uppercase tracking-widest mb-auto font-body">
               Até R$2.400 em verba
             </p>
-            
+
             {/* Pill Graphic */}
             <div className="relative w-full flex justify-center mt-6">
               <div className="flex items-center bg-[#F1204A] rounded-full p-2 shadow-xl border border-white/20">
@@ -339,14 +359,14 @@ export function HeroSectionDesktop() {
                   CUPOM
                 </div>
               </div>
-              
+
               {/* Small floating green pill */}
-              <motion.div 
+              <motion.div
                 animate={{ y: [0, -5, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
                 className="absolute -bottom-5 right-1/4 bg-[#2DCCD3] rounded-full p-2.5 shadow-lg transform rotate-12 z-20 border border-white"
               >
-                 <Gift size={18} className="text-[#033624]" />
+                <Gift size={18} className="text-[#033624]" />
               </motion.div>
             </div>
 
@@ -357,25 +377,25 @@ export function HeroSectionDesktop() {
           </motion.div>
 
           {/* Card 3: Diamante */}
-          <motion.div 
+          <motion.div
             whileHover={{ y: -10, scale: 1.02 }}
-            className="bg-gradient-to-b from-[#F8F9FA] to-white rounded-[2.5rem] p-8 flex flex-col items-center text-center relative h-72 border-2 border-gray-50 shadow-md hover:shadow-2xl transition-all duration-300"
+            className="bg-gradient-to-b from-[#F8F9FA] to-white rounded-[2.5rem] p-6 flex flex-col items-center text-center relative h-64 border-2 border-gray-50 shadow-md hover:shadow-2xl transition-all duration-300"
           >
             <div className="w-12 h-12 bg-[#FBEB35]/20 rounded-full mb-4 flex items-center justify-center text-[#8a7a00]">
               <Gem size={24} />
             </div>
             <h3 className="text-xl md:text-[1.7rem] uppercase leading-none mb-3 font-black font-display text-[#033624] tracking-tight">
-              TORNE-SE<br/>DIAMANTE
+              TORNE-SE<br />DIAMANTE
             </h3>
             <p className="text-[11px] md:text-[0.8rem] text-[#033624]/60 font-bold uppercase tracking-widest mb-auto font-body">
               Suporte VIP Exclusivo
             </p>
-            
+
             {/* Pill Graphic */}
             <div className="flex flex-col items-center bg-[#FBEB35] rounded-[2rem] px-8 py-5 text-[#033624] shadow-xl mt-6 relative w-full max-w-[220px] border border-white/40">
               <p className="text-[10px] font-black uppercase tracking-widest mb-1.5 font-body opacity-80">Status Alcançado</p>
               <p className="text-2xl font-black font-display flex items-center gap-2"><Gem size={20} /> VIP</p>
-              
+
               {/* Speech bubble tail */}
               <div className="absolute -bottom-2.5 left-10 w-6 h-6 bg-[#FBEB35] transform rotate-45 border-r border-b border-white/10"></div>
             </div>

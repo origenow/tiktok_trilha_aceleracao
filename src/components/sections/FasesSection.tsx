@@ -546,16 +546,23 @@ export function FasesSection() {
   };
 
   /* Avança passo / fase */
-  const goNext = () => {
+  const goNext = (e?: React.MouseEvent<HTMLButtonElement>) => {
     if (!isLastGroup) {
       setDirection(1);
       setGroupStep((p) => p + 1);
     } else if (!showReward) {
       setShowReward(true);
+      const rect = e?.currentTarget.getBoundingClientRect();
+      const origin = rect
+        ? {
+            x: (rect.left + rect.width / 2) / window.innerWidth,
+            y: (rect.top + rect.height / 2) / window.innerHeight,
+          }
+        : { y: 0.6 };
       confetti({
         particleCount: 150,
         spread: 70,
-        origin: { y: 0.6 },
+        origin,
         colors: [activeFase.color, activeFase.onColor, '#F1204A', '#FBEB35'],
         ticks: 200,
         zIndex: 9999,
@@ -712,7 +719,7 @@ export function FasesSection() {
             </motion.button>
 
             <motion.button
-              onClick={goNext}
+              onClick={(e) => goNext(e)}
               whileTap={{ scale: 0.97 }}
               whileHover={{ scale: 1.02 }}
               className="flex-1 h-11 rounded-2xl font-display font-black text-sm flex items-center justify-center gap-2 transition-shadow duration-200"
@@ -774,9 +781,9 @@ export function FasesSection() {
   );
 
   return (
-    <section id="fases" className="relative pt-20 pb-20 overflow-hidden" style={{ backgroundColor: "#f4f6f5" }}>
-      {/* Wave entrada */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none pointer-events-none">
+    <section id="fases" className="relative pt-10 pb-12 overflow-hidden" style={{ backgroundColor: "#f4f6f5" }}>
+      {/* Wave entrada — visível apenas no mobile */}
+      <div className="lg:hidden absolute top-0 left-0 w-full overflow-hidden leading-none pointer-events-none">
         <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full h-[80px] block">
           <path d="M0,80 C200,20 500,70 720,30 C940,0 1180,60 1440,25 L1440,0 L0,0 Z" fill={DS.shimmer} />
         </svg>
@@ -830,10 +837,10 @@ export function FasesSection() {
       {/* ════════════════════════════════════════════════════════ */}
       {/* DESKTOP layout — Tabuleiro Interativo Gamificado         */}
       {/* ════════════════════════════════════════════════════════ */}
-      <div className="hidden lg:block w-full max-w-[1200px] mx-auto px-8 relative z-10">
-        
+      <div className="hidden lg:block w-full max-w-[1400px] mx-auto px-8 relative z-10">
+
         {/* Cabeçalho */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           <p className="font-body text-sm uppercase tracking-widest mb-2 font-bold" style={{ color: DS.glint }}>
             Mapa da Aceleração
           </p>
@@ -847,7 +854,7 @@ export function FasesSection() {
         </div>
 
         {/* MAPA HORIZONTAL (TABULEIRO) */}
-        <div className="relative w-full max-w-5xl mx-auto mb-16 h-32 flex items-center">
+        <div className="relative w-full mx-auto mb-6 h-28 flex items-center">
           {/* Linha pontilhada de fundo */}
           <div className="absolute left-[10%] right-[10%] top-1/2 -translate-y-1/2 h-1.5 rounded-full border-t-[3px] border-dashed" style={{ borderColor: alpha(DS.thrive, 0.15) }} />
           
@@ -888,16 +895,15 @@ export function FasesSection() {
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                   >
                     <div className="absolute inset-2 rounded-full flex items-center justify-center transition-colors duration-500" style={{ backgroundColor: isActive || isPast ? fase.color : "transparent" }}>
-                      <fase.icon 
-                        size={26} 
+                      <fase.icon
+                        size={26}
                         style={{ color: isActive || isPast ? fase.onColor : alpha(DS.thrive, 0.3) }}
                         strokeWidth={isActive ? 2.5 : 2}
                       />
                     </div>
-                    
-                    {/* Checkmark for past phases */}
+
                     {isPast && (
-                      <motion.div 
+                      <motion.div
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full flex items-center justify-center border-[3px] border-[#f4f6f5] z-20 shadow-md"
@@ -914,32 +920,20 @@ export function FasesSection() {
             })}
           </div>
 
-          {/* Avatar / Cursor */}
-          <motion.div 
-            className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-14 h-14 z-20 pointer-events-none drop-shadow-2xl"
-            initial={false}
-            animate={{ left: `${10 + (activeIndex / (FASES.length - 1)) * 80}%` }}
-            transition={{ type: "spring", stiffness: 50, damping: 14 }}
-          >
-            <div className="w-full h-full rounded-[1.2rem] flex items-center justify-center border-4 border-white shadow-xl rotate-[15deg]" style={{ backgroundColor: activeFase.color }}>
-              <div className="absolute inset-0 bg-white/20 rounded-xl" />
-              <activeFase.icon size={22} color={activeFase.onColor} className="relative z-10" />
-            </div>
-          </motion.div>
         </div>
 
         {/* QUEST LOG PANEL (Detalhes da Missão) */}
-        <div ref={rewardRef} className="scroll-mt-32">
-          <motion.div 
+        <div ref={rewardRef} className="scroll-mt-20">
+          <motion.div
             key={activeFase.id}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, type: "spring", bounce: 0.3 }}
-            className="w-full max-w-5xl mx-auto bg-white rounded-[2.5rem] overflow-hidden shadow-[0_20px_60px_rgba(3,54,36,0.08)] flex flex-row border border-gray-100 relative"
-            style={{ minHeight: "560px" }}
+            className="w-full bg-white rounded-[2.5rem] overflow-hidden shadow-[0_20px_60px_rgba(3,54,36,0.08)] flex flex-row border border-gray-100 relative"
+            style={{ minHeight: "520px" }}
           >
             {/* Lado Esquerdo: Imagem e Identidade */}
-            <div className="w-[42%] relative flex flex-col justify-end p-10 overflow-hidden text-white shrink-0">
+            <div className="w-[38%] relative flex flex-col justify-end p-8 overflow-hidden text-white shrink-0">
               <Image src={activeFase.image} alt={activeFase.label} fill className="object-cover absolute inset-0 z-0 scale-[1.02] hover:scale-105 transition-transform duration-[2s]" sizes="500px" priority />
               
               {/* Overlays */}
@@ -972,11 +966,11 @@ export function FasesSection() {
             </div>
 
             {/* Lado Direito: Conteúdo de Missões */}
-            <div className="w-[58%] p-10 flex flex-col justify-between bg-[#FCFDFD] relative">
+            <div className="w-[62%] p-8 flex flex-col justify-between bg-[#FCFDFD] relative">
               
               <div className="flex-1">
                 {/* Header Steps */}
-                <div className="flex items-center justify-between mb-8 pb-5 border-b border-gray-100">
+                <div className="flex items-center justify-between mb-5 pb-4 border-b border-gray-100">
                   <div>
                     <h4 className="font-display font-black text-[1.4rem] tracking-tight text-[#033624]">
                       Missão Atual
@@ -1022,7 +1016,7 @@ export function FasesSection() {
               </div>
 
               {/* Controle Inferior */}
-              <div className="mt-8 flex items-center gap-3">
+              <div className="mt-5 flex items-center gap-3">
                 <motion.button
                   onClick={goPrev}
                   disabled={groupStep === 0 && activeIndex === 0 && !showReward}
@@ -1038,7 +1032,7 @@ export function FasesSection() {
                 </motion.button>
 
                 <motion.button
-                  onClick={goNext}
+                  onClick={(e) => goNext(e)}
                   whileTap={{ scale: 0.98 }}
                   whileHover={{ scale: 1.02 }}
                   className="flex-1 h-14 rounded-[1.25rem] font-display font-black text-[0.95rem] flex items-center justify-center gap-2.5 transition-all duration-300 group relative overflow-hidden"

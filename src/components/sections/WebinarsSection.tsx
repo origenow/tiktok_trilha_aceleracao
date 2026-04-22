@@ -241,7 +241,7 @@ export function WebinarsSection() {
   }
 
   return (
-    <section id="webinars" className="relative overflow-hidden" style={{ backgroundColor: "#EDD4B2" }}>
+    <section id="webinars" className="relative overflow-hidden py-20 lg:py-32" style={{ backgroundColor: "#EDD4B2" }}>
 
       {/* ── Doodles ── */}
       {/* Florzinha Glow — esquerda central */}
@@ -268,7 +268,7 @@ export function WebinarsSection() {
         />
       </svg>
 
-      <div className="relative z-10 w-full max-w-[430px] lg:max-w-screen-xl mx-auto py-14 lg:px-16 flex flex-col gap-8">
+      <div className="relative z-10 w-full max-w-[430px] lg:max-w-screen-xl mx-auto lg:px-16 flex flex-col gap-12 lg:gap-20">
 
         {/* ── Cabeçalho ── */}
         <motion.div
@@ -293,7 +293,7 @@ export function WebinarsSection() {
 
           <h2
             className="font-display font-black leading-[0.92] tracking-tight"
-            style={{ fontSize: "clamp(1.75rem, 7vw, 2.3rem)", color: "#033624" }}
+            style={{ fontSize: "clamp(2rem, 8vw, 3.5rem)", color: "#033624" }}
           >
             Fique ligado nos nossos{" "}
             <HighlightedText highlightColor="#F1204A" from="bottom" inView delay={0.2}>
@@ -311,45 +311,53 @@ export function WebinarsSection() {
         </motion.div>
 
         {/* ── Grid desktop (3 colunas) ── */}
-        <div className="hidden lg:grid lg:grid-cols-3 lg:gap-6 px-0">
+        <div className="hidden lg:grid lg:grid-cols-3 lg:gap-12 px-0">
           {WEBINARS.map((card, i) => (
             <motion.a
               key={card.id}
               href={card.pdfPath}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="group flex flex-col rounded-3xl overflow-hidden cursor-pointer hover:-translate-y-1 transition-transform duration-200"
-              style={{ background: "#ffffff", boxShadow: "0 4px 20px rgba(3,54,36,0.10)" }}
+              transition={{ duration: 0.5, delay: i * 0.15, type: "spring", bounce: 0.4 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="group flex flex-col rounded-[2rem] overflow-hidden cursor-pointer bg-white transition-all duration-300"
+              style={{ boxShadow: "0 10px 40px rgba(3,54,36,0.06)" }}
             >
-              <div className="relative overflow-hidden" style={{ height: "220px" }}>
+              <div className="relative overflow-hidden" style={{ height: "260px" }}>
                 <img
                   src={card.imagePath}
                   alt={card.title}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
+                
+                {/* Overlay gradiente no hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
                 <span
-                  className="absolute top-3 left-3 font-body text-[10px] font-semibold px-2.5 py-1 rounded-full z-10"
-                  style={{ backgroundColor: card.tagColor, color: card.tagTextColor, transform: "rotate(-3deg)", boxShadow: "0 2px 8px rgba(0,0,0,0.12)" }}
+                  className="absolute top-4 left-4 font-body text-[0.7rem] font-bold px-3 py-1.5 rounded-full z-10 uppercase tracking-widest"
+                  style={{ backgroundColor: card.tagColor, color: card.tagTextColor, transform: "rotate(-3deg)", boxShadow: "0 4px 12px rgba(0,0,0,0.15)" }}
                 >
                   {card.tag}
                 </span>
+                
+                {/* Ícone download centralizado grande no hover */}
                 <div
-                  className="absolute bottom-3 right-3 w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 z-10"
-                  style={{ backgroundColor: "#033624" }}
+                  className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-10"
                 >
-                  <Download size={13} style={{ color: "#BAF6F0" }} />
+                  <div className="w-14 h-14 rounded-full flex items-center justify-center shadow-2xl scale-50 group-hover:scale-100 transition-transform duration-300" style={{ backgroundColor: "#F1204A" }}>
+                    <Download size={24} style={{ color: "white" }} />
+                  </div>
                 </div>
               </div>
-              <div className="p-4 flex flex-col gap-1" style={{ borderTop: `3px solid ${card.accentColor}` }}>
-                <p className="font-display font-black text-sm leading-tight" style={{ color: "#033624" }}>{card.title}</p>
-                <p className="font-body text-xs leading-snug" style={{ color: "#4A0505", opacity: 0.6 }}>{card.subtitle}</p>
-                <div className="flex items-center gap-1 mt-2">
-                  <FileText size={11} style={{ color: card.accentColor === "#FBEB35" ? "#8a7a00" : card.accentColor }} />
-                  <span className="font-body text-[10px] font-medium" style={{ color: card.accentColor === "#FBEB35" ? "#8a7a00" : card.accentColor }}>
+              <div className="p-6 flex flex-col gap-2 bg-white relative z-20" style={{ borderTop: `4px solid ${card.accentColor}` }}>
+                <p className="font-display font-black text-[1.35rem] leading-tight" style={{ color: "#033624" }}>{card.title}</p>
+                <p className="font-body text-[0.9rem] leading-relaxed" style={{ color: "#4A0505", opacity: 0.7 }}>{card.subtitle}</p>
+                <div className="flex items-center gap-2 mt-4 pt-4 border-t border-gray-100">
+                  <FileText size={14} style={{ color: card.accentColor === "#FBEB35" ? "#8a7a00" : card.accentColor }} />
+                  <span className="font-body text-xs font-bold tracking-wide uppercase" style={{ color: card.accentColor === "#FBEB35" ? "#8a7a00" : card.accentColor }}>
                     Abrir PDF
                   </span>
                 </div>

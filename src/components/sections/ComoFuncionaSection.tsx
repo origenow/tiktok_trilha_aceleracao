@@ -145,49 +145,49 @@ export function ComoFuncionaSection() {
       <div className="w-full max-w-[430px] lg:max-w-screen-xl mx-auto lg:px-16">
 
         {/* Desktop: grid 2 colunas */}
-        <div className="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-start">
+        <div className="lg:grid lg:grid-cols-2 lg:gap-20 lg:items-center">
 
           {/* ── Coluna esquerda: header + marquee ── */}
-          <div>
+          <div className="lg:pr-8">
             {/* Header */}
             <motion.div
-              className="px-6 lg:px-0 mb-6 text-center lg:text-left"
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              className="px-6 lg:px-0 mb-8 text-center lg:text-left"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.6, type: "spring" }}
             >
-              <p className="font-body text-xs uppercase tracking-widest mb-1" style={{ color: "#FBEB35", textShadow: "0 0 0 #033624", WebkitTextStroke: "0.5px #bba800" }}>
+              <span className="inline-block px-4 py-1.5 rounded-full font-body text-xs font-black uppercase tracking-widest mb-4 border border-[#FBEB35]/50 bg-[#FBEB35]/10 text-[#033624]">
                 Recompensas
-              </p>
+              </span>
               <h2
-                className="font-display font-black leading-tight"
-                style={{ fontSize: "clamp(1.6rem, 7vw, 2.8rem)", color: "#033624" }}
+                className="font-display font-black leading-[0.95]"
+                style={{ fontSize: "clamp(2rem, 5vw, 4rem)", color: "#033624" }}
               >
                 Como resgatar seus <HighlightedText highlightColor="#F1204A" from="bottom" inView delay={0.3}>prêmios?</HighlightedText>
               </h2>
-              <p className="font-body text-sm mt-2" style={{ color: "#4A0505", opacity: 0.7 }}>
-                Depois de completar as missões, veja como retirar suas recompensas no Seller Center
+              <p className="font-body text-sm lg:text-base mt-4 font-medium max-w-sm mx-auto lg:mx-0" style={{ color: "#4A0505", opacity: 0.75 }}>
+                Depois de completar as missões estratégicas da Trilha, veja como retirar suas recompensas no Seller Center e impulsionar suas vendas.
               </p>
             </motion.div>
 
-            {/* Marquee triplo */}
+            {/* Marquee triplo envolto em um card de vidro no desktop */}
             <motion.div
-              className="relative mb-8"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              className="relative mb-8 lg:p-6 lg:bg-white/50 lg:backdrop-blur-xl lg:rounded-[2rem] lg:border lg:border-white/60 lg:shadow-[0_20px_40px_rgba(3,54,36,0.05)]"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.5, delay: 0.15 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
             >
               <div
-                className="absolute left-0 top-0 bottom-0 w-10 z-10 pointer-events-none"
-                style={{ background: "linear-gradient(to right, #ffffff, transparent)" }}
+                className="absolute left-0 top-0 bottom-0 w-12 z-10 pointer-events-none lg:rounded-l-[2rem]"
+                style={{ background: "linear-gradient(to right, rgba(255,255,255,0.9), transparent)" }}
               />
               <div
-                className="absolute right-0 top-0 bottom-0 w-10 z-10 pointer-events-none"
-                style={{ background: "linear-gradient(to left, #ffffff, transparent)" }}
+                className="absolute right-0 top-0 bottom-0 w-12 z-10 pointer-events-none lg:rounded-r-[2rem]"
+                style={{ background: "linear-gradient(to left, rgba(255,255,255,0.9), transparent)" }}
               />
-              <div className="flex flex-col gap-2 py-1">
+              <div className="flex flex-col gap-3 py-1">
                 <Marquee items={m1} duration="35s" />
                 <Marquee items={m2} reverse duration="45s" />
                 <Marquee items={m3} duration="40s" />
@@ -195,72 +195,80 @@ export function ComoFuncionaSection() {
             </motion.div>
           </div>
 
-          {/* ── Coluna direita: 4 passos + botão ── */}
+          {/* ── Coluna direita: 4 passos em cards + botão ── */}
           <div className="px-6 lg:px-0">
-            <div className="border-t-2 border-dashed" style={{ borderColor: "#2DCCD3" }}>
-              {PASSOS.map((passo, i) => {
-                const Icon = passo.icon;
-                const dividerColors = ["#F1204A", "#FBEB35", "#EDBBE8", "#2DCCD3"];
-                return (
-                  <motion.div
-                    key={i}
-                    className="flex gap-4 py-5 border-b border-dashed"
-                    style={{ borderColor: dividerColors[i % dividerColors.length] }}
-                    initial={{ opacity: 0, x: -24 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, amount: 0.4 }}
-                    transition={{ duration: 0.4, delay: i * 0.1 }}
-                  >
-                    <div
-                      className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-display font-black text-sm text-white"
-                      style={{ backgroundColor: "#F1204A" }}
+            <div className="relative">
+              {/* Linha guia desktop */}
+              <div className="hidden lg:block absolute left-6 top-10 bottom-24 w-1 border-l-2 border-dashed border-[#2DCCD3]/30 z-0" />
+
+              <div className="flex flex-col gap-0 lg:gap-4 lg:pb-8 relative z-10 border-t-2 border-dashed lg:border-none" style={{ borderColor: "#2DCCD3" }}>
+                {PASSOS.map((passo, i) => {
+                  const Icon = passo.icon;
+                  const dividerColors = ["#F1204A", "#FBEB35", "#EDBBE8", "#2DCCD3"];
+                  const currentColor = dividerColors[i % dividerColors.length];
+                  
+                  return (
+                    <motion.div
+                      key={i}
+                      className="flex gap-4 lg:gap-6 py-5 lg:py-4 lg:px-6 lg:bg-white lg:rounded-2xl lg:shadow-sm lg:hover:shadow-md transition-all duration-300 lg:border lg:border-gray-100 group border-b border-dashed lg:border-solid lg:border-b-gray-100"
+                      style={{ borderBottomColor: typeof window !== 'undefined' && window.innerWidth < 1024 ? currentColor : undefined }}
+                      initial={{ opacity: 0, x: 30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, amount: 0.4 }}
+                      transition={{ duration: 0.5, delay: i * 0.15, type: "spring" }}
+                      whileHover={{ scale: 1.02, x: 5 }}
                     >
-                      {passo.num}
-                    </div>
-                    <div className="flex flex-col gap-1 pt-0.5">
-                      <Icon size={20} style={{ color: "#033624", opacity: 0.6 }} />
-                      <h3 className="font-display font-black text-sm" style={{ color: "#033624" }}>
-                        {passo.title}
-                      </h3>
-                      <p className="font-body text-sm" style={{ color: "#4A0505", opacity: 0.75 }}>
-                        {passo.desc}
-                      </p>
-                    </div>
-                  </motion.div>
-                );
-              })}
+                      <div
+                        className="flex-shrink-0 w-8 h-8 lg:w-12 lg:h-12 rounded-full flex items-center justify-center font-display font-black text-sm lg:text-xl text-white shadow-md transition-transform duration-300 group-hover:rotate-12"
+                        style={{ backgroundColor: currentColor, color: currentColor === "#FBEB35" ? "#033624" : "white" }}
+                      >
+                        {passo.num}
+                      </div>
+                      <div className="flex flex-col gap-1 pt-0.5 lg:pt-1">
+                        <Icon size={20} className="lg:w-6 lg:h-6 transition-colors duration-300" style={{ color: "#033624", opacity: 0.6 }} />
+                        <h3 className="font-display font-black text-sm lg:text-lg lg:mt-1" style={{ color: "#033624" }}>
+                          {passo.title}
+                        </h3>
+                        <p className="font-body text-sm lg:text-[0.95rem] leading-relaxed" style={{ color: "#4A0505", opacity: 0.75 }}>
+                          {passo.desc}
+                        </p>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
             </div>
 
             {/* Link seller center */}
             <motion.div
-              className="mt-8 text-center lg:text-left flex justify-center lg:justify-start"
-              initial={{ opacity: 0, y: 16 }}
+              className="mt-8 lg:mt-4 text-center lg:text-left flex justify-center lg:justify-start"
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.5 }}
-              transition={{ duration: 0.4, delay: 0.35 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
             >
               <a
                 href="https://seller-br.tiktok.com/challenges/growth"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 font-display font-black text-sm px-7 py-3 transition-all duration-200"
+                className="group inline-flex items-center gap-3 font-display font-black text-sm lg:text-[1.1rem] px-7 py-3 lg:px-10 lg:py-5 lg:w-full justify-center transition-all duration-300 hover:-translate-y-1"
                 style={{
                   color: "#ffffff",
                   backgroundColor: "#F1204A",
                   borderRadius: "999px",
-                  boxShadow: "0 4px 12px rgba(241, 32, 74, 0.2)"
+                  boxShadow: "0 10px 30px rgba(241, 32, 74, 0.3)"
                 }}
                 onClick={() => {
                   confetti({
-                    particleCount: 100,
-                    spread: 70,
+                    particleCount: 150,
+                    spread: 80,
                     origin: { y: 0.8 },
                     colors: ['#F1204A', '#FBEB35', '#2DCCD3', '#EDBBE8'],
                     zIndex: 9999,
                   });
                 }}
               >
-                Ver minhas recompensas agora <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                Resgatar recompensas agora <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform duration-300" />
               </a>
             </motion.div>
           </div>

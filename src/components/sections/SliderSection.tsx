@@ -300,7 +300,7 @@ export function SliderSection() {
   return (
     <section id="acceleration-sliders" className="py-24 bg-white overflow-hidden relative z-10 w-full">
       <div className="w-full max-w-[430px] lg:max-w-screen-2xl mx-auto lg:px-20">
-      {/* ── Seller Academy + Abrindo sua loja ─────────────────────── */}
+        {/* ── Seller Academy + Abrindo sua loja ─────────────────────── */}
         <motion.div {...fadeUp(0)} className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 lg:mb-8 px-4">
           <div className="flex flex-col gap-2">
             <span
@@ -447,7 +447,7 @@ export function SliderSection() {
           }}
         >
           <div className="absolute -bottom-10 -right-10 w-64 h-64 rounded-full opacity-[0.05]" style={{ backgroundColor: "#111111" }} />
-          
+
           <div className="flex-1 flex flex-col gap-6 relative z-10">
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-3">
@@ -458,7 +458,7 @@ export function SliderSection() {
                 Ative a isenção antes da sua primeira venda e potencialize seu lucro inicial.
               </p>
             </div>
-            
+
             <div
               className="flex items-center gap-2 flex-wrap rounded-2xl px-4 py-2.5 w-fit"
               style={{ backgroundColor: "rgba(0,0,0,0.05)" }}
@@ -470,7 +470,7 @@ export function SliderSection() {
               <span className="font-body text-xs lg:text-sm font-black px-4 py-1 rounded-full bg-[#F1204A] text-white">Minhas Missões</span>
             </div>
           </div>
-          
+
           <div className="lg:w-[40%] shrink-0 z-10 transition-transform duration-500 hover:scale-[1.02]">
             <ZoomableImage src="/assets/isencao.png" alt="Como ativar isenção de comissão"
               width={600} height={380} className="rounded-2xl shadow-xl border-4 border-white/20" />
@@ -498,9 +498,8 @@ export function SliderSection() {
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
-                <span className={`relative z-10 transition-colors duration-300 ${
-                  isActive ? "text-[#BAF6F0]" : "text-[#033624] group-hover:text-[#033624]/70"
-                }`}>
+                <span className={`relative z-10 transition-colors duration-300 ${isActive ? "text-[#BAF6F0]" : "text-[#033624] group-hover:text-[#033624]/70"
+                  }`}>
                   {tab}
                 </span>
                 {!isActive && (
@@ -511,111 +510,112 @@ export function SliderSection() {
           })}
         </motion.div>
 
-      {/* Slider */}
-      <motion.div {...fadeUp(0.15)} className="w-full px-4 relative lg:px-0">
-        {/* Efeito de Blur + Fade nas bordas (Desktop) - Suavizado */}
-        <div className="hidden lg:block absolute -left-10 top-0 bottom-0 w-40 z-20 pointer-events-none bg-gradient-to-r from-white via-white/30 to-transparent" />
-        <div className="hidden lg:block absolute -right-10 top-0 bottom-0 w-40 z-20 pointer-events-none bg-gradient-to-l from-white via-white/30 to-transparent" />
+        {/* Slider */}
+        <motion.div {...fadeUp(0.15)} className="w-full px-4 relative lg:px-0">
+          {/* Efeito de Blur + Fade nas bordas (Desktop) - Suavizado */}
+          <div className="hidden lg:block absolute -left-10 top-0 bottom-0 w-40 z-20 pointer-events-none bg-gradient-to-r from-white via-white/30 to-transparent" />
+          <div className="hidden lg:block absolute -right-10 top-0 bottom-0 w-40 z-20 pointer-events-none bg-gradient-to-l from-white via-white/30 to-transparent" />
 
-        {/* Seta esquerda */}
-        <button
-          onClick={() => swiperInstance?.slidePrev()}
-          aria-label="Card anterior"
-          className="absolute left-0 lg:-left-12 top-[calc(50%-2.5rem)] lg:top-[calc(50%-1.5rem)] -translate-y-1/2 z-30 w-9 lg:w-14 h-9 lg:h-14 rounded-full flex items-center justify-center shadow-2xl transition-all active:scale-90 hover:scale-110 border border-white/10"
-          style={{ backgroundColor: "rgba(3,54,36,0.98)", color: "#BAF6F0" }}
-        >
-          <ChevronLeft size={24} />
-        </button>
+          {/* Seta esquerda */}
+          <button
+            onClick={() => swiperInstance?.slidePrev()}
+            aria-label="Card anterior"
+            className="absolute left-0 lg:-left-12 top-[calc(50%-2.5rem)] lg:top-[calc(50%-1.5rem)] -translate-y-1/2 z-30 w-9 lg:w-14 h-9 lg:h-14 rounded-full flex items-center justify-center shadow-2xl transition-all active:scale-90 hover:scale-110 border border-white/10"
+            style={{ backgroundColor: "rgba(3,54,36,0.98)", color: "#BAF6F0" }}
+          >
+            <ChevronLeft size={24} />
+          </button>
 
-        {/* Seta direita */}
-        <button
-          onClick={() => swiperInstance?.slideNext()}
-          aria-label="Próximo card"
-          className="absolute right-0 lg:-right-12 top-[calc(50%-2.5rem)] lg:top-[calc(50%-1.5rem)] -translate-y-1/2 z-30 w-9 lg:w-14 h-9 lg:h-14 rounded-full flex items-center justify-center shadow-2xl transition-all active:scale-90 hover:scale-110 border border-white/10"
-          style={{ backgroundColor: "rgba(3,54,36,0.98)", color: "#BAF6F0" }}
-        >
-          <ChevronRightNav size={24} />
-        </button>
+          {/* Seta direita */}
+          <button
+            onClick={() => swiperInstance?.slideNext()}
+            aria-label="Próximo card"
+            className="absolute right-0 lg:-right-12 top-[calc(50%-2.5rem)] lg:top-[calc(50%-1.5rem)] -translate-y-1/2 z-30 w-9 lg:w-14 h-9 lg:h-14 rounded-full flex items-center justify-center shadow-2xl transition-all active:scale-90 hover:scale-110 border border-white/10"
+            style={{ backgroundColor: "rgba(3,54,36,0.98)", color: "#BAF6F0" }}
+          >
+            <ChevronRightNav size={24} />
+          </button>
 
-        <Swiper
-          onSwiper={setSwiperInstance}
-          modules={[Autoplay]}
-          spaceBetween={16}
-          slidesPerView={1.1}
-          breakpoints={{
-            1024: {
-              slidesPerView: 3.5,
-              spaceBetween: 24,
-            }
-          }}
-          centeredSlides={false}
-          loop={false}
-          autoplay={{
-            delay: 10000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          }}
-          className="mySwiper !pb-10 lg:!px-10"
-        >
-          {currentSlides.map((slide, i) => (
-            <SwiperSlide key={`${activeTab}-${i}`} className="h-auto">
-              <div
-                className={`flex flex-col h-full rounded-2xl p-6 transition-all duration-500 group min-h-[520px] lg:bg-transparent lg:p-0 lg:min-h-0 ${slide.dark ? "bg-black text-white" : "bg-[#f4f5f5] text-black"}`}
-                onPointerDown={pauseAutoplay}
-              >
-                {/* Tag Superior */}
-                <h4 className={`font-bold text-sm mb-6 lg:mb-3 lg:text-[#033624]/60 lg:uppercase lg:tracking-widest lg:text-[10px] ${slide.dark ? "text-gray-300" : "text-gray-600"}`}>
-                  {slide.tag}
-                </h4>
-
-                {/* Vídeo Vertical */}
-                <div className="relative w-full aspect-[9/16] mb-6 lg:mb-5 rounded-xl lg:rounded-[24px] overflow-hidden shadow-2xl lg:shadow-[0_20px_50px_rgba(0,0,0,0.1)] lg:group-hover:shadow-[0_20px_60px_rgba(0,0,0,0.2)] lg:group-hover:-translate-y-2 transition-all duration-500 bg-gray-900">
-                  {slide.tiktok ? (
-                    <TikTokEmbed src={slide.video} />
-                  ) : (
-                    <video
-                      src={slide.video}
-                      className="w-full h-full object-cover"
-                      controls
-                      playsInline
-                      loop
-                      muted
-                      onPlay={pauseAutoplay}
-                    />
-                  )}
-                </div>
-
-                {/* Textos Inferiores */}
-                <h3 className="font-bold text-xl lg:text-lg lg:font-black leading-tight mb-3 lg:mb-2 lg:text-[#033624]">
-                  {slide.title}
-                </h3>
-                <p className={`text-sm leading-snug mb-8 lg:mb-6 lg:text-[#033624]/70 lg:leading-relaxed ${slide.dark ? "text-gray-300" : "text-gray-700"}`}>
-                  {slide.description}
-                </p>
-
-                {/* Link Assistir Agora */}
-                <a
-                  href={slide.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-auto flex items-center gap-1 hover:opacity-80 transition-all w-fit lg:mt-0 lg:group-hover:translate-x-1"
-                  onClick={pauseAutoplay}
+          <Swiper
+            onSwiper={setSwiperInstance}
+            modules={[Autoplay]}
+            spaceBetween={16}
+            slidesPerView={1.1}
+            breakpoints={{
+              1024: {
+                slidesPerView: 3.5,
+                spaceBetween: 24,
+              }
+            }}
+            centeredSlides={false}
+            loop={false}
+            autoplay={{
+              delay: 10000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            className="mySwiper !pb-10 lg:!px-10"
+          >
+            {currentSlides.map((slide, i) => (
+              <SwiperSlide key={`${activeTab}-${i}`} className="h-auto">
+                <div
+                  className={`flex flex-col h-full rounded-2xl p-6 transition-all duration-500 group min-h-[520px] lg:bg-transparent lg:p-0 lg:min-h-0 ${slide.dark ? "bg-black text-white" : "bg-[#f4f5f5] text-black"}`}
+                  onPointerDown={pauseAutoplay}
                 >
-                  <span className={`font-bold text-sm leading-none lg:text-[#033624] lg:border-b-2 lg:border-[#033624]/10 lg:pb-1 lg:group-hover:border-[#033624] ${slide.dark ? "text-white" : "text-black"}`}>
-                    Assistir agora
-                  </span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={`mt-[1px] lg:text-[#033624] ${slide.dark ? "text-white" : "text-black"}`}>
-                    <path d="m9 18 6-6-6-6" />
-                  </svg>
-                </a>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </motion.div>
+                  {/* Tag Superior */}
+                  <h4 className={`font-bold text-sm mb-6 lg:mb-3 lg:text-[#033624]/60 lg:uppercase lg:tracking-widest lg:text-[10px] ${slide.dark ? "text-gray-300" : "text-gray-600"}`}>
+                    {slide.tag}
+                  </h4>
+
+                  {/* Vídeo Vertical */}
+                  <div className="relative w-full aspect-[9/16] mb-6 lg:mb-5 rounded-xl lg:rounded-[24px] overflow-hidden shadow-2xl lg:shadow-[0_20px_50px_rgba(0,0,0,0.1)] lg:group-hover:shadow-[0_20px_60px_rgba(0,0,0,0.2)] lg:group-hover:-translate-y-2 transition-all duration-500 bg-gray-900">
+                    {slide.tiktok ? (
+                      <TikTokEmbed src={slide.video} />
+                    ) : (
+                      <video
+                        src={slide.video}
+                        className="w-full h-full object-cover"
+                        controls
+                        playsInline
+                        loop
+                        muted
+                        onPlay={pauseAutoplay}
+                      />
+                    )}
+                  </div>
+
+                  {/* Textos Inferiores */}
+                  <h3 className="font-bold text-xl lg:text-lg lg:font-black leading-tight mb-3 lg:mb-2 lg:text-[#033624]">
+                    {slide.title}
+                  </h3>
+                  <p className={`text-sm leading-snug mb-8 lg:mb-6 lg:text-[#033624]/70 lg:leading-relaxed ${slide.dark ? "text-gray-300" : "text-gray-700"}`}>
+                    {slide.description}
+                  </p>
+
+                  {/* Link Assistir Agora */}
+                  <a
+                    href={slide.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-auto flex items-center gap-1 hover:opacity-80 transition-all w-fit lg:mt-0 lg:group-hover:translate-x-1"
+                    onClick={pauseAutoplay}
+                  >
+                    <span className={`font-bold text-sm leading-none lg:text-[#033624] lg:border-b-2 lg:border-[#033624]/10 lg:pb-1 lg:group-hover:border-[#033624] ${slide.dark ? "text-white" : "text-black"}`}>
+                      Assistir agora
+                    </span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={`mt-[1px] lg:text-[#033624] ${slide.dark ? "text-white" : "text-black"}`}>
+                      <path d="m9 18 6-6-6-6" />
+                    </svg>
+                  </a>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </motion.div>
       </div>
 
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       ` }} />

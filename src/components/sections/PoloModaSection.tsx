@@ -2,7 +2,6 @@
 
 import { motion } from "motion/react";
 import { Trophy, PhoneCall, Zap, Tag, Star, ArrowRight, Sparkles } from "lucide-react";
-import { HighlightedText } from "@/components/ui/highlighted-text";
 
 /* ── WhatsApp icon ───────────────────────────────────────────── */
 const WhatsAppIcon = ({ className }: { className?: string }) => (
@@ -13,11 +12,11 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
 
 /* ── Dados ───────────────────────────────────────────────────── */
 const BENEFICIOS = [
-  { icon: Trophy,   title: "Até R$ 2.400 em cupons",                    desc: "de plataforma nas primeiras fases",                           bg: "#2DCCD3", color: "#033624", span: 1 },
-  { icon: PhoneCall,title: "Sessões de suporte",                         desc: "com especialistas TikTok Shop",                              bg: "#ffffff", color: "#033624", span: 1 },
-  { icon: Zap,      title: "Incentivo de tráfego",                       desc: "para seus produtos em destaque",                             bg: "#FBEB35", color: "#033624", span: 1 },
-  { icon: Tag,      title: "Cupons até 30% off",                         desc: "para atrair mais compradores",                               bg: "#ffffff", color: "#033624", span: 1 },
-  { icon: Star,     title: "Matching com Top Criadores + Ads Credits",   desc: "Conecte-se com os maiores criadores de conteúdo do TikTok",  bg: "#F1204A", color: "#ffffff", span: 2, badge: "Fase 4" },
+  { icon: Trophy,    title: "Até R$ 2.400 em cupons",                   desc: "de plataforma nas primeiras fases",                          bg: "#2DCCD3", color: "#033624", span: 1 },
+  { icon: PhoneCall, title: "Sessões de suporte",                        desc: "com especialistas TikTok Shop",                             bg: "#ffffff", color: "#033624", span: 1 },
+  { icon: Zap,       title: "Incentivo de tráfego",                      desc: "para seus produtos em destaque",                            bg: "#FBEB35", color: "#033624", span: 1 },
+  { icon: Tag,       title: "Cupons até 30% off",                        desc: "para atrair mais compradores",                              bg: "#ffffff", color: "#033624", span: 1 },
+  { icon: Star,      title: "Matching com Top Criadores + Ads Credits",  desc: "Conecte-se com os maiores criadores de conteúdo do TikTok", bg: "#F1204A", color: "#ffffff", span: 2, badge: "Fase 4" },
 ];
 
 const REGIOES = [
@@ -37,187 +36,264 @@ const HERO_STATS = [
   { val: "0%",       label: "comissão por 90 dias"  },
 ];
 
-/* ── Animações de entrada (hero = animate; scroll = whileInView) ── */
+/* ── Animações ────────────────────────────────────────────────── */
 const heroLine = (delay: number) => ({
-  initial:   { opacity: 0, y: 28 },
-  animate:   { opacity: 1, y: 0 },
-  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number,number,number,number], delay },
+  initial:    { opacity: 0, y: 24 },
+  animate:    { opacity: 1, y: 0 },
+  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay },
 });
 
 const inView = (delay = 0) => ({
-  initial:    { opacity: 0, y: 32 },
-  whileInView:{ opacity: 1, y: 0 },
-  viewport:   { once: true, amount: 0.2 as const },
-  transition: { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] as [number,number,number,number], delay },
+  initial:     { opacity: 0, y: 32 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport:    { once: true, amount: 0.2 as const },
+  transition:  { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number], delay },
 });
-
-const FloatingDoodle = ({
-  src, size = 40, top, left, right, bottom, delay = 0, rotate = 0, opacity = 0.3, reverse = false,
-}: {
-  src: string; size?: number; top?: string; left?: string; right?: string;
-  bottom?: string; delay?: number; rotate?: number; opacity?: number; reverse?: boolean;
-}) => (
-  <div
-    className={`absolute pointer-events-none ${reverse ? "animate-float-reverse" : "animate-float"}`}
-    style={{ top, left, right, bottom, width: size, height: size, animationDelay: `${delay}s`, opacity, zIndex: 0 }}
-  >
-    <img src={src} alt="" className="w-full h-full object-contain brightness-125 saturate-150"
-      style={{ transform: `rotate(${rotate}deg)` }} />
-  </div>
-);
 
 /* ── Componente principal ─────────────────────────────────────── */
 export function PoloModaSection() {
   return (
     <section className="relative overflow-hidden" style={{ backgroundColor: "#033624" }}>
 
-      {/* Dot-grid texture */}
+      {/* ── Noise texture – premium grain feel ── */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
         style={{
-          backgroundImage:
-            "radial-gradient(rgba(45,204,211,0.13) 1px, transparent 1px)",
+          opacity: 0.025,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "256px 256px",
+        }}
+      />
+
+      {/* ── Dot-grid texture ── */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          backgroundImage: "radial-gradient(rgba(45,204,211,0.11) 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       />
 
-      {/* Radial light blobs */}
+      {/* ── Focal radial light – atrás do título ── */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
         style={{
           background:
-            "radial-gradient(ellipse at 18% 30%, rgba(45,204,211,0.11) 0%, transparent 58%), " +
-            "radial-gradient(ellipse at 88% 68%, rgba(241,32,74,0.08) 0%, transparent 52%)",
+            "radial-gradient(ellipse 70% 55% at 28% 38%, rgba(45,204,211,0.09) 0%, transparent 65%), " +
+            "radial-gradient(ellipse 50% 40% at 80% 18%, rgba(241,32,74,0.07) 0%, transparent 60%), " +
+            "radial-gradient(ellipse 40% 50% at 10% 80%, rgba(45,204,211,0.05) 0%, transparent 60%)",
         }}
       />
 
-      {/* Doodles */}
-      <FloatingDoodle src="/assets_new/7.svg"       size={130} top="3%"    right="-4%"   rotate={-10} opacity={0.30} />
-      <FloatingDoodle src="/assets_new/8.svg"       size={110} bottom="6%" left="-4%"   rotate={15}  opacity={0.28} reverse />
-      <FloatingDoodle src="/assets_new/10.svg"      size={170} top="38%"   left="-9%"   rotate={0}   opacity={0.18} />
-      <FloatingDoodle src="/assets_new/5.svg"       size={90}  top="22%"   right="-4%"  rotate={45}  opacity={0.22} />
-      <FloatingDoodle src="/assets_new/2.svg"       size={100} bottom="26%" right="-2%" rotate={-20} opacity={0.25} reverse />
-      <FloatingDoodle src="/assets_new/camera.svg"  size={130} top="11%"   left="3%"    rotate={30}  opacity={0.35} />
-      <FloatingDoodle src="/assets_new/manequim.svg" size={160} bottom="3%" right="13%" rotate={-10} opacity={0.22} />
+      {/* ── Geometric floating elements (desktop only) ── */}
+      {/* Anel externo top-right */}
+      <motion.div
+        className="absolute pointer-events-none z-0 hidden lg:block"
+        style={{
+          top: "5%", right: "2%",
+          width: 220, height: 220,
+          borderRadius: "50%",
+          border: "1.5px solid rgba(45,204,211,0.13)",
+        }}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+      />
+      {/* Anel interno top-right */}
+      <motion.div
+        className="absolute pointer-events-none z-0 hidden lg:block"
+        style={{
+          top: "9.5%", right: "6.5%",
+          width: 110, height: 110,
+          borderRadius: "50%",
+          border: "1px solid rgba(45,204,211,0.09)",
+        }}
+        animate={{ rotate: -360 }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+      />
+      {/* Dot centro do anel */}
+      <div
+        className="absolute pointer-events-none z-0 hidden lg:block"
+        style={{ top: "13.5%", right: "10.3%", width: 5, height: 5, borderRadius: "50%", backgroundColor: "rgba(45,204,211,0.35)" }}
+      />
 
-      <div className="relative z-10 w-full max-w-[430px] lg:max-w-screen-xl mx-auto px-6 lg:px-20 py-16 lg:py-28 flex flex-col gap-12 lg:gap-24">
+      {/* Anel bottom-left */}
+      <motion.div
+        className="absolute pointer-events-none z-0 hidden lg:block"
+        style={{
+          bottom: "8%", left: "-4%",
+          width: 260, height: 260,
+          borderRadius: "50%",
+          border: "1px solid rgba(45,204,211,0.07)",
+        }}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 55, repeat: Infinity, ease: "linear" }}
+      />
 
-        {/* ══════════════════════════════════════════════════════
-            ① HERO — 2 colunas no desktop
-        ══════════════════════════════════════════════════════ */}
-        <div className="lg:grid lg:grid-cols-[1fr_460px] lg:gap-20 lg:items-center">
+      {/* Dots decorativos espalhados */}
+      <motion.div
+        className="absolute pointer-events-none z-0 hidden lg:block"
+        style={{ top: "18%", left: "6%", width: 6, height: 6, borderRadius: "50%", backgroundColor: "rgba(251,235,53,0.45)" }}
+        animate={{ opacity: [0.45, 0.9, 0.45] }}
+        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute pointer-events-none z-0 hidden lg:block"
+        style={{ top: "50%", left: "3%", width: 4, height: 4, borderRadius: "50%", backgroundColor: "rgba(45,204,211,0.50)" }}
+        animate={{ opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      />
+      <motion.div
+        className="absolute pointer-events-none z-0 hidden lg:block"
+        style={{ top: "28%", right: "18%", width: 5, height: 5, borderRadius: "50%", backgroundColor: "rgba(241,32,74,0.40)" }}
+        animate={{ opacity: [0.4, 0.8, 0.4] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+      />
 
-          {/* ── Coluna esquerda ── */}
-          <div>
+      {/* Linha diagonal decorativa top-left */}
+      <div
+        className="absolute pointer-events-none z-0 hidden lg:block"
+        style={{
+          top: "12%", left: "8%",
+          width: 60, height: 1,
+          backgroundColor: "rgba(45,204,211,0.15)",
+          transform: "rotate(-35deg)",
+        }}
+      />
+      <div
+        className="absolute pointer-events-none z-0 hidden lg:block"
+        style={{
+          top: "14%", left: "7%",
+          width: 30, height: 1,
+          backgroundColor: "rgba(45,204,211,0.10)",
+          transform: "rotate(-35deg)",
+        }}
+      />
 
-            {/* Programa ativo — desktop only */}
+      {/* ════════════════════════════════════════════════════════
+          CONTEÚDO
+      ════════════════════════════════════════════════════════ */}
+      <div className="relative z-10 w-full max-w-[430px] lg:max-w-screen-xl mx-auto px-6 lg:px-20 py-12 lg:py-14 flex flex-col gap-10 lg:gap-14">
+
+        {/* ══ ① HERO — grid 12 colunas ══════════════════════════ */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-16 lg:items-start">
+
+          {/* ── Coluna esquerda · 7 cols ── */}
+          <div className="lg:col-span-7">
+
+            {/* Badge glassmorphism */}
             <motion.div
-              className="hidden lg:flex items-center gap-2.5 mb-7"
-              initial={{ opacity: 0, x: -16 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.05 }}
+              className="inline-flex mb-5"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
             >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60" style={{ backgroundColor: "#2DCCD3" }} />
-                <span className="relative inline-flex h-2 w-2 rounded-full" style={{ backgroundColor: "#2DCCD3" }} />
-              </span>
               <span
-                className="font-body text-xs font-medium uppercase tracking-[0.18em]"
-                style={{ color: "rgba(255,255,255,0.32)" }}
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full font-body font-semibold text-xs uppercase tracking-widest"
+                style={{
+                  background: "rgba(241,32,74,0.15)",
+                  border: "1px solid rgba(241,32,74,0.32)",
+                  color: "#F1204A",
+                  backdropFilter: "blur(12px)",
+                  WebkitBackdropFilter: "blur(12px)",
+                }}
               >
-                Programa ativo · Polos de Moda · 2026
+                <span
+                  className="w-1.5 h-1.5 rounded-full animate-pulse"
+                  style={{ backgroundColor: "#F1204A" }}
+                />
+                Exclusivo para Polos de Moda
               </span>
             </motion.div>
 
-            {/* Pill badge */}
-            <motion.span
-              className="pill-tag text-white text-xs inline-block mb-5 lg:text-sm lg:px-5 lg:py-2"
-              style={{ backgroundColor: "#F1204A", transform: "rotate(-2deg)" }}
-              initial={{ opacity: 0, scale: 0.88 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.45, delay: 0.1 }}
-            >
-              Exclusivo para Polos de Moda
-            </motion.span>
-
-            {/* Título — cada linha entra em cascata */}
+            {/* Headline */}
             <h2
-              className="font-display font-black leading-[0.90] tracking-tight"
-              style={{ fontSize: "clamp(2rem, 7vw, 5.4rem)" }}
+              className="font-display font-black leading-[0.91] tracking-tight"
+              style={{ fontSize: "clamp(2rem, 5vw, 3.8rem)" }}
             >
-              <motion.span className="block text-white" {...heroLine(0.15)}>
+              <motion.span className="block text-white" {...heroLine(0.18)}>
                 Venda moda{" "}
                 <span style={{ color: "#2DCCD3" }}>no TikTok Shop</span>
               </motion.span>
-              <motion.span className="block text-white" {...heroLine(0.25)}>
-                e desbloqueie{" "}
-                <HighlightedText once={false} inView={true} from="left">
+              <motion.span className="block text-white mt-1" {...heroLine(0.28)}>
+                e desbloqueie
+              </motion.span>
+              <motion.span className="block mt-1.5" {...heroLine(0.38)}>
+                <span
+                  className="inline-block rounded-lg px-3 py-0.5"
+                  style={{
+                    backgroundColor: "#F1204A",
+                    color: "#ffffff",
+                    boxShadow: "0 6px 28px rgba(241,32,74,0.40)",
+                  }}
+                >
                   benefícios exclusivos
-                </HighlightedText>
+                </span>
               </motion.span>
             </h2>
 
             {/* Subtítulo */}
             <motion.p
-              className="font-body mt-5 text-sm lg:text-lg leading-relaxed lg:mt-7"
-              style={{ color: "rgba(255,255,255,0.52)", maxWidth: "480px" }}
-              {...heroLine(0.47)}
+              className="font-body mt-4 text-sm lg:text-base leading-relaxed lg:mt-5"
+              style={{ color: "rgba(255,255,255,0.48)", maxWidth: "460px" }}
+              {...heroLine(0.48)}
             >
               Se sua loja está cadastrada com o CEP de um Polo de moda,
               você já faz parte automaticamente.
             </motion.p>
 
             {/* CTAs */}
-            <motion.div className="flex items-center gap-4 mt-6 lg:mt-8" {...heroLine(0.53)}>
+            <motion.div className="flex flex-wrap items-center gap-4 mt-5 lg:mt-6" {...heroLine(0.54)}>
               <motion.a
                 href="https://seller-br.tiktok.com/account/register?channel=BrunaSeller"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative overflow-hidden inline-flex items-center gap-2 font-display font-black text-white text-sm lg:text-base px-6 py-3 lg:px-8 lg:py-4"
+                className="relative overflow-hidden inline-flex items-center gap-2 font-display font-black text-white text-sm lg:text-base px-7 py-3.5 rounded-full"
                 style={{
                   backgroundColor: "#F1204A",
-                  borderRadius: "999px",
-                  boxShadow: "0 10px 36px rgba(241,32,74,0.38)",
+                  boxShadow: "0 8px 28px rgba(241,32,74,0.42)",
                 }}
-                whileHover={{ scale: 1.04, boxShadow: "0 16px 48px rgba(241,32,74,0.48)" }}
+                whileHover={{ scale: 1.04, boxShadow: "0 16px 48px rgba(241,32,74,0.58)" }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 380, damping: 20 }}
               >
-                {/* Shimmer on hover */}
                 <motion.span
                   className="absolute inset-0 bg-white/20"
-                  initial={{ x: "-110%", skewX: -12 }}
+                  style={{ skewX: -12 }}
+                  initial={{ x: "-110%" }}
                   whileHover={{ x: "110%" }}
                   transition={{ duration: 0.45, ease: "easeOut" }}
                 />
                 <span className="relative flex items-center gap-2">
-                  Abrir conta agora <ArrowRight size={18} />
+                  Abrir conta agora <ArrowRight size={17} />
                 </span>
               </motion.a>
 
               <a
                 href="#beneficios"
-                className="hidden lg:inline-flex items-center gap-1.5 font-body text-sm font-medium transition-all duration-200"
+                className="group hidden lg:inline-flex items-center gap-1.5 font-body text-sm font-medium relative pb-0.5"
                 style={{ color: "rgba(255,255,255,0.38)" }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.80)"; }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.78)"; }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.38)"; }}
               >
                 Ver benefícios ↓
+                <span className="absolute bottom-0 left-0 h-px w-0 group-hover:w-full transition-all duration-300" style={{ backgroundColor: "rgba(255,255,255,0.35)" }} />
               </a>
             </motion.div>
 
-            {/* Social proof — desktop */}
+            {/* Social proof */}
             <motion.p
-              className="hidden lg:block font-body text-xs mt-4"
-              style={{ color: "rgba(255,255,255,0.26)" }}
+              className="hidden lg:flex items-center gap-2 font-body text-xs mt-4"
+              style={{ color: "rgba(255,255,255,0.28)" }}
               {...heroLine(0.60)}
             >
-              ✓ Vendedores de Birigui, Brás, Franca, Goiânia e mais 4 regiões já participam
+              <span style={{ color: "#2DCCD3" }}>✓</span>
+              Vendedores de Birigui, Brás, Franca, Goiânia e mais 4 regiões já participam
             </motion.p>
 
-            {/* Stats row — desktop */}
+            {/* Stats row */}
             <motion.div
-              className="hidden lg:grid lg:grid-cols-3 mt-10 pt-8"
+              className="hidden lg:grid lg:grid-cols-3 mt-7 pt-6"
               style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
               {...heroLine(0.66)}
             >
@@ -225,12 +301,15 @@ export function PoloModaSection() {
                 <div
                   key={i}
                   className="pr-6"
-                  style={{ borderRight: i < 2 ? "1px solid rgba(255,255,255,0.08)" : "none", paddingLeft: i > 0 ? "1.5rem" : 0 }}
+                  style={{
+                    borderRight: i < 2 ? "1px solid rgba(255,255,255,0.08)" : "none",
+                    paddingLeft: i > 0 ? "1.5rem" : 0,
+                  }}
                 >
-                  <p className="font-display font-black text-white" style={{ fontSize: "1.6rem" }}>
+                  <p className="font-display font-black text-white" style={{ fontSize: "1.5rem" }}>
                     {s.val}
                   </p>
-                  <p className="font-body text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>
+                  <p className="font-body text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.32)" }}>
                     {s.label}
                   </p>
                 </div>
@@ -238,144 +317,158 @@ export function PoloModaSection() {
             </motion.div>
           </div>
 
-          {/* ── Coluna direita: stat cards — desktop only ── */}
-          <div className="hidden lg:flex flex-col gap-3">
+          {/* ── Coluna direita · 5 cols — Glassmorphism cards ── */}
+          <div className="hidden lg:flex lg:col-span-5 flex-col gap-2.5">
 
-            {/* Card principal com gradient border */}
+            {/* Card principal — R$ 9.800 */}
             <motion.div
-              className="rounded-[22px] p-[1.5px]"
+              className="relative rounded-[20px] overflow-hidden"
               style={{
-                background:
-                  "linear-gradient(135deg, rgba(45,204,211,0.55) 0%, rgba(45,204,211,0.12) 55%, transparent 100%)",
+                background: "rgba(255,255,255,0.05)",
+                border: "1px solid rgba(45,204,211,0.22)",
+                backdropFilter: "blur(20px)",
+                WebkitBackdropFilter: "blur(20px)",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.07)",
               }}
-              initial={{ opacity: 0, x: 44, y: 8 }}
+              initial={{ opacity: 0, x: 40, y: 8 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 0.75, delay: 0.25, type: "spring", stiffness: 65, damping: 18 }}
-              whileHover={{ y: -5, boxShadow: "0 28px 64px rgba(45,204,211,0.18)" }}
+              whileHover={{ y: -4, boxShadow: "0 20px 52px rgba(0,0,0,0.28), 0 0 0 1px rgba(45,204,211,0.28)" }}
             >
+              {/* Linha de acento no topo */}
               <div
-                className="rounded-[20.5px] p-7 flex items-center justify-between backdrop-blur-sm"
-                style={{ backgroundColor: "rgba(3,44,28,0.88)" }}
-              >
+                className="absolute top-0 left-0 right-0 h-px"
+                style={{ background: "linear-gradient(90deg, transparent 0%, rgba(45,204,211,0.55) 50%, transparent 100%)" }}
+              />
+              <div className="px-6 py-5 flex items-center justify-between">
                 <div>
                   <p
-                    className="font-body text-[10px] uppercase tracking-[0.22em] mb-3 font-semibold"
-                    style={{ color: "#2DCCD3", opacity: 0.78 }}
+                    className="font-body text-[10px] uppercase tracking-[0.22em] mb-2 font-semibold"
+                    style={{ color: "#2DCCD3", opacity: 0.82 }}
                   >
                     Total desbloqueável
                   </p>
                   <p
                     className="font-display font-black text-white leading-none"
-                    style={{ fontSize: "3rem" }}
+                    style={{ fontSize: "2.5rem" }}
                   >
                     R$ 9.800
                   </p>
-                  <p className="font-body text-sm mt-2.5" style={{ color: "rgba(255,255,255,0.38)" }}>
+                  <p className="font-body text-sm mt-1.5" style={{ color: "rgba(255,255,255,0.35)" }}>
                     em cupons, ads e incentivos
                   </p>
                 </div>
-                <Trophy
-                  size={64}
-                  style={{ color: "#2DCCD3", opacity: 0.15 }}
-                  className="flex-shrink-0 ml-4"
-                />
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+                  style={{
+                    background: "rgba(45,204,211,0.08)",
+                    border: "1px solid rgba(45,204,211,0.14)",
+                  }}
+                >
+                  <Trophy size={28} style={{ color: "#2DCCD3", opacity: 0.55 }} />
+                </div>
               </div>
             </motion.div>
 
             {/* Dois cards pequenos */}
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-2.5">
+
+              {/* 0% comissão — Glow yellow */}
               <motion.div
-                className="rounded-[18px] p-5 flex flex-col justify-between"
+                className="rounded-[16px] px-5 py-4 flex flex-col justify-between"
                 style={{
                   backgroundColor: "#FBEB35",
-                  boxShadow: "0 4px 20px rgba(251,235,53,0.15)",
-                  minHeight: 148,
+                  boxShadow: "0 4px 20px rgba(251,235,53,0.20), inset 0 1px 0 rgba(255,255,255,0.55)",
+                  minHeight: 118,
                 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.38, type: "spring", stiffness: 90 }}
-                whileHover={{ y: -4, boxShadow: "0 18px 44px rgba(251,235,53,0.22)" }}
+                whileHover={{ y: -3, boxShadow: "0 14px 36px rgba(251,235,53,0.30)" }}
               >
+                <p className="font-body text-[11px] font-semibold" style={{ color: "#033624", opacity: 0.55 }}>
+                  Primeiros 90 dias
+                </p>
                 <div>
-                  <p className="font-body text-[11px] font-semibold" style={{ color: "#033624", opacity: 0.50 }}>
-                    Primeiros 90 dias
-                  </p>
-                  <p
-                    className="font-display font-black leading-none mt-2"
-                    style={{ fontSize: "2.6rem", color: "#033624" }}
-                  >
+                  <p className="font-display font-black leading-none mt-2" style={{ fontSize: "2.2rem", color: "#033624" }}>
                     0%
                   </p>
+                  <p className="font-body text-xs mt-1.5" style={{ color: "#033624", opacity: 0.58 }}>
+                    comissão na plataforma
+                  </p>
                 </div>
-                <p className="font-body text-xs" style={{ color: "#033624", opacity: 0.58 }}>
-                  comissão na plataforma
-                </p>
               </motion.div>
 
+              {/* 4 fases — glassmorphism */}
               <motion.div
-                className="rounded-[18px] p-5 flex flex-col justify-between"
+                className="rounded-[16px] px-5 py-4 flex flex-col justify-between"
                 style={{
-                  backgroundColor: "rgba(255,255,255,0.06)",
+                  background: "rgba(255,255,255,0.05)",
                   border: "1px solid rgba(255,255,255,0.10)",
-                  minHeight: 148,
+                  backdropFilter: "blur(12px)",
+                  WebkitBackdropFilter: "blur(12px)",
+                  minHeight: 118,
+                  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.07)",
                 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.44, type: "spring", stiffness: 90 }}
-                whileHover={{ y: -4, backgroundColor: "rgba(255,255,255,0.09)" }}
+                whileHover={{ y: -3, background: "rgba(255,255,255,0.08)" }}
               >
+                <p className="font-body text-[11px] font-semibold" style={{ color: "rgba(255,255,255,0.40)" }}>
+                  Fases de aceleração
+                </p>
                 <div>
-                  <p className="font-body text-[11px] font-semibold" style={{ color: "rgba(255,255,255,0.38)" }}>
-                    Fases de aceleração
-                  </p>
-                  <p
-                    className="font-display font-black leading-none mt-2 text-white"
-                    style={{ fontSize: "2.6rem" }}
-                  >
+                  <p className="font-display font-black leading-none mt-2 text-white" style={{ fontSize: "2.2rem" }}>
                     4
                   </p>
+                  <p className="font-body text-xs mt-1.5" style={{ color: "rgba(255,255,255,0.38)" }}>
+                    do básico ao Diamante
+                  </p>
                 </div>
-                <p className="font-body text-xs" style={{ color: "rgba(255,255,255,0.36)" }}>
-                  do básico ao Diamante
-                </p>
               </motion.div>
             </div>
 
-            {/* Card criadores */}
+            {/* Card criadores — Blaze gradient glassmorphism */}
             <motion.div
-              className="rounded-[18px] p-5 flex items-center gap-4"
+              className="relative rounded-[16px] px-5 py-4 flex items-center gap-3 overflow-hidden"
               style={{
-                background: "linear-gradient(135deg, #F1204A 0%, #c8183e 100%)",
-                boxShadow: "0 4px 24px rgba(241,32,74,0.22)",
+                background: "linear-gradient(135deg, rgba(241,32,74,0.82) 0%, rgba(192,16,56,0.88) 100%)",
+                border: "1px solid rgba(241,32,74,0.35)",
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
+                boxShadow: "0 4px 24px rgba(241,32,74,0.28), inset 0 1px 0 rgba(255,255,255,0.12)",
               }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.50, type: "spring", stiffness: 90 }}
-              whileHover={{ y: -4, boxShadow: "0 18px 48px rgba(241,32,74,0.34)" }}
+              whileHover={{ y: -3, boxShadow: "0 14px 42px rgba(241,32,74,0.40)" }}
             >
               <div
-                className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ backgroundColor: "rgba(255,255,255,0.18)" }}
+                className="absolute top-0 left-0 right-0 h-px"
+                style={{ background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.20) 50%, transparent 100%)" }}
+              />
+              <div
+                className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+                style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.12)" }}
               >
-                <Star size={22} className="text-white" />
+                <Star size={16} className="text-white" />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-display font-black text-white text-sm leading-tight">
                   Matching com Top Criadores
                 </p>
-                <p className="font-body text-xs mt-1" style={{ color: "rgba(255,255,255,0.58)" }}>
+                <p className="font-body text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.60)" }}>
                   Fase 4 · Ads Credits + Comissão extra
                 </p>
               </div>
-              <Sparkles size={18} style={{ color: "rgba(255,255,255,0.35)" }} className="flex-shrink-0" />
+              <Sparkles size={15} style={{ color: "rgba(255,255,255,0.38)" }} className="flex-shrink-0" />
             </motion.div>
 
           </div>
         </div>
 
-        {/* ══════════════════════════════════════════════════════
-            ② GRID DE BENEFÍCIOS
-        ══════════════════════════════════════════════════════ */}
+        {/* ══ ② GRID DE BENEFÍCIOS ══════════════════════════════ */}
         <motion.div {...inView(0.05)} id="beneficios">
           <p
             className="font-body text-xs lg:text-sm mb-4 lg:mb-8 font-semibold uppercase tracking-[0.18em]"
@@ -421,12 +514,10 @@ export function PoloModaSection() {
           </div>
         </motion.div>
 
-        {/* ══════════════════════════════════════════════════════
-            ③ BLOCOS INFERIORES
-        ══════════════════════════════════════════════════════ */}
+        {/* ══ ③ BLOCOS INFERIORES ══════════════════════════════ */}
         <div className="flex flex-col gap-6">
 
-          {/* Polos participantes — SOMENTE MOBILE */}
+          {/* Polos participantes — mobile only */}
           <motion.div {...inView(0.1)} id="polos" className="lg:hidden">
             <div className="rounded-3xl p-6 flex flex-col" style={{ backgroundColor: "#BAF6F0" }}>
               <h3 className="font-display font-black text-xl mb-1" style={{ color: "#033624" }}>
@@ -466,7 +557,6 @@ export function PoloModaSection() {
                   Escolha o link da sua região para criar sua conta
                 </p>
               </div>
-
               <div className="flex flex-col lg:flex-row gap-3 lg:gap-4">
                 {[
                   {

@@ -19,7 +19,7 @@ export default function PoloModaPage() {
       <FloatingNavbar />
 
       <main
-        className="relative w-full pt-28"
+        className="relative w-full pt-20 lg:pt-20"
         style={{ minHeight: "100vh", backgroundColor: "#033624" }}
       >
         <PoloModaSection />

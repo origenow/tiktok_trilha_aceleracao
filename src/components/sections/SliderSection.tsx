@@ -298,240 +298,243 @@ export function SliderSection() {
   const currentSlides = tabData[activeTab] || tabData["Abrindo sua loja"];
 
   return (
-    <section id="acceleration-sliders" className="py-12 bg-white overflow-hidden relative z-10 w-full">
-      <div className="w-full max-w-[430px] lg:max-w-screen-xl mx-auto">
+    <section id="acceleration-sliders" className="py-24 bg-white overflow-hidden relative z-10 w-full">
+      <div className="w-full max-w-[430px] lg:max-w-screen-2xl mx-auto lg:px-20">
       {/* ── Seller Academy + Abrindo sua loja ─────────────────────── */}
-      <div className="px-4 mb-10 flex flex-col gap-4">
+        <motion.div {...fadeUp(0)} className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 lg:mb-8 px-4">
+          <div className="flex flex-col gap-2">
+            <span
+              className="font-body text-xs font-semibold px-4 py-1.5 self-start"
+              style={{
+                backgroundColor: "#111111",
+                color: "#BAF6F0",
+                borderRadius: "999px",
+                transform: "rotate(-2deg)",
+                display: "inline-block",
+              }}
+            >
+              🎓 Conteúdo oficial
+            </span>
+            <h2 className="font-display font-black leading-tight" style={{ fontSize: "clamp(1.6rem, 7vw, 2.5rem)", color: "#111111" }}>
+              Seller Academy
+            </h2>
+            <p className="font-body text-sm lg:text-base leading-snug" style={{ color: "#4A0505", opacity: 0.7 }}>
+              Saiba tudo sobre TikTok Shop — do cadastro à escala.
+            </p>
+          </div>
 
-        {/* Header */}
-        <motion.div {...fadeUp(0)} className="flex flex-col gap-2">
-          <span
-            className="font-body text-xs font-semibold px-4 py-1.5 self-start"
+          {/* CTA Seller Academy */}
+          <motion.a
+            {...fadeUp(0.08)}
+            href="https://seller-br.tiktok.com/university/home"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-4 rounded-2xl p-5 lg:p-4 lg:px-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:scale-[0.98]"
             style={{
-              backgroundColor: "#033624",
-              color: "#BAF6F0",
-              borderRadius: "999px",
-              transform: "rotate(-2deg)",
-              display: "inline-block",
+              background: "linear-gradient(135deg, #111111 0%, #333333 100%)",
+              boxShadow: "0 6px 24px rgba(0,0,0,0.20)",
             }}
           >
-            🎓 Conteúdo oficial
-          </span>
-          <h2 className="font-display font-black leading-tight" style={{ fontSize: "clamp(1.6rem, 7vw, 2rem)", color: "#033624" }}>
-            Seller Academy
-          </h2>
-          <p className="font-body text-sm leading-snug" style={{ color: "#4A0505", opacity: 0.7 }}>
-            Saiba tudo sobre TikTok Shop — do cadastro à escala.
-          </p>
+            <div
+              className="shrink-0 w-12 h-12 lg:w-8 lg:h-8 rounded-2xl lg:rounded-lg flex items-center justify-center text-2xl lg:text-sm"
+              style={{ backgroundColor: "rgba(186,246,240,0.1)" }}
+            >
+              🎓
+            </div>
+            <div className="flex-1 lg:flex-none">
+              <p className="font-display font-black text-sm lg:text-base" style={{ color: "#BAF6F0" }}>Acessar Academy</p>
+              <p className="font-body text-xs mt-0.5 lg:hidden" style={{ color: "rgba(186,246,240,0.5)" }}>Treinamentos oficiais</p>
+            </div>
+            <div
+              className="shrink-0 w-8 h-8 lg:w-6 lg:h-6 rounded-full flex items-center justify-center transition-all duration-200 group-hover:scale-110"
+              style={{ backgroundColor: "rgba(186,246,240,0.1)" }}
+            >
+              <ExternalLink size={14} style={{ color: "#BAF6F0" }} />
+            </div>
+          </motion.a>
         </motion.div>
 
-        {/* CTA Seller Academy */}
-        <motion.a
-          {...fadeUp(0.08)}
-          href="https://seller-br.tiktok.com/university/home"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group flex items-center gap-4 rounded-2xl p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]"
-          style={{
-            background: "linear-gradient(135deg, #033624 0%, #055a3a 100%)",
-            boxShadow: "0 6px 24px rgba(3,54,36,0.30)",
-          }}
-        >
-          <div
-            className="shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-2xl"
-            style={{ backgroundColor: "rgba(186,246,240,0.15)" }}
-          >
-            🎓
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="font-display font-black text-sm" style={{ color: "#BAF6F0" }}>Acessar Seller Academy</p>
-            <p className="font-body text-xs mt-0.5" style={{ color: "rgba(186,246,240,0.5)" }}>Treinamentos oficiais TikTok Shop</p>
-          </div>
-          <div
-            className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 group-hover:scale-110"
-            style={{ backgroundColor: "rgba(186,246,240,0.15)" }}
-          >
-            <ExternalLink size={14} style={{ color: "#BAF6F0" }} />
-          </div>
-        </motion.a>
-
-        {/* Divider */}
-        <motion.div {...fadeUp(0.14)} className="flex items-center gap-3 my-1">
-          <div className="flex-1 h-px" style={{ backgroundColor: "rgba(3,54,36,0.12)" }} />
-          <span className="font-body text-[10px] font-bold uppercase tracking-widest" style={{ color: "#033624", opacity: 0.45 }}>Abrindo sua loja</span>
-          <div className="flex-1 h-px" style={{ backgroundColor: "rgba(3,54,36,0.12)" }} />
-        </motion.div>
-
-        {/* Container Desktop para Políticas + Taxas */}
-        <div className="flex flex-col lg:flex-row gap-3 lg:gap-4 w-full mt-2 lg:mt-4">
+        {/* Grid de Informações - Cards Profissionais */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 w-full mt-6 px-4">
           {/* Políticas */}
           <motion.a
             {...fadeUp(0.18)}
             href="https://seller-br.tiktok.com/university/home"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-3.5 rounded-2xl px-4 py-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl lg:flex-1 h-full"
+            className="group flex items-center gap-4 rounded-3xl p-6 transition-all duration-300 lg:hover:-translate-y-1 hover:shadow-xl"
             style={{
               background: "linear-gradient(135deg, #e0fdfb 0%, #BAF6F0 100%)",
               border: "1.5px solid #2DCCD3",
               boxShadow: "0 4px 16px rgba(45,204,211,0.18)",
             }}
           >
-          <div
-            className="shrink-0 w-11 h-11 rounded-xl flex items-center justify-center text-lg"
-            style={{ backgroundColor: "#2DCCD3", boxShadow: "0 3px 10px rgba(45,204,211,0.4)" }}
-          >
-            📋
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="font-display font-black text-sm" style={{ color: "#033624" }}>Políticas da Plataforma</p>
-            <p className="font-body text-xs mt-0.5" style={{ color: "#033624", opacity: 0.55 }}>Regras e termos para vender no TikTok Shop</p>
-          </div>
-          <div
-            className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
-            style={{ backgroundColor: "#2DCCD3" }}
-          >
-            <ExternalLink size={12} style={{ color: "#033624" }} />
-          </div>
-        </motion.a>
+            <div
+              className="shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-xl"
+              style={{ backgroundColor: "#2DCCD3", boxShadow: "0 3px 10px rgba(45,204,211,0.4)" }}
+            >
+              📋
+            </div>
+            <div className="flex-1">
+              <p className="font-display font-black text-sm lg:text-base text-[#111111]">Políticas</p>
+              <p className="font-body text-xs mt-0.5 text-[#111111]/60">Regras e termos da plataforma</p>
+            </div>
+            <div
+              className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+              style={{ backgroundColor: "#2DCCD3" }}
+            >
+              <ExternalLink size={14} style={{ color: "#111111" }} />
+            </div>
+          </motion.a>
 
-        {/* Taxas — 2 colunas */}
-        <motion.div {...fadeUp(0.22)} className="grid grid-cols-2 gap-3 lg:gap-4 lg:flex-[2] h-full">
           {/* Comissão */}
-          <div
-            className="rounded-2xl p-4 flex flex-col gap-1.5 relative overflow-hidden"
+          <motion.div
+            {...fadeUp(0.22)}
+            className="group relative rounded-3xl p-6 flex flex-col gap-1 overflow-hidden transition-all duration-300 lg:hover:-translate-y-1 hover:shadow-xl"
             style={{
               background: "linear-gradient(145deg, #F1204A 0%, #c01038 100%)",
               boxShadow: "0 6px 22px rgba(241,32,74,0.38)",
             }}
           >
-            <div className="absolute -top-4 -right-4 w-20 h-20 rounded-full opacity-10 bg-white" />
-            <div
-              className="w-9 h-9 rounded-xl flex items-center justify-center mb-0.5"
-              style={{ backgroundColor: "rgba(255,255,255,0.2)" }}
-            >
-              <Tag size={15} style={{ color: "#ffffff" }} />
+            <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full -mr-8 -mt-8" />
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: "rgba(255,255,255,0.2)" }}>
+                <Tag size={16} style={{ color: "#ffffff" }} />
+              </div>
+              <p className="font-body text-[10px] lg:text-xs font-bold uppercase tracking-widest text-white/70">
+                Comissão
+              </p>
             </div>
-            <p className="font-body text-[10px] font-semibold uppercase tracking-wide" style={{ color: "rgba(255,255,255,0.75)" }}>
-              Comissão TikTok
-            </p>
-            <p className="font-display font-black leading-none" style={{ fontSize: "2.2rem", color: "#ffffff" }}>
-              6%
-            </p>
-            <p className="font-body text-[10px]" style={{ color: "rgba(255,255,255,0.65)" }}>
-              + R$ 4,00 por item
-            </p>
-          </div>
+            <div className="flex items-baseline gap-1">
+              <p className="font-display font-black text-4xl lg:text-5xl text-white">6%</p>
+              <p className="font-body text-[10px] font-bold text-white/50">+ R$ 4,00</p>
+            </div>
+            <p className="font-body text-[10px] mt-1 text-white/40">por item vendido</p>
+          </motion.div>
+
           {/* Frete */}
-          <div
-            className="rounded-2xl p-4 flex flex-col gap-1.5 relative overflow-hidden"
+          <motion.div
+            {...fadeUp(0.26)}
+            className="group relative rounded-3xl p-6 flex flex-col gap-1 overflow-hidden transition-all duration-300 lg:hover:-translate-y-1 hover:shadow-xl"
             style={{
-              background: "linear-gradient(145deg, #033624 0%, #055a3a 100%)",
-              boxShadow: "0 6px 22px rgba(3,54,36,0.35)",
+              background: "linear-gradient(145deg, #111111 0%, #333333 100%)",
+              boxShadow: "0 6px 22px rgba(0,0,0,0.25)",
             }}
           >
-            <div className="absolute -top-4 -right-4 w-20 h-20 rounded-full opacity-10" style={{ backgroundColor: "#2DCCD3" }} />
-            <div
-              className="w-9 h-9 rounded-xl flex items-center justify-center mb-0.5"
-              style={{ backgroundColor: "rgba(45,204,211,0.2)" }}
-            >
-              <Truck size={15} style={{ color: "#2DCCD3" }} />
+            <div className="absolute top-0 right-0 w-24 h-24 bg-[#2DCCD3]/5 rounded-full -mr-8 -mt-8" />
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: "rgba(45,204,211,0.2)" }}>
+                <Truck size={16} style={{ color: "#2DCCD3" }} />
+              </div>
+              <p className="font-body text-[10px] lg:text-xs font-bold uppercase tracking-widest text-[#2DCCD3]">
+                Frete
+              </p>
             </div>
-            <p className="font-body text-[10px] font-semibold uppercase tracking-wide" style={{ color: "rgba(186,246,240,0.7)" }}>
-              Taxa de Frete
-            </p>
-            <p className="font-display font-black leading-none" style={{ fontSize: "2.2rem", color: "#BAF6F0" }}>
-              6%
-            </p>
-            <p className="font-body text-[10px]" style={{ color: "rgba(186,246,240,0.6)" }}>
-              sobre o pedido
-            </p>
-          </div>
-        </motion.div>
+            <div className="flex items-baseline gap-1">
+              <p className="font-display font-black text-4xl lg:text-5xl text-white">6%</p>
+            </div>
+            <p className="font-body text-[10px] mt-1 text-white/40">sobre o valor total</p>
+          </motion.div>
         </div>
 
-        {/* Nota de isenção */}
+        {/* Nota de isenção - Estilo Card Premium */}
         <motion.div
           {...fadeUp(0.28)}
-          className="rounded-2xl p-5 lg:p-8 flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-8 relative overflow-hidden mt-2 lg:mt-4"
+          className="rounded-3xl p-6 lg:p-10 flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12 relative overflow-hidden mt-8 transition-all duration-300 hover:shadow-2xl"
           style={{
             background: "linear-gradient(135deg, #FBEB35 0%, #f5e020 100%)",
-            boxShadow: "0 6px 24px rgba(251,235,53,0.45)",
+            boxShadow: "0 12px 40px rgba(251,235,53,0.3)",
           }}
         >
-          <div className="absolute -bottom-6 -right-6 w-28 h-28 rounded-full opacity-10" style={{ backgroundColor: "#033624" }} />
+          <div className="absolute -bottom-10 -right-10 w-64 h-64 rounded-full opacity-[0.05]" style={{ backgroundColor: "#111111" }} />
           
-          <div className="flex-1 flex flex-col gap-4 relative z-10">
-            <div className="flex items-start gap-3">
-              <span style={{ fontSize: "1.75rem", lineHeight: 1, marginTop: "2px" }}>💡</span>
-              <div className="flex flex-col gap-1">
-                <p className="font-display font-black text-sm lg:text-xl" style={{ color: "#033624" }}>Isenção de comissão por 60 dias</p>
-                <p className="font-body text-xs lg:text-sm leading-relaxed" style={{ color: "#033624", opacity: 0.72 }}>
-                  Ative a isenção de comissão antes da sua primeira venda.
-                </p>
+          <div className="flex-1 flex flex-col gap-6 relative z-10">
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl lg:text-3xl">💡</span>
+                <p className="font-display font-black text-xl lg:text-3xl text-[#111111]">Isenção de comissão por 60 dias</p>
               </div>
+              <p className="font-body text-sm lg:text-base leading-relaxed text-[#111111]/70">
+                Ative a isenção antes da sua primeira venda e potencialize seu lucro inicial.
+              </p>
             </div>
             
             <div
-              className="flex items-center gap-1 flex-wrap rounded-xl px-3 py-2 w-fit mt-1 lg:mt-2"
-              style={{ backgroundColor: "rgba(3,54,36,0.12)" }}
+              className="flex items-center gap-2 flex-wrap rounded-2xl px-4 py-2.5 w-fit"
+              style={{ backgroundColor: "rgba(0,0,0,0.05)" }}
             >
-              <span className="font-body text-[10px] lg:text-xs font-semibold" style={{ color: "#033624" }}>Central do vendedor</span>
-              <ChevronRight size={12} style={{ color: "#033624", opacity: 0.6 }} />
-              <span className="font-body text-[10px] lg:text-xs font-semibold" style={{ color: "#033624" }}>Crescimento</span>
-              <ChevronRight size={12} style={{ color: "#033624", opacity: 0.6 }} />
-              <span className="font-body text-[10px] lg:text-xs font-black px-2.5 py-0.5 rounded-full" style={{ backgroundColor: "#F1204A", color: "#ffffff" }}>Minhas Missões</span>
+              <span className="font-body text-xs lg:text-sm font-semibold text-[#111111]">Central do vendedor</span>
+              <ChevronRight size={14} className="text-[#111111]/40" />
+              <span className="font-body text-xs lg:text-sm font-semibold text-[#111111]">Crescimento</span>
+              <ChevronRight size={14} className="text-[#111111]/40" />
+              <span className="font-body text-xs lg:text-sm font-black px-4 py-1 rounded-full bg-[#F1204A] text-white">Minhas Missões</span>
             </div>
           </div>
           
-          <div className="lg:w-[45%] shrink-0 z-10 lg:-mr-4 mt-2 lg:mt-0 transition-transform duration-500 hover:scale-[1.02]">
+          <div className="lg:w-[40%] shrink-0 z-10 transition-transform duration-500 hover:scale-[1.02]">
             <ZoomableImage src="/assets/isencao.png" alt="Como ativar isenção de comissão"
-              width={500} height={320} className="rounded-xl shadow-lg" />
+              width={600} height={380} className="rounded-2xl shadow-xl border-4 border-white/20" />
           </div>
         </motion.div>
 
 
-      </div>
+
 
         {/* Container de Tabs */}
-        <motion.div {...fadeUp(0.1)} className="w-full px-4 mb-8 flex items-center justify-start gap-3 overflow-x-auto no-scrollbar lg:flex-wrap pb-2">
-        {tabs.map((tab) => {
-          const isActive = activeTab === tab;
-          return (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`whitespace-nowrap px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-300 border border-black/10 ${isActive
-                ? "bg-black text-white"
-                : "bg-white text-black hover:bg-gray-50"
-                }`}
-            >
-              {tab}
-            </button>
-          );
-        })}
-      </motion.div>
+        <motion.div {...fadeUp(0.1)} className="w-full px-4 mb-12 flex items-center justify-start lg:justify-center gap-4 overflow-x-auto no-scrollbar lg:flex-wrap pb-2">
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab;
+            return (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className="relative whitespace-nowrap px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 group"
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="activeTabSlider"
+                    className="absolute inset-0 rounded-full shadow-lg shadow-[#033624]/20"
+                    style={{ backgroundColor: "#033624" }}
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+                <span className={`relative z-10 transition-colors duration-300 ${
+                  isActive ? "text-[#BAF6F0]" : "text-[#033624] group-hover:text-[#033624]/70"
+                }`}>
+                  {tab}
+                </span>
+                {!isActive && (
+                  <div className="absolute inset-0 rounded-full border border-[#033624]/10 group-hover:border-[#033624]/30 transition-all duration-300 group-hover:bg-[#033624]/5" />
+                )}
+              </button>
+            );
+          })}
+        </motion.div>
 
       {/* Slider */}
-      <motion.div {...fadeUp(0.15)} className="w-full px-4 relative lg:px-8">
+      <motion.div {...fadeUp(0.15)} className="w-full px-4 relative lg:px-0">
+        {/* Efeito de Blur + Fade nas bordas (Desktop) - Suavizado */}
+        <div className="hidden lg:block absolute -left-10 top-0 bottom-0 w-40 z-20 pointer-events-none bg-gradient-to-r from-white via-white/30 to-transparent" />
+        <div className="hidden lg:block absolute -right-10 top-0 bottom-0 w-40 z-20 pointer-events-none bg-gradient-to-l from-white via-white/30 to-transparent" />
+
         {/* Seta esquerda */}
         <button
           onClick={() => swiperInstance?.slidePrev()}
           aria-label="Card anterior"
-          className="absolute left-0 lg:-left-4 top-[calc(50%-2.5rem)] lg:top-[calc(50%-1.5rem)] -translate-y-1/2 z-20 w-9 lg:w-12 h-9 lg:h-12 rounded-full flex items-center justify-center shadow-lg transition-all active:scale-90 hover:scale-110"
-          style={{ backgroundColor: "rgba(3,54,36,0.85)", color: "#BAF6F0" }}
+          className="absolute left-0 lg:-left-12 top-[calc(50%-2.5rem)] lg:top-[calc(50%-1.5rem)] -translate-y-1/2 z-30 w-9 lg:w-14 h-9 lg:h-14 rounded-full flex items-center justify-center shadow-2xl transition-all active:scale-90 hover:scale-110 border border-white/10"
+          style={{ backgroundColor: "rgba(3,54,36,0.98)", color: "#BAF6F0" }}
         >
-          <ChevronLeft size={20} />
+          <ChevronLeft size={24} />
         </button>
 
         {/* Seta direita */}
         <button
           onClick={() => swiperInstance?.slideNext()}
           aria-label="Próximo card"
-          className="absolute right-0 lg:-right-4 top-[calc(50%-2.5rem)] lg:top-[calc(50%-1.5rem)] -translate-y-1/2 z-20 w-9 lg:w-12 h-9 lg:h-12 rounded-full flex items-center justify-center shadow-lg transition-all active:scale-90 hover:scale-110"
-          style={{ backgroundColor: "rgba(3,54,36,0.85)", color: "#BAF6F0" }}
+          className="absolute right-0 lg:-right-12 top-[calc(50%-2.5rem)] lg:top-[calc(50%-1.5rem)] -translate-y-1/2 z-30 w-9 lg:w-14 h-9 lg:h-14 rounded-full flex items-center justify-center shadow-2xl transition-all active:scale-90 hover:scale-110 border border-white/10"
+          style={{ backgroundColor: "rgba(3,54,36,0.98)", color: "#BAF6F0" }}
         >
-          <ChevronRightNav size={20} />
+          <ChevronRightNav size={24} />
         </button>
 
         <Swiper
@@ -552,22 +555,21 @@ export function SliderSection() {
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
           }}
-          className="mySwiper !pb-10 lg:!px-2"
+          className="mySwiper !pb-10 lg:!px-10"
         >
           {currentSlides.map((slide, i) => (
             <SwiperSlide key={`${activeTab}-${i}`} className="h-auto">
               <div
-                className={`flex flex-col h-full rounded-2xl p-6 ${slide.dark ? "bg-black text-white" : "bg-[#f4f5f5] text-black"}`}
-                style={{ minHeight: "520px" }}
+                className={`flex flex-col h-full rounded-2xl p-6 transition-all duration-500 group min-h-[520px] lg:bg-transparent lg:p-0 lg:min-h-0 ${slide.dark ? "bg-black text-white" : "bg-[#f4f5f5] text-black"}`}
                 onPointerDown={pauseAutoplay}
               >
                 {/* Tag Superior */}
-                <h4 className={`font-bold text-sm mb-6 ${slide.dark ? "text-gray-300" : "text-gray-600"}`}>
+                <h4 className={`font-bold text-sm mb-6 lg:mb-3 lg:text-[#033624]/60 lg:uppercase lg:tracking-widest lg:text-[10px] ${slide.dark ? "text-gray-300" : "text-gray-600"}`}>
                   {slide.tag}
                 </h4>
 
                 {/* Vídeo Vertical */}
-                <div className="relative w-full aspect-[9/16] mb-6 rounded-xl overflow-hidden shadow-2xl bg-gray-900">
+                <div className="relative w-full aspect-[9/16] mb-6 lg:mb-5 rounded-xl lg:rounded-[24px] overflow-hidden shadow-2xl lg:shadow-[0_20px_50px_rgba(0,0,0,0.1)] lg:group-hover:shadow-[0_20px_60px_rgba(0,0,0,0.2)] lg:group-hover:-translate-y-2 transition-all duration-500 bg-gray-900">
                   {slide.tiktok ? (
                     <TikTokEmbed src={slide.video} />
                   ) : (
@@ -584,10 +586,10 @@ export function SliderSection() {
                 </div>
 
                 {/* Textos Inferiores */}
-                <h3 className="font-bold text-xl leading-tight mb-3">
+                <h3 className="font-bold text-xl lg:text-lg lg:font-black leading-tight mb-3 lg:mb-2 lg:text-[#033624]">
                   {slide.title}
                 </h3>
-                <p className={`text-sm leading-snug mb-8 ${slide.dark ? "text-gray-300" : "text-gray-700"}`}>
+                <p className={`text-sm leading-snug mb-8 lg:mb-6 lg:text-[#033624]/70 lg:leading-relaxed ${slide.dark ? "text-gray-300" : "text-gray-700"}`}>
                   {slide.description}
                 </p>
 
@@ -596,13 +598,13 @@ export function SliderSection() {
                   href={slide.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-auto flex items-center gap-1 hover:opacity-80 transition-opacity w-fit"
+                  className="mt-auto flex items-center gap-1 hover:opacity-80 transition-all w-fit lg:mt-0 lg:group-hover:translate-x-1"
                   onClick={pauseAutoplay}
                 >
-                  <span className={`font-bold text-sm leading-none ${slide.dark ? "text-white" : "text-black"}`}>
+                  <span className={`font-bold text-sm leading-none lg:text-[#033624] lg:border-b-2 lg:border-[#033624]/10 lg:pb-1 lg:group-hover:border-[#033624] ${slide.dark ? "text-white" : "text-black"}`}>
                     Assistir agora
                   </span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={`mt-[1px] ${slide.dark ? "text-white" : "text-black"}`}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={`mt-[1px] lg:text-[#033624] ${slide.dark ? "text-white" : "text-black"}`}>
                     <path d="m9 18 6-6-6-6" />
                   </svg>
                 </a>
@@ -613,10 +615,10 @@ export function SliderSection() {
       </motion.div>
       </div>
 
-      <style jsx global>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-      `}</style>
+      ` }} />
     </section>
   );
 }
@@ -626,24 +628,37 @@ function TikTokEmbed({ src }: { src: string }) {
   const startX = useRef(0);
 
   return (
-    <div className="relative w-full h-full overflow-hidden">
+    <div className="relative w-full h-full overflow-hidden bg-black group/video">
+      {/* Mantemos o SRC para mostrar a capa original, mas controlamos o autoplay via permissões e KEY */}
       <iframe
+        key={activated ? "active" : "inactive"}
         src={src}
-        className="border-0 absolute"
-        style={{ top: 0, left: 0, width: "calc(100% + 18px)", height: "100%", overflow: "hidden" }}
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
+        className={`border-0 absolute inset-0 w-full h-full transition-opacity duration-700 ${activated ? "opacity-100" : "opacity-80 lg:opacity-90"}`}
+        style={{ width: "calc(100% + 18px)", height: "100%", left: 0, top: 0 }}
+        // Adicionamos permissões extras para garantir o funcionamento do áudio e outros recursos
+        allow={activated ? "autoplay; clipboard-write; encrypted-media; picture-in-picture; fullscreen; web-share" : "clipboard-write; encrypted-media; picture-in-picture"}
         allowFullScreen
       />
+
       {!activated && (
         <div
-          className="absolute inset-0 z-10 cursor-pointer"
+          className="absolute inset-0 z-10 cursor-pointer flex items-center justify-center bg-black/10"
           onPointerDown={(e) => { startX.current = e.clientX; }}
           onPointerUp={(e) => {
             if (Math.abs(e.clientX - startX.current) < 8) {
               setActivated(true);
             }
           }}
-        />
+        >
+          {/* Botão Play Central - Suave */}
+          <div className="flex w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm items-center justify-center scale-90 group-hover/video:scale-100 transition-all duration-500">
+            <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#033624" className="ml-1">
+                <path d="M5 3l14 9-14 9V3z" />
+              </svg>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

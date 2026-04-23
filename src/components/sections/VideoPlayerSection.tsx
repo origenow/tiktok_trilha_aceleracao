@@ -97,7 +97,7 @@ export function VideoPlayerSection({ canPlay = false }: { canPlay?: boolean }) {
   };
 
   return (
-    <div ref={containerRef} className="relative h-[150vh] w-full bg-[#e8e8e8] lg:hidden">
+    <div ref={containerRef} className="relative h-[150vh] w-full bg-[#e8e8e8] md:hidden">
       <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
         <motion.section
           style={{ scale, borderRadius, opacity, y }}
@@ -108,14 +108,15 @@ export function VideoPlayerSection({ canPlay = false }: { canPlay?: boolean }) {
             <img src="/tiktok-icon.svg" alt="TikTok" className="w-16 h-16" />
           </div>
 
-          {/* Vídeo local */}
+          {/* Vídeo local - Otimizado com preload auto */}
           <video
             ref={videoRef}
             className="w-full h-full object-cover cursor-pointer"
-            src="/assets/videos/videoteste.mp4"
+            src="/assets/videos/video_mobile.mp4"
             loop
             muted={isMuted}
             playsInline
+            preload="auto"
             onClick={togglePlay}
           />
 

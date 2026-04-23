@@ -115,8 +115,8 @@ const FASES: FaseData[] = [
           "Use fotos de qualidade e descrições completas",
         ],
         materials: [
-          { title: "Webinar TikTok Shop [1]", url: null },
-          { title: "Webinar introdutório sobre Lives", url: null },
+          { title: "Webinar TikTok Shop [1]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgvm66g4ngwyp9m43qu3a3" },
+          { title: "Webinar introdutório sobre Lives", url: "https://bytedance.sg.larkoffice.com/minutes/obsgoo4ypm8jql622h3ey545" },
         ],
       },
       {
@@ -177,8 +177,8 @@ const FASES: FaseData[] = [
           "Envie no mínimo 30 amostras do mesmo produto para criadores",
         ],
         materials: [
-          { title: "Webinar TikTok Shop [2]", url: null },
-          { title: "Webinar sobre Afiliados", url: null },
+          { title: "Webinar TikTok Shop [2]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgvo577q35g62w4z28yv35" },
+          { title: "Webinar sobre Afiliados", url: "https://bytedance.sg.larkoffice.com/minutes/obsgpacf9mx8fscn32b762g2" },
         ],
       },
       {
@@ -189,10 +189,10 @@ const FASES: FaseData[] = [
           "Realize lives — mínimo 20h no total (sugestão: 14 lives)",
         ],
         materials: [
-          { title: "Playbook de Vídeos", url: null },
-          { title: "Playbook de Lives", url: null },
-          { title: "Webinar Lives [2]", url: null },
-          { title: "Webinar Lives [3]", url: null },
+          { title: "Playbook de Vídeos", url: "https://bytedance.sg.larkoffice.com/docx/A9WUdaFuxowRmKxKUm7lcFvGgHh" },
+          { title: "Playbook de Lives", url: "https://bytedance.sg.larkoffice.com/docx/F8XKdsImGop4r8xRUG1lYl9Qgdh?from=from_parent_docx" },
+          { title: "Webinar Lives [2]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgp28ow116pnqs1y7nh89n" },
+          { title: "Webinar Lives [3]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgr4l4269j4m3l96q9j13c" },
         ],
       },
       {
@@ -230,7 +230,7 @@ const FASES: FaseData[] = [
           "Reforce o relacionamento com top criadores (mais produtos + comunicação ativa)",
         ],
         materials: [
-          { title: "Webinar TikTok Shop [3]", url: null },
+          { title: "Webinar TikTok Shop [3]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgv6t9hu43976116r93ot3" },
         ],
       },
       {
@@ -241,7 +241,7 @@ const FASES: FaseData[] = [
           "Realize 1 big live por campanha mensal (mínimo 3h)",
         ],
         materials: [
-          { title: "Webinar Lives [4]", url: null },
+          { title: "Webinar Lives [4]", url: "https://bytedance.sg.larkoffice.com/minutes/obsg2oo34y99uh95rv75iemz" },
         ],
       },
       {
@@ -252,7 +252,7 @@ const FASES: FaseData[] = [
           "Investimento inicial sugerido: R$ 2.500/mês",
         ],
         materials: [
-          { title: "Webinar GMV Max", url: null },
+          { title: "Webinar GMV Max", url: "https://bytedance.sg.larkoffice.com/minutes/obsgaahwrem1hut18kqogot3" },
         ],
       },
     ],

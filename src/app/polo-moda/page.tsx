@@ -20,7 +20,7 @@ export default function PoloModaPage() {
 
       <main
         className="relative w-full pt-20 lg:pt-20"
-        style={{ minHeight: "100vh", backgroundColor: "#033624" }}
+        style={{ minHeight: "100vh", backgroundColor: "#EDBBE8" }}
       >
         <PoloModaSection />
         <SliderSection />

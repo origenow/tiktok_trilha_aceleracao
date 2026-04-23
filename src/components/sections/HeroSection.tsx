@@ -7,13 +7,13 @@ import { HeroSectionDesktop } from "./HeroSectionDesktop";
 export function HeroSection() {
   return (
     <section id="hero" className="w-full">
-      {/* Exibe apenas em telas menores que lg (1024px) */}
-      <div className="block lg:hidden w-full">
+      {/* Exibe apenas em telas menores que md (768px) */}
+      <div className="block md:hidden w-full">
         <HeroSectionMobile />
       </div>
       
-      {/* Exibe apenas em telas lg ou maiores */}
-      <div className="hidden lg:block w-full">
+      {/* Exibe apenas em telas md ou maiores */}
+      <div className="hidden md:block w-full">
         <HeroSectionDesktop />
       </div>
     </section>

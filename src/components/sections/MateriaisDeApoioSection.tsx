@@ -81,16 +81,6 @@ const GRUPOS: MaterialGroup[] = [
         cardBg: "#fffde8",
       },
       {
-        icon: TrendingUp,
-        label: "GMV Max — Ads Acelerados",
-        description: "Impulsionamento automático com ROAS otimizado",
-        href: "/gmv-max",
-        accent: "#F1204A",
-        accentText: "#ffffff",
-        cardBg: "#fff0f2",
-        badge: "⭐ Destaque",
-      },
-      {
         icon: Heart,
         label: "Boas Práticas de Lingerie",
         description: "Políticas e recomendações para venda nesta categoria",

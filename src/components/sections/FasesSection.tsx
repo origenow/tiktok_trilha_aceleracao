@@ -245,14 +245,14 @@ const FASES: FaseData[] = [
         ],
       },
       {
-        title: "Investir em tráfego (GMV Max)",
+        title: "Investir em tráfego pago",
         icon: Zap,
         items: [
-          "Ative GMV Max nos produtos com mais de 30 vídeos",
+          "Ative anúncios nos produtos com mais de 30 vídeos",
           "Investimento inicial sugerido: R$ 2.500/mês",
         ],
         materials: [
-          { title: "Webinar GMV Max", url: "https://bytedance.sg.larkoffice.com/minutes/obsgaahwrem1hut18kqogot3" },
+          { title: "Webinar sobre Ads", url: "https://bytedance.sg.larkoffice.com/minutes/obsgaahwrem1hut18kqogot3" },
         ],
       },
     ],
@@ -620,47 +620,40 @@ export function FasesSection() {
         transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
       >
         {/* Imagem */}
-        <div className="relative w-full h-44 lg:h-52 rounded-2xl overflow-hidden mb-4 shadow-sm">
-          <Image src={activeFase.image} alt={activeFase.label} fill className="object-cover" sizes="(min-width: 1024px) 700px, 430px" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          <div className="absolute top-0 left-0 right-0 h-1.5 rounded-t-2xl" style={{ backgroundColor: activeFase.color }} />
-          <div className="absolute bottom-0 left-0 p-4">
-            <div className="px-3 py-1.5 rounded-full font-body text-[0.65rem] font-semibold w-fit"
+        <div className="relative w-full h-64 lg:h-72 rounded-2xl overflow-hidden mb-4 shadow-sm flex flex-col justify-start p-5 pt-8">
+          <Image src={activeFase.image} alt={activeFase.label} fill className="object-cover absolute inset-0 z-0" sizes="(min-width: 1024px) 700px, 430px" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent z-10" />
+          <div className="absolute top-0 left-0 right-0 h-1.5 rounded-t-2xl z-20" style={{ backgroundColor: activeFase.color }} />
+          
+          <div className="relative z-20">
+            <div className="px-3 py-1.5 rounded-full font-body text-[0.65rem] font-black uppercase tracking-widest w-fit shadow-lg mb-4"
               style={{ backgroundColor: activeFase.color, color: activeFase.onColor }}>
               {activeFase.tagLabel}
             </div>
+            <h3 className="font-display font-black text-2xl leading-tight text-white drop-shadow-md mb-2">
+              {activeFase.shortLabel}
+            </h3>
+            <p className="font-body text-xs leading-snug text-white/90 font-medium">
+              {activeFase.objective}
+            </p>
           </div>
         </div>
-
-        {/* Cabeçalho + dica */}
-        <div className="rounded-2xl bg-white p-5 mb-4"
-          style={{ boxShadow: "0 4px 24px rgba(3,54,36,0.07), 0 1px 4px rgba(3,54,36,0.04)" }}>
-          <div className="flex items-center gap-3.5 mb-4 pb-4 border-b" style={{ borderColor: "rgba(3,54,36,0.07)" }}>
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
-              style={{ backgroundColor: alpha(activeFase.color, 0.15), color: activeFase.color }}>
-              <activeFase.icon size={24} strokeWidth={1.8} />
-            </div>
-            <div>
-              <h3 className="font-display font-black text-lg leading-tight" style={{ color: DS.thrive }}>
-                {activeFase.shortLabel}
-              </h3>
-              <p className="font-body text-xs mt-0.5 leading-snug" style={{ color: DS.ember, opacity: 0.65 }}>
-                {activeFase.objective}
-              </p>
-            </div>
-          </div>
           {activeFase.tip && (
-            <div className="flex items-start gap-2.5 rounded-xl px-3.5 py-3"
-              style={{ backgroundColor: alpha(activeFase.color, 0.1) }}>
-              <Info size={14} className="mt-0.5 shrink-0"
-                style={{ color: activeFase.onColor === DS.white ? activeFase.color : activeFase.onColor }} />
-              <p className="font-body text-xs leading-snug"
-                style={{ color: activeFase.onColor === DS.white ? activeFase.color : activeFase.onColor }}>
-                {activeFase.tip}
-              </p>
+            <div className="flex items-start gap-3 rounded-2xl px-4 py-4 relative overflow-hidden group/tip"
+              style={{ backgroundColor: alpha(activeFase.color, 0.08), border: `1.5px solid ${alpha(activeFase.color, 0.2)}` }}>
+              <div className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 mt-0.5 shadow-sm"
+                style={{ backgroundColor: activeFase.color, color: activeFase.onColor }}>
+                <Info size={16} strokeWidth={2.5} />
+              </div>
+              <div>
+                <p className="font-display font-black text-[0.7rem] uppercase tracking-widest mb-1.5" style={{ color: activeFase.color }}>Dica Crucial</p>
+                <p className="font-body text-[0.95rem] leading-tight font-black"
+                  style={{ color: DS.thrive }}>
+                  {activeFase.tip}
+                </p>
+              </div>
             </div>
           )}
-        </div>
 
         {/* ── Step-by-step dos grupos ── */}
         <div className="mb-4">
@@ -933,12 +926,12 @@ export function FasesSection() {
             style={{ minHeight: "520px" }}
           >
             {/* Lado Esquerdo: Imagem e Identidade */}
-            <div className="w-[38%] relative flex flex-col justify-end p-8 overflow-hidden text-white shrink-0">
+            <div className="w-[38%] relative flex flex-col justify-start p-10 pt-12 overflow-hidden text-white shrink-0">
               <Image src={activeFase.image} alt={activeFase.label} fill className="object-cover absolute inset-0 z-0 scale-[1.02] hover:scale-105 transition-transform duration-[2s]" sizes="500px" priority />
               
               {/* Overlays */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-black/10 z-10" />
-              <div className="absolute inset-0 opacity-40 mix-blend-multiply z-10" style={{ backgroundColor: activeFase.color }} />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/40 to-transparent z-10" />
+              <div className="absolute inset-0 opacity-30 mix-blend-multiply z-10" style={{ backgroundColor: activeFase.color }} />
               
               <div className="relative z-20">
                 <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full mb-5 backdrop-blur-md border shadow-lg" style={{ backgroundColor: alpha(activeFase.color, 0.4), borderColor: alpha(activeFase.color, 0.5) }}>
@@ -953,13 +946,23 @@ export function FasesSection() {
                 </p>
                 
                 {activeFase.tip && (
-                  <div className="bg-white/10 backdrop-blur-xl rounded-[1.25rem] p-4 flex items-start gap-3 border border-white/20 shadow-inner">
-                    <div className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5" style={{ backgroundColor: activeFase.color }}>
-                      <Info size={12} color={activeFase.onColor} />
+                  <div className="mt-auto bg-white/15 backdrop-blur-3xl rounded-[2rem] p-8 flex items-start gap-6 border border-white/30 shadow-[0_12px_48px_rgba(0,0,0,0.4)] relative overflow-hidden group/tip">
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-10 group-hover/tip:opacity-25 transition-opacity duration-500" />
+                    
+                    <div className="relative">
+                      <div className="absolute inset-0 blur-2xl opacity-50 transition-all duration-500 group-hover/tip:opacity-80 scale-150" style={{ backgroundColor: activeFase.color }} />
+                      <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 shadow-2xl relative z-10 transition-transform duration-500 group-hover/tip:scale-110" 
+                        style={{ backgroundColor: activeFase.color }}>
+                        <Info size={28} color={activeFase.onColor} strokeWidth={3} />
+                      </div>
                     </div>
-                    <p className="font-body text-[0.7rem] font-medium text-white/95 leading-snug">
-                      {activeFase.tip}
-                    </p>
+
+                    <div className="relative z-10">
+                      <p className="font-display font-black text-[0.8rem] uppercase tracking-widest mb-2" style={{ color: activeFase.color, textShadow: "0 0 10px rgba(0,0,0,0.2)" }}>Dica de Ouro</p>
+                      <p className="font-body text-[1.1rem] font-black text-white leading-tight tracking-tight drop-shadow-sm">
+                        {activeFase.tip}
+                      </p>
+                    </div>
                   </div>
                 )}
               </div>

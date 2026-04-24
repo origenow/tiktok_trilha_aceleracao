@@ -781,7 +781,7 @@ export function FasesSection() {
   );
 
   return (
-    <section id="fases" className="relative pt-10 pb-12 overflow-hidden" style={{ backgroundColor: "#f4f6f5" }}>
+    <section id="fases" className="relative pt-20 pb-20 overflow-hidden" style={{ backgroundColor: "#f4f6f5" }}>
       {/* Wave entrada — visível apenas no mobile */}
       <div className="lg:hidden absolute top-0 left-0 w-full overflow-hidden leading-none pointer-events-none">
         <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full h-[80px] block">
@@ -800,7 +800,7 @@ export function FasesSection() {
       {/* ════════════════════════════════════════════════════════ */}
       {/* MOBILE layout                                          */}
       {/* ════════════════════════════════════════════════════════ */}
-      <div className="lg:hidden">
+      <div className="lg:hidden relative z-10">
         <div className="w-full max-w-[430px] mx-auto px-6 mb-7">
           <p className="font-body text-xs uppercase tracking-widest mb-1" style={{ color: DS.glint }}>A Trilha</p>
           <h2 className="font-display font-black leading-tight" style={{ fontSize: "clamp(1.8rem, 7vw, 2.4rem)", color: DS.thrive }}>
@@ -842,11 +842,11 @@ export function FasesSection() {
         {/* Cabeçalho */}
         <div className="text-center mb-8">
           <p className="font-body text-sm uppercase tracking-widest mb-2 font-bold" style={{ color: DS.glint }}>
-            Mapa da Aceleração
+            A Trilha
           </p>
           <h2 className="font-display font-black leading-tight mb-3" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", color: DS.thrive }}>
-            Sua Jornada até o{" "}
-            <HighlightedText highlightColor={DS.blaze} from="bottom" inView delay={0.3}>Topo</HighlightedText>
+            Missões por{" "}
+            <HighlightedText highlightColor={DS.blaze} from="bottom" inView delay={0.3}>Fase</HighlightedText>
           </h2>
           <p className="font-body text-base max-w-2xl mx-auto font-medium" style={{ color: DS.ember, opacity: 0.8 }}>
             Siga o caminho, complete missões estratégicas e desbloqueie recompensas exclusivas a cada novo marco alcançado no TikTok Shop.

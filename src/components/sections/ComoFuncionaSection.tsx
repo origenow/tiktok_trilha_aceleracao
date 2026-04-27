@@ -78,7 +78,32 @@ const FloatingDoodle = ({
 /* ── Componente principal ─────────────────────────────────────── */
 export function ComoFuncionaSection() {
   return (
-    <section id="como-funciona" className="relative pt-12 pb-20 overflow-hidden" style={{ backgroundColor: "#ffffff" }}>
+    <section id="como-funciona" className="relative pt-12 pb-20 overflow-hidden">
+      {/* Background Layer */}
+      <div className="absolute inset-0 bg-white -z-20" />
+      
+      {/* Mesh Gradient Effect (Efeito de Malha) */}
+      <div className="absolute inset-0 pointer-events-none -z-10 opacity-15 lg:opacity-20"
+        style={{
+          backgroundImage: `
+            radial-gradient(circle at 10% 20%, #BAF6F0 0%, transparent 40%),
+            radial-gradient(circle at 90% 10%, #EDBBE8 0%, transparent 40%),
+            radial-gradient(circle at 80% 90%, #FBEB35 0%, transparent 40%),
+            radial-gradient(circle at 20% 80%, #F1204A 0%, transparent 35%),
+            radial-gradient(circle at 50% 50%, #2DCCD3 0%, transparent 50%)
+          `,
+          filter: "blur(40px)"
+        }}
+      />
+
+      {/* Grid Overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] pointer-events-none -z-10" 
+        style={{ 
+          backgroundImage: `linear-gradient(#033624 1px, transparent 1px), linear-gradient(90deg, #033624 1px, transparent 1px)`,
+          backgroundSize: '40px 40px'
+        }} 
+      />
       {/* Decorative icons */}
       <FloatingDoodle src="/assets_new/camera.svg" size={108} top="2%" left="4%" rotate={-12} opacity={0.12} />
       <FloatingDoodle src="/assets_new/cosmetics.svg" size={99} bottom="10%" right="4%" rotate={12} opacity={0.15} reverse />
@@ -86,7 +111,7 @@ export function ComoFuncionaSection() {
       <FloatingDoodle src="/assets_new/2.svg" size={35} bottom="20%" left="6%" rotate={-45} opacity={0.1} />
       <FloatingDoodle src="/assets_new/5.svg" size={50} top="15%" right="10%" rotate={10} opacity={0.05} />
       <div className="w-full max-w-[430px] lg:max-w-screen-xl mx-auto lg:px-16 flex flex-col items-center">
-        
+
         {/* ── Header Centralizado ── */}
         <motion.div
           className="px-6 lg:px-0 mb-16 text-center max-w-2xl"

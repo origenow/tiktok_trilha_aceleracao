@@ -32,6 +32,9 @@ import {
   MessageCircle,
   Search,
   X,
+  Lightbulb,
+  Flame,
+  Sparkles,
   LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -57,10 +60,15 @@ interface Material {
   type?: "webinar" | "playbook";
 }
 
+interface MissionItem {
+  text: string;
+  icon?: LucideIcon;
+}
+
 interface MissionGroup {
   title: string;
   icon: LucideIcon;
-  items: string[];
+  items: (string | MissionItem)[];
   materials?: Material[];
   note?: { text: string; href: string; external?: boolean };
   images?: string[];
@@ -78,7 +86,7 @@ interface FaseData {
   rewardBg: string;
   image: string;
   objective: string;
-  tip?: string;
+  tip?: string | { text: string; icon: LucideIcon };
   missionGroups: MissionGroup[];
   reward: string;
   rewardSub: string;
@@ -105,7 +113,7 @@ const FASES: FaseData[] = [
         title: "Entrar na comunidade",
         icon: Users,
         items: [
-          "Entre no grupo de WhatsApp da sua região 👉 (dicas + suporte diário)",
+          { text: "Entre no grupo de WhatsApp da sua região (dicas + suporte diário)", icon: MessageCircle },
         ],
         note: { text: "Ver grupos por região", href: "#cta" },
       },
@@ -168,42 +176,40 @@ const FASES: FaseData[] = [
     onColor: DS.thrive,
     rewardBg: "#FFFDE0",
     image: "/assets/m4.png",
-    objective: "Ganhe volume com criadores + conteúdo",
-    tip: "Mais conteúdo = mais vendas. Foque em criadores e lives nesta fase.",
+    objective: "ganhar volume usando criadores + conteúdo",
+    tip: { text: "Mais conteúdo = mais vendas", icon: Zap },
     missionGroups: [
       {
-        title: "Ativar afiliados",
+        title: "Ativar afiliados (ESSENCIAL)",
         icon: UserCheck,
         items: [
-          "Coloque TODOS os produtos em colaboração aberta (comissão >10%)",
-          "Defina amostras grátis para seus top 2 produtos",
-          "Envie no mínimo 30 amostras do mesmo produto para criadores",
+          "Coloque TODOS os produtos em Colaboração aberta (comissão > 10%)",
+          "Envie no mínimo 30 amostras grátis do mesmo produto para criadores",
         ],
         materials: [
-          { title: "Webinar TikTok Shop [2]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgvo577q35g62w4z28yv35", type: "webinar" },
-          { title: "Webinar sobre Afiliados", url: "https://bytedance.sg.larkoffice.com/minutes/obsgpacf9mx8fscn32b762g2", type: "webinar" },
+          { title: "Assista o webinar 2 sobre TikTok shop [2]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgvo577q35g62w4z28yv35", type: "webinar" },
+          { title: "Assista o webinar sobre Afiliados", url: "https://bytedance.sg.larkoffice.com/minutes/obsgpacf9mx8fscn32b762g2", type: "webinar" },
         ],
       },
       {
         title: "Escalar conteúdo",
         icon: BarChart2,
         items: [
-          "Poste 10 vídeos compráveis com link do produto",
-          "Realize lives — mínimo 20h no total (sugestão: 14 lives)",
+          "Poste 14 vídeos com link do produto",
+          "Faça lives (mínimo 20h no total)",
         ],
         materials: [
-          { title: "Playbook de Vídeos", url: "https://bytedance.sg.larkoffice.com/docx/A9WUdaFuxowRmKxKUm7lcFvGgHh", type: "playbook" },
-          { title: "Playbook de Lives", url: "https://bytedance.sg.larkoffice.com/docx/F8XKdsImGop4r8xRUG1lYl9Qgdh?from=from_parent_docx", type: "playbook" },
-          { title: "Webinar Lives [2]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgp28ow116pnqs1y7nh89n", type: "webinar" },
-          { title: "Webinar Lives [3]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgr4l4269j4m3l96q9j13c", type: "webinar" },
+          { title: "Veja o Playbook de Vídeos", url: "https://bytedance.sg.larkoffice.com/docx/A9WUdaFuxowRmKxKUm7lcFvGgHh", type: "playbook" },
+          { title: "Veja o Playbook de Lives", url: "https://bytedance.sg.larkoffice.com/docx/F8XKdsImGop4r8xRUG1lYl9Qgdh?from=from_parent_docx", type: "playbook" },
+          { title: "Assista o webinar 2 sobre Lives", url: "https://bytedance.sg.larkoffice.com/minutes/obsgp28ow116pnqs1y7nh89n", type: "webinar" },
+          { title: "Assista o webinar 3 sobre Lives", url: "https://bytedance.sg.larkoffice.com/minutes/obsgr4l4269j4m3l96q9j13c", type: "webinar" },
         ],
       },
       {
         title: "Entrar nas campanhas",
         icon: Megaphone,
         items: [
-          "Acesse Marketing > Campanhas no Seller Center",
-          "Participe de todas as oportunidades de descontos financiados pelo TikTok",
+          "Acompanhe em Marketing > Campanhas todas oportunidades de descontos financiados pelo TikTok",
         ],
       },
     ],
@@ -222,40 +228,40 @@ const FASES: FaseData[] = [
     onColor: DS.ember,
     rewardBg: "#F9EEFA",
     image: "/assets/m2.jpg",
-    objective: "Escale de forma consistente com criadores, lives e tráfego pago",
-    tip: "Mais criadores + mais lives + tráfego pago = escala de verdade.",
+    objective: "escalar vendas de forma consistente usando criadores, lives e tráfego pago",
+    tip: "Mais criadores + mais lives + tráfego pago = escala de verdade",
     missionGroups: [
       {
-        title: "Escalar criadores",
+        title: "Escalar criadores (máquina de conteúdo)",
         icon: Layers,
         items: [
-          "Trabalhe com criadores ativos para atingir 1.500 vídeos publicados",
-          "Reforce o relacionamento com top criadores (mais produtos + comunicação ativa)",
+          "Trabalhar com criadores ativos para chegar em alto volume de vídeos (1.500 vídeos)",
+          "Reforçar relacionamento com top criadores (mandar mais produtos)",
         ],
         materials: [
-          { title: "Webinar TikTok Shop [3]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgv6t9hu43976116r93ot3", type: "webinar" },
+          { title: "Assitir o webinar 3 sobre TikTok Shop [3]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgv6t9hu43976116r93ot3", type: "webinar" },
         ],
       },
       {
         title: "Aumentar intensidade de lives",
         icon: Radio,
         items: [
-          "Faça lives frequentes — mínimo 40h por mês",
-          "Realize 1 big live por campanha mensal (mínimo 3h)",
+          "Fazer lives frequentes",
+          "Atingir 40 horas de lives no mês",
         ],
         materials: [
-          { title: "Webinar Lives [4]", url: "https://bytedance.sg.larkoffice.com/minutes/obsg2oo34y99uh95rv75iemz", type: "webinar" },
+          { title: "Assistir o webinar 4 sobre Lives", url: "https://bytedance.sg.larkoffice.com/minutes/obsg2oo34y99uh95rv75iemz", type: "webinar" },
         ],
       },
       {
-        title: "Investir em tráfego pago",
+        title: "Investir em tráfego (GMV Max)",
         icon: Zap,
         items: [
-          "Ative anúncios nos produtos com mais de 30 vídeos",
-          "Investimento inicial sugerido: R$ 2.500/mês",
+          "Ativar GMV Max nos produtos com mais conteúdo",
+          "Investimento inicial sugerido: R$2.500/mês",
         ],
         materials: [
-          { title: "Webinar sobre Ads", url: "https://bytedance.sg.larkoffice.com/minutes/obsgaahwrem1hut18kqogot3", type: "webinar" },
+          { title: "Assistir o webinar sobre GMV Max", url: "https://bytedance.sg.larkoffice.com/minutes/obsgaahwrem1hut18kqogot3", type: "webinar" },
         ],
       },
     ],
@@ -265,34 +271,33 @@ const FASES: FaseData[] = [
   },
   {
     id: "fase4",
-    label: "Diamante",
-    shortLabel: "Escala Avançada",
-    tagLabel: "Diamante",
+    label: "Fase 4",
+    shortLabel: "Escala Avançada (Diamante)",
+    tagLabel: "Fase 4 · Diamante",
     icon: Gem,
     duration: "R$ 4k/dia",
     color: DS.ember,
     onColor: DS.white,
     rewardBg: DS.muse,
     image: "/assets/m1.jpg",
-    objective: "Maximizar crescimento com estratégia avançada e suporte dedicado",
+    objective: "maximizar crescimento com estratégia avançada e suporte dedicado",
     tip: "Atingindo R$ 4.000/dia de média você desbloqueia benefícios exclusivos do TikTok.",
     missionGroups: [
       {
         title: "Manter alto volume de vendas",
         icon: BarChart2,
         items: [
-          "Atingir média de aproximadamente R$ 4.000/dia em vendas",
-          "Manter consistência por pelo menos 30 dias consecutivos",
+          "Atingir média de aproximadamente R$4.000/dia em vendas",
         ],
       },
       {
-        title: "Benefícios que você desbloqueia",
+        title: "O que você ganha:",
         icon: Gift,
         items: [
-          "Gerente de contas dedicado (TikTok)",
-          "Planejamento estratégico personalizado",
-          "Acesso antecipado a campanhas e oportunidades",
-          "Suporte direto para escalar mais rápido",
+          { text: "Gerente de contas dedicado (TikTok)", icon: UserCheck },
+          { text: "Planejamento estratégico personalizado", icon: TrendingUp },
+          { text: "Acesso antecipado a oportunidades e campanhas", icon: Flame },
+          { text: "Suporte direto para escalar vendas mais rápido", icon: Lightbulb },
         ],
       },
     ],
@@ -417,15 +422,25 @@ function MissionGroupCard({ group, fase, step, onImageClick }: {
       {/* Items */}
       <div className={cn("px-4 pt-3.5", hasMaterials || group.note || hasImages ? "pb-3" : "pb-3.5")}>
         <ul className="space-y-3">
-          {group.items.map((item, i) => (
-            <li key={i} className="flex items-start gap-3.5">
-              <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5"
-                style={{ backgroundColor: alpha(fase.color, 0.12) }}>
-                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: fase.color }} />
-              </div>
-              <span className="font-body text-[0.95rem] leading-tight font-medium" style={{ color: "#1a2e1e" }}>{item}</span>
-            </li>
-          ))}
+          {group.items.map((item, i) => {
+            const isString = typeof item === "string";
+            const text = isString ? item : item.text;
+            const ItemIcon = isString ? null : item.icon;
+
+            return (
+              <li key={i} className="flex items-start gap-3.5">
+                <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+                  style={{ backgroundColor: alpha(fase.color, 0.12) }}>
+                  {ItemIcon ? (
+                    <ItemIcon size={11} style={{ color: fase.color }} strokeWidth={2.5} />
+                  ) : (
+                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: fase.color }} />
+                  )}
+                </div>
+                <span className="font-body text-[0.95rem] leading-tight font-medium" style={{ color: "#1a2e1e" }}>{text}</span>
+              </li>
+            );
+          })}
         </ul>
         {group.note && (
           <motion.a
@@ -685,13 +700,17 @@ export function FasesSection() {
             style={{ backgroundColor: alpha(activeFase.color, 0.08), border: `1.5px solid ${alpha(activeFase.color, 0.2)}` }}>
             <div className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 mt-0.5 shadow-sm"
               style={{ backgroundColor: activeFase.color, color: activeFase.onColor }}>
-              <Info size={16} strokeWidth={2.5} />
+              {typeof activeFase.tip !== "string" && activeFase.tip.icon ? (
+                <activeFase.tip.icon size={16} strokeWidth={2.5} />
+              ) : (
+                <Info size={16} strokeWidth={2.5} />
+              )}
             </div>
             <div>
               <p className="font-display font-black text-[0.7rem] uppercase tracking-widest mb-1.5" style={{ color: activeFase.color }}>Dica Crucial</p>
               <p className="font-body text-[0.95rem] leading-tight font-black"
                 style={{ color: DS.thrive }}>
-                {activeFase.tip}
+                {typeof activeFase.tip === "string" ? activeFase.tip : activeFase.tip.text}
               </p>
             </div>
           </div>
@@ -1002,7 +1021,7 @@ export function FasesSection() {
                     <div className="relative z-10">
                       <p className="font-display font-black text-[0.8rem] uppercase tracking-widest mb-2" style={{ color: activeFase.color, textShadow: "0 0 10px rgba(0,0,0,0.2)" }}>Dica de Ouro</p>
                       <p className="font-body text-[1.1rem] font-black text-white leading-tight tracking-tight drop-shadow-sm">
-                        {activeFase.tip}
+                        {typeof activeFase.tip === "string" ? activeFase.tip : activeFase.tip.text}
                       </p>
                     </div>
                   </div>

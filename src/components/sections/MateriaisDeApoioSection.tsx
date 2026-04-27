@@ -101,16 +101,6 @@ const GRUPOS: MaterialGroup[] = [
     pillRotate: "4deg",
     items: [
       {
-        icon: Gem,
-        label: "Jóias e Semi Jóias",
-        description: "Requisitos e processo para vender na categoria de jóias",
-        href: "/semijoias",
-        accent: "#2DCCD3",
-        accentText: "#111111",
-        cardBg: "#d0f5f3",
-        badge: "💎 Premium",
-      },
-      {
         icon: Baby,
         label: "Bebê & Maternidade",
         description: "Categoria exclusiva para Polos de Moda credenciados",

@@ -38,14 +38,14 @@ import { HighlightedText } from "@/components/ui/highlighted-text";
 /* ── Design system colors ────────────────────────────────────── */
 const DS = {
   shimmer: "#BAF6F0",
-  muse:    "#EDD4B2",
-  thrive:  "#033624",
-  ember:   "#4A0505",
-  blaze:   "#F1204A",
-  glint:   "#2DCCD3",
-  glow:    "#FBEB35",
-  dawn:    "#EDBBE8",
-  white:   "#FFFFFF",
+  muse: "#EDD4B2",
+  thrive: "#033624",
+  ember: "#4A0505",
+  blaze: "#F1204A",
+  glint: "#2DCCD3",
+  glow: "#FBEB35",
+  dawn: "#EDBBE8",
+  white: "#FFFFFF",
 };
 
 /* ── Types ───────────────────────────────────────────────────── */
@@ -96,7 +96,7 @@ const FASES: FaseData[] = [
     rewardBg: DS.shimmer,
     image: "/assets/m3.jpg",
     objective: "Deixe sua loja pronta e gere as primeiras vendas",
-    tip: "Complete todas as missões nos primeiros 5 dias para garantir as recompensas.",
+    tip: "Complete todas as tarefas nos primeiros 5 dias para garantir as recompensas.",
     missionGroups: [
       {
         title: "Entrar na comunidade",
@@ -527,14 +527,14 @@ function MissionGroupCard({ group, fase, step }: {
 
 /* ── Componente principal ────────────────────────────────────── */
 export function FasesSection() {
-  const [activeIndex, setActiveIndex]   = useState(0);
-  const [groupStep, setGroupStep]       = useState(0);
-  const [direction, setDirection]       = useState(1);
-  const [showReward, setShowReward]     = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [groupStep, setGroupStep] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const [showReward, setShowReward] = useState(false);
   const rewardRef = useRef<HTMLDivElement>(null);
 
-  const activeFase  = FASES[activeIndex];
-  const totalSteps  = activeFase.missionGroups.length;
+  const activeFase = FASES[activeIndex];
+  const totalSteps = activeFase.missionGroups.length;
   const isLastGroup = groupStep === totalSteps - 1;
 
   /* Muda de fase e reseta o passo */
@@ -555,9 +555,9 @@ export function FasesSection() {
       const rect = e?.currentTarget.getBoundingClientRect();
       const origin = rect
         ? {
-            x: (rect.left + rect.width / 2) / window.innerWidth,
-            y: (rect.top + rect.height / 2) / window.innerHeight,
-          }
+          x: (rect.left + rect.width / 2) / window.innerWidth,
+          y: (rect.top + rect.height / 2) / window.innerHeight,
+        }
         : { y: 0.6 };
       confetti({
         particleCount: 150,
@@ -610,9 +610,9 @@ export function FasesSection() {
         key={activeFase.id}
         custom={direction}
         variants={{
-          enter:  (d: number) => ({ x: d > 0 ? 60 : -60, opacity: 0 }),
+          enter: (d: number) => ({ x: d > 0 ? 60 : -60, opacity: 0 }),
           center: { x: 0, opacity: 1 },
-          exit:   (d: number) => ({ x: d > 0 ? -60 : 60, opacity: 0 }),
+          exit: (d: number) => ({ x: d > 0 ? -60 : 60, opacity: 0 }),
         }}
         initial="enter"
         animate="center"
@@ -624,7 +624,7 @@ export function FasesSection() {
           <Image src={activeFase.image} alt={activeFase.label} fill className="object-cover absolute inset-0 z-0" sizes="(min-width: 1024px) 700px, 430px" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent z-10" />
           <div className="absolute top-0 left-0 right-0 h-1.5 rounded-t-2xl z-20" style={{ backgroundColor: activeFase.color }} />
-          
+
           <div className="relative z-20">
             <div className="px-3 py-1.5 rounded-full font-body text-[0.65rem] font-black uppercase tracking-widest w-fit shadow-lg mb-4"
               style={{ backgroundColor: activeFase.color, color: activeFase.onColor }}>
@@ -638,22 +638,22 @@ export function FasesSection() {
             </p>
           </div>
         </div>
-          {activeFase.tip && (
-            <div className="flex items-start gap-3 rounded-2xl px-4 py-4 relative overflow-hidden group/tip"
-              style={{ backgroundColor: alpha(activeFase.color, 0.08), border: `1.5px solid ${alpha(activeFase.color, 0.2)}` }}>
-              <div className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 mt-0.5 shadow-sm"
-                style={{ backgroundColor: activeFase.color, color: activeFase.onColor }}>
-                <Info size={16} strokeWidth={2.5} />
-              </div>
-              <div>
-                <p className="font-display font-black text-[0.7rem] uppercase tracking-widest mb-1.5" style={{ color: activeFase.color }}>Dica Crucial</p>
-                <p className="font-body text-[0.95rem] leading-tight font-black"
-                  style={{ color: DS.thrive }}>
-                  {activeFase.tip}
-                </p>
-              </div>
+        {activeFase.tip && (
+          <div className="flex items-start gap-3 rounded-2xl px-4 py-4 relative overflow-hidden group/tip"
+            style={{ backgroundColor: alpha(activeFase.color, 0.08), border: `1.5px solid ${alpha(activeFase.color, 0.2)}` }}>
+            <div className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 mt-0.5 shadow-sm"
+              style={{ backgroundColor: activeFase.color, color: activeFase.onColor }}>
+              <Info size={16} strokeWidth={2.5} />
             </div>
-          )}
+            <div>
+              <p className="font-display font-black text-[0.7rem] uppercase tracking-widest mb-1.5" style={{ color: activeFase.color }}>Dica Crucial</p>
+              <p className="font-body text-[0.95rem] leading-tight font-black"
+                style={{ color: DS.thrive }}>
+                {activeFase.tip}
+              </p>
+            </div>
+          </div>
+        )}
 
         {/* ── Step-by-step dos grupos ── */}
         <div className="mb-4">
@@ -783,12 +783,12 @@ export function FasesSection() {
       </div>
 
       {/* Floating doodles */}
-      <FloatingDoodle src="/assets_new/10.svg"       size={80}  top="15%"    right="-2%"  rotate={15}  opacity={0.12} />
-      <FloatingDoodle src="/assets_new/5.svg"         size={70}  bottom="25%" left="-2%"   rotate={-15} opacity={0.08} reverse />
-      <FloatingDoodle src="/assets_new/manequim.svg"  size={72}  top="45%"    left="2%"    rotate={20}  opacity={0.06} />
-      <FloatingDoodle src="/assets_new/2.svg"         size={50}  bottom="5%"  right="4%"   rotate={-10} opacity={0.08} />
-      <FloatingDoodle src="/assets_new/camera.svg"    size={81}  top="5%"     left="4%"    rotate={30}  opacity={0.04} reverse />
-      <FloatingDoodle src="/assets_new/cosmetics.svg" size={108} bottom="45%" right="2%"   rotate={45}  opacity={0.06} />
+      <FloatingDoodle src="/assets_new/10.svg" size={80} top="15%" right="-2%" rotate={15} opacity={0.12} />
+      <FloatingDoodle src="/assets_new/5.svg" size={70} bottom="25%" left="-2%" rotate={-15} opacity={0.08} reverse />
+      <FloatingDoodle src="/assets_new/manequim.svg" size={72} top="45%" left="2%" rotate={20} opacity={0.06} />
+      <FloatingDoodle src="/assets_new/2.svg" size={50} bottom="5%" right="4%" rotate={-10} opacity={0.08} />
+      <FloatingDoodle src="/assets_new/camera.svg" size={81} top="5%" left="4%" rotate={30} opacity={0.04} reverse />
+      <FloatingDoodle src="/assets_new/cosmetics.svg" size={108} bottom="45%" right="2%" rotate={45} opacity={0.06} />
 
       {/* ════════════════════════════════════════════════════════ */}
       {/* MOBILE layout                                          */}
@@ -842,7 +842,7 @@ export function FasesSection() {
             <HighlightedText highlightColor={DS.blaze} from="bottom" inView delay={0.3}>Fase</HighlightedText>
           </h2>
           <p className="font-body text-base max-w-2xl mx-auto font-medium" style={{ color: DS.ember, opacity: 0.8 }}>
-            Siga o caminho, complete missões estratégicas e desbloqueie recompensas exclusivas a cada novo marco alcançado no TikTok Shop.
+            Siga o caminho, complete tarefas estratégicas e desbloqueie recompensas exclusivas a cada novo marco alcançado no TikTok Shop.
           </p>
         </div>
 
@@ -850,14 +850,14 @@ export function FasesSection() {
         <div className="relative w-full mx-auto mb-6 h-28 flex items-center">
           {/* Linha pontilhada de fundo */}
           <div className="absolute left-[10%] right-[10%] top-1/2 -translate-y-1/2 h-1.5 rounded-full border-t-[3px] border-dashed" style={{ borderColor: alpha(DS.thrive, 0.15) }} />
-          
+
           {/* Linha de progresso preenchida */}
           <div className="absolute left-[10%] top-1/2 -translate-y-1/2 h-2.5 rounded-full transition-all duration-700 ease-out z-0"
-               style={{ 
-                 width: `${(activeIndex / (FASES.length - 1)) * 80}%`,
-                 backgroundColor: DS.glint,
-                 boxShadow: `0 0 15px ${alpha(DS.glint, 0.8)}`
-               }} 
+            style={{
+              width: `${(activeIndex / (FASES.length - 1)) * 80}%`,
+              backgroundColor: DS.glint,
+              boxShadow: `0 0 15px ${alpha(DS.glint, 0.8)}`
+            }}
           />
 
           {/* NÓS DAS FASES */}
@@ -865,10 +865,10 @@ export function FasesSection() {
             {FASES.map((fase, i) => {
               const isActive = i === activeIndex;
               const isPast = i < activeIndex;
-              
+
               return (
                 <div key={fase.id} className="relative flex flex-col items-center group cursor-pointer" onClick={() => selectPhase(i)}>
-                  
+
                   {/* Etiqueta Superior */}
                   <div className={`absolute -top-14 transition-all duration-300 pointer-events-none ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0'}`}>
                     <div className="bg-white px-4 py-2 rounded-2xl shadow-[0_10px_30px_rgba(3,54,36,0.1)] border border-gray-100 text-center whitespace-nowrap">
@@ -878,7 +878,7 @@ export function FasesSection() {
                   </div>
 
                   {/* O "Nó" Circular */}
-                  <motion.div 
+                  <motion.div
                     className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center relative transition-colors duration-500 bg-white"
                     style={{
                       border: `4px solid ${isActive || isPast ? fase.color : alpha(DS.thrive, 0.1)}`,
@@ -928,11 +928,11 @@ export function FasesSection() {
             {/* Lado Esquerdo: Imagem e Identidade */}
             <div className="w-[38%] relative flex flex-col justify-start p-10 pt-12 overflow-hidden text-white shrink-0">
               <Image src={activeFase.image} alt={activeFase.label} fill className="object-cover absolute inset-0 z-0 scale-[1.02] hover:scale-105 transition-transform duration-[2s]" sizes="500px" priority />
-              
+
               {/* Overlays */}
               <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/40 to-transparent z-10" />
               <div className="absolute inset-0 opacity-30 mix-blend-multiply z-10" style={{ backgroundColor: activeFase.color }} />
-              
+
               <div className="relative z-20">
                 <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full mb-5 backdrop-blur-md border shadow-lg" style={{ backgroundColor: alpha(activeFase.color, 0.4), borderColor: alpha(activeFase.color, 0.5) }}>
                   <activeFase.icon size={16} color={activeFase.onColor === DS.white ? DS.white : activeFase.onColor} />
@@ -944,14 +944,14 @@ export function FasesSection() {
                 <p className="font-body text-[0.9rem] font-medium text-white/90 leading-relaxed mb-6">
                   {activeFase.objective}
                 </p>
-                
+
                 {activeFase.tip && (
                   <div className="mt-auto bg-white/15 backdrop-blur-3xl rounded-[2rem] p-8 flex items-start gap-6 border border-white/30 shadow-[0_12px_48px_rgba(0,0,0,0.4)] relative overflow-hidden group/tip">
                     <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-10 group-hover/tip:opacity-25 transition-opacity duration-500" />
-                    
+
                     <div className="relative">
                       <div className="absolute inset-0 blur-2xl opacity-50 transition-all duration-500 group-hover/tip:opacity-80 scale-150" style={{ backgroundColor: activeFase.color }} />
-                      <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 shadow-2xl relative z-10 transition-transform duration-500 group-hover/tip:scale-110" 
+                      <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 shadow-2xl relative z-10 transition-transform duration-500 group-hover/tip:scale-110"
                         style={{ backgroundColor: activeFase.color }}>
                         <Info size={28} color={activeFase.onColor} strokeWidth={3} />
                       </div>
@@ -970,7 +970,7 @@ export function FasesSection() {
 
             {/* Lado Direito: Conteúdo de Missões */}
             <div className="w-[62%] p-8 flex flex-col justify-between bg-[#FCFDFD] relative">
-              
+
               <div className="flex-1">
                 {/* Header Steps */}
                 <div className="flex items-center justify-between mb-5 pb-4 border-b border-gray-100">
@@ -1046,7 +1046,7 @@ export function FasesSection() {
                   }}
                 >
                   <div className="absolute inset-0 bg-white/20 w-0 group-hover:w-full transition-all duration-500 ease-out" />
-                  
+
                   {isLastGroup && showReward && activeIndex < FASES.length - 1 ? (
                     <><span className="relative z-10">Ir para {FASES[activeIndex + 1].label}</span><Rocket size={18} className="relative z-10 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" strokeWidth={2.5} /></>
                   ) : isLastGroup && showReward ? (
@@ -1058,7 +1058,7 @@ export function FasesSection() {
                   )}
                 </motion.button>
               </div>
-              
+
               {/* OVERLAY DE RECOMPENSA DESKTOP */}
               <AnimatePresence>
                 {showReward && (
@@ -1073,29 +1073,29 @@ export function FasesSection() {
                     {/* Fundo com glassmorphism forte */}
                     <div className="absolute inset-0 bg-white/70 backdrop-blur-2xl rounded-r-[2.5rem]" />
                     <div className="absolute inset-0 bg-gradient-to-tr from-white/90 via-white/40 to-transparent rounded-r-[2.5rem]" />
-                    
+
                     <div className="relative z-10 flex flex-col items-center w-full">
-                      <motion.div 
+                      <motion.div
                         initial={{ rotate: -15, scale: 0 }}
                         animate={{ rotate: 10, scale: 1 }}
                         transition={{ type: "spring", damping: 12, delay: 0.1 }}
-                        className="w-28 h-28 rounded-[2.5rem] flex items-center justify-center mb-6 shadow-2xl border-4 border-white" 
+                        className="w-28 h-28 rounded-[2.5rem] flex items-center justify-center mb-6 shadow-2xl border-4 border-white"
                         style={{ backgroundColor: activeFase.color, color: activeFase.onColor }}
                       >
                         <activeFase.rewardIcon size={56} strokeWidth={1.5} />
                       </motion.div>
-                      
-                      <motion.div 
+
+                      <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="inline-flex px-5 py-2 rounded-full font-body text-[0.7rem] font-black uppercase tracking-widest mb-4 border-[1.5px]" 
+                        className="inline-flex px-5 py-2 rounded-full font-body text-[0.7rem] font-black uppercase tracking-widest mb-4 border-[1.5px]"
                         style={{ borderColor: activeFase.color, color: activeFase.color, backgroundColor: alpha(activeFase.color, 0.08) }}
                       >
                         Desbloqueio de Fase
                       </motion.div>
-                      
-                      <motion.h3 
+
+                      <motion.h3
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3 }}
@@ -1103,8 +1103,8 @@ export function FasesSection() {
                       >
                         {activeFase.reward}
                       </motion.h3>
-                      
-                      <motion.p 
+
+                      <motion.p
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.4 }}
@@ -1112,7 +1112,7 @@ export function FasesSection() {
                       >
                         {activeFase.rewardSub}
                       </motion.p>
-                      
+
                       <motion.button
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -1123,11 +1123,11 @@ export function FasesSection() {
                         className="h-14 px-10 rounded-full font-display font-black text-lg flex items-center justify-center gap-3 shadow-[0_8px_20px_rgba(241,32,74,0.3)] transition-all"
                         style={{ backgroundColor: "#F1204A", color: "white" }}
                       >
-                         {activeIndex < FASES.length - 1 ? (
-                            <>Avançar Trilha <Rocket size={20} /></>
-                         ) : (
-                            <>Recomeçar Trilha <RotateCcw size={20} /></>
-                         )}
+                        {activeIndex < FASES.length - 1 ? (
+                          <>Avançar Trilha <Rocket size={20} /></>
+                        ) : (
+                          <>Recomeçar Trilha <RotateCcw size={20} /></>
+                        )}
                       </motion.button>
                     </div>
                   </motion.div>

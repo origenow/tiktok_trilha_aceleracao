@@ -30,7 +30,7 @@ const BENEFICIOS: Benefit[] = [
     Icon: Trophy,
     title: "Até R$ 2.400 em cupons",
     desc: "de plataforma nas primeiras fases",
-    detail: "Complete as missões da Fase 1 em apenas 5 dias e desbloqueie cupons de plataforma para reinvestir no crescimento da sua loja.",
+    detail: "Complete as tarefas da Fase 1 em apenas 5 dias e desbloqueie cupons de plataforma para reinvestir no crescimento da sua loja.",
     accent: "#2DCCD3",
     accentRgb: "45,204,211",
     phase: "Fase 1",
@@ -79,14 +79,14 @@ const BENEFICIOS: Benefit[] = [
 ];
 
 const HERO_STATS = [
-  { val: "R$ 9.800", label: "em benefícios totais",  accent: "#F1204A" },
-  { val: "8",        label: "regiões participantes", accent: "#033624" },
-  { val: "0%",       label: "comissão por 90 dias",  accent: "#2DCCD3" },
+  { val: "R$ 9.800", label: "em benefícios totais", accent: "#F1204A" },
+  { val: "8", label: "regiões participantes", accent: "#033624" },
+  { val: "0%", label: "comissão por 90 dias", accent: "#2DCCD3" },
 ];
 
 const heroLine = (delay: number) => ({
-  initial:    { opacity: 0, y: 24 },
-  animate:    { opacity: 1, y: 0 },
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0 },
   transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay },
 });
 

@@ -122,60 +122,10 @@ export function CtaFinalSection() {
 
       <div className="relative z-10 w-full max-w-[430px] lg:max-w-screen-xl mx-auto px-6 lg:px-16 lg:py-8">
 
-        {/* Desktop: grid 2 colunas */}
-        <div className="lg:grid lg:grid-cols-2 lg:gap-20 lg:items-center">
-
-          {/* ── Coluna esquerda: título + CTAs ── */}
-          <div className="flex flex-col items-center lg:items-start text-center lg:text-left relative z-10">
-            <h2
-              className="font-display font-black leading-[0.92] tracking-tighter mb-4 lg:mb-6"
-              style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", color: "#033624" }}
-            >
-              Pronto para jogar{" "}<br className="hidden lg:block" />e vender{" "}
-              <HighlightedText highlightColor="#F1204A" from="bottom" inView delay={0.2}>muito?</HighlightedText>
-            </h2>
-
-            <p className="font-body text-sm lg:text-[1.1rem] font-medium mb-8 lg:mb-10 lg:max-w-md" style={{ color: "#4A0505", opacity: 0.85 }}>
-              A Trilha de Aceleração do TikTok Shop é a oportunidade perfeita para transformar sua loja em uma máquina de vendas.
-            </p>
-
-            <div className="flex flex-col lg:flex-row gap-4 w-full lg:w-auto">
-              <a
-                href="https://seller-br.tiktok.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-display font-black text-white text-base lg:text-lg px-8 py-4 w-full lg:w-auto text-center hover:scale-[1.04] transition-all duration-300 flex items-center justify-center gap-3 relative overflow-hidden group"
-                style={{ backgroundColor: "#F1204A", borderRadius: "999px", boxShadow: "0 10px 30px rgba(241,32,74,0.4)" }}
-              >
-                <div className="absolute inset-0 bg-white/20 w-0 group-hover:w-full transition-all duration-500 ease-out" />
-                <span className="relative z-10">Abrir Conta Vendedor</span> 
-                <ArrowRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform" />
-              </a>
-
-              <a
-                href="https://seller-br.tiktok.com/challenges/growth"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-display font-black text-sm lg:text-base px-8 py-4 w-full lg:w-auto text-center hover:bg-white/40 transition-colors duration-200 flex items-center justify-center gap-2 backdrop-blur-sm"
-                style={{ border: "2px solid #033624", borderRadius: "999px", color: "#033624" }}
-              >
-                Ver missões no painel
-              </a>
-            </div>
-          </div>
-
-          {/* ── Coluna direita: WhatsApp ── */}
-          <div className="mt-12 lg:mt-0 relative group" style={{ perspective: isMobile ? "none" : "1000px" }}>
-
-            {/* Divisor — mobile only */}
-            <div className="w-full mb-6 lg:hidden">
-              <div className="flex items-center gap-3">
-                <div className="flex-1 h-px" style={{ backgroundColor: "rgba(3,54,36,0.2)" }} />
-                <span className="font-body text-xs font-semibold" style={{ color: "#033624", opacity: 0.5 }}>Comunidade</span>
-                <div className="flex-1 h-px" style={{ backgroundColor: "rgba(3,54,36,0.2)" }} />
-              </div>
-            </div>
-
+        {/* Centralized WhatsApp Card */}
+        <div className="flex justify-center items-center">
+          <div className="w-full max-w-[540px] relative group" style={{ perspective: isMobile ? "none" : "1000px" }}>
+            
             {/* Fundo glow do Whatsapp no desktop */}
             <div className="hidden lg:block absolute -inset-4 bg-gradient-to-r from-[#25D366]/40 to-[#128C7E]/40 rounded-[3rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-0" />
 
@@ -317,9 +267,30 @@ export function CtaFinalSection() {
               </div>
               </div>
             </motion.div>
-          </div>{/* fim bloco WhatsApp + coluna direita */}
-
-        </div>{/* fim grid */}
+            {/* Balão de lembrete - Estático, Arredondado e Premium */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ type: "spring", stiffness: 100, damping: 15, delay: 0.5 }}
+              className="absolute -bottom-4 -right-4 md:-right-8 z-50 max-w-[220px] pointer-events-none"
+            >
+              <div 
+                className="bg-[#FBEB35] px-5 py-4 rounded-[2rem] shadow-[0_15px_30px_rgba(0,0,0,0.12)] border border-white/50"
+              >
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#033624] animate-pulse" />
+                  <p className="font-display font-black text-[10px] text-[#033624] uppercase tracking-[0.15em]">
+                    Foco do Grupo
+                  </p>
+                </div>
+                <p className="font-body text-[11px] md:text-[12px] text-[#033624] font-bold leading-tight">
+                  Suporte técnico e estratégias reais para escalar sua loja.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
 
       </div>
     </section>

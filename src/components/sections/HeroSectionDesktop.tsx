@@ -306,7 +306,7 @@ export function HeroSectionDesktop() {
               <Rocket size={24} />
             </div>
             <h3 className="text-xl md:text-[1.7rem] uppercase leading-none mb-3 font-black font-display text-[#033624] tracking-tight">
-              COMPLETE<br />MISSÕES
+              COMPLETE<br />TAREFAS
             </h3>
             <p className="text-[11px] md:text-[0.8rem] text-[#033624]/60 font-bold uppercase tracking-widest mb-auto font-body">
               3 Fases e 60 dias

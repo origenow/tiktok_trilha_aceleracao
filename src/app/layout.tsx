@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "TikTok Shop",
   description:
-    "Siga as fases, complete missões e desbloqueie cupons, tráfego e suporte exclusivo para vendedores de moda no TikTok Shop.",
+    "Siga as fases, complete tarefas e desbloqueie cupons, tráfego e suporte exclusivo para vendedores de moda no TikTok Shop.",
   icons: {
     icon: "/tiktok-icon.svg",
   },

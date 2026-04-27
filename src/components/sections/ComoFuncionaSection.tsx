@@ -89,7 +89,7 @@ const PASSOS = [
   {
     num: "4",
     icon: Trophy,
-    title: "Resgate seus prêmios",
+    title: "Resgate seus benefícios",
     desc: 'Acesse "Minhas Recompensas" e use seus cupons e créditos',
   },
 ];
@@ -178,14 +178,14 @@ export function ComoFuncionaSection() {
               >
                 Como resgatar seus{" "}
                 <HighlightedText highlightColor="#F1204A" from="bottom" inView delay={0.3}>
-                  prêmios?
+                  benefícios?
                 </HighlightedText>
               </h2>
               <p
                 className="font-body text-sm lg:text-base mt-5 font-medium max-w-sm mx-auto lg:mx-0 leading-relaxed"
                 style={{ color: "#4A0505", opacity: 0.72 }}
               >
-                Depois de completar as missões estratégicas da Trilha, veja como retirar suas recompensas no Seller Center e impulsionar suas vendas.
+                Depois de completar as tarefas estratégicas da Trilha, veja como retirar suas recompensas no Seller Center e impulsionar suas vendas.
               </p>
             </motion.div>
 
@@ -216,14 +216,14 @@ export function ComoFuncionaSection() {
               <div className="flex flex-col border-t-2 border-dashed lg:border-none" style={{ borderColor: "#2DCCD3" }}>
                 {PASSOS.map((passo, i) => {
                   const Icon = passo.icon;
-                  const colors    = ["#F1204A", "#FBEB35", "#EDBBE8", "#2DCCD3"];
-                  const textColors = ["#ffffff",  "#033624", "#4A0505", "#033624"];
-                  const bgTints   = ["rgba(241,32,74,0.10)", "rgba(251,235,53,0.18)", "rgba(237,187,232,0.25)", "rgba(45,204,211,0.14)"];
-                  const color     = colors[i];
+                  const colors = ["#F1204A", "#FBEB35", "#EDBBE8", "#2DCCD3"];
+                  const textColors = ["#ffffff", "#033624", "#4A0505", "#033624"];
+                  const bgTints = ["rgba(241,32,74,0.10)", "rgba(251,235,53,0.18)", "rgba(237,187,232,0.25)", "rgba(45,204,211,0.14)"];
+                  const color = colors[i];
                   const nextColor = colors[i + 1];
                   const textColor = textColors[i];
-                  const bgTint    = bgTints[i];
-                  const isLast    = i === PASSOS.length - 1;
+                  const bgTint = bgTints[i];
+                  const isLast = i === PASSOS.length - 1;
 
                   return (
                     <React.Fragment key={i}>

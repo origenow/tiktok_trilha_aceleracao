@@ -183,10 +183,15 @@ export function CtaFinalSection() {
 
                 {/* Pill subtítulo */}
                 <div className="relative z-10 mt-5 flex items-center gap-3">
-                  <div className="flex -space-x-2">
-                    {["#a8e6cf", "#7fdbba", "#56d1a6", "#2DC895"].map((c, i) => (
-                      <div key={i} className="w-7 h-7 rounded-full border-2 border-white/60 shadow-sm"
-                        style={{ backgroundColor: c }} />
+                  <div className="flex -space-x-2.5">
+                    {["pro1.jpg", "pro2.jpg", "pro3.jpg", "pro4.jpg"].map((img, i) => (
+                      <div key={i} className="w-7 h-7 lg:w-8 lg:h-8 rounded-full border-2 border-white shadow-sm overflow-hidden bg-[#EDF3F1]">
+                        <img 
+                          src={`/assets/images/wpp_card/${img}`} 
+                          alt="" 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
                     ))}
                   </div>
                   <p className="font-body text-white/90 text-xs lg:text-sm font-medium">
@@ -267,28 +272,7 @@ export function CtaFinalSection() {
               </div>
               </div>
             </motion.div>
-            {/* Balão de lembrete - Estático, Arredondado e Premium */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ type: "spring", stiffness: 100, damping: 15, delay: 0.5 }}
-              className="absolute -bottom-4 -right-4 md:-right-8 z-50 max-w-[220px] pointer-events-none"
-            >
-              <div 
-                className="bg-[#FBEB35] px-5 py-4 rounded-[2rem] shadow-[0_15px_30px_rgba(0,0,0,0.12)] border border-white/50"
-              >
-                <div className="flex items-center gap-2 mb-1">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#033624] animate-pulse" />
-                  <p className="font-display font-black text-[10px] text-[#033624] uppercase tracking-[0.15em]">
-                    Foco do Grupo
-                  </p>
-                </div>
-                <p className="font-body text-[11px] md:text-[12px] text-[#033624] font-bold leading-tight">
-                  Suporte técnico e estratégias reais para escalar sua loja.
-                </p>
-              </div>
-            </motion.div>
+
           </div>
         </div>
 

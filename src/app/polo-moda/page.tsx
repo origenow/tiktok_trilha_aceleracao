@@ -1,4 +1,3 @@
-import { PoloModaSection } from "@/components/sections/PoloModaSection";
 import { SliderSection } from "@/components/sections/SliderSection";
 import { MateriaisDeApoioSection } from "@/components/sections/MateriaisDeApoioSection";
 import { Footer } from "@/components/sections/Footer";
@@ -22,7 +21,6 @@ export default function PoloModaPage() {
         className="relative w-full pt-20 lg:pt-20"
         style={{ minHeight: "100vh", backgroundColor: "#EDBBE8" }}
       >
-        <PoloModaSection />
         <SliderSection />
         <MateriaisDeApoioSection />
         <Footer />

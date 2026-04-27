@@ -136,6 +136,33 @@ export function HeroSectionDesktop() {
       {/* Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#03362415_1px,transparent_1px),linear-gradient(to_bottom,#03362415_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none z-0"></div>
 
+      {/* Video Card — posicionado relativo ao viewport inteiro */}
+      <motion.div
+        style={{ x: parallax1X, y: parallax2Y }}
+        className="absolute top-[18%] right-[2%] z-30 pointer-events-auto"
+      >
+        <motion.div
+          animate={{ y: [0, -14, 0] }}
+          transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.8 }}
+          className="relative overflow-hidden cursor-pointer rotate-[8deg] hover:rotate-0 hover:scale-105 transition-all duration-500 border-2 border-white/40 shadow-[0_20px_50px_rgba(0,0,0,0.28)]"
+          style={{ width: 138, aspectRatio: "9/16", borderRadius: 20 }}
+        >
+          <video
+            className="w-full h-full object-cover"
+            src="/assets/videos/videoBruna.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute bottom-0 inset-x-0 p-2">
+            <p className="text-white text-[9px] font-display font-black leading-tight">@bruna.moda</p>
+            <p className="text-white/60 text-[8px] font-body">Trilha Aceleração</p>
+          </div>
+        </motion.div>
+      </motion.div>
+
       {/* Doodles absolutos com Parallax */}
       <FloatingDoodle src="/assets_new/manequim.svg" size={86} bottom="32%" left="4%" rotate={12} delay={0.5} opacity={0.4} reverse parallaxX={parallax1X} parallaxY={parallax1Y} />
       <FloatingDoodle src="/assets_new/2.svg" size={60} top="45%" right="4%" rotate={-12} delay={1.5} opacity={0.35} parallaxX={parallax2X} parallaxY={parallax2Y} />
@@ -262,8 +289,8 @@ export function HeroSectionDesktop() {
 
             {/* Floating Glass Card 2 (Yellow — Diamante) */}
             <motion.div
-              style={{ x: parallax1X, y: parallax1Y }}
-              className="absolute top-[5%] md:top-auto md:bottom-[0%] right-[0%] md:right-[-6%] z-30 pointer-events-auto"
+              style={{ x: parallax1X, y: parallax1Y, right: "calc(-6% - 60px)" }}
+              className="absolute top-[5%] md:top-auto md:bottom-[0%] z-30 pointer-events-auto"
             >
               <motion.div
                 animate={{ y: [0, -25, 0] }}
@@ -280,6 +307,7 @@ export function HeroSectionDesktop() {
                 </div>
               </motion.div>
             </motion.div>
+
 
             {/* Circular Badge */}
             <motion.div

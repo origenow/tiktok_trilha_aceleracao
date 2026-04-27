@@ -18,13 +18,13 @@ const PASSOS = [
     num: "2",
     icon: TrendingUp,
     title: 'Clique em "Iniciar"',
-    desc: "Selecione a fase e siga os passos de cada missão",
+    desc: "Selecione a fase e siga os passos de cada tarefa",
   },
   {
     num: "3",
     icon: Gift,
     title: "Conclua e atualize",
-    desc: "Ao completar a missão, recarregue a página para registrar ",
+    desc: "Ao completar a tarefa, recarregue a página para registrar ",
   },
   {
     num: "4",
@@ -81,7 +81,7 @@ export function ComoFuncionaSection() {
     <section id="como-funciona" className="relative pt-12 pb-20 overflow-hidden">
       {/* Background Layer */}
       <div className="absolute inset-0 bg-white -z-20" />
-      
+
       {/* Mesh Gradient Effect (Efeito de Malha) */}
       <div className="absolute inset-0 pointer-events-none -z-10 opacity-15 lg:opacity-20"
         style={{
@@ -97,12 +97,12 @@ export function ComoFuncionaSection() {
       />
 
       {/* Grid Overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.03] pointer-events-none -z-10" 
-        style={{ 
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none -z-10"
+        style={{
           backgroundImage: `linear-gradient(#033624 1px, transparent 1px), linear-gradient(90deg, #033624 1px, transparent 1px)`,
           backgroundSize: '40px 40px'
-        }} 
+        }}
       />
       {/* Decorative icons */}
       <FloatingDoodle src="/assets_new/camera.svg" size={108} top="2%" left="4%" rotate={-12} opacity={0.12} />

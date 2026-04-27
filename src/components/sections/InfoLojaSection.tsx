@@ -189,7 +189,7 @@ export function InfoLojaSection() {
 
           {/* Cards de taxas — 2 colunas */}
           <div className="grid grid-cols-2 gap-3">
-            {/* Comissão */}
+            {/* comissão */}
             <div
               className="rounded-2xl p-4 flex flex-col gap-1.5 relative overflow-hidden"
               style={{
@@ -208,7 +208,7 @@ export function InfoLojaSection() {
                 <Tag size={15} style={{ color: "#ffffff" }} />
               </div>
               <p className="font-body text-[10px] font-semibold uppercase tracking-wide" style={{ color: "rgba(255,255,255,0.75)" }}>
-                Comissão TikTok
+                comissão TikTok
               </p>
               <p className="font-display font-black leading-none" style={{ fontSize: "2.2rem", color: "#ffffff" }}>
                 6%
@@ -267,7 +267,7 @@ export function InfoLojaSection() {
                   Isenção de comissão por 60 dias
                 </p>
                 <p className="font-body text-xs leading-relaxed" style={{ color: "#033624", opacity: 0.75 }}>
-                  Habilite a missão no Seller Center para participar e aproveite 0% de comissão nas primeiras semanas.
+                  Habilite a tarefa no Seller Center para participar e aproveite 0% de comissão nas primeiras semanas.
                 </p>
               </div>
             </div>
@@ -289,7 +289,7 @@ export function InfoLojaSection() {
                 className="font-body text-[10px] font-black px-2.5 py-0.5 rounded-full"
                 style={{ backgroundColor: "#F1204A", color: "#ffffff" }}
               >
-                Missões
+                tarefas
               </span>
             </div>
           </div>

@@ -73,7 +73,7 @@ O objetivo é criar um layout responsivo que em desktop (≥ 1024px) use o espa�
   lg:grid lg:grid-cols-[220px_1fr] lg:gap-8
   ```
 - Coluna esquerda: lista vertical das 4 fases como tabs clicáveis
-- Coluna direita: conteúdo da fase selecionada (missões, reward, imagem)
+- Coluna direita: conteúdo da fase selecionada (tarefas, reward, imagem)
 - Manter o slider para mobile sem mudança
 - Usar `useMediaQuery('(min-width: 1024px)')` ou CSS para mostrar/ocultar cada layout
 

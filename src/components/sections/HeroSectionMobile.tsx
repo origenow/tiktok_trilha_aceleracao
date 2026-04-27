@@ -210,7 +210,7 @@ export function HeroSectionMobile() {
 
               {/* Subtítulo */}
               <p className="font-body mt-4 text-[0.95rem] leading-relaxed w-full" style={{ color: "#4A0505", opacity: 0.8 }}>
-                Siga as fases → complete tarefas → desbloqueie cupons, tráfego e suporte
+                Siga as fases → complete ações simples → desbloqueie cupons, tráfego e suporte
               </p>
 
               {/* Cards flutuantes — mobile only */}
@@ -353,7 +353,7 @@ export function HeroSectionMobile() {
         <div className="lg:hidden mt-auto shrink-0 relative z-10 w-full max-w-[430px] mx-auto px-4 pb-6">
           <div className="bg-white rounded-3xl px-4 py-5 shadow-md">
             <p className="font-body text-xs text-center mb-3 opacity-60" style={{ color: "#033624" }}>
-              4 fases · missões progressivas · recompensas reais
+              4 fases · tarefas progressivas · recompensas reais
             </p>
             <div className="flex flex-wrap justify-center gap-2">
               {fasesPills.map((p) => (

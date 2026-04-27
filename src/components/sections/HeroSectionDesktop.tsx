@@ -297,7 +297,7 @@ export function HeroSectionDesktop() {
       <section className="bg-white text-[#033624] rounded-t-[3.5rem] px-6 py-8 md:px-10 md:py-12 relative z-20 shadow-[0_-30px_60px_rgba(0,0,0,0.08)] mt-auto w-full">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
 
-          {/* Card 1: Missões */}
+          {/* Card 1: tarefas */}
           <motion.div
             whileHover={{ y: -10, scale: 1.02 }}
             className="bg-gradient-to-b from-[#F8F9FA] to-white rounded-[2.5rem] p-6 flex flex-col items-center text-center relative h-64 border-2 border-gray-50 shadow-md hover:shadow-2xl transition-all duration-300"

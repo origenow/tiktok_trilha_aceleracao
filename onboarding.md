@@ -28,8 +28,8 @@ Criar uma experiência imersiva, responsiva e com nível de produção profissio
 ## 2. SliderSection (Seller Academy)
 
 ### Cards de Taxas e Header
-- **Reorganização Horizontal:** A seção que exibe os links das Políticas, Taxa de Comissão e Frete será agrupada em linha (`lg:grid-cols-3` ou `lg:flex`) para não gerar um bloco excessivamente longo verticalmente no desktop.
-- **Isenção de Comissão:** O card promocional será redimensionado para aproveitar a largura do container desktop, possivelmente dividindo texto de um lado e a imagem de exemplo do outro.
+- **Reorganização Horizontal:** A seção que exibe os links das Políticas, Taxa de comissão e Frete será agrupada em linha (`lg:grid-cols-3` ou `lg:flex`) para não gerar um bloco excessivamente longo verticalmente no desktop.
+- **Isenção de comissão:** O card promocional será redimensionado para aproveitar a largura do container desktop, possivelmente dividindo texto de um lado e a imagem de exemplo do outro.
 
 ### Otimização do Swiper (Carrossel)
 - **Breakpoints Responsivos:** Adicionar configurações no `<Swiper>` para o desktop. Atualmente usa `slidesPerView={1.1}`. Para telas grandes, implementaremos `breakpoints={{ 1024: { slidesPerView: 3.5, spaceBetween: 24 } }}`.

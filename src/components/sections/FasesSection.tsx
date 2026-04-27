@@ -30,6 +30,8 @@ import {
   ChevronRight,
   RotateCcw,
   MessageCircle,
+  Search,
+  X,
   LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -52,6 +54,7 @@ const DS = {
 interface Material {
   title: string;
   url: string | null;
+  type?: "webinar" | "playbook";
 }
 
 interface MissionGroup {
@@ -102,8 +105,7 @@ const FASES: FaseData[] = [
         title: "Entrar na comunidade",
         icon: Users,
         items: [
-          "Entre no grupo de WhatsApp da sua região",
-          "Acompanhe dicas e suporte diário do grupo",
+          "Entre no grupo de WhatsApp da sua região 👉 (dicas + suporte diário)",
         ],
         note: { text: "Ver grupos por região", href: "#cta" },
       },
@@ -111,12 +113,11 @@ const FASES: FaseData[] = [
         title: "Subir seus produtos",
         icon: Package,
         items: [
-          "Cadastre pelo menos 10 produtos na loja",
-          "Use fotos de qualidade e descrições completas",
+          "Cadastre pelo menos 10 produtos",
         ],
         materials: [
-          { title: "Webinar TikTok Shop [1]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgvm66g4ngwyp9m43qu3a3" },
-          { title: "Webinar introdutório sobre Lives", url: "https://bytedance.sg.larkoffice.com/minutes/obsgoo4ypm8jql622h3ey545" },
+          { title: "Webinar 1 - Trilha Aceleração", url: "https://bytedance.sg.larkoffice.com/minutes/obsgvm66g4ngwyp9m43qu3a3", type: "webinar" },
+          { title: "Webinar Lives: como começar fase 1", url: "https://bytedance.sg.larkoffice.com/minutes/obsgoo4ypm8jql622h3ey545", type: "webinar" },
         ],
       },
       {
@@ -124,15 +125,17 @@ const FASES: FaseData[] = [
         icon: Tag,
         items: [
           "Coloque promoção em 5 produtos",
-          "Crie 1 cupom de desconto",
-          "Ative 3 ofertas relâmpago",
+          "Crie 1 cupom (10 unidades)",
+          "Ative 1 oferta relâmpago",
         ],
       },
       {
-        title: "Criar os primeiros conteúdos",
+        title: "Começar a ter conteúdos",
         icon: Video,
         items: [
-          "Faça 2 lives de 60 minutos cada",
+          "Garanta Amostras grátis em seus top 3 produtos",
+          "Garanta Amostra reembolsável em 3 produtos",
+          "Faça 1 lives (pelo menos 30 min)",
           "Poste 3 vídeos com link do produto",
         ],
       },
@@ -140,8 +143,8 @@ const FASES: FaseData[] = [
         title: "Como ganhar benefícios?",
         icon: Gift,
         items: [
-          "Siga as Oportunidades de crescimento no painel (Figura 1)",
-          "Siga as Tarefas de Lives no Live Manager (Figura 2)",
+          "Siga as Oportunidades de crescimento no painel [Figura Abaixo 1]",
+          "Siga as Tarefas de Lives no Live Manager [Figura Abaixo 2]",
         ],
         note: { text: "Acessar Central do Vendedor", href: "https://seller-br.tiktok.com/challenges/growth", external: true },
         images: [
@@ -177,8 +180,8 @@ const FASES: FaseData[] = [
           "Envie no mínimo 30 amostras do mesmo produto para criadores",
         ],
         materials: [
-          { title: "Webinar TikTok Shop [2]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgvo577q35g62w4z28yv35" },
-          { title: "Webinar sobre Afiliados", url: "https://bytedance.sg.larkoffice.com/minutes/obsgpacf9mx8fscn32b762g2" },
+          { title: "Webinar TikTok Shop [2]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgvo577q35g62w4z28yv35", type: "webinar" },
+          { title: "Webinar sobre Afiliados", url: "https://bytedance.sg.larkoffice.com/minutes/obsgpacf9mx8fscn32b762g2", type: "webinar" },
         ],
       },
       {
@@ -189,10 +192,10 @@ const FASES: FaseData[] = [
           "Realize lives — mínimo 20h no total (sugestão: 14 lives)",
         ],
         materials: [
-          { title: "Playbook de Vídeos", url: "https://bytedance.sg.larkoffice.com/docx/A9WUdaFuxowRmKxKUm7lcFvGgHh" },
-          { title: "Playbook de Lives", url: "https://bytedance.sg.larkoffice.com/docx/F8XKdsImGop4r8xRUG1lYl9Qgdh?from=from_parent_docx" },
-          { title: "Webinar Lives [2]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgp28ow116pnqs1y7nh89n" },
-          { title: "Webinar Lives [3]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgr4l4269j4m3l96q9j13c" },
+          { title: "Playbook de Vídeos", url: "https://bytedance.sg.larkoffice.com/docx/A9WUdaFuxowRmKxKUm7lcFvGgHh", type: "playbook" },
+          { title: "Playbook de Lives", url: "https://bytedance.sg.larkoffice.com/docx/F8XKdsImGop4r8xRUG1lYl9Qgdh?from=from_parent_docx", type: "playbook" },
+          { title: "Webinar Lives [2]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgp28ow116pnqs1y7nh89n", type: "webinar" },
+          { title: "Webinar Lives [3]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgr4l4269j4m3l96q9j13c", type: "webinar" },
         ],
       },
       {
@@ -205,7 +208,7 @@ const FASES: FaseData[] = [
       },
     ],
     reward: "Até R$ 3.400 em cupons + impulsionamento",
-    rewardSub: "Incentivo de tráfego · 15% off cupom · Comissão extra criadores",
+    rewardSub: "Incentivo de tráfego · 15% off cupom · comissão extra criadores",
     rewardIcon: Coins,
   },
   {
@@ -230,7 +233,7 @@ const FASES: FaseData[] = [
           "Reforce o relacionamento com top criadores (mais produtos + comunicação ativa)",
         ],
         materials: [
-          { title: "Webinar TikTok Shop [3]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgv6t9hu43976116r93ot3" },
+          { title: "Webinar TikTok Shop [3]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgv6t9hu43976116r93ot3", type: "webinar" },
         ],
       },
       {
@@ -241,7 +244,7 @@ const FASES: FaseData[] = [
           "Realize 1 big live por campanha mensal (mínimo 3h)",
         ],
         materials: [
-          { title: "Webinar Lives [4]", url: "https://bytedance.sg.larkoffice.com/minutes/obsg2oo34y99uh95rv75iemz" },
+          { title: "Webinar Lives [4]", url: "https://bytedance.sg.larkoffice.com/minutes/obsg2oo34y99uh95rv75iemz", type: "webinar" },
         ],
       },
       {
@@ -252,12 +255,12 @@ const FASES: FaseData[] = [
           "Investimento inicial sugerido: R$ 2.500/mês",
         ],
         materials: [
-          { title: "Webinar sobre Ads", url: "https://bytedance.sg.larkoffice.com/minutes/obsgaahwrem1hut18kqogot3" },
+          { title: "Webinar sobre Ads", url: "https://bytedance.sg.larkoffice.com/minutes/obsgaahwrem1hut18kqogot3", type: "webinar" },
         ],
       },
     ],
     reward: "Matching com Top Criadores + Ads Credits",
-    rewardSub: "Cashback em ads até R$ 4.000 · Cupons 30% off · Comissão extra",
+    rewardSub: "Cashback em ads até R$ 4.000 · Cupons 30% off · comissão extra",
     rewardIcon: Target,
   },
   {
@@ -383,8 +386,8 @@ function PhaseTab({ fase, index, isActive, onClick }: {
 }
 
 /* ── Mission group card ──────────────────────────────────────── */
-function MissionGroupCard({ group, fase, step }: {
-  group: MissionGroup; fase: FaseData; step: number;
+function MissionGroupCard({ group, fase, step, onImageClick }: {
+  group: MissionGroup; fase: FaseData; step: number; onImageClick?: (src: string) => void;
 }) {
   const GroupIcon = group.icon;
   const hasMaterials = group.materials && group.materials.length > 0;
@@ -413,45 +416,57 @@ function MissionGroupCard({ group, fase, step }: {
 
       {/* Items */}
       <div className={cn("px-4 pt-3.5", hasMaterials || group.note || hasImages ? "pb-3" : "pb-3.5")}>
-        <ul className="space-y-2.5">
+        <ul className="space-y-3">
           {group.items.map((item, i) => (
-            <li key={i} className="flex items-start gap-3">
-              <div className="w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+            <li key={i} className="flex items-start gap-3.5">
+              <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5"
                 style={{ backgroundColor: alpha(fase.color, 0.12) }}>
-                <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: fase.color }} />
+                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: fase.color }} />
               </div>
-              <span className="font-body text-[0.82rem] leading-snug" style={{ color: "#1a2e1e" }}>{item}</span>
+              <span className="font-body text-[0.95rem] leading-tight font-medium" style={{ color: "#1a2e1e" }}>{item}</span>
             </li>
           ))}
         </ul>
         {group.note && (
-          group.note.external ? (
-            <a href={group.note.href} target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-1.5 mt-3 font-body text-xs font-semibold w-fit rounded-full px-3 py-1.5"
-              style={{ backgroundColor: alpha(DS.glint, 0.12), color: DS.thrive }}
-            >
-              <MessageCircle size={12} />
-              {group.note.text}
-              <ChevronRight size={11} />
-            </a>
-          ) : (
-            <a href={group.note.href}
-              className="inline-flex items-center gap-2 mt-3 font-display font-black text-xs rounded-xl px-4 py-2.5 transition-transform duration-150 active:scale-[0.97]"
-              style={{
-                backgroundColor: DS.glint,
-                color: DS.thrive,
-                boxShadow: `0 4px 14px ${alpha(DS.glint, 0.4)}`,
-              }}
-              onClick={(e) => {
+          <motion.a
+            href={group.note.href}
+            target={group.note.external ? "_blank" : undefined}
+            rel={group.note.external ? "noopener noreferrer" : undefined}
+            initial={{ scale: 1 }}
+            animate={{
+              scale: [1, 1.02, 1],
+              boxShadow: [
+                `0 4px 14px ${alpha(DS.glint, 0.3)}`,
+                `0 6px 20px ${alpha(DS.glint, 0.5)}`,
+                `0 4px 14px ${alpha(DS.glint, 0.3)}`
+              ]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-2.5 mt-4 font-display font-black text-xs rounded-full px-5 py-3 transition-colors relative overflow-hidden group/btn"
+            style={{
+              backgroundColor: DS.glint,
+              color: DS.thrive,
+            }}
+            onClick={(e) => {
+              if (!group.note?.external) {
                 e.preventDefault();
                 document.querySelector(group.note!.href)?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              <MessageCircle size={15} />
-              {group.note.text}
-              <ChevronRight size={14} />
-            </a>
-          )
+              }
+            }}
+          >
+            {/* Shimmer effect */}
+            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover/btn:animate-shimmer" />
+
+            <MessageCircle size={15} strokeWidth={2.5} />
+            <span className="relative z-10">{group.note.text}</span>
+            <ChevronRight size={14} strokeWidth={3} className="transition-transform group-hover/btn:translate-x-1" />
+          </motion.a>
         )}
       </div>
 
@@ -463,13 +478,17 @@ function MissionGroupCard({ group, fase, step }: {
           </p>
           <div className={cn("grid gap-3", group.images!.length > 1 ? "grid-cols-2" : "grid-cols-1")}>
             {group.images!.map((src, i) => (
-              <div key={i} className="w-full rounded-xl overflow-hidden flex flex-col"
+              <div key={i} className="w-full rounded-xl overflow-hidden flex flex-col group/img cursor-zoom-in"
+                onClick={() => onImageClick?.(src)}
                 style={{ border: `1px solid ${alpha(fase.color, 0.18)}` }}>
                 <p className="font-body text-[0.6rem] px-2.5 py-1.5 shrink-0" style={{ backgroundColor: alpha(fase.color, 0.08), color: alpha(DS.thrive, 0.5) }}>
                   Figura {i + 1}
                 </p>
                 <div className="relative w-full flex-1 min-h-[120px] max-h-[180px] bg-[#f8f9fa] flex items-center justify-center p-2 overflow-hidden">
-                  <img src={src} alt={`Figura ${i + 1}`} className="max-w-full max-h-full object-contain" />
+                  <img src={src} alt={`Figura ${i + 1}`} className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover/img:scale-105" />
+                  <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/5 transition-colors flex items-center justify-center opacity-0 group-hover/img:opacity-100">
+                    <Search size={20} className="text-[#033624]/40" />
+                  </div>
                 </div>
               </div>
             ))}
@@ -477,47 +496,69 @@ function MissionGroupCard({ group, fase, step }: {
         </div>
       )}
 
-      {/* Materiais inline */}
+      {/* Materiais inline - Redesenhados como Cards/Thumbs em 2 colunas */}
       {hasMaterials && (
-        <div className="px-4 pb-3.5" style={{ borderTop: `1px dashed ${alpha(fase.color, 0.2)}` }}>
-          <div className="flex items-center gap-1.5 pt-3 mb-2.5">
-            <BookOpen size={11} style={{ color: alpha(DS.thrive, 0.4) }} />
-            <span className="font-body text-[0.6rem] uppercase tracking-wider" style={{ color: alpha(DS.thrive, 0.4) }}>
-              Materiais de apoio
-            </span>
-          </div>
-          <div className="flex flex-col gap-1.5">
-            {group.materials!.map((mat, mi) => {
-              const hasUrl = Boolean(mat.url);
-              if (hasUrl) {
-                return (
-                  <a key={mi} href={mat.url!} target="_blank" rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-3 py-2 rounded-xl transition-all duration-200 hover:shadow-sm active:scale-[0.97]"
-                    style={{ backgroundColor: alpha(fase.color, 0.08), border: `1px solid ${alpha(fase.color, 0.2)}` }}>
-                    <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0"
-                      style={{ backgroundColor: fase.color, color: fase.onColor }}>
-                      <Play size={10} fill={fase.onColor} strokeWidth={0} />
-                    </div>
-                    <span className="font-body text-[0.75rem] flex-1" style={{ color: DS.thrive }}>{mat.title}</span>
-                    <ChevronRight size={12} style={{ color: alpha(fase.color, 0.6) }} />
-                  </a>
-                );
-              }
-              return (
-                <div key={mi} className="flex items-center gap-2 px-3 py-2 rounded-xl"
-                  style={{ backgroundColor: "rgba(3,54,36,0.03)", border: "1px solid rgba(3,54,36,0.07)" }}>
-                  <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0"
-                    style={{ backgroundColor: "rgba(3,54,36,0.06)", color: "rgba(3,54,36,0.3)" }}>
-                    <Play size={10} strokeWidth={1.5} />
-                  </div>
-                  <span className="font-body text-[0.75rem] flex-1" style={{ color: "rgba(3,54,36,0.35)" }}>{mat.title}</span>
-                  <span className="font-body text-[0.55rem] px-1.5 py-0.5 rounded-full"
-                    style={{ backgroundColor: "rgba(3,54,36,0.05)", color: "rgba(3,54,36,0.3)" }}>
-                    em breve
+        <div className="px-4 pb-4" style={{ borderTop: `1px dashed ${alpha(fase.color, 0.2)}` }}>
+          <div className="flex flex-col lg:flex-row gap-5 pt-4">
+
+            {/* Coluna Webinars */}
+            {group.materials!.some(m => m.type === "webinar") && (
+              <div className="flex-1">
+                <div className="flex items-center gap-1.5 mb-2.5">
+                  <Video size={12} className="text-[#033624]/40" />
+                  <span className="font-body text-[0.6rem] uppercase tracking-wider font-bold" style={{ color: alpha(DS.thrive, 0.4) }}>
+                    Assista nossos Webinars
                   </span>
                 </div>
-              );
-            })}
+                <div className="grid grid-cols-1 gap-2">
+                  {group.materials!.filter(m => m.type === "webinar").map((mat, mi) => (
+                    <a key={mi} href={mat.url!} target="_blank" rel="noopener noreferrer"
+                      className="group/thumb flex items-center gap-3 p-2 rounded-xl border transition-all duration-300 hover:shadow-md hover:bg-white active:scale-[0.98]"
+                      style={{ backgroundColor: alpha(fase.color, 0.05), borderColor: alpha(fase.color, 0.15) }}>
+                      <div className="w-12 h-10 rounded-lg flex items-center justify-center shrink-0 relative overflow-hidden"
+                        style={{ backgroundColor: fase.color }}>
+                        <div className="absolute inset-0 bg-black/10 opacity-0 group-hover/thumb:opacity-100 transition-opacity" />
+                        <Play size={14} fill={fase.onColor} strokeWidth={0} className="relative z-10" />
+                        {/* Play progress bar simulation */}
+                        <div className="absolute bottom-0 left-0 h-0.5 bg-white/40 w-full" />
+                        <div className="absolute bottom-0 left-0 h-0.5 bg-white w-2/3" />
+                      </div>
+                      <span className="font-body text-[0.7rem] font-bold leading-tight flex-1 line-clamp-2" style={{ color: DS.thrive }}>
+                        {mat.title}
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Coluna Playbooks */}
+            {group.materials!.some(m => m.type === "playbook") && (
+              <div className="flex-1">
+                <div className="flex items-center gap-1.5 mb-2.5">
+                  <BookOpen size={12} className="text-[#033624]/40" />
+                  <span className="font-body text-[0.6rem] uppercase tracking-wider font-bold" style={{ color: alpha(DS.thrive, 0.4) }}>
+                    Playbooks
+                  </span>
+                </div>
+                <div className="grid grid-cols-1 gap-2">
+                  {group.materials!.filter(m => m.type === "playbook").map((mat, mi) => (
+                    <a key={mi} href={mat.url!} target="_blank" rel="noopener noreferrer"
+                      className="group/thumb flex items-center gap-3 p-2 rounded-xl border transition-all duration-300 hover:shadow-md hover:bg-white active:scale-[0.98]"
+                      style={{ backgroundColor: alpha(DS.dawn, 0.25), borderColor: alpha(DS.dawn, 0.4) }}>
+                      <div className="w-12 h-10 rounded-lg flex items-center justify-center shrink-0"
+                        style={{ backgroundColor: DS.dawn }}>
+                        <Tag size={14} className="text-[#4A0505]" />
+                      </div>
+                      <span className="font-body text-[0.7rem] font-bold leading-tight flex-1 line-clamp-2" style={{ color: "#4A0505" }}>
+                        {mat.title}
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+
           </div>
         </div>
       )}
@@ -531,6 +572,7 @@ export function FasesSection() {
   const [groupStep, setGroupStep] = useState(0);
   const [direction, setDirection] = useState(1);
   const [showReward, setShowReward] = useState(false);
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
   const rewardRef = useRef<HTMLDivElement>(null);
 
   const activeFase = FASES[activeIndex];
@@ -797,7 +839,7 @@ export function FasesSection() {
         <div className="w-full max-w-[430px] mx-auto px-6 mb-7">
           <p className="font-body text-xs uppercase tracking-widest mb-1" style={{ color: DS.glint }}>A Trilha</p>
           <h2 className="font-display font-black leading-tight" style={{ fontSize: "clamp(1.8rem, 7vw, 2.4rem)", color: DS.thrive }}>
-            Missões por{" "}
+            tarefas por{" "}
             <HighlightedText highlightColor={DS.blaze} from="bottom" inView delay={0.3}>Fase</HighlightedText>
           </h2>
           <p className="font-body text-sm mt-1.5" style={{ color: DS.ember, opacity: 0.7 }}>
@@ -838,7 +880,7 @@ export function FasesSection() {
             A Trilha
           </p>
           <h2 className="font-display font-black leading-tight mb-3" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", color: DS.thrive }}>
-            Missões por{" "}
+            tarefas por{" "}
             <HighlightedText highlightColor={DS.blaze} from="bottom" inView delay={0.3}>Fase</HighlightedText>
           </h2>
           <p className="font-body text-base max-w-2xl mx-auto font-medium" style={{ color: DS.ember, opacity: 0.8 }}>
@@ -915,7 +957,7 @@ export function FasesSection() {
 
         </div>
 
-        {/* QUEST LOG PANEL (Detalhes da Missão) */}
+        {/* QUEST LOG PANEL (Detalhes da tarefa) */}
         <div ref={rewardRef} className="scroll-mt-20">
           <motion.div
             key={activeFase.id}
@@ -968,7 +1010,7 @@ export function FasesSection() {
               </div>
             </div>
 
-            {/* Lado Direito: Conteúdo de Missões */}
+            {/* Lado Direito: Conteúdo de tarefas */}
             <div className="w-[62%] p-8 flex flex-col justify-between bg-[#FCFDFD] relative">
 
               <div className="flex-1">
@@ -976,7 +1018,7 @@ export function FasesSection() {
                 <div className="flex items-center justify-between mb-5 pb-4 border-b border-gray-100">
                   <div>
                     <h4 className="font-display font-black text-[1.4rem] tracking-tight text-[#033624]">
-                      Missão Atual
+                      tarefa Atual
                     </h4>
                     <p className="font-body text-xs font-bold uppercase tracking-widest mt-1.5" style={{ color: alpha(DS.thrive, 0.4) }}>
                       Passo {groupStep + 1} de {totalSteps}
@@ -997,7 +1039,7 @@ export function FasesSection() {
                   </div>
                 </div>
 
-                {/* Card da Missão Atual */}
+                {/* Card da tarefa Atual */}
                 <AnimatePresence mode="wait" custom={direction}>
                   <motion.div
                     key={`${activeFase.id}-${groupStep}`}
@@ -1013,6 +1055,7 @@ export function FasesSection() {
                       group={activeFase.missionGroups[groupStep]}
                       fase={activeFase}
                       step={groupStep + 1}
+                      onImageClick={setZoomedImage}
                     />
                   </motion.div>
                 </AnimatePresence>
@@ -1054,7 +1097,7 @@ export function FasesSection() {
                   ) : isLastGroup ? (
                     <><activeFase.rewardIcon size={20} className="relative z-10 group-hover:scale-110 transition-transform" strokeWidth={2.5} /><span className="relative z-10">Ver Recompensa da Fase</span></>
                   ) : (
-                    <><span className="relative z-10">Completar Missão</span><ChevronRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform" strokeWidth={2.5} /></>
+                    <><span className="relative z-10">Completar tarefa</span><ChevronRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform" strokeWidth={2.5} /></>
                   )}
                 </motion.button>
               </div>
@@ -1138,6 +1181,38 @@ export function FasesSection() {
           </motion.div>
         </div>
       </div>
+      {/* Modal de Zoom da Imagem */}
+      <AnimatePresence>
+        {zoomedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setZoomedImage(null)}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 md:p-10 cursor-zoom-out"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative max-w-5xl w-full h-full flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={zoomedImage}
+                alt="Zoom"
+                className="max-w-full max-h-full object-contain rounded-2xl shadow-2xl"
+              />
+              <button
+                onClick={() => setZoomedImage(null)}
+                className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center backdrop-blur-md transition-colors"
+              >
+                <X size={24} />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

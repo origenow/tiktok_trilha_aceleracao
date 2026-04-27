@@ -190,10 +190,10 @@ export function SliderSection() {
         tiktok: true,
       },
       {
-        tag: "Missão",
+        tag: "tarefa",
         video: "https://www.tiktok.com/embed/v2/7553759058801577224",
         link: "https://www.tiktok.com/@sellwithtiktokshop_br/video/7553759058801577224",
-        title: "Tarefas e missões",
+        title: "Tarefas e tarefas",
         description: "Complete os desafios do lojista iniciante para desbloquear cupons e ads grátis.",
         dark: false,
         tiktok: true,
@@ -261,7 +261,7 @@ export function SliderSection() {
         video: "https://www.tiktok.com/embed/v2/7517954448451177734",
         link: "https://www.tiktok.com/@sellwithtiktokshop_br/video/7517954448451177734",
         title: "Visual da Live",
-        description: "Como configurar os elementos visuais e a disposição da sua transmissão para atrair cliques.",
+        description: "Como configurar os elementos visuais e a disposição da sua transtarefa para atrair cliques.",
         dark: true,
         tiktok: true,
       },
@@ -387,7 +387,7 @@ export function SliderSection() {
             </div>
           </motion.a>
 
-          {/* Comissão */}
+          {/* comissão */}
           <motion.div
             {...fadeUp(0.22)}
             className="group relative rounded-3xl p-6 flex flex-col gap-1 overflow-hidden transition-all duration-300 md:hover:-translate-y-1 hover:shadow-xl"
@@ -402,7 +402,7 @@ export function SliderSection() {
                 <Tag size={16} style={{ color: "#ffffff" }} />
               </div>
               <p className="font-body text-[10px] md:text-xs font-bold uppercase tracking-widest text-white/70">
-                Comissão
+                comissão
               </p>
             </div>
             <div className="flex items-baseline gap-1">
@@ -467,7 +467,7 @@ export function SliderSection() {
               <ChevronRight size={14} className="text-[#111111]/40" />
               <span className="font-body text-xs md:text-sm font-semibold text-[#111111]">Crescimento</span>
               <ChevronRight size={14} className="text-[#111111]/40" />
-              <span className="font-body text-xs md:text-sm font-black px-4 py-1 rounded-full bg-[#F1204A] text-white">Minhas Missões</span>
+              <span className="font-body text-xs md:text-sm font-black px-4 py-1 rounded-full bg-[#F1204A] text-white">Minhas tarefas</span>
             </div>
           </div>
 
@@ -629,13 +629,13 @@ function TikTokEmbed({ src }: { src: string }) {
 
   return (
     <div className="relative w-full h-full overflow-hidden bg-black group/video">
-      {/* Mantemos o SRC para mostrar a capa original, mas controlamos o autoplay via permissões e KEY */}
+      {/* Mantemos o SRC para mostrar a capa original, mas controlamos o autoplay via pertarefas e KEY */}
       <iframe
         key={activated ? "active" : "inactive"}
         src={src}
         className={`border-0 absolute inset-0 w-full h-full transition-opacity duration-700 ${activated ? "opacity-100" : "opacity-80 md:opacity-90"}`}
         style={{ width: "calc(100% + 18px)", height: "100%", left: 0, top: 0 }}
-        // Adicionamos permissões extras para garantir o funcionamento do áudio e outros recursos
+        // Adicionamos pertarefas extras para garantir o funcionamento do áudio e outros recursos
         allow={activated ? "autoplay; clipboard-write; encrypted-media; picture-in-picture; fullscreen; web-share" : "clipboard-write; encrypted-media; picture-in-picture"}
         allowFullScreen
       />

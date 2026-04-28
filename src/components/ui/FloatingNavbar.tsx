@@ -29,7 +29,7 @@ export function FloatingNavbar() {
   });
 
   return (
-    <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-full max-w-[320px] lg:max-w-[680px] px-4 pointer-events-none">
+    <div className="hidden md:block fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-full max-w-[320px] lg:max-w-[680px] px-4 pointer-events-none">
       <motion.div
         initial={{ y: -100, x: "-50%", opacity: 0 }}
         animate={{

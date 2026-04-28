@@ -1,7 +1,7 @@
 import { SliderSection } from "@/components/sections/SliderSection";
 import { MateriaisDeApoioSection } from "@/components/sections/MateriaisDeApoioSection";
 import { Footer } from "@/components/sections/Footer";
-import { FloatingNavbar } from "@/components/ui/FloatingNavbar";
+import { StaggeredMenu } from "@/components/ui/StaggeredMenu";
 
 export const metadata = {
   title: "TikTok Shop · Polos",
@@ -12,17 +12,32 @@ export const metadata = {
   },
 };
 
+const MENU_ITEMS = [
+  { label: "Trilha", ariaLabel: "Trilha de Aceleração", link: "/", color: "#F1204A" },
+  { label: "Biblioteca", ariaLabel: "Biblioteca de conteúdos", link: "/polo-moda", color: "#2DCCD3" },
+];
+
 export default function PoloModaPage() {
   return (
     <>
-      <FloatingNavbar />
+      <StaggeredMenu
+        isFixed={true}
+        position="right"
+        items={MENU_ITEMS}
+        colors={["#F1204A", "#033624", "#2DCCD3"]}
+        accentColor="#F1204A"
+        logoUrl="/assets/3.svg"
+        displaySocials={false}
+        displayItemNumbering={false}
+        toggleClassName="md:hidden"
+      />
 
       <main
-        className="relative w-full pt-20 lg:pt-20"
+        className="relative w-full"
         style={{ minHeight: "100vh", backgroundColor: "#EDBBE8" }}
       >
-        <SliderSection />
         <MateriaisDeApoioSection />
+        <SliderSection />
         <Footer />
       </main>
     </>

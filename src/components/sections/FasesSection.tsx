@@ -187,8 +187,8 @@ const FASES: FaseData[] = [
           "Envie no mínimo 30 amostras grátis do mesmo produto para criadores",
         ],
         materials: [
-          { title: "Assista o webinar 2 sobre TikTok shop [2]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgvo577q35g62w4z28yv35", type: "webinar" },
-          { title: "Assista o webinar sobre Afiliados", url: "https://bytedance.sg.larkoffice.com/minutes/obsgpacf9mx8fscn32b762g2", type: "webinar" },
+          { title: "Webinar 2 - Trilha Aceleração", url: "https://bytedance.sg.larkoffice.com/minutes/obsgvo577q35g62w4z28yv35", type: "webinar" },
+          { title: "Webinar sobre Afiliados", url: "https://bytedance.sg.larkoffice.com/minutes/obsgpacf9mx8fscn32b762g2", type: "webinar" },
         ],
       },
       {
@@ -201,8 +201,8 @@ const FASES: FaseData[] = [
         materials: [
           { title: "Veja o Playbook de Vídeos", url: "https://bytedance.sg.larkoffice.com/docx/A9WUdaFuxowRmKxKUm7lcFvGgHh", type: "playbook" },
           { title: "Veja o Playbook de Lives", url: "https://bytedance.sg.larkoffice.com/docx/F8XKdsImGop4r8xRUG1lYl9Qgdh?from=from_parent_docx", type: "playbook" },
-          { title: "Assista o webinar 2 sobre Lives", url: "https://bytedance.sg.larkoffice.com/minutes/obsgp28ow116pnqs1y7nh89n", type: "webinar" },
-          { title: "Assista o webinar 3 sobre Lives", url: "https://bytedance.sg.larkoffice.com/minutes/obsgr4l4269j4m3l96q9j13c", type: "webinar" },
+          { title: "Webinar 2", url: "https://bytedance.sg.larkoffice.com/minutes/obsgp28ow116pnqs1y7nh89n", type: "webinar" },
+          { title: "Webinar 3", url: "https://bytedance.sg.larkoffice.com/minutes/obsgr4l4269j4m3l96q9j13c", type: "webinar" },
         ],
       },
       {
@@ -239,7 +239,7 @@ const FASES: FaseData[] = [
           "Reforçar relacionamento com top criadores (mandar mais produtos)",
         ],
         materials: [
-          { title: "Assitir o webinar 3 sobre TikTok Shop [3]", url: "https://bytedance.sg.larkoffice.com/minutes/obsgv6t9hu43976116r93ot3", type: "webinar" },
+          { title: "Assitir o webinar 3 sobre TikTok Shop", url: "https://bytedance.sg.larkoffice.com/minutes/obsgv6t9hu43976116r93ot3", type: "webinar" },
         ],
       },
       {

@@ -6,7 +6,12 @@ import { WebinarsSection } from "@/components/sections/WebinarsSection";
 import { CtaFinalSection } from "@/components/sections/CtaFinalSection";
 import { Footer } from "@/components/sections/Footer";
 import { TikTokIntro } from "@/components/ui/TikTokIntro";
-import { FloatingNavbar } from "@/components/ui/FloatingNavbar";
+import { StaggeredMenu } from "@/components/ui/StaggeredMenu";
+
+const MOBILE_MENU_ITEMS = [
+  { label: "Trilha", ariaLabel: "Trilha de Aceleração", link: "/", color: "#F1204A" },
+  { label: "Biblioteca", ariaLabel: "Biblioteca de conteúdos", link: "/polo-moda", color: "#2DCCD3" },
+];
 
 export default function Home() {
   return (
@@ -14,8 +19,18 @@ export default function Home() {
       {/* Splash screen de entrada — remove-se automaticamente após ~3.2s */}
       <TikTokIntro />
 
-      {/* Menu flutuante interativo */}
-      <FloatingNavbar />
+      {/* Mobile: menu overlay staggered — toggle oculto em md+ */}
+      <StaggeredMenu
+        isFixed={true}
+        position="right"
+        items={MOBILE_MENU_ITEMS}
+        colors={["#F1204A", "#033624", "#2DCCD3"]}
+        accentColor="#F1204A"
+        logoUrl="/assets/3.svg"
+        displaySocials={false}
+        displayItemNumbering={false}
+        toggleClassName="md:hidden"
+      />
 
       <main
         className="relative w-full mx-auto"
@@ -32,5 +47,3 @@ export default function Home() {
     </>
   );
 }
-
-

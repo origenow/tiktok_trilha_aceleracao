@@ -139,7 +139,7 @@ export function HeroSectionDesktop() {
     const unsubscribe = videoScrollProgress.on("change", (v) => {
       if (!videoRef.current) return;
       if (v > 0.38 && !hasAutoStarted.current) {
-        videoRef.current.play().catch(() => {});
+        videoRef.current.play().catch(() => { });
         videoRef.current.muted = false;
         setIsPlaying(true);
         setIsMuted(false);
@@ -160,7 +160,7 @@ export function HeroSectionDesktop() {
   const togglePlay = () => {
     if (!videoRef.current) return;
     if (videoRef.current.paused) {
-      videoRef.current.play().catch(() => {});
+      videoRef.current.play().catch(() => { });
       setIsPlaying(true);
     } else {
       videoRef.current.pause();

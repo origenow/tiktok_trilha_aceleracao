@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "motion/react";
-import { FileText, Download, ChevronLeft, ChevronRight, Video, Users } from "lucide-react";
+
+import { motion } from "motion/react";
+import { Download, Video, Users } from "lucide-react";
 import { HighlightedText } from "@/components/ui/highlighted-text";
 
 /* ── Dados dos PDFs ───────────────────────────────────────────── */
@@ -69,21 +69,6 @@ const WEBINARS: WebinarCard[] = [
 
 /* ── Seção principal ──────────────────────────────────────────── */
 export function WebinarsSection() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  function scroll(dir: "left" | "right") {
-    if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: dir === "right" ? 250 : -250, behavior: "smooth" });
-  }
-
-  function handleCardClick(index: number) {
-    if (!scrollRef.current) return;
-    const cardWidth = 248; // 240 + 8 gap
-    // Cálculo de offset para centralizar o card (considerando o espaçador inicial de 95px)
-    const offset = (index * cardWidth + 95) - (430 / 2) + (120);
-    scrollRef.current.scrollTo({ left: offset, behavior: "smooth" });
-  }
-
   return (
     <section id="webinars" className="relative overflow-hidden py-20 lg:py-32" style={{ backgroundColor: "#EDD4B2" }}>
 
@@ -175,141 +160,110 @@ export function WebinarsSection() {
             Conteúdo exclusivo com especialistas do TikTok Shop — salve as datas e não perca nenhuma edição.
           </p>
         </motion.div>
-        {/* ── Grid desktop (Duas Colunas: Webinars e Eventos) ── */}
-        <div className="hidden lg:grid lg:grid-cols-12 lg:gap-x-16 lg:gap-y-12 px-0 relative items-start">
-          
-          {/* Divisor Lateral (Vertical) */}
-          <div className="absolute left-[34%] top-10 bottom-0 w-px bg-[#033624]/10 hidden lg:block" />
+        {/* ── Desktop Layout (espelha estrutura do mobile) ── */}
+        <div className="hidden lg:flex lg:flex-col gap-14">
 
-          {/* HEADERS (Row 1) */}
-          <div className="lg:col-span-4 flex flex-col gap-3 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="flex flex-col gap-3"
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg" style={{ backgroundColor: "#2DCCD3" }}>
-                  <Video size={20} className="text-[#033624]" />
-                </div>
+          {/* Webinars */}
+          <div className="flex flex-col gap-5">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-md" style={{ backgroundColor: "#2DCCD3" }}>
+                <Video size={20} className="text-[#033624]" />
+              </div>
+              <div>
                 <h3 className="font-display font-black text-2xl" style={{ color: "#033624" }}>Webinars</h3>
+                <p className="font-body text-sm opacity-60" style={{ color: "#4A0505" }}>Sessões semanais com especialistas</p>
               </div>
-              <p className="font-body text-[0.95rem] leading-relaxed" style={{ color: "#4A0505", opacity: 0.65 }}>
-                Sessões semanais com especialistas para você dominar as ferramentas do TikTok Shop e impulsionar suas vendas.
-              </p>
-            </motion.div>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              {WEBINARS.filter(card => card.id === 1).map((card, i) => (
+                <motion.a
+                  key={card.id}
+                  href={card.pdfPath}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
+                  whileHover={{ y: -4, scale: 1.01 }}
+                  className="bg-white rounded-3xl p-5 flex items-center gap-5 border border-gray-100 group"
+                  style={{ boxShadow: "0 4px 20px rgba(3,54,36,0.06)" }}
+                >
+                  <div className="w-20 h-20 rounded-2xl overflow-hidden shrink-0">
+                    <img src={card.imagePath} alt={card.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span
+                      className="font-body text-[0.65rem] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-2 inline-block"
+                      style={{ backgroundColor: card.tagColor, color: card.tagTextColor }}
+                    >
+                      {card.tag}
+                    </span>
+                    <p className="font-display font-bold text-lg leading-tight" style={{ color: "#033624" }}>{card.title}</p>
+                    <p className="font-body text-sm opacity-60 mt-0.5 truncate" style={{ color: "#4A0505" }}>{card.subtitle}</p>
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0 ml-2" style={{ color: "#F1204A" }}>
+                    <Download size={18} />
+                    <span className="font-body text-xs font-bold uppercase tracking-wider">Abrir PDF</span>
+                  </div>
+                </motion.a>
+              ))}
+            </div>
           </div>
 
-          <div className="lg:col-span-8 flex flex-col gap-3 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="flex flex-col gap-3"
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg" style={{ backgroundColor: "#FBEB35" }}>
-                  <Users size={20} className="text-[#033624]" />
-                </div>
+          {/* Divisor */}
+          <div className="w-full h-px bg-[#033624]/10" />
+
+          {/* Eventos */}
+          <div className="flex flex-col gap-5">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-md" style={{ backgroundColor: "#FBEB35" }}>
+                <Users size={20} className="text-[#033624]" />
+              </div>
+              <div>
                 <h3 className="font-display font-black text-2xl" style={{ color: "#033624" }}>Eventos Presenciais</h3>
+                <p className="font-body text-sm opacity-60" style={{ color: "#4A0505" }}>Networking e prática presencial</p>
               </div>
-              <p className="font-body text-[0.95rem] leading-relaxed max-w-xl" style={{ color: "#4A0505", opacity: 0.65 }}>
-                Participe dos nossos encontros ao vivo em diversos polos de moda pelo Brasil para fazer networking e aprender na prática com nosso time.
-              </p>
-            </motion.div>
-          </div>
+            </div>
 
-          {/* CARDS (Row 2) */}
-          <div className="lg:col-span-4 flex flex-col">
-            {WEBINARS.filter(card => card.id === 1).map((card, i) => (
-              <motion.a
-                key={card.id}
-                href={card.pdfPath}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.5, delay: i * 0.15, type: "spring", bounce: 0.4 }}
-                whileHover={{ y: -8, scale: 1.02 }}
-              >
-                <div className="flex flex-col group">
-                  <div className="flex justify-start px-6 mb-4 relative z-30">
-                    <span className="font-body text-[0.7rem] font-black px-4 py-1.5 rounded-full uppercase tracking-widest"
-                      style={{ backgroundColor: card.tagColor, color: card.tagTextColor, transform: "rotate(-2deg)", boxShadow: "0 6px 16px rgba(0,0,0,0.12)", border: "2px solid white" }}>
+            <div className="grid grid-cols-2 gap-5">
+              {WEBINARS.filter(card => card.id !== 1).map((card, i) => (
+                <motion.a
+                  key={card.id}
+                  href={card.pdfPath}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
+                  whileHover={{ y: -4, scale: 1.01 }}
+                  className="bg-white rounded-3xl p-4 flex flex-col gap-3 border border-gray-100 group"
+                  style={{ boxShadow: "0 4px 20px rgba(3,54,36,0.06)" }}
+                >
+                  <div className="w-full h-44 rounded-2xl overflow-hidden">
+                    <img src={card.imagePath} alt={card.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                  </div>
+                  <div>
+                    <span
+                      className="font-body text-[0.65rem] font-black px-3 py-1 rounded-full uppercase tracking-widest mb-2 inline-block"
+                      style={{ backgroundColor: card.tagColor, color: card.tagTextColor }}
+                    >
                       {card.tag}
                     </span>
+                    <p className="font-display font-bold text-lg leading-tight" style={{ color: "#033624" }}>{card.title}</p>
+                    <p className="font-body text-sm opacity-60 mt-0.5" style={{ color: "#4A0505" }}>{card.subtitle}</p>
                   </div>
-                  <div className="flex flex-col rounded-[2.5rem] overflow-hidden bg-white transition-all duration-300 relative z-20"
-                    style={{ boxShadow: "0 10px 40px rgba(3,54,36,0.06)" }}>
-                    <div className="relative overflow-hidden" style={{ height: "260px" }}>
-                      <img src={card.imagePath} alt={card.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-10">
-                        <div className="w-14 h-14 rounded-full flex items-center justify-center shadow-2xl scale-50 group-hover:scale-100 transition-transform duration-300" style={{ backgroundColor: "#F1204A" }}>
-                          <Download size={24} style={{ color: "white" }} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="p-6 flex flex-col gap-2 bg-white relative z-20" style={{ borderTop: `4px solid ${card.accentColor}` }}>
-                      <p className="font-display font-black text-[1.35rem] leading-tight" style={{ color: "#033624" }}>{card.title}</p>
-                      <p className="font-body text-[0.9rem] leading-relaxed" style={{ color: "#4A0505", opacity: 0.7 }}>{card.subtitle}</p>
-                      <div className="flex items-center gap-2 mt-4 pt-4 border-t border-gray-100">
-                        <FileText size={14} style={{ color: card.accentColor === "#FBEB35" ? "#8a7a00" : card.accentColor }} />
-                        <span className="font-body text-xs font-bold tracking-wide uppercase" style={{ color: card.accentColor === "#FBEB35" ? "#8a7a00" : card.accentColor }}>Abrir PDF</span>
-                      </div>
-                    </div>
+                  <div className="flex items-center gap-2 mt-auto pt-3 border-t border-gray-100" style={{ color: "#F1204A" }}>
+                    <Download size={14} />
+                    <span className="font-body text-xs font-bold uppercase tracking-wider">Ver Agenda</span>
                   </div>
-                </div>
-              </motion.a>
-            ))}
+                </motion.a>
+              ))}
+            </div>
           </div>
 
-          <div className="lg:col-span-8 grid grid-cols-2 gap-8">
-            {WEBINARS.filter(card => card.id !== 1).map((card, i) => (
-              <motion.a
-                key={card.id}
-                href={card.pdfPath}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.5, delay: i * 0.15, type: "spring", bounce: 0.4 }}
-                whileHover={{ y: -8, scale: 1.02 }}
-              >
-                <div className="flex flex-col group">
-                  <div className="flex justify-start px-6 mb-4 relative z-30">
-                    <span className="font-body text-[0.7rem] font-black px-4 py-1.5 rounded-full uppercase tracking-widest"
-                      style={{ backgroundColor: card.tagColor, color: card.tagTextColor, transform: "rotate(-2deg)", boxShadow: "0 6px 16px rgba(0,0,0,0.12)", border: "2px solid white" }}>
-                      {card.tag}
-                    </span>
-                  </div>
-                  <div className="flex flex-col rounded-[2.5rem] overflow-hidden bg-white transition-all duration-300 relative z-20"
-                    style={{ boxShadow: "0 10px 40px rgba(3,54,36,0.06)" }}>
-                    <div className="relative overflow-hidden" style={{ height: "260px" }}>
-                      <img src={card.imagePath} alt={card.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-10">
-                        <div className="w-14 h-14 rounded-full flex items-center justify-center shadow-2xl scale-50 group-hover:scale-100 transition-transform duration-300" style={{ backgroundColor: "#F1204A" }}>
-                          <Download size={24} style={{ color: "white" }} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="p-6 flex flex-col gap-2 bg-white relative z-20" style={{ borderTop: `4px solid ${card.accentColor}` }}>
-                      <p className="font-display font-black text-[1.35rem] leading-tight" style={{ color: "#033624" }}>{card.title}</p>
-                      <p className="font-body text-[0.9rem] leading-relaxed" style={{ color: "#4A0505", opacity: 0.7 }}>{card.subtitle}</p>
-                      <div className="flex items-center gap-2 mt-4 pt-4 border-t border-gray-100">
-                        <FileText size={14} style={{ color: card.accentColor === "#FBEB35" ? "#8a7a00" : card.accentColor }} />
-                        <span className="font-body text-xs font-bold tracking-wide uppercase" style={{ color: card.accentColor === "#FBEB35" ? "#8a7a00" : card.accentColor }}>Abrir PDF</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.a>
-            ))}
-          </div>
         </div>
 
         {/* ── Mobile Layout ── */}

@@ -676,13 +676,14 @@ export function FasesSection() {
         exit="exit"
         transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
       >
-        {/* Imagem */}
-        <div className="relative w-full h-64 lg:h-72 rounded-2xl overflow-hidden mb-4 shadow-sm flex flex-col justify-start p-5 pt-8">
+        {/* Imagem + Dica integrada no mobile */}
+        <div className="relative w-full rounded-2xl overflow-hidden mb-4 shadow-sm flex flex-col justify-start" style={{ minHeight: "16rem" }}>
           <Image src={activeFase.image} alt={activeFase.label} fill className="object-cover absolute inset-0 z-0" sizes="(min-width: 1024px) 700px, 430px" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/30 to-black/60 z-10" />
           <div className="absolute top-0 left-0 right-0 h-1.5 rounded-t-2xl z-20" style={{ backgroundColor: activeFase.color }} />
 
-          <div className="relative z-20">
+          {/* Conteúdo superior: tag + título + objetivo */}
+          <div className="relative z-20 p-5 pt-8 flex-1">
             <div className="px-3 py-1.5 rounded-full font-body text-[0.65rem] font-black uppercase tracking-widest w-fit shadow-lg mb-4"
               style={{ backgroundColor: activeFase.color, color: activeFase.onColor }}>
               {activeFase.tagLabel}
@@ -694,27 +695,33 @@ export function FasesSection() {
               {activeFase.objective}
             </p>
           </div>
+
+          {/* Dica Crucial integrada na parte inferior do card */}
+          {activeFase.tip && (
+            <div className="relative z-20 mx-3 mb-3 flex items-start gap-3 rounded-xl px-4 py-3.5 overflow-hidden"
+              style={{
+                background: `linear-gradient(135deg, ${alpha(activeFase.color, 0.22)}, ${alpha(activeFase.color, 0.12)})`,
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
+                border: `1px solid ${alpha(activeFase.color, 0.45)}`,
+              }}>
+              <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 shadow-sm"
+                style={{ backgroundColor: activeFase.color, color: activeFase.onColor }}>
+                {typeof activeFase.tip !== "string" && activeFase.tip.icon ? (
+                  <activeFase.tip.icon size={14} strokeWidth={2.5} />
+                ) : (
+                  <Info size={14} strokeWidth={2.5} />
+                )}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="font-display font-black text-[0.6rem] uppercase tracking-widest mb-1" style={{ color: activeFase.color }}>Dica Crucial</p>
+                <p className="font-body text-[0.82rem] leading-snug font-bold text-white/95">
+                  {typeof activeFase.tip === "string" ? activeFase.tip : activeFase.tip.text}
+                </p>
+              </div>
+            </div>
+          )}
         </div>
-        {activeFase.tip && (
-          <div className="flex items-start gap-3 rounded-2xl px-4 py-4 relative overflow-hidden group/tip"
-            style={{ backgroundColor: alpha(activeFase.color, 0.08), border: `1.5px solid ${alpha(activeFase.color, 0.2)}` }}>
-            <div className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 mt-0.5 shadow-sm"
-              style={{ backgroundColor: activeFase.color, color: activeFase.onColor }}>
-              {typeof activeFase.tip !== "string" && activeFase.tip.icon ? (
-                <activeFase.tip.icon size={16} strokeWidth={2.5} />
-              ) : (
-                <Info size={16} strokeWidth={2.5} />
-              )}
-            </div>
-            <div>
-              <p className="font-display font-black text-[0.7rem] uppercase tracking-widest mb-1.5" style={{ color: activeFase.color }}>Dica Crucial</p>
-              <p className="font-body text-[0.95rem] leading-tight font-black"
-                style={{ color: DS.thrive }}>
-                {typeof activeFase.tip === "string" ? activeFase.tip : activeFase.tip.text}
-              </p>
-            </div>
-          </div>
-        )}
 
         {/* ── Step-by-step dos grupos ── */}
         <div className="mb-4">

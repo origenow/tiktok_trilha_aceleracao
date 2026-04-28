@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import React, { useRef, useEffect } from "react";
+import { motion, useMotionValue, useSpring, useTransform, useScroll } from "motion/react";
 import { Trophy, ShoppingBag, Crown, Rocket, Gem, Gift } from "lucide-react";
 import { ModaHandwriting } from "@/components/ui/ModaHandwriting";
 
@@ -96,6 +96,8 @@ const ArrowBlack2 = () => (
 
 export function HeroSectionDesktop() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoSectionRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -111,6 +113,31 @@ export function HeroSectionDesktop() {
 
   const parallax3X = useTransform(mouseXSpring, [-0.5, 0.5], [-15, 15]);
   const parallax3Y = useTransform(mouseYSpring, [-0.5, 0.5], [-15, 15]);
+
+  // Scroll-driven video expansion
+  const { scrollYProgress: videoScrollProgress } = useScroll({
+    target: videoSectionRef,
+    offset: ["start center", "end start"],
+  });
+
+  // Scale-based growth from center: 138px → 80vw
+  const targetWidth = typeof window !== "undefined" ? window.innerWidth * 0.8 : 1200;
+  const scaleFactor = targetWidth / 138;
+  const videoScale = useTransform(videoScrollProgress, [0, 0.5], [1, scaleFactor]);
+  const videoBorderRadius = useTransform(videoScrollProgress, [0, 0.5], [20, 24 / scaleFactor]);
+  const videoRotate = useTransform(videoScrollProgress, [0, 0.3], [8, 0]);
+  const smallInfoOpacity = useTransform(videoScrollProgress, [0, 0.2], [1, 0]);
+  const expandedInfoOpacity = useTransform(videoScrollProgress, [0.4, 0.55], [0, 1]);
+
+  // Play video when expanded
+  useEffect(() => {
+    const unsubscribe = videoScrollProgress.on("change", (v) => {
+      if (videoRef.current && v > 0.25) {
+        videoRef.current.play().catch(() => {});
+      }
+    });
+    return unsubscribe;
+  }, [videoScrollProgress]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
@@ -136,7 +163,7 @@ export function HeroSectionDesktop() {
       {/* Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#03362415_1px,transparent_1px),linear-gradient(to_bottom,#03362415_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none z-0"></div>
 
-      {/* Video Card — posicionado relativo ao viewport inteiro */}
+      {/* Video Card — pequeno no hero, expande ao scrollar */}
       <motion.div
         style={{ x: parallax1X, y: parallax2Y }}
         className="absolute top-[18%] right-[2%] z-30 pointer-events-auto"
@@ -321,8 +348,55 @@ export function HeroSectionDesktop() {
         </div>
       </main>
 
+      {/* ═══ Seção do Vídeo expandindo no scroll ═══ */}
+      <div ref={videoSectionRef} className="relative z-10 w-full" style={{ height: "140vh" }}>
+        <div className="sticky top-0 w-full h-screen flex items-center justify-center overflow-hidden" style={{ backgroundColor: "#BAF6F0" }}>
+          {/* Background grid contínuo */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#03362415_1px,transparent_1px),linear-gradient(to_bottom,#03362415_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
+
+          {/* Video container — cresce do centro usando scale */}
+          <motion.div
+            style={{
+              scale: videoScale,
+              borderRadius: videoBorderRadius,
+              rotate: videoRotate,
+            }}
+            className="relative overflow-hidden border-2 border-white/30 shadow-[0_20px_60px_rgba(0,0,0,0.25)] origin-center"
+          >
+            <video
+              ref={videoRef}
+              className="object-cover"
+              src="/assets/videos/videoBruna.mp4"
+              loop
+              muted
+              playsInline
+              style={{ width: 138, aspectRatio: "9/16" }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
+            {/* Small overlay — fades out */}
+            <motion.div
+              className="absolute bottom-0 inset-x-0 p-2"
+              style={{ opacity: smallInfoOpacity }}
+            >
+              <p className="text-white text-[9px] font-display font-black leading-tight">@bruna.moda</p>
+              <p className="text-white/60 text-[8px] font-body">Trilha Aceleração</p>
+            </motion.div>
+
+            {/* Expanded overlay — fades in */}
+            <motion.div
+              className="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent"
+              style={{ opacity: expandedInfoOpacity }}
+            >
+              <p className="text-white font-display font-black text-lg">@bruna.moda</p>
+              <p className="text-white/70 text-sm font-body">Trilha de Aceleração · TikTok Shop</p>
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
+
       {/* Bottom Features Section */}
-      <section className="bg-white text-[#033624] rounded-t-[3.5rem] px-6 py-8 md:px-10 md:py-12 relative z-20 shadow-[0_-30px_60px_rgba(0,0,0,0.08)] mt-auto w-full">
+      <section className="bg-white text-[#033624] rounded-t-[3.5rem] px-6 py-8 md:px-10 md:py-12 relative z-20 shadow-[0_-30px_60px_rgba(0,0,0,0.08)] w-full">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
 
           {/* Card 1: tarefas */}

@@ -160,13 +160,14 @@ export function WebinarsSection() {
             Conteúdo exclusivo com especialistas do TikTok Shop — salve as datas e não perca nenhuma edição.
           </p>
         </motion.div>
-        {/* ── Desktop Layout (espelha estrutura do mobile) ── */}
+
+        {/* ── Desktop Layout (Layout original restaurado para os cards) ── */}
         <div className="hidden lg:flex lg:flex-col gap-14">
 
           {/* Webinars */}
           <div className="flex flex-col gap-5">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-md" style={{ backgroundColor: "#2DCCD3" }}>
+              <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-md" style={{ backgroundColor: "#2DCCD3" }}>
                 <Video size={20} className="text-[#033624]" />
               </div>
               <div>
@@ -218,7 +219,7 @@ export function WebinarsSection() {
           {/* Eventos */}
           <div className="flex flex-col gap-5">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-md" style={{ backgroundColor: "#FBEB35" }}>
+              <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-md" style={{ backgroundColor: "#FBEB35" }}>
                 <Users size={20} className="text-[#033624]" />
               </div>
               <div>
@@ -263,7 +264,6 @@ export function WebinarsSection() {
               ))}
             </div>
           </div>
-
         </div>
 
         {/* ── Mobile Layout ── */}
@@ -274,7 +274,7 @@ export function WebinarsSection() {
             <p className="font-body text-xs opacity-60 mb-6" style={{ color: "#4A0505" }}>Aulas semanais com especialistas</p>
             <div className="flex flex-col gap-4">
               {WEBINARS.filter(card => card.id === 1).map((card) => (
-                <a key={card.id} href={card.pdfPath} target="_blank" rel="noopener noreferrer" 
+                <a key={card.id} href={card.pdfPath} target="_blank" rel="noopener noreferrer"
                   className="bg-white rounded-3xl p-4 flex items-center gap-4 shadow-sm border border-gray-100">
                   <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0">
                     <img src={card.imagePath} className="w-full h-full object-cover" />
@@ -295,10 +295,10 @@ export function WebinarsSection() {
               <h3 className="font-display font-black text-xl mb-2" style={{ color: "#033624" }}>Eventos</h3>
               <p className="font-body text-xs opacity-60 mb-6" style={{ color: "#4A0505" }}>Networking e prática presencial</p>
             </div>
-            
+
             <div className="flex gap-4 overflow-x-auto pb-6 px-5 no-scrollbar">
               {WEBINARS.filter(card => card.id !== 1).map((card) => (
-                <a key={card.id} href={card.pdfPath} target="_blank" rel="noopener noreferrer" 
+                <a key={card.id} href={card.pdfPath} target="_blank" rel="noopener noreferrer"
                   className="bg-white rounded-3xl p-4 flex flex-col gap-3 shadow-sm border border-gray-100 min-w-[280px]">
                   <div className="w-full h-32 rounded-2xl overflow-hidden">
                     <img src={card.imagePath} className="w-full h-full object-cover" />

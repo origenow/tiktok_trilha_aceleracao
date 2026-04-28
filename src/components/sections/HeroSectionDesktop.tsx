@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform, useScroll } from "motion/react";
-import { Trophy, ShoppingBag, Crown, Rocket, Gem, Gift } from "lucide-react";
+import { Trophy, ShoppingBag, Crown, Rocket, Gem, Gift, Play, Pause, Volume2, VolumeX, Maximize } from "lucide-react";
 import { ModaHandwriting } from "@/components/ui/ModaHandwriting";
 
 /* ── Floating Doodle component ───────────────────────────────── */
@@ -98,6 +98,9 @@ export function HeroSectionDesktop() {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoSectionRef = useRef<HTMLDivElement>(null);
+  const [isMuted, setIsMuted] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const hasAutoStarted = useRef(false);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -114,30 +117,68 @@ export function HeroSectionDesktop() {
   const parallax3X = useTransform(mouseXSpring, [-0.5, 0.5], [-15, 15]);
   const parallax3Y = useTransform(mouseYSpring, [-0.5, 0.5], [-15, 15]);
 
-  // Scroll-driven video expansion
+  // Scroll-driven video expansion — starts earlier with "start 80%"
   const { scrollYProgress: videoScrollProgress } = useScroll({
     target: videoSectionRef,
-    offset: ["start center", "end start"],
+    offset: ["start 80%", "end start"],
   });
 
-  // Scale-based growth from center: 138px → 80vw
-  const targetWidth = typeof window !== "undefined" ? window.innerWidth * 0.8 : 1200;
+  // Scale-based growth from center: 138px → 70vw (faster, stops at 0.20)
+  const targetWidth = typeof window !== "undefined" ? window.innerWidth * 0.7 : 1008;
   const scaleFactor = targetWidth / 138;
-  const videoScale = useTransform(videoScrollProgress, [0, 0.5], [1, scaleFactor]);
-  const videoBorderRadius = useTransform(videoScrollProgress, [0, 0.5], [20, 24 / scaleFactor]);
-  const videoRotate = useTransform(videoScrollProgress, [0, 0.3], [8, 0]);
-  const smallInfoOpacity = useTransform(videoScrollProgress, [0, 0.2], [1, 0]);
-  const expandedInfoOpacity = useTransform(videoScrollProgress, [0.4, 0.55], [0, 1]);
+  const videoScale = useTransform(videoScrollProgress, [0, 0.38], [1, scaleFactor]);
+  const videoBorderRadius = useTransform(videoScrollProgress, [0, 0.38], [20, 24 / scaleFactor]);
+  const videoRotate = useTransform(videoScrollProgress, [0, 0.28], [8, 0]);
+  const smallInfoOpacity = useTransform(videoScrollProgress, [0, 0.20], [1, 0]);
+  const controlsOpacity = useTransform(videoScrollProgress, [0, 0.38], [0, 1]);
+  const sectionExitOpacity = useTransform(videoScrollProgress, [0.82, 0.96], [1, 0]);
 
-  // Play video when expanded
+  // Play + unmute once when fully expanded; mute when exiting
   useEffect(() => {
     const unsubscribe = videoScrollProgress.on("change", (v) => {
-      if (videoRef.current && v > 0.25) {
+      if (!videoRef.current) return;
+      if (v > 0.38 && !hasAutoStarted.current) {
         videoRef.current.play().catch(() => {});
+        videoRef.current.muted = false;
+        setIsPlaying(true);
+        setIsMuted(false);
+        hasAutoStarted.current = true;
+      }
+      if (v <= 0.38) {
+        hasAutoStarted.current = false;
+      }
+      if (v > 0.82) {
+        videoRef.current.muted = true;
+        setIsMuted(true);
       }
     });
     return unsubscribe;
   }, [videoScrollProgress]);
+
+  // Video control handlers
+  const togglePlay = () => {
+    if (!videoRef.current) return;
+    if (videoRef.current.paused) {
+      videoRef.current.play().catch(() => {});
+      setIsPlaying(true);
+    } else {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  const toggleMute = () => {
+    if (!videoRef.current) return;
+    videoRef.current.muted = !videoRef.current.muted;
+    setIsMuted(!isMuted);
+  };
+
+  const toggleFullscreen = () => {
+    if (!videoRef.current) return;
+    if (videoRef.current.requestFullscreen) {
+      videoRef.current.requestFullscreen();
+    }
+  };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
@@ -162,33 +203,6 @@ export function HeroSectionDesktop() {
 
       {/* Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#03362415_1px,transparent_1px),linear-gradient(to_bottom,#03362415_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none z-0"></div>
-
-      {/* Video Card — pequeno no hero, expande ao scrollar */}
-      <motion.div
-        style={{ x: parallax1X, y: parallax2Y }}
-        className="absolute top-[18%] right-[2%] z-30 pointer-events-auto"
-      >
-        <motion.div
-          animate={{ y: [0, -14, 0] }}
-          transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.8 }}
-          className="relative overflow-hidden cursor-pointer rotate-[8deg] hover:rotate-0 hover:scale-105 transition-all duration-500 border-2 border-white/40 shadow-[0_20px_50px_rgba(0,0,0,0.28)]"
-          style={{ width: 138, aspectRatio: "9/16", borderRadius: 20 }}
-        >
-          <video
-            className="w-full h-full object-cover"
-            src="/assets/videos/videoBruna.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent pointer-events-none" />
-          <div className="absolute bottom-0 inset-x-0 p-2">
-            <p className="text-white text-[9px] font-display font-black leading-tight">@bruna.moda</p>
-            <p className="text-white/60 text-[8px] font-body">Trilha Aceleração</p>
-          </div>
-        </motion.div>
-      </motion.div>
 
       {/* Doodles absolutos com Parallax */}
       <FloatingDoodle src="/assets_new/manequim.svg" size={86} bottom="32%" left="4%" rotate={12} delay={0.5} opacity={0.4} reverse parallaxX={parallax1X} parallaxY={parallax1Y} />
@@ -349,47 +363,90 @@ export function HeroSectionDesktop() {
       </main>
 
       {/* ═══ Seção do Vídeo expandindo no scroll ═══ */}
-      <div ref={videoSectionRef} className="relative z-10 w-full" style={{ height: "140vh" }}>
+      <div ref={videoSectionRef} className="relative z-10 w-full" style={{ height: "125vh" }}>
         <div className="sticky top-0 w-full h-screen flex items-center justify-center overflow-hidden" style={{ backgroundColor: "#BAF6F0" }}>
           {/* Background grid contínuo */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#03362415_1px,transparent_1px),linear-gradient(to_bottom,#03362415_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
 
-          {/* Video container — cresce do centro usando scale */}
+          {/* Wrapper com fade-out de saída */}
           <motion.div
-            style={{
-              scale: videoScale,
-              borderRadius: videoBorderRadius,
-              rotate: videoRotate,
-            }}
-            className="relative overflow-hidden border-2 border-white/30 shadow-[0_20px_60px_rgba(0,0,0,0.25)] origin-center"
+            style={{ opacity: sectionExitOpacity }}
+            className="absolute inset-0 flex items-center justify-center"
           >
-            <video
-              ref={videoRef}
-              className="object-cover"
-              src="/assets/videos/videoBruna.mp4"
-              loop
-              muted
-              playsInline
-              style={{ width: 138, aspectRatio: "9/16" }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-
-            {/* Small overlay — fades out */}
+            {/* Video container — cresce do centro usando scale */}
             <motion.div
-              className="absolute bottom-0 inset-x-0 p-2"
-              style={{ opacity: smallInfoOpacity }}
+              style={{
+                scale: videoScale,
+                borderRadius: videoBorderRadius,
+                rotate: videoRotate,
+              }}
+              className="relative overflow-hidden border-2 border-white/30 shadow-[0_20px_60px_rgba(0,0,0,0.25)] origin-center cursor-pointer"
+              onClick={togglePlay}
             >
-              <p className="text-white text-[9px] font-display font-black leading-tight">@bruna.moda</p>
-              <p className="text-white/60 text-[8px] font-body">Trilha Aceleração</p>
+              <video
+                ref={videoRef}
+                className="object-cover"
+                src="/assets/videos/videoBruna.mp4"
+                loop
+                muted={isMuted}
+                playsInline
+                style={{ width: 138, aspectRatio: "16/9" }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
+              {/* Small overlay — fades out */}
+              <motion.div
+                className="absolute bottom-0 inset-x-0 p-2"
+                style={{ opacity: smallInfoOpacity }}
+              >
+                <p className="text-white text-[9px] font-display font-black leading-tight">@bruna.moda</p>
+                <p className="text-white/60 text-[8px] font-body">Trilha Aceleração</p>
+              </motion.div>
+
             </motion.div>
 
-            {/* Expanded overlay — fades in */}
+            {/* ═══ Video Controls (aparecem junto com a expansão) ═══ */}
             <motion.div
-              className="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent"
-              style={{ opacity: expandedInfoOpacity }}
+              style={{ opacity: controlsOpacity }}
+              className="absolute bottom-[12%] z-50 flex items-center gap-3 pointer-events-auto"
             >
-              <p className="text-white font-display font-black text-lg">@bruna.moda</p>
-              <p className="text-white/70 text-sm font-body">Trilha de Aceleração · TikTok Shop</p>
+              {/* Play/Pause */}
+              <button
+                onClick={togglePlay}
+                className="w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-xl border border-white/20 transition-all duration-300 hover:scale-110 hover:bg-white/30 active:scale-95"
+                style={{ backgroundColor: "rgba(255,255,255,0.15)" }}
+                aria-label={isPlaying ? "Pausar" : "Reproduzir"}
+              >
+                {isPlaying ? (
+                  <Pause size={20} className="text-white" fill="white" />
+                ) : (
+                  <Play size={20} className="text-white ml-0.5" fill="white" />
+                )}
+              </button>
+
+              {/* Mute/Unmute */}
+              <button
+                onClick={toggleMute}
+                className="w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-xl border border-white/20 transition-all duration-300 hover:scale-110 hover:bg-white/30 active:scale-95"
+                style={{ backgroundColor: "rgba(255,255,255,0.15)" }}
+                aria-label={isMuted ? "Ativar som" : "Silenciar"}
+              >
+                {isMuted ? (
+                  <VolumeX size={20} className="text-white" />
+                ) : (
+                  <Volume2 size={20} className="text-white" />
+                )}
+              </button>
+
+              {/* Fullscreen */}
+              <button
+                onClick={toggleFullscreen}
+                className="w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-xl border border-white/20 transition-all duration-300 hover:scale-110 hover:bg-white/30 active:scale-95"
+                style={{ backgroundColor: "rgba(255,255,255,0.15)" }}
+                aria-label="Tela cheia"
+              >
+                <Maximize size={20} className="text-white" />
+              </button>
             </motion.div>
           </motion.div>
         </div>

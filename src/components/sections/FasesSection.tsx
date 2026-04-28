@@ -518,27 +518,29 @@ function MissionGroupCard({ group, fase, step, onImageClick }: {
 
             {/* Coluna Webinars */}
             {group.materials!.some(m => m.type === "webinar") && (
-              <div className="flex-1">
+              <div className="flex-1 lg:max-w-[50%]">
                 <div className="flex items-center gap-1.5 mb-2.5">
                   <Video size={12} className="text-[#033624]/40" />
                   <span className="font-body text-[0.6rem] uppercase tracking-wider font-bold" style={{ color: alpha(DS.thrive, 0.4) }}>
                     Assista nossos Webinars
                   </span>
                 </div>
-                <div className="grid grid-cols-1 gap-2">
+                <div className="grid grid-cols-2 gap-3">
                   {group.materials!.filter(m => m.type === "webinar").map((mat, mi) => (
                     <a key={mi} href={mat.url!} target="_blank" rel="noopener noreferrer"
-                      className="group/thumb flex items-center gap-3 p-2 rounded-xl border transition-all duration-300 hover:shadow-md hover:bg-white active:scale-[0.98]"
+                      className="group/thumb flex flex-col gap-2.5 p-2 rounded-2xl border transition-all duration-300 hover:shadow-xl hover:bg-white hover:-translate-y-1 active:scale-[0.98]"
                       style={{ backgroundColor: alpha(fase.color, 0.05), borderColor: alpha(fase.color, 0.15) }}>
-                      <div className="w-12 h-10 rounded-lg flex items-center justify-center shrink-0 relative overflow-hidden"
+                      <div className="w-full aspect-video rounded-xl flex items-center justify-center shrink-0 relative overflow-hidden shadow-sm"
                         style={{ backgroundColor: fase.color }}>
                         <div className="absolute inset-0 bg-black/10 opacity-0 group-hover/thumb:opacity-100 transition-opacity" />
-                        <Play size={14} fill={fase.onColor} strokeWidth={0} className="relative z-10" />
+                        <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center transition-transform duration-300 group-hover/thumb:scale-110 shadow-lg">
+                          <Play size={16} fill={fase.onColor} strokeWidth={0} className="ml-0.5" />
+                        </div>
                         {/* Play progress bar simulation */}
-                        <div className="absolute bottom-0 left-0 h-0.5 bg-white/40 w-full" />
-                        <div className="absolute bottom-0 left-0 h-0.5 bg-white w-2/3" />
+                        <div className="absolute bottom-0 left-0 h-1 bg-white/20 w-full" />
+                        <div className="absolute bottom-0 left-0 h-1 bg-white w-1/3 transition-all duration-500 group-hover/thumb:w-2/3" />
                       </div>
-                      <span className="font-body text-[0.7rem] font-bold leading-tight flex-1 line-clamp-2" style={{ color: DS.thrive }}>
+                      <span className="font-body text-[0.68rem] font-bold leading-tight px-1 pb-1 line-clamp-2" style={{ color: DS.thrive }}>
                         {mat.title}
                       </span>
                     </a>
@@ -549,23 +551,23 @@ function MissionGroupCard({ group, fase, step, onImageClick }: {
 
             {/* Coluna Playbooks */}
             {group.materials!.some(m => m.type === "playbook") && (
-              <div className="flex-1">
+              <div className="flex-1 lg:max-w-[50%]">
                 <div className="flex items-center gap-1.5 mb-2.5">
                   <BookOpen size={12} className="text-[#033624]/40" />
                   <span className="font-body text-[0.6rem] uppercase tracking-wider font-bold" style={{ color: alpha(DS.thrive, 0.4) }}>
                     Playbooks
                   </span>
                 </div>
-                <div className="grid grid-cols-1 gap-2">
+                <div className="grid grid-cols-2 gap-3">
                   {group.materials!.filter(m => m.type === "playbook").map((mat, mi) => (
                     <a key={mi} href={mat.url!} target="_blank" rel="noopener noreferrer"
-                      className="group/thumb flex items-center gap-3 p-2 rounded-xl border transition-all duration-300 hover:shadow-md hover:bg-white active:scale-[0.98]"
+                      className="group/thumb flex flex-col gap-2.5 p-2 rounded-2xl border transition-all duration-300 hover:shadow-xl hover:bg-white hover:-translate-y-1 active:scale-[0.98]"
                       style={{ backgroundColor: alpha(DS.dawn, 0.25), borderColor: alpha(DS.dawn, 0.4) }}>
-                      <div className="w-12 h-10 rounded-lg flex items-center justify-center shrink-0"
+                      <div className="w-full aspect-video rounded-xl flex items-center justify-center"
                         style={{ backgroundColor: DS.dawn }}>
-                        <Tag size={14} className="text-[#4A0505]" />
+                        <Tag size={18} className="text-[#4A0505] transition-transform duration-300 group-hover/thumb:scale-110" />
                       </div>
-                      <span className="font-body text-[0.7rem] font-bold leading-tight flex-1 line-clamp-2" style={{ color: "#4A0505" }}>
+                      <span className="font-body text-[0.68rem] font-bold leading-tight px-1 pb-1 line-clamp-2" style={{ color: "#4A0505" }}>
                         {mat.title}
                       </span>
                     </a>

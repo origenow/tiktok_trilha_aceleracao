@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform, useScroll } from "motion/react";
-import { Trophy, ShoppingBag, Crown, Rocket, Gem, Gift, Play, Pause, Volume2, VolumeX, Maximize } from "lucide-react";
+import { Trophy, ShoppingBag, Crown, Rocket, Gem, Gift, Play, Pause, Volume2, VolumeX, Maximize, RotateCcw, RotateCw } from "lucide-react";
 import { ModaHandwriting } from "@/components/ui/ModaHandwriting";
 
 /* ── Floating Doodle component ───────────────────────────────── */
@@ -100,6 +100,7 @@ export function HeroSectionDesktop() {
   const videoSectionRef = useRef<HTMLDivElement>(null);
   const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [videoProgress, setVideoProgress] = useState(0);
   const hasAutoStarted = useRef(false);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -179,6 +180,32 @@ export function HeroSectionDesktop() {
       videoRef.current.requestFullscreen();
     }
   };
+
+  const skipBack = () => {
+    if (!videoRef.current) return;
+    videoRef.current.currentTime = Math.max(0, videoRef.current.currentTime - 10);
+  };
+
+  const skipForward = () => {
+    if (!videoRef.current) return;
+    videoRef.current.currentTime = Math.min(videoRef.current.duration, videoRef.current.currentTime + 10);
+  };
+
+  const seekVideo = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!videoRef.current || !videoRef.current.duration) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    videoRef.current.currentTime = ((e.clientX - rect.left) / rect.width) * videoRef.current.duration;
+  };
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const handleTimeUpdate = () => {
+      if (video.duration) setVideoProgress(video.currentTime / video.duration);
+    };
+    video.addEventListener("timeupdate", handleTimeUpdate);
+    return () => video.removeEventListener("timeupdate", handleTimeUpdate);
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
@@ -408,45 +435,83 @@ export function HeroSectionDesktop() {
             {/* ═══ Video Controls (aparecem junto com a expansão) ═══ */}
             <motion.div
               style={{ opacity: controlsOpacity }}
-              className="absolute bottom-[12%] z-50 flex items-center gap-3 pointer-events-auto"
+              className="absolute bottom-[12%] z-50 flex flex-col items-center gap-3 pointer-events-auto"
             >
-              {/* Play/Pause */}
-              <button
-                onClick={togglePlay}
-                className="w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-xl border border-white/20 transition-all duration-300 hover:scale-110 hover:bg-white/30 active:scale-95"
-                style={{ backgroundColor: "rgba(255,255,255,0.15)" }}
-                aria-label={isPlaying ? "Pausar" : "Reproduzir"}
+              {/* Progress bar */}
+              <div
+                className="w-[min(70vw,1008px)] h-[3px] rounded-full bg-white/20 cursor-pointer relative overflow-hidden group"
+                onClick={seekVideo}
               >
-                {isPlaying ? (
-                  <Pause size={20} className="text-white" fill="white" />
-                ) : (
-                  <Play size={20} className="text-white ml-0.5" fill="white" />
-                )}
-              </button>
+                <div
+                  className="h-full bg-blaze rounded-full group-hover:bg-blaze/90 transition-colors duration-200"
+                  style={{ width: `${videoProgress * 100}%` }}
+                />
+              </div>
 
-              {/* Mute/Unmute */}
-              <button
-                onClick={toggleMute}
-                className="w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-xl border border-white/20 transition-all duration-300 hover:scale-110 hover:bg-white/30 active:scale-95"
-                style={{ backgroundColor: "rgba(255,255,255,0.15)" }}
-                aria-label={isMuted ? "Ativar som" : "Silenciar"}
-              >
-                {isMuted ? (
-                  <VolumeX size={20} className="text-white" />
-                ) : (
-                  <Volume2 size={20} className="text-white" />
-                )}
-              </button>
+              {/* Buttons row */}
+              <div className="flex items-center gap-3">
 
-              {/* Fullscreen */}
-              <button
-                onClick={toggleFullscreen}
-                className="w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-xl border border-white/20 transition-all duration-300 hover:scale-110 hover:bg-white/30 active:scale-95"
-                style={{ backgroundColor: "rgba(255,255,255,0.15)" }}
-                aria-label="Tela cheia"
-              >
-                <Maximize size={20} className="text-white" />
-              </button>
+                {/* Skip Back 10s */}
+                <button
+                  onClick={skipBack}
+                  className="w-12 h-12 rounded-full flex flex-col items-center justify-center backdrop-blur-xl border border-white/20 transition-all duration-300 hover:scale-110 hover:bg-white/30 active:scale-95"
+                  style={{ backgroundColor: "rgba(255,255,255,0.15)" }}
+                  aria-label="Voltar 10 segundos"
+                >
+                  <RotateCcw size={16} className="text-white" />
+                  <span className="text-white text-[9px] font-bold leading-none mt-0.5">10s</span>
+                </button>
+
+                {/* Play/Pause */}
+                <button
+                  onClick={togglePlay}
+                  className="w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-xl border border-white/20 transition-all duration-300 hover:scale-110 hover:bg-white/30 active:scale-95"
+                  style={{ backgroundColor: "rgba(255,255,255,0.15)" }}
+                  aria-label={isPlaying ? "Pausar" : "Reproduzir"}
+                >
+                  {isPlaying ? (
+                    <Pause size={20} className="text-white" fill="white" />
+                  ) : (
+                    <Play size={20} className="text-white ml-0.5" fill="white" />
+                  )}
+                </button>
+
+                {/* Skip Forward 10s */}
+                <button
+                  onClick={skipForward}
+                  className="w-12 h-12 rounded-full flex flex-col items-center justify-center backdrop-blur-xl border border-white/20 transition-all duration-300 hover:scale-110 hover:bg-white/30 active:scale-95"
+                  style={{ backgroundColor: "rgba(255,255,255,0.15)" }}
+                  aria-label="Adiantar 10 segundos"
+                >
+                  <RotateCw size={16} className="text-white" />
+                  <span className="text-white text-[9px] font-bold leading-none mt-0.5">10s</span>
+                </button>
+
+                {/* Mute/Unmute */}
+                <button
+                  onClick={toggleMute}
+                  className="w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-xl border border-white/20 transition-all duration-300 hover:scale-110 hover:bg-white/30 active:scale-95"
+                  style={{ backgroundColor: "rgba(255,255,255,0.15)" }}
+                  aria-label={isMuted ? "Ativar som" : "Silenciar"}
+                >
+                  {isMuted ? (
+                    <VolumeX size={20} className="text-white" />
+                  ) : (
+                    <Volume2 size={20} className="text-white" />
+                  )}
+                </button>
+
+                {/* Fullscreen */}
+                <button
+                  onClick={toggleFullscreen}
+                  className="w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-xl border border-white/20 transition-all duration-300 hover:scale-110 hover:bg-white/30 active:scale-95"
+                  style={{ backgroundColor: "rgba(255,255,255,0.15)" }}
+                  aria-label="Tela cheia"
+                >
+                  <Maximize size={20} className="text-white" />
+                </button>
+
+              </div>
             </motion.div>
           </motion.div>
         </div>
